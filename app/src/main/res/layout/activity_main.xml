@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+    <variable
+      name="counter"
+      type="com.example.popmate.viewmodel.TestViewModel" />
+  </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".view.activities.MainActivity">
+
+  <TextView
+    android:id="@+id/americanoMenuTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="예약인원"
+    android:textSize="20dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toLeftOf="@+id/americanoDeleteButton"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+    android:id="@+id/americanoDeleteButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="@{() -> counter.delCount()}"
+    android:text="-"
+    android:textSize="20dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@+id/americanoMenuTitle"
+    app:layout_constraintRight_toLeftOf="@+id/americanoCountText"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/americanoCountText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@{counter.visitorCnt}"
+    android:textSize="20dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@+id/americanoDeleteButton"
+    app:layout_constraintRight_toLeftOf="@+id/americanoAddButton"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+    android:id="@+id/americanoAddButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="@{() -> counter.addCount()}"
+    android:text="+"
+    android:textSize="20dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@+id/americanoCountText"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
