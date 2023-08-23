@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="kakao_native_app_key">fdb2e3d76674eb0f667734de4c01e189</string>
+    <!-- kakao${kakao_native_app_key} 의 구조다.-->
+    <string name="kakao_redirection_scheme">kakaofdb2e3d76674eb0f667734de4c01e189</string>
+</resources>
