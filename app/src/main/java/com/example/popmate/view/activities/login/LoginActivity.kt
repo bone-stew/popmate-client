@@ -6,12 +6,18 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.popmate.databinding.ActivityLoginBinding
+import com.example.popmate.model.data.remote.login.LoginTokenVO
+import com.example.popmate.model.repository.service.ApiClient
 import com.example.popmate.view.activities.MainActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -26,6 +32,9 @@ class LoginActivity : AppCompatActivity() {
         binding.kakaoLoginBtn.setOnClickListener {
             kakaoLogin()
         }
+        binding.googleLoginBtn.setOnClickListener {
+            googleLogin()
+        }
     }
 
     private fun kakaoLogin() {
@@ -33,7 +42,9 @@ class LoginActivity : AppCompatActivity() {
             if (error != null) {
                 Log.e("LOGIN", "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
-                nextMainActivity()
+                Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
+                // 토큰 얻어오는 함수
+                getToken(token.accessToken)
             }
         }
 
@@ -54,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
                 } else if (token != null) {
                     Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
+
                     nextMainActivity()
                 }
             }
@@ -61,6 +73,55 @@ class LoginActivity : AppCompatActivity() {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
         }
     }
+
+    fun kakaoLogout() {
+        // 로그아웃
+        UserApiClient.instance.logout { error ->
+            if (error != null) {
+                Log.e("TAG", "로그아웃 실패. SDK에서 토큰 삭제됨", error)
+            }
+            else {
+                Log.i("TAG", "로그아웃 성공. SDK에서 토큰 삭제됨")
+            }
+        }
+    }
+
+    fun kakaoUnlink(){
+        // 연결 끊기
+        UserApiClient.instance.unlink { error ->
+            if (error != null) {
+                Log.e("TAG", "연결 끊기 실패", error)
+            }
+            else {
+                Log.i("TAG", "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+            }
+        }
+    }
+
+    private fun googleLogin(){
+        // Configure Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+
+        val mGoogleSiginlnClient = GoogleSignIn.getClient(this,gso)
+    }
+
+    private fun getToken(token : String) {
+        val apiService = ApiClient.getTokenService
+        val call: Call<LoginTokenVO> = apiService.getToken(token)
+        call.enqueue(object : Callback<LoginTokenVO> {
+            override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
+                nextMainActivity()
+            }
+
+            override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+
 
 
     private fun nextMainActivity() {

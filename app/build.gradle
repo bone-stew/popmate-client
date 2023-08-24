@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -82,5 +83,10 @@ dependencies {
 
     // 카카오 로그인
     implementation "com.kakao.sdk:v2-all:2.15.0"
+
+    //구글 로그인
+    implementation platform('com.google.firebase:firebase-bom:32.2.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation("com.google.android.gms:play-services-auth:20.6.0")
 
 }
