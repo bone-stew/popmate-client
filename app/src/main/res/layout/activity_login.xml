@@ -39,25 +39,28 @@
         android:id="@+id/kakao_login_btn"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="272dp"
+        android:layout_marginTop="260dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_main_name2"
         app:srcCompat="@drawable/kakao_login_large_wide" />
 
-    <ImageView
-        android:id="@+id/google_login_btn"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="15dp"
+    <Button
+        android:id="@+id/google_button"
+        android:layout_width="378dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="26dp"
+        android:background="@color/white"
+        android:text="Google로 시작하기"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/kakao_login_btn"
-        app:srcCompat="@drawable/googlebtn" />
+        app:layout_constraintVertical_bias="0.766" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

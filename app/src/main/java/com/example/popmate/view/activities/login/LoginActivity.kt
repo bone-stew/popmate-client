@@ -4,13 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.popmate.databinding.ActivityLoginBinding
+import com.example.popmate.model.data.remote.login.GoogleLoginVO
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.service.ApiClient
 import com.example.popmate.view.activities.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -21,18 +27,23 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var gso : GoogleSignInOptions
+    private lateinit var gsc : GoogleSignInClient
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 나중에 key해쉬 알 때
+        // 나중에 key해쉬 알려고 할 때
         //Log.d("aa", "keyhash : ${Utility.getKeyHash(this)}")
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            onActivityResult(result.resultCode, result.data)
+        }
         binding.kakaoLoginBtn.setOnClickListener {
             kakaoLogin()
         }
-        binding.googleLoginBtn.setOnClickListener {
+        binding.googleButton.setOnClickListener {
             googleLogin()
         }
     }
@@ -44,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             } else if (token != null) {
                 Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
                 // 토큰 얻어오는 함수
-                getToken(token.accessToken)
+                getKakaoToken(token.accessToken)
             }
         }
 
@@ -99,17 +110,63 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun googleLogin(){
-        // Configure Google Sign-In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        // GoogleSignInOptions :  로그인 시 요청할 권한 및 사용자 데이터에 대한 설정을 지정할 수 있는 것
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
 
-        val mGoogleSiginlnClient = GoogleSignIn.getClient(this,gso)
+        // GoogleSignIn : Google 로그인 API를 사용하여 사용자가 Google 계정으로 앱에 로그인할 수 있도록 도와주는 클래스 및 API 모음이다.
+        gsc = GoogleSignIn.getClient(this, gso)
+        // 마지막으로 로그인한 계정 정보를 가져오는 곳
+        val acct: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(this)
+        if (acct != null) {
+            val name = acct.displayName
+            val email = acct.email
+            val provider = "Google"
+            val googleLogin = name?.let { GoogleLoginVO(it, email ?: "", provider) }
+            getGoogleToken(googleLogin!!)
+        }
+
+        // 구글 계정 로그인이 안되어 있는 경우 실행
+        val signInIntent = gsc.signInIntent
+        resultLauncher.launch(signInIntent)
+
     }
 
-    private fun getToken(token : String) {
+    //첫 구글 계정 등록할 때 나오는 로그인 창
+    private fun onActivityResult(resultCode: Int, data: Intent?) {
+        if (resultCode == RESULT_OK) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val name = task.result.displayName
+                val email = task.result.email
+                val provider = "Google"
+                val googleLogin = name?.let { GoogleLoginVO(it, email ?: "", provider) }
+                getGoogleToken(googleLogin!!)
+            } catch (e: ApiException) {
+                Toast.makeText(applicationContext, "Something went wrong", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    // 구글 유저 정보 넘겨서 JWT토큰 가져오는 곳
+    private fun getGoogleToken(googleLoginVO: GoogleLoginVO){
         val apiService = ApiClient.getTokenService
-        val call: Call<LoginTokenVO> = apiService.getToken(token)
+        val call: Call<LoginTokenVO> = apiService.getGoogleToken(googleLoginVO)
+        call.enqueue(object : Callback<LoginTokenVO>{
+            override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
+                nextMainActivity()
+            }
+            override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    // 카카오 토큰 넘겨서 JWT토큰 가져오는 곳
+    private fun getKakaoToken(token : String) {
+        val apiService = ApiClient.getTokenService
+        val call: Call<LoginTokenVO> = apiService.getKakaoToken(token)
         call.enqueue(object : Callback<LoginTokenVO> {
             override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
                 nextMainActivity()
@@ -123,7 +180,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
+    // 다음 Activity로 가는 코드
     private fun nextMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
