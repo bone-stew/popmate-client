@@ -4,6 +4,7 @@ import com.example.popmate.model.data.remote.login.GoogleLoginVO
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -17,4 +18,7 @@ interface LoginApiService {
     fun getGoogleToken(
         @Body googleLoginVO: GoogleLoginVO
     ): Call<LoginTokenVO>
+
+    @GET("resource")
+    fun loginTest() : Call<LoginTokenVO>
 }

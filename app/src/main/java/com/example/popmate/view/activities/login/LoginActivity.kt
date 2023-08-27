@@ -11,7 +11,6 @@ import com.example.popmate.databinding.ActivityLoginBinding
 import com.example.popmate.model.data.remote.login.GoogleLoginVO
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.service.ApiClient
-import com.example.popmate.view.activities.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -76,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
                 } else if (token != null) {
                     Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
-
+                    getKakaoToken(token.accessToken)
                     nextMainActivity()
                 }
             }
@@ -155,6 +154,8 @@ class LoginActivity : AppCompatActivity() {
         val call: Call<LoginTokenVO> = apiService.getGoogleToken(googleLoginVO)
         call.enqueue(object : Callback<LoginTokenVO>{
             override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
+                val token = response.body()
+                ApiClient.setJwtToken(token)
                 nextMainActivity()
             }
             override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
@@ -169,6 +170,9 @@ class LoginActivity : AppCompatActivity() {
         val call: Call<LoginTokenVO> = apiService.getKakaoToken(token)
         call.enqueue(object : Callback<LoginTokenVO> {
             override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
+                val token = response.body()
+                ApiClient.setJwtToken(token)
+                //ApiClient.getJwtToken()?.let { Log.d("ddd", it) }
                 nextMainActivity()
             }
 
@@ -182,7 +186,7 @@ class LoginActivity : AppCompatActivity() {
 
     // 다음 Activity로 가는 코드
     private fun nextMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginTestActivity::class.java)
         startActivity(intent)
         finish()
     }
