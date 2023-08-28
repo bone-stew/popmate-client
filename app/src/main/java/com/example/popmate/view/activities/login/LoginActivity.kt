@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             onActivityResult(result.resultCode, result.data)
         }
-        binding.kakaoLoginBtn.setOnClickListener {
+        binding.kakaoButton.setOnClickListener {
             kakaoLogin()
         }
         binding.googleButton.setOnClickListener {
