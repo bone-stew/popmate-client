@@ -13,6 +13,13 @@ import com.example.popmate.model.data.local.Item
 class ItemAdapter(private var items: LiveData<ArrayList<Item>>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     private var itemList: ArrayList<Item>? = null
 
+    inner class ItemViewHolder(private val binding: ItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(recyclerViewItem: Item) = with(binding) {
+            item = recyclerViewItem
+        }
+
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
@@ -23,13 +30,6 @@ class ItemAdapter(private var items: LiveData<ArrayList<Item>>) : RecyclerView.A
             holder.bind(it)
             println(it.itemName)
         }
-    }
-    inner class ItemViewHolder(private val binding: ItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(recyclerViewItem: Item) = with(binding) {
-            item = recyclerViewItem
-        }
-
     }
 
     override fun getItemCount(): Int {

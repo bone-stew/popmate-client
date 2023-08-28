@@ -7,10 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.example.popmate.R
 import com.example.popmate.databinding.ActivityMainBinding
 import com.example.popmate.model.data.local.Item
 import com.example.popmate.view.adapters.ItemAdapter
 import com.example.popmate.viewmodel.ItemViewModel
+import me.relex.circleindicator.CircleIndicator3
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,11 +29,14 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = itemViewModel
         binding.lifecycleOwner = this
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.adapter = ItemAdapter(itemViewModel.itemList)
-
+        binding.recyclerView.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.listView.layoutManager = LinearLayoutManager(this)
         binding.listView.adapter = ItemAdapter(itemViewModel.itemList)
+
+        val indicator = findViewById<CircleIndicator3>(R.id.indicator)
+        indicator.setViewPager(binding.recyclerView)
 
         binding.horizontalView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.horizontalView.adapter = ItemAdapter(itemViewModel.itemList)
