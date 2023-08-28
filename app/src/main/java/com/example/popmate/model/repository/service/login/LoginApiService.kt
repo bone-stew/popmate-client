@@ -6,12 +6,11 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 
 interface LoginApiService {
-    @POST("oauth/{id}")
+    @POST("oauth/kakao")
     fun getKakaoToken(
-        @Path("id") token: String
+        @Body token: String
     ): Call<LoginTokenVO>
 
     @POST("oauth/google")
@@ -19,6 +18,6 @@ interface LoginApiService {
         @Body googleLoginVO: GoogleLoginVO
     ): Call<LoginTokenVO>
 
-    @GET("resource")
+    @GET("oauth/resource")
     fun loginTest() : Call<LoginTokenVO>
 }
