@@ -16,8 +16,7 @@
     <activity
       android:exported="true"
       android:label="@string/app_name"
-      android:name=".view.activities.MainActivity"
-      android:theme="@style/Theme.AppCompat">
+      android:name=".view.activities.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
