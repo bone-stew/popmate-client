@@ -2,6 +2,7 @@ package com.example.popmate.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.ItemLayoutBinding
@@ -14,10 +15,17 @@ class ItemAdapter(private var items: LiveData<ArrayList<Item>>) : RecyclerView.A
     private var itemList: ArrayList<Item>? = null
 
     inner class ItemViewHolder(private val binding: ItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(recyclerViewItem: Item) = with(binding) {
-            item = recyclerViewItem
+        init {
+            binding.root.setOnClickListener{
+                Toast.makeText(binding.root.context, "클릭된 아이템 = ${binding.item!!.itemName}", Toast.LENGTH_LONG).show()
+            }
         }
+        fun setItem(item: Item){
+            binding.item = item
+        }
+//        fun bind(recyclerViewItem: Item) = with(binding) {
+//            item = recyclerViewItem
+//        }
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -26,10 +34,12 @@ class ItemAdapter(private var items: LiveData<ArrayList<Item>>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        items.value?.get(position)?.let {
-            holder.bind(it)
-            println(it.itemName)
-        }
+        val item = items.value?.get(position)
+        item?.let { holder.setItem(it) }
+    //        items.value?.get(position)?.let {
+//            holder.bind(it)
+//            println(it.itemName)
+//        }
     }
 
     override fun getItemCount(): Int {
