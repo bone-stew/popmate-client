@@ -75,4 +75,8 @@ object ApiClient {
     fun getJwtToken(): String? {
         return jwtToken
     }
+
+    fun loginCheck(): Boolean{
+        return jwtToken!=null
+    }
 }

@@ -16,7 +16,9 @@ class LoginTestActivity : AppCompatActivity() {
         binding = ActivityLoginTestBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        if(ApiClient.getJwtToken() != null){
+            Log.d("ddd","로그인되어있습니다.")
+        }
         binding.loginTestBtn.setOnClickListener {
             val apiService = ApiClient.getTokenService
             val call: Call<LoginTokenVO> = apiService.loginTest()
