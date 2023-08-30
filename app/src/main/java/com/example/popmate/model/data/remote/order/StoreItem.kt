@@ -3,7 +3,7 @@ package com.example.popmate.model.data.remote.order
 import java.util.Date
 
 data class StoreItem(
-    val tbItemId: Long,
+    val tbItemId: Int,
     val storeId: Long,
     val name: String,
     val price: Int,

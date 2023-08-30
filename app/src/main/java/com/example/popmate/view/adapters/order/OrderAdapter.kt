@@ -2,11 +2,9 @@ package com.example.popmate.view.adapters.order
 
 
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.popmate.databinding.FragmentOrderBottomBinding
 import com.example.popmate.databinding.ListOrderItemBinding
 import com.example.popmate.model.data.remote.order.StoreItem
 

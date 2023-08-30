@@ -27,7 +27,8 @@ class OrderActivity : AppCompatActivity(), OnItemClick {
 
         fragment = OrderBottomFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.order_bottom,fragment)
+            .add(R.id.order_bottom,fragment)
+            .hide(fragment)
             .commit()
 
         binding.orderRecyclerView.layoutManager = GridLayoutManager(this,2)
@@ -38,13 +39,16 @@ class OrderActivity : AppCompatActivity(), OnItemClick {
         for(no in 1..100){
             val price = 10000 * no
             val name = "테스트 ${no}"
-            var store = StoreItem(tbItemId = 0, storeId = 0, name = name, price = price, imgUrl = "", stock = 0, order_limit = 0, createdAt = Date())
+            var store = StoreItem(tbItemId = no, storeId = 0, name = name, price = price, imgUrl = "", stock = 0, order_limit = 0, createdAt = Date())
             data.add(store)
         }
         return data
     }
 
     override fun onClick(value: StoreItem) {
+        supportFragmentManager.beginTransaction()
+            .show(fragment)
+            .commit()
         fragment.update(value)
     }
 
