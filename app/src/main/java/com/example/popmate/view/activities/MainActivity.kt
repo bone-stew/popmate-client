@@ -1,12 +1,9 @@
 package com.example.popmate.view.activities
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import com.example.popmate.R
-import com.example.popmate.model.data.local.Item
 import com.example.popmate.view.fragments.HomeFragment
 import com.example.popmate.view.fragments.MyPageFragment
 import com.example.popmate.view.fragments.PopupStoreFragment
