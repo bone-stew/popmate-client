@@ -41,7 +41,7 @@ class ItemAdapterForListView(val context: Context, val items: List<Item>) : Base
 //    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.main_list_item, null)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.list_home_item, null)
 
         val textView = view.findViewById<TextView>(R.id.mainItemText)
         val item = items[position]

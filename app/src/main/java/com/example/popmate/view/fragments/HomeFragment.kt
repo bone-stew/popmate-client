@@ -1,18 +1,18 @@
 package com.example.popmate.view.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.example.popmate.R
 import com.example.popmate.databinding.FragmentHomeBinding
 import com.example.popmate.model.data.local.Item
 import com.example.popmate.view.adapters.ItemAdapter
 import com.example.popmate.view.adapters.ItemAdapterForListView
-import me.relex.circleindicator.CircleIndicator3
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,8 +56,6 @@ class HomeFragment : Fragment() {
 
         binding.horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.horizontalView.adapter = ItemAdapter(items)
-
-
         // initialize
         return binding.root
     }
