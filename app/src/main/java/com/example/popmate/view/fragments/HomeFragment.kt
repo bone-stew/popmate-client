@@ -42,6 +42,12 @@ class HomeFragment : Fragment() {
         binding.imageCarousel.adapter = ItemAdapter(items)
         binding.imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 //        binding.listView.layoutManager = LinearLayoutManager(requireContext())
+        binding.visitedRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.visitedRecyclerView.adapter = ItemAdapter(items)
+
+        binding.visitedRecyclerView.visibility = if (visitedByIsNotNull()) View.VISIBLE else View.GONE
+
+
         binding.listView.adapter = ItemAdapterForListView(requireContext(), items)
 
 //        val indicator = findViewById<CircleIndicator3>(R.id.indicator)
@@ -56,6 +62,9 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private fun visitedByIsNotNull():Boolean {
+        return true
+    }
     private fun getDataFromApi() : List<Item> {
         val sampleData = mutableListOf<Item>(
             Item("Sample Text 1"),
