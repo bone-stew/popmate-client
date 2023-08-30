@@ -25,6 +25,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
     private lateinit var binding: ActivityLoginBinding
     private lateinit var gso : GoogleSignInOptions
     private lateinit var gsc : GoogleSignInClient
