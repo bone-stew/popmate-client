@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.popmate.R
+import com.example.popmate.databinding.FragmentHomeBinding
+import com.example.popmate.model.data.local.Item
+import com.example.popmate.view.adapters.ItemAdapter
+import com.example.popmate.view.adapters.ItemAdapterForListView
+import me.relex.circleindicator.CircleIndicator3
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,24 +26,48 @@ private const val ARG_PARAM2 = "param2"
  */
 class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+//    private var param1: String? = null
+//    private var param2: String? = null
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        // get data from api
+        val items = getDataFromApi()
+        binding.imageCarousel.adapter = ItemAdapter(items)
+        binding.imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+//        binding.listView.layoutManager = LinearLayoutManager(requireContext())
+        binding.listView.adapter = ItemAdapterForListView(requireContext(), items)
+
+//        val indicator = findViewById<CircleIndicator3>(R.id.indicator)
+        val indicator = binding.indicator
+        indicator.setViewPager(binding.imageCarousel)
+
+        binding.horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.horizontalView.adapter = ItemAdapter(items)
+
+
+        // initialize
+        return binding.root
     }
+
+    private fun getDataFromApi() : List<Item> {
+        val sampleData = mutableListOf<Item>(
+            Item("Sample Text 1"),
+            Item("Sample Text 2"),
+            Item("Sample Text 3"),
+            Item("Sample Text 4"),
+            Item("Sample Text 5"),
+        )
+        return sampleData
+    }
+
+
 
     companion object {
         /**

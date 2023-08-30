@@ -35,9 +35,8 @@
         <activity
             android:name=".view.activities.login.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/Theme.Popmate"/>
+
     <activity
       android:exported="true"
       android:label="@string/app_name"
@@ -55,10 +54,7 @@
             android:theme="@style/Theme.Popmate"/>
 
 
-        <activity
-            android:name=".view.activities.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+
     </application>
 
 </manifest>

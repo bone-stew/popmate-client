@@ -1,9 +1,9 @@
 package com.example.popmate.view.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.ItemLayoutBinding
 import com.example.popmate.model.data.local.Item
@@ -11,7 +11,7 @@ import com.example.popmate.model.data.local.Item
 
 
 
-class ItemAdapter(private var items: LiveData<ArrayList<Item>>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter( private var items: List<Item>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     private var itemList: ArrayList<Item>? = null
 
     inner class ItemViewHolder(private val binding: ItemLayoutBinding): RecyclerView.ViewHolder(binding.root) {
@@ -34,7 +34,7 @@ class ItemAdapter(private var items: LiveData<ArrayList<Item>>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = items.value?.get(position)
+        val item = items.get(position)
         item?.let { holder.setItem(it) }
     //        items.value?.get(position)?.let {
 //            holder.bind(it)
@@ -43,7 +43,7 @@ class ItemAdapter(private var items: LiveData<ArrayList<Item>>) : RecyclerView.A
     }
 
     override fun getItemCount(): Int {
-        return items.value?.size!!
+        return items.size!!
     }
 
 

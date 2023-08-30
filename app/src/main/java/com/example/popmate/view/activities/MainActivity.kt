@@ -15,7 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-    private val items = MutableLiveData<ArrayList<Item>>()
+//    private val items = MutableLiveData<ArrayList<Item>>()
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment,fragment)
@@ -42,35 +42,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-//        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, com.example.popmate.R.layout.activity_main)
-////        binding.recyclerView.setHasFixedSize(true)
-//
-//        val itemViewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
-//        binding.viewModel = itemViewModel
-//        binding.lifecycleOwner = this
-//
-////        binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        binding.recyclerView.adapter = ItemAdapter(itemViewModel.itemList)
-//        binding.recyclerView.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-//
-////        binding.listView.layoutManager = GridLayoutManager(this, 1)
-//        binding.listView.layoutManager = LinearLayoutManager(this)
-//        binding.listView.adapter = ItemAdapter(itemViewModel.itemList)
-//
-//        val indicator = findViewById<CircleIndicator3>(R.id.indicator)
-//        indicator.setViewPager(binding.recyclerView)
-//
-//        binding.horizontalView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-//        binding.horizontalView.adapter = ItemAdapter(itemViewModel.itemList)
-//
-//        val dataObserver: Observer<ArrayList<Item>> = Observer {
-//            items.value = it
-//            val adapter = ItemAdapter(items)
-//            binding.recyclerView.adapter = adapter
-//        }
-//
-//        itemViewModel.itemList.observe(this, dataObserver)
     }
 
 
