@@ -13,7 +13,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="110dp"
         android:layout_marginEnd="261dp"
-        android:drawableRight="@drawable/mypage_next"
+        android:drawableRight="@drawable/calender"
         android:text="로그인 해주세요 "
         android:textColor="@color/black"
         android:textSize="20dp"
