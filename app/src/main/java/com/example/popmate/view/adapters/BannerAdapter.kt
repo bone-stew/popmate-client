@@ -5,9 +5,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.RowBannerBinding
-import com.example.popmate.databinding.RowPopupstoreBinding
 import com.example.popmate.model.data.local.Banner
-import com.example.popmate.model.data.local.PopupStore
 
 
 
@@ -23,7 +21,6 @@ class BannerAdapter(private var banners: List<Banner>) : RecyclerView.Adapter<Ba
         }
         fun setItem(banner: Banner){
             binding.banner = banner
-//            binding.bannerImage.setImageResource(banner.imgUrl);
         }
 
     }

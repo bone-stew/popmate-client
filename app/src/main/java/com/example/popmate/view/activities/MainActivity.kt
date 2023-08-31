@@ -12,7 +12,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
-//    private val items = MutableLiveData<ArrayList<Item>>()
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment,fragment)

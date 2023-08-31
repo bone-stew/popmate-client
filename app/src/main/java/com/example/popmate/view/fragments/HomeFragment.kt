@@ -12,7 +12,6 @@ import com.example.popmate.model.data.local.Banner
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.view.adapters.BannerAdapter
 import com.example.popmate.view.adapters.PopupStoreAdapter
-import com.example.popmate.view.adapters.PopupStoreAdapterForListView
 import java.util.Date
 
 
@@ -50,7 +49,6 @@ class HomeFragment : Fragment() {
 
         binding.listView.adapter = PopupStoreAdapter(popupStoresFromApi)
         binding.listView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-//        binding.listView.adapter = PopupStoreAdapterForListView(requireContext(), popupStoresFromApi)
 
         val indicator = binding.indicator
         indicator.setViewPager(binding.imageCarousel)

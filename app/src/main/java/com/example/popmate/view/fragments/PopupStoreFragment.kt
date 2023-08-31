@@ -49,7 +49,6 @@ class PopupStoreFragment : Fragment(), CalendarBottomSheetFragment.DateRangeCall
         }
 
         binding.searchButton.setOnClickListener {
-            // Start the search fragment
             val searchFragment = SearchFragment()
             parentFragmentManager.beginTransaction()
                 .replace(R.id.flFragment, searchFragment)
@@ -63,24 +62,6 @@ class PopupStoreFragment : Fragment(), CalendarBottomSheetFragment.DateRangeCall
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(com.example.popmate.R.menu.menu_search, menu)
 
-//
-//        val searchItem = menu?.findItem(R.id.menu_item_search)
-//        val searchView = searchItem?.actionView as SearchView
-//
-//        searchView.imeOptions = EditorInfo.IME_ACTION_DONE
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(p0: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(p0: String?): Boolean {
-//                //adapter.getFilter().filter(newText);
-//                return false
-//            }
-//        })
-//
-//        toolbar.addView(searchView)
-
     }
 
     override fun onCreateView(
@@ -90,13 +71,9 @@ class PopupStoreFragment : Fragment(), CalendarBottomSheetFragment.DateRangeCall
         _binding = FragmentPopupStoreBinding.inflate(inflater, container, false)
         val items = getDataFromApi()
 
-        // Inflate the layout for this fragment
         binding.popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.popupstoreRecyclerView.adapter = PopupStoreAdapter(items)
 
-
-//        setHasOptionsMenu(true)
-//        setSupportActionBar(toolbar)
         return binding.root
     }
 

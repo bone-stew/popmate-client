@@ -11,7 +11,6 @@ import com.example.popmate.model.data.local.PopupStore
 
 
 class PopupStoreAdapter(private var popupStores: List<PopupStore>) : RecyclerView.Adapter<PopupStoreAdapter.PopupStoreViewHolder>() {
-    private var popupStoreList: ArrayList<PopupStore>? = null
 
     inner class PopupStoreViewHolder(private val binding: RowPopupstoreBinding): RecyclerView.ViewHolder(binding.root) {
         init {
