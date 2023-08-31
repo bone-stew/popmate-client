@@ -1,4 +1,4 @@
-package com.example.popmate.view.activities.order
+package com.example.popmate.view.framents.order
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.popmate.R
 import com.example.popmate.model.data.remote.order.StoreItem
+import com.example.popmate.view.activities.order.OrderDetailActivity
 
 
 class OrderBottomFragment : Fragment(){

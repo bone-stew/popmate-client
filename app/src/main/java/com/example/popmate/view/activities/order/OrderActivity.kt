@@ -9,6 +9,7 @@ import com.example.popmate.databinding.ActivityOrderBinding
 import com.example.popmate.model.data.remote.order.StoreItem
 import com.example.popmate.view.adapters.order.OnItemClick
 import com.example.popmate.view.adapters.order.OrderAdapter
+import com.example.popmate.view.framents.order.OrderBottomFragment
 import java.util.Date
 
 class OrderActivity : AppCompatActivity(), OnItemClick {
