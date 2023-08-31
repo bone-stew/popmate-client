@@ -10,7 +10,6 @@ import com.example.popmate.view.fragments.PopupStoreFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {

@@ -15,16 +15,7 @@ import com.example.popmate.view.adapters.PopupStoreAdapter
 import java.util.Date
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
@@ -42,19 +33,19 @@ class HomeFragment : Fragment() {
         binding.imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.visitedRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.visitedRecyclerView.adapter = PopupStoreAdapter(popupStoresFromApi)
+        binding.visitedRecyclerView.adapter = PopupStoreAdapter(popupStoresFromApi, PopupStoreAdapter.ViewHolderType.VISITED)
 
         binding.visitedLayout.visibility = if (visitedByIsNotNull()) View.VISIBLE else View.GONE
 
 
-        binding.listView.adapter = PopupStoreAdapter(popupStoresFromApi)
+        binding.listView.adapter = PopupStoreAdapter(popupStoresFromApi, PopupStoreAdapter.ViewHolderType.HORIZONTAL)
         binding.listView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         val indicator = binding.indicator
         indicator.setViewPager(binding.imageCarousel)
 
         binding.horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.horizontalView.adapter = PopupStoreAdapter(popupStoresFromApi)
+        binding.horizontalView.adapter = PopupStoreAdapter(popupStoresFromApi, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
         return binding.root
     }
 
@@ -143,12 +134,14 @@ class HomeFragment : Fragment() {
 
 
     companion object {
+
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HomeFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+//                    putString(ARG_PARAM1, param1)
+//                    putString(ARG_PARAM2, param2)
                 }
             }
     }

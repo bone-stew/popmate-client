@@ -96,6 +96,8 @@ dependencies {
     // circleindicator
     implementation 'me.relex:circleindicator:2.1.6'
 
+    // circleimageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 
 }
