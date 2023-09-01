@@ -1,10 +1,12 @@
 package com.example.popmate.view.fragments
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentHomeBinding
@@ -39,6 +41,7 @@ class SearchFragment : Fragment() {
         }
     }
 
+//    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +53,7 @@ class SearchFragment : Fragment() {
         binding.horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.horizontalView.adapter = PopupStoreAdapter(popupStoresFromApi, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
 
+        binding.searchView.setIconifiedByDefault(false)
         return binding.root
     }
 

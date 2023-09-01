@@ -18,19 +18,26 @@
     app:layout_constraintEnd_toEndOf="parent">
 
     <!-- Button on the left -->
-    <Button
-      android:id="@+id/newButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Button" />
+    <ImageView
+      android:id="@+id/img_arrow"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginStart="15dp"
+      android:src="@drawable/arrow2"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
     <!-- EditText in the middle -->
-    <EditText
-      android:id="@+id/newEditText"
+    <SearchView
+      android:background="@drawable/shape_search_view"
+      android:id="@+id/searchView"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:hint="EditText" />
+      android:iconifiedByDefault="false"
+      android:searchIcon="@null"
+      android:queryHint="검색어를 입력해주세요" />
   </LinearLayout>
 
   <LinearLayout
@@ -44,7 +51,7 @@
       android:id="@+id/closingSoonText"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="끝나기전에 방문하세요!"
+      android:text="최근 검색한 팝업스토어"
       android:layout_marginVertical="23dp"
       android:gravity="start|center_vertical"
       android:layout_marginLeft="16dp"
