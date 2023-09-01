@@ -1,7 +1,6 @@
 package com.example.popmate.view.activities.reservation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
@@ -30,6 +29,9 @@ class ReservationWaitActivity :
         }
         binding.btnPlus.setOnClickListener {
             viewModel.increment()
+        }
+        binding.btnReserve.setOnClickListener {
+            viewModel.onReserveButtonClick()
         }
     }
 }

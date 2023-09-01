@@ -1,6 +1,5 @@
 package com.example.popmate.viewmodel.reservation
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 
@@ -17,5 +16,9 @@ class ReservationViewModel : ViewModel() {
         if (currentCount > 1) {
             count.set(currentCount - 1)
         }
+    }
+
+    fun onReserveButtonClick() {
+        // TODO: 예약하기 버튼 클릭 시 동작
     }
 }

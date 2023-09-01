@@ -227,7 +227,7 @@
                     app:cardUseCompatPadding="true">
 
                     <Button
-                        android:id="@+id/btn_reservation_wait"
+                        android:id="@+id/btn_reserve"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/btn_reservation_wait_background"
