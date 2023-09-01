@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Popmate"
         tools:targetApi="31">
         <activity
+            android:name=".view.activities.order.OrderPaymentCompleteActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activities.order.OrderPaymentActivity"
             android:exported="false" />
         <activity
