@@ -1,12 +1,7 @@
 package com.example.popmate.view.activities.detail
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil.setContentView
-import androidx.fragment.app.Fragment
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityPopupDetailBinding
@@ -30,7 +25,7 @@ class PopupDetailActivity :
 
     private fun setInfoFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(binding.detailMainFrame.id, PopupDetailInfo()).commit()
+            .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance()).commit()
         binding.run {
             infoBtn.run {
                 setTextColor(ContextCompat.getColor(context, R.color.black))
@@ -44,7 +39,7 @@ class PopupDetailActivity :
     }
     private fun setChatFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(binding.detailMainFrame.id, PopupDetailChat()).commit()
+            .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
         binding.run {
             infoBtn.run {
                 setTextColor(ContextCompat.getColor(context, R.color.tx_light_gray))
