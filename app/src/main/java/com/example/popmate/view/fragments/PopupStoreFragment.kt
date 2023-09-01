@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,7 +18,7 @@ import java.util.Calendar
 import java.util.Date
 
 
-class PopupStoreFragment : Fragment(), CalendarBottomSheetFragment.DateRangeCallback {
+class PopupStoreFragment : Fragment() {
     private var _binding: FragmentPopupStoreBinding? = null
     private val binding get() = _binding!!
     private var isOpeningSoon = false
@@ -26,16 +27,18 @@ class PopupStoreFragment : Fragment(), CalendarBottomSheetFragment.DateRangeCall
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.isOpeningSoonBtn.setOnClickListener {
+        val isOpeningSoonBtn = binding.isOpeningSoonBtn
+        isOpeningSoonBtn.setOnClickListener {
             isOpeningSoon = !isOpeningSoon
-            val buttonImageRes = if (isOpeningSoon) R.drawable.google_logo else R.drawable.kakao_logo
-//            binding.isOpeningSoonBtn.setImageResource(buttonImageRes)
         }
 
-        binding.calendarButton.setOnClickListener {
+
+        val calendarLayout = view.findViewById<LinearLayout>(R.id.calendarLayout)
+    calendarLayout.setOnClickListener{
             val bottomSheetFragment = CalendarBottomSheetFragment()
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
-        }
+
+    }
 
         binding.searchButton.setOnClickListener {
             val searchFragment = SearchFragment()
@@ -66,7 +69,7 @@ class PopupStoreFragment : Fragment(), CalendarBottomSheetFragment.DateRangeCall
         return binding.root
     }
 
-    private fun getDataFromApi():List<PopupStore> {
+    private fun getDataFromApi(): List<PopupStore> {
         val sampleData = mutableListOf<PopupStore>(
             PopupStore(
                 id = 1,
@@ -206,10 +209,6 @@ class PopupStoreFragment : Fragment(), CalendarBottomSheetFragment.DateRangeCall
 
         )
         return sampleData
-    }
-
-    override fun onDateRangeSelected(startDate: Calendar, endDate: Calendar) {
-        TODO("Not yet implemented")
     }
 
 
