@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,22 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Popmate"
-        tools:targetApi="31">
-        <activity
-            android:name=".view.activities.order.OrderPaymentCompleteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activities.order.OrderPaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activities.order.OrderDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activities.user.MyPageLoginActivity"
-            android:exported="false" />
+        tools:targetApi="31" >
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -42,6 +30,24 @@
                     android:scheme="@string/kakao_redirection_scheme" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.activities.PopupDetailActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name=".view.activities.order.OrderPaymentCompleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.order.OrderPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.order.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.user.MyPageLoginActivity"
+            android:exported="false" />
+
         <activity
             android:name=".view.activities.order.OrderActivity"
             android:exported="true"
@@ -68,6 +74,8 @@
             android:name=".view.activities.user.MyPageLogoutActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
+
+
     </application>
 
 </manifest>
