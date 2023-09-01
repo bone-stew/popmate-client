@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.popmate.viewmodel.reservation.ReservationViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_reservation_wait"
         android:layout_width="match_parent"
@@ -158,11 +163,12 @@
                         android:textSize="20dp" />
 
                     <TextView
+                        android:id="@+id/tv_visiter_count_card"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="end|center_vertical"
-                        android:text="1" />
+                        android:text="@{Integer.toString(viewModel.count)}" />
 
                     <TextView
                         android:layout_width="0dp"
