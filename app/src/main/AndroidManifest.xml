@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Popmate"
         tools:targetApi="31">
         <activity
-            android:name=".view.activities.PopupDetailActivity"
+            android:name=".view.activities.detail.PopupDetailActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,6 +65,10 @@
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
 
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCZg0trsh4KTJYpMNYlsgWrEzIpoC9hsZc" />
     </application>
 
 </manifest>

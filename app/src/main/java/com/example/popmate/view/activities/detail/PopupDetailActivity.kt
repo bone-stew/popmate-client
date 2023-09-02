@@ -5,9 +5,11 @@ import androidx.core.content.ContextCompat
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityPopupDetailBinding
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 
 class PopupDetailActivity :
-    BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail) {
+    BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail), OnMapReadyCallback{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,5 +52,9 @@ class PopupDetailActivity :
                 setBackgroundResource(R.drawable.bottom_line)
             }
         }
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        TODO("Not yet implemented")
     }
 }
