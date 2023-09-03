@@ -6,9 +6,9 @@
       android:layout_height="match_parent"
       android:foregroundGravity="center_vertical">
 
-        <ImageView
+        <ImageButton
           android:id="@+id/img_arrow"
-          android:layout_width="20dp"
+          android:layout_width="10dp"
           android:layout_height="20dp"
           android:layout_marginTop="20dp"
           android:layout_marginStart="15dp"

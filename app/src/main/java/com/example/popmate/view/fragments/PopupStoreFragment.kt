@@ -1,18 +1,25 @@
 package com.example.popmate.view.fragments
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.adapters.PopupStoreAdapter
 import java.util.Calendar
 import java.util.Date
@@ -22,6 +29,11 @@ class PopupStoreFragment : Fragment() {
     private var _binding: FragmentPopupStoreBinding? = null
     private val binding get() = _binding!!
     private var isOpeningSoon = false
+    private lateinit var mainActivity: MainActivity
+
+    companion object {
+        private const val TWO_POPUPSTORES_WIDTH = 362
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,11 +62,8 @@ class PopupStoreFragment : Fragment() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(com.example.popmate.R.menu.menu_search, menu)
 
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,10 +72,33 @@ class PopupStoreFragment : Fragment() {
         _binding = FragmentPopupStoreBinding.inflate(inflater, container, false)
         val items = getDataFromApi()
 
+        val screenWidthInPixels = resources.displayMetrics.widthPixels // Get the screen width in pixels
+        val screenDensity = resources.displayMetrics.density // Get the screen density
+
+// Calculate the screen width in dp
+        val screenWidthInDp = screenWidthInPixels / screenDensity
+//        val screenWidth = resources.displayMetrics.widthPixels  // Get the screen width
+
+        Log.i("POPUPSTORE", screenWidthInDp.toString())
+        // Calculate the desired left padding
+        val desiredPadding = (screenWidthInDp - TWO_POPUPSTORES_WIDTH) / 2
+        Log.i("POPUPSTORE", desiredPadding.toString())
+
+        // Apply the left padding to popupstoreRecyclerView
+        binding.popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, 0, 0)
+
         binding.popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.popupstoreRecyclerView.adapter = PopupStoreAdapter(items, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE)
 
+        binding.imgArrow.setOnClickListener {
+            mainActivity.goBack()
+        }
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
     }
 
     private fun getDataFromApi(): List<PopupStore> {
