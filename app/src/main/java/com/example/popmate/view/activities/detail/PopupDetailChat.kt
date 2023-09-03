@@ -14,6 +14,8 @@ class PopupDetailChat : Fragment() {
         fun newInstance() = PopupDetailChat()
     }
 
+    private lateinit var viewModel: PopupDetailChatViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,4 +23,9 @@ class PopupDetailChat : Fragment() {
         return inflater.inflate(R.layout.fragment_popup_detail_chat, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(PopupDetailChatViewModel::class.java)
+        // TODO: Use the ViewModel
+    }
 }

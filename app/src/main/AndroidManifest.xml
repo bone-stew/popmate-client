@@ -15,18 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Popmate"
         tools:targetApi="31">
-        <activity
-            android:name=".view.activities.detail.PopupDetailActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- SplashActivity 설정 -->
+
+        <!-- MainActivity 설정 -->
         <activity
-            android:name=".view.activities.user.MyPageLoginActivity"
-            android:exported="false" />
+            android:name=".view.activities.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <!-- LoginActivity 설정 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -45,30 +43,44 @@
         <activity
             android:name=".view.activities.login.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate"></activity>
+            android:theme="@style/Theme.Popmate" />
         <activity
             android:name=".view.activities.login.LoginTestActivity"
             android:exported="false"
             android:theme="@style/Theme.Popmate" />
-        <activity
-            android:name=".view.activities.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".view.activities.user.MyPageLogoutActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Popmate">
 
+        <!-- 팝업스토어 Activity 설정 -->
+        <activity
+            android:name=".view.activities.detail.PopupDetailActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
+        <!-- Reservation Activity 설정 -->
+        <activity
+            android:name=".view.activities.reservation.ReservationWaitActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Popmate" />
+
+        <!-- Chat Activity 설정 -->
+
+        <!-- MyPage Activity 설정 -->
+        <activity
+            android:name=".view.activities.user.MyPageLoginActivity"
+            android:exported="false" />
         <activity
             android:name=".view.activities.user.MyPageLogoutActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
-
-
+        
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCZg0trsh4KTJYpMNYlsgWrEzIpoC9hsZc" />
+
     </application>
 
 </manifest>

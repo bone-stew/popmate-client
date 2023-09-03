@@ -1,6 +1,5 @@
 package com.example.popmate.view.activities.detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupDetailInfoBinding
 import com.example.popmate.model.data.local.Banner
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.view.adapters.BannerAdapter
-import com.example.popmate.view.adapters.PopupStoreAdapter
 import com.example.popmate.view.adapters.StoreCardAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
