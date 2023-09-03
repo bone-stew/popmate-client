@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.popmate.R
 import com.example.popmate.view.fragments.HomeFragment
 import com.example.popmate.view.fragments.PopupStoreFragment
-import com.example.popmate.view.fragments.user.MyPageLoginFragment
-import com.example.popmate.view.fragments.user.MyPagePurchaseFragment
+import com.example.popmate.view.fragments.user.MyPageLogoutFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val firstFragment=HomeFragment()
         val secondFragment=PopupStoreFragment()
-        val thirdFragment= MyPagePurchaseFragment()
+        val thirdFragment= MyPageLogoutFragment()
 
         setCurrentFragment(firstFragment)
 

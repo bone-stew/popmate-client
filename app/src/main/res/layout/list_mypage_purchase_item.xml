@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="10dp"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/button_radius"
     android:layout_width="match_parent"
     android:layout_marginTop="5dp"
+    android:elevation="4dp"
     android:layout_gravity="center"
-    android:layout_height="190dp">
+    android:layout_height="185dp">
 
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="23dp"
         android:text="9.12 ("
         android:textColor="@color/tx_gray"
@@ -58,20 +61,21 @@
         android:id="@+id/imageView8"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/button_radius"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/google_logo" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/btn_mypage_purchase_detail"
         android:layout_width="50dp"
         android:layout_height="25dp"
+        android:clickable="true"
         android:layout_marginTop="18dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/button_radius"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/mypage_rounded_rectangle"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +102,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/txt_mypage_order_detail_store_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -110,16 +114,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/txt_mypage_order_detail_store_items"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="5dp"
         android:text="무럭무럭 잔 1개 + 투두투두 잇 1개"
         android:textColor="@color/tx_gray"
         android:textSize="10dp"
         app:layout_constraintStart_toEndOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_mypage_order_detail_store_name" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -127,7 +131,7 @@
         android:layout_height="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="52dp"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintStart_toEndOf="@+id/txt_mypage_order_detail_store_name"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/arrow3" />
 
@@ -135,7 +139,7 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="17dp"
         android:text="픽업 시간"
         android:textColor="@color/tx_gray"
@@ -147,7 +151,7 @@
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:text="9.12"
         android:textColor="@color/black"
