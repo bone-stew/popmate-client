@@ -9,7 +9,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 
 class PopupDetailActivity :
-    BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail), OnMapReadyCallback{
+    BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +39,7 @@ class PopupDetailActivity :
             }
         }
     }
+
     private fun setChatFragment() {
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
@@ -52,9 +53,5 @@ class PopupDetailActivity :
                 setBackgroundResource(R.drawable.bottom_line)
             }
         }
-    }
-
-    override fun onMapReady(p0: GoogleMap) {
-        TODO("Not yet implemented")
     }
 }

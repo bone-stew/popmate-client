@@ -513,13 +513,13 @@
                 <ImageView
                     android:layout_width="13dp"
                     android:layout_height="13dp"
-                    android:src="@drawable/solar_copy_outline"
-                    />
+                    android:src="@drawable/solar_copy_outline" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="서울 영등포구 여의대로 108 더현대 서울 B2 아이코닉"
-                    android:textSize="@dimen/h5"/>
+                    android:textSize="@dimen/h5" />
             </LinearLayout>
         </LinearLayout>
 
@@ -530,9 +530,9 @@
             android:background="@color/white"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="60dp"
             app:layout_constraintTop_toBottomOf="@+id/map_section">
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -542,8 +542,11 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/h3" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommend_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
