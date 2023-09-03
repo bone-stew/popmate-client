@@ -76,6 +76,11 @@
             android:name=".view.activities.user.MyPageLogoutActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
+        
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCZg0trsh4KTJYpMNYlsgWrEzIpoC9hsZc" />
+
     </application>
 
 </manifest>

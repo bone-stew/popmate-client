@@ -28,5 +28,4 @@ class PopupDetailChat : Fragment() {
         viewModel = ViewModelProvider(this).get(PopupDetailChatViewModel::class.java)
         // TODO: Use the ViewModel
     }
-
 }
