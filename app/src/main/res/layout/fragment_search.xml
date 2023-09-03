@@ -36,7 +36,11 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"
       android:iconifiedByDefault="false"
+      android:queryBackground="@null"
       android:searchIcon="@null"
+      android:layout_marginTop="10dp"
+      android:layout_marginLeft="8dp"
+      android:padding="8dp"
       android:queryHint="검색어를 입력해주세요" />
   </LinearLayout>
 

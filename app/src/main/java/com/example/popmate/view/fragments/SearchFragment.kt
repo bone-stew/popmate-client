@@ -1,19 +1,21 @@
 package com.example.popmate.view.fragments
 
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
-import com.example.popmate.databinding.FragmentHomeBinding
 import com.example.popmate.databinding.FragmentSearchBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.adapters.PopupStoreAdapter
+import org.w3c.dom.Text
 import java.util.Date
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,6 +33,7 @@ class SearchFragment : Fragment() {
     private var param2: String? = null
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+    private lateinit var mainActivity: MainActivity
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +57,25 @@ class SearchFragment : Fragment() {
         binding.horizontalView.adapter = PopupStoreAdapter(popupStoresFromApi, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
 
         binding.searchView.setIconifiedByDefault(false)
-        return binding.root
+    val search_text =
+        binding.searchView.findViewById<TextView>(binding.searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null))
+    search_text.setTextSize(13F)
+
+//    binding.searchView.setTextSize()
+    binding.imgArrow.setOnClickListener {
+        val fragmentManager = requireActivity().supportFragmentManager
+        if (fragmentManager.backStackEntryCount > 0) {
+            fragmentManager.popBackStack()
+        } else {
+            // Handle case where there is no previous fragment
+            // You can choose to navigate to a specific fragment or take some other action
+            // For example, go back to HomeFragment:
+            fragmentManager.beginTransaction()
+                .replace(R.id.flFragment, HomeFragment())
+                .commit()
+        }
+    }
+    return binding.root
     }
 
     companion object {
