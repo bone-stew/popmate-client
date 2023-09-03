@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class ReservationViewModel : ViewModel() {
     val count = ObservableField(1)
+    val isReservationPending = ObservableField(false)
 
     fun increment() {
         val currentCount = count.get() ?: 0
@@ -18,7 +19,22 @@ class ReservationViewModel : ViewModel() {
         }
     }
 
-    fun onReserveButtonClick() {
+    fun onReserveButtonClick(): Boolean {
         // TODO: 예약하기 버튼 클릭 시 동작
+
+        if (1 != 1) {
+            return false // 예약 실패
+        }
+
+        // retrofit 호출
+        isReservationPending.set(true)
+
+        // 3초 로딩
+        Thread.sleep(3000)
+
+        // retrofit 호출 후
+        isReservationPending.set(false)
+
+        return true
     }
 }

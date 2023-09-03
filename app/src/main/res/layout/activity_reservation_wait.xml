@@ -8,6 +8,7 @@
             name="viewModel"
             type="com.example.popmate.viewmodel.reservation.ReservationViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_reservation_wait"
         android:layout_width="match_parent"
