@@ -18,14 +18,54 @@
         <include
             android:id="@+id/layout_page_title"
             layout="@layout/layout_title_simple"
-            app:titleText="@{`예약 내역`}" />
+            app:titleText="@{`팝업스토어 예약내역`}" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_reservation_title"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="15dp"-->
+        <!--            android:text="@string/reservation_receipt"-->
+        <!--            android:textColor="@color/tx_gray"-->
+        <!--            android:textSize="@dimen/h3"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/layout_page_title"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"/>-->
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/layout_visit_tab"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:theme="@style/TabTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_page_title">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pre_visit"
+                android:textSize="@dimen/h4" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/post_visit"
+                android:textSize="@dimen/h4" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_visit"
+                android:textSize="@dimen/h4" />
+
+        </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_visit"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_page_title" />
+            app:layout_constraintTop_toBottomOf="@id/layout_visit_tab" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
