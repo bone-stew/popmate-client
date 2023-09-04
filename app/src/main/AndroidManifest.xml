@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" >
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
 
     <application
         android:name=".config.GlobalApplication"
@@ -15,9 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Popmate"
         tools:targetApi="31" >
-        <activity
-            android:name=".view.activities.user.MyPageLoginActivity"
-            android:exported="false" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true" >
@@ -33,30 +32,71 @@
                     android:scheme="@string/kakao_redirection_scheme" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".view.activities.login.LoginActivity"
+            android:name=".view.activities.detail.PopupDetailActivity"
+            android:exported="true"/>
+
+        <!-- OrderActivity 부분-->
+        <activity
+            android:name=".view.activities.order.OrderActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate" >
-        </activity>
-        <activity
-            android:name=".view.activities.login.LoginTestActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Popmate" />
-        <activity
-            android:name=".view.activities.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Popmate" >
+            android:theme="@style/Theme.Popmate">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.activities.order.OrderPaymentCompleteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.order.OrderPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.order.OrderDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.user.MyPageLoginActivity"
+            android:exported="false" />
+
+
+        <!-- LoginActivity 부분-->
+        <activity
+            android:name=".view.activities.login.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Popmate" />
+        <activity
+            android:name=".view.activities.login.LoginTestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Popmate" />
+
+        <!-- MainActivity 부분-->
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Popmate">
+
+        </activity>
+
         <activity
             android:name=".view.activities.user.MyPageLogoutActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
 
+        <!-- Reservation Activity 설정 -->
+        <activity
+            android:name=".view.activities.reservation.ReservationWaitActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Popmate" />
+
+        <!-- Chat Activity 설정 -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCZg0trsh4KTJYpMNYlsgWrEzIpoC9hsZc" />
     </application>
 
 </manifest>

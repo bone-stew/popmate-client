@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical">
+
+        <!-- 다이얼로그 제목 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_reservation_success_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/check" />
+
+            <TextView
+                android:id="@+id/tvDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/reservation_success"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+            <!-- 예약 안내 메시지 -->
+            <TextView
+                android:id="@+id/tvReservationInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:text="@string/reservation_notification"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <!-- 예약 안내 하단 내용 -->
+            <TextView
+                android:id="@+id/tvAdditionalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:text="@string/reservation_notification_detail"
+                android:textSize="10sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="@color/black" />
+
+            <!-- 예약 안내 내용 -->
+            <TextView
+                android:id="@+id/tvReservationDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:text="팝업스토어 제목"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <!-- 예약 시간 -->
+                <ImageView
+                    android:id="@+id/img_clock"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/clock_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_visit_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="방문 예약 시간 "
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@+id/img_clock"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_visit_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="10:00"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_visit_time"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_visit_time_divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" ~ "
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_visit_start_time"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_visit_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22:00"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_visit_time_divider"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 예약 인원 -->
+                <ImageView
+                    android:id="@+id/img_human"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/human"
+                    app:layout_constraintStart_toStartOf="@+id/img_clock"
+                    app:layout_constraintTop_toBottomOf="@id/img_clock" />
+
+                <TextView
+                    android:id="@+id/tv_visit_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="방문 예약 인원 "
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_visit_time"
+                    app:layout_constraintTop_toTopOf="@id/img_human" />
+
+                <TextView
+                    android:id="@+id/tv_visit_people_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2명"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_visit_start_time"
+                    app:layout_constraintTop_toTopOf="@id/img_human" />
+
+                <!-- 예약 장소 -->
+                <ImageView
+                    android:id="@+id/img_location"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/location"
+                    app:layout_constraintStart_toStartOf="@+id/img_clock"
+                    app:layout_constraintTop_toBottomOf="@id/img_human" />
+
+                <TextView
+                    android:id="@+id/tv_visit_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="팝업스토어 장소 "
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_visit_time"
+                    app:layout_constraintTop_toTopOf="@id/img_location" />
+
+                <TextView
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:text="더 현대 서울 3층 팝업스토어 매장"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_visit_start_time"
+                    app:layout_constraintTop_toTopOf="@id/img_location" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 확인 버튼 -->
+            <Button
+                android:id="@+id/btnClose"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_reservation_wait_background"
+                android:text="확인"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
