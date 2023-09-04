@@ -22,7 +22,7 @@
     android:layout_height="wrap_content"
     android:text="09.12~09.19"
     android:textColor="@color/tx_light_gray"
-    android:textSize="10sp"
+    android:textSize="@dimen/h5"
     android:layout_marginStart="2dp"
     android:layout_gravity="center"/>
 </LinearLayout>

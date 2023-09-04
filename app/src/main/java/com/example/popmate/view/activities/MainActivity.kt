@@ -8,7 +8,7 @@ import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.fragment.app.Fragment
 import com.example.popmate.R
 import com.example.popmate.view.fragments.HomeFragment
-import com.example.popmate.view.fragments.MyPageFragment
+//import com.example.popmate.view.fragments.MyPageFragment
 import com.example.popmate.view.fragments.PopupStoreFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Stack
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.page_home -> setCurrentFragment(HomeFragment(), false)
                 R.id.page_popupstore -> setCurrentFragment(PopupStoreFragment(), false)
-                R.id.page_mypage -> setCurrentFragment(MyPageFragment(), false)
+//                R.id.page_mypage -> setCurrentFragment(MyPageFragment(), false)
             }
             true
         }
@@ -62,20 +62,9 @@ class MainActivity : AppCompatActivity() {
             when (previousFragment) {
                 is HomeFragment -> bottomNavigationView.selectedItemId = R.id.page_home
                 is PopupStoreFragment -> bottomNavigationView.selectedItemId = R.id.page_popupstore
-                is MyPageFragment -> bottomNavigationView.selectedItemId = R.id.page_mypage
+//                is MyPageFragment -> bottomNavigationView.selectedItemId = R.id.page_mypage
             }
-
-            // 뒤로 가기를 눌렀을때 바텀 바 아이템 클릭 변경 시도
-//            setCurrentFragment(previousFragment)
-//            bottomNavigationView.selectedItemId = R.id.page_home
-//            bottomNavigationView.findViewById<View>(R.id.page_home).performClick()
-//            bottomNavigationView.performContextClick(335F, 847F)
-//            bottomNavigationView.menu.findItem(R.id.page_home).performClick()
-//            bottomNavigationView.findViewById<View>(R.id.page_mypage).performClick()
-//            bottomNavigationView.getMenu().findItem(R.id.page_home).setChecked(true);
-//            bottomNavigationView.menu.performIdentifierAction(R.id.page_home, 0)
         } else {
-
             super.onBackPressed()
         }
     }

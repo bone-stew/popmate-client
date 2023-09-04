@@ -7,5 +7,5 @@
   android:layout_weight="1"
   android:gravity="center"
   android:textColor="@color/black"
-  android:textSize="14sp"
+  android:textSize="@dimen/h4"
   tools:text="SUN" />

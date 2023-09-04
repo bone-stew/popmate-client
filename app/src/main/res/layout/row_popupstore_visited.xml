@@ -32,88 +32,10 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintVertical_bias="0.5"
-      android:textSize="10sp"
+      android:textSize="@dimen/h5"
       android:textColor="@color/tx_light_gray"
       android:gravity="center"
       android:layout_marginTop="4dp" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
-<!--<layout-->
-<!--  xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--  xmlns:app="http://schemas.android.com/apk/res-auto">-->
-<!--  <data>-->
-<!--    <variable-->
-<!--      name="popupstore"-->
-<!--      type="com.example.popmate.model.data.local.PopupStore" />-->
-<!--  </data>-->
-
-<!--  <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content">-->
-
-
-<!--    <ImageView-->
-<!--      android:id="@+id/itemImageView"-->
-<!--      android:layout_width="120dp"-->
-<!--      android:layout_height="120dp"-->
-<!--      android:scaleType="centerCrop"-->
-<!--      android:src="@drawable/googlelogo"-->
-<!--      app:layout_constraintStart_toStartOf="parent"-->
-<!--      app:layout_constraintTop_toTopOf="parent"-->
-<!--      app:layout_constraintBottom_toBottomOf="parent"-->
-<!--      android:layout_margin="8dp" />-->
-
-<!--    <TextView-->
-<!--      android:id="@+id/titleTextView"-->
-<!--      android:layout_width="0dp"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:text="@{popupstore.title}"-->
-<!--      app:layout_constraintStart_toEndOf="@id/itemImageView"-->
-<!--      app:layout_constraintTop_toTopOf="@id/itemImageView"-->
-<!--      app:layout_constraintEnd_toEndOf="parent"-->
-<!--      android:layout_marginStart="8dp"-->
-<!--      android:layout_marginEnd="8dp"-->
-<!--      android:layout_marginTop="8dp" />-->
-
-<!--    <TextView-->
-<!--      android:id="@+id/dateTextView"-->
-<!--      android:layout_width="0dp"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:text="@{popupstore.openDateFormatted}"-->
-<!--      app:layout_constraintStart_toEndOf="@id/itemImageView"-->
-<!--      app:layout_constraintTop_toBottomOf="@id/titleTextView"-->
-<!--      app:layout_constraintEnd_toEndOf="parent"-->
-<!--      android:layout_marginStart="8dp"-->
-<!--      android:layout_marginEnd="8dp"-->
-<!--      android:layout_marginTop="4dp" />-->
-
-<!--    <TextView-->
-<!--      android:id="@+id/locationTextView"-->
-<!--      android:layout_width="0dp"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:text="@{popupstore.location}"-->
-<!--      app:layout_constraintStart_toEndOf="@id/itemImageView"-->
-<!--      app:layout_constraintTop_toBottomOf="@id/dateTextView"-->
-<!--      app:layout_constraintEnd_toEndOf="parent"-->
-<!--      android:layout_marginStart="8dp"-->
-<!--      android:layout_marginEnd="8dp"-->
-<!--      android:layout_marginTop="4dp" />-->
-
-<!--    <TextView-->
-<!--      android:id="@+id/organizerTextView"-->
-<!--      android:layout_width="0dp"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:text="@{popupstore.organizer}"-->
-<!--      app:layout_constraintStart_toEndOf="@id/itemImageView"-->
-<!--      app:layout_constraintTop_toBottomOf="@id/dateTextView"-->
-<!--      app:layout_constraintEnd_toEndOf="parent"-->
-<!--      android:layout_marginStart="8dp"-->
-<!--      android:layout_marginEnd="8dp"-->
-<!--      android:layout_marginTop="4dp"-->
-<!--      app:layout_constraintBottom_toBottomOf="parent" />-->
-
-<!--  </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
-<!--</layout>-->

@@ -3,8 +3,7 @@
   android:padding="12dp"
   android:shape="rectangle" >
   <solid android:color="#FFFFFF" />
-  <corners android:radius="8dp" /> <!-- Corner radius (adjust as needed) -->
-
+  <corners android:radius="8dp" />
   <stroke
     android:width="0.3dp"
     android:color="#797979" />

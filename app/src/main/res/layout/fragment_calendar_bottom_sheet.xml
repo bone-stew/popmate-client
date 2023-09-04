@@ -44,7 +44,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginBottom="16dp"
         android:textColor="@color/tx_gray"
-        android:textSize="11sp"
+        android:textSize="@dimen/h7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calendarIcon"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
-        android:textSize="11sp"
+        android:textSize="@dimen/h7"
         app:layout_constraintStart_toEndOf="@id/startDateText"/>
 
 
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/tx_gray"
-        android:textSize="11sp"
+        android:textSize="@dimen/h7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="32dp"
@@ -88,7 +88,7 @@
         android:focusable="true"
         android:text="초기화"
         android:textColor="@color/tx_gray"
-        android:textSize="11sp"
+        android:textSize="@dimen/h7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -136,7 +136,7 @@
     android:layout_marginTop="10dp"
     android:layout_gravity="center"
     android:text="검색 결과 보러가기"
-    android:textSize="13sp"
+    android:textSize="@dimen/h8"
     android:background="@color/orange_light"
   android:textColor="@android:color/white" />
 
