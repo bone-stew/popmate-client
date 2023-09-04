@@ -2,4 +2,11 @@
     <string name="app_name">popmate</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="popup_store_visit_time">팝업스토어 방문 시간</string>
+    <string name="popup_store_visit_status">예약 중</string>
+    <string name="reservation">예약하기</string>
+    <string name="popup_store_visiter_count">팝업스토어 방문 인원</string>
+    <string name="reservation_success">팝업스토어 예약완료</string>
+    <string name="reservation_notification_detail">- 입장시간 이후 입장이 불가능할 수 있습니다.\n- 개별 팝업스토어 상황에 따라 대기 시간이 발생할 수 있습니다.</string>
+    <string name="reservation_notification">예약하신 시간에\n해당 팝업스토어 예약라인으로 입장하세요</string>
 </resources>

@@ -66,11 +66,11 @@
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -78,7 +78,17 @@
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
 
+        <!-- Reservation Activity 설정 -->
+        <activity
+            android:name=".view.activities.reservation.ReservationWaitActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Popmate" />
 
+        <!-- Chat Activity 설정 -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCZg0trsh4KTJYpMNYlsgWrEzIpoC9hsZc" />
     </application>
 
 </manifest>
