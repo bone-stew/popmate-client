@@ -4,15 +4,28 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class PopupStore(
-    val id: Int,
-    val title: String,
-    val openDate: Date,
-    val closeDate: Date,
-    val location: String,
+data class PopupStore(
+    val id: Long,
+    val bannerImgUrl: String,
+    val closeDate: String,
+    val closeTime: String,
+    val departmentDescription: String,
+    val departmentName: String,
+    val description: String,
+    val entryFee: Int,
+    val eventDescription: String,
+    val latitude: Double,
+    val longitude: Double,
+    val openDate: String,
+    val openTime: String,
     val organizer: String,
-    val imgUrl: String,
-){
+    val placeDetail: String,
+    val popupStoreImgResponses: List<Banner>,
+    val popupStoreSnsResponses: List<PopupStoreSnsResponse>,
+    val status: Int,
+    val title: String,
+    val views: Int
+) {
     val openDateFormatted: String
         get() {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
