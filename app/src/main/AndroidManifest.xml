@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" >
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
 
     <application
         android:name=".config.GlobalApplication"
@@ -35,6 +37,18 @@
             android:name=".view.activities.detail.PopupDetailActivity"
             android:exported="true"/>
 
+        <!-- OrderActivity 부분-->
+        <activity
+            android:name=".view.activities.order.OrderActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Popmate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".view.activities.order.OrderPaymentCompleteActivity"
             android:exported="false" />
@@ -48,12 +62,8 @@
             android:name=".view.activities.user.MyPageLoginActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".view.activities.order.OrderActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Popmate">
 
-        </activity>
+        <!-- LoginActivity 부분-->
         <activity
             android:name=".view.activities.login.LoginActivity"
             android:exported="true"
@@ -62,15 +72,13 @@
             android:name=".view.activities.login.LoginTestActivity"
             android:exported="false"
             android:theme="@style/Theme.Popmate" />
+
+        <!-- MainActivity 부분-->
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity

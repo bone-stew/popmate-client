@@ -10,13 +10,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
         tools:context=".view.activities.order.OrderPaymentCompleteActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_order_payment_complete_first"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:foregroundGravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +25,6 @@
                 android:id="@+id/img_order_detail_payment_complete_close"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginEnd="16dp"
                 android:src="@drawable/close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +44,6 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="17dp"
                 android:text="결제 완료"
@@ -59,7 +57,6 @@
                 android:id="@+id/txt_order_detail_payment_complete_totalprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="13dp"
                 android:text="18000"
                 android:textColor="@color/black"
@@ -83,11 +80,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_order_payment_complete_history"
-            android:layout_width="380dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/button_radius"
             android:elevation="4dp"
+            android:paddingHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -96,7 +94,6 @@
                 android:id="@+id/imageView4"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -117,7 +114,6 @@
                 android:id="@+id/imageView6"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:layout_marginEnd="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -137,7 +133,6 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
                 android:layout_marginTop="24dp"
                 android:text="주문금액"
                 android:textColor="@color/black"
@@ -149,7 +144,6 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
                 android:layout_marginTop="8dp"
                 android:text="결제일시"
                 android:textColor="@color/black"
@@ -161,7 +155,6 @@
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
                 android:layout_marginTop="8dp"
                 android:text="상호명"
                 android:textColor="@color/black"
@@ -185,7 +178,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
                 android:textColor="@color/black"
                 android:text="2023.09.12 12:00:24"
                 android:textSize="13dp"
@@ -197,7 +189,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
                 android:textColor="@color/black"
                 android:text="더 현대 서울"
                 android:textSize="13dp"
@@ -208,7 +199,6 @@
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="8dp"
                 android:text="원"
                 android:textColor="@color/black"
@@ -221,45 +211,50 @@
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="430dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/bg_light_gray"
+            app:layout_constraintBottom_toTopOf="@+id/textView22"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_order_payment_complete_middle" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
+            android:id="@+id/textView22"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:text="- 결제 취소는 팝업스토어에서 취소 요청 문의 바랍니다."
             android:textColor="@color/tx_gray"
             android:textSize="11dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_order_payment_complete_check"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view2" />
 
         <LinearLayout
             android:id="@+id/btn_order_payment_complete_check"
-            android:layout_width="420dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:backgroundTint="@color/orange_light"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="10dp"
             android:background="@drawable/button_radius"
+            android:backgroundTint="@color/orange_light"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:gravity="center"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:text="확인"
                 android:textColor="@color/white"
-                android:text="확인" />
+                android:textSize="14dp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

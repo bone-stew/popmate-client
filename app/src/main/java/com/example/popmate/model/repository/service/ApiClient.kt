@@ -20,47 +20,47 @@ object ApiClient {
 
     private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
 
+//    private val retrofit: Retrofit by lazy {
+//
+//        val httpClient = OkHttpClient.Builder()
+//            .addInterceptor(object : Interceptor {
+//                @Throws(IOException::class)
+//                override fun intercept(chain: Interceptor.Chain): Response {
+//                    val originalRequest: Request = chain.request()
+//
+//                    // JWT 토큰이 있는 경우 헤더에 추가
+//                    val token = getJwtToken()
+//                    val newRequest: Request = if (token != null) {
+//                        originalRequest.newBuilder()
+//                            .header("Authorization", "Bearer $token") // 헤더에 토큰 추가
+//                            .build()
+//                    } else {
+//                        originalRequest
+//                    }
+//                    Log.i("TestActivity", "인터셉터를 통해 토큰 담김")
+//                    Log.i("TestActivity", token.toString())
+//                    return chain.proceed(newRequest)
+//                }
+//            })
+//            .addInterceptor(HttpLoggingInterceptor().apply {
+//                level = HttpLoggingInterceptor.Level.BODY // 요청 및 응답 로그 출력 레벨 설정
+//            })
+//            .build()
+//
+//        Retrofit.Builder()
+//            .baseUrl(BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create()) // Gson을 사용한 JSON 파싱 설정
+//            .client(httpClient) // OkHttpClient 설정
+//            .build() // Retrofit 인스턴스 생성
+//    }
+
     private val retrofit: Retrofit by lazy {
-
-        val httpClient = OkHttpClient.Builder()
-            .addInterceptor(object : Interceptor {
-                @Throws(IOException::class)
-                override fun intercept(chain: Interceptor.Chain): Response {
-                    val originalRequest: Request = chain.request()
-
-                    // JWT 토큰이 있는 경우 헤더에 추가
-                    val token = getJwtToken()
-                    val newRequest: Request = if (token != null) {
-                        originalRequest.newBuilder()
-                            .header("Authorization", "Bearer $token") // 헤더에 토큰 추가
-                            .build()
-                    } else {
-                        originalRequest
-                    }
-                    Log.i("TestActivity", "인터셉터를 통해 토큰 담김")
-                    Log.i("TestActivity", token.toString())
-                    return chain.proceed(newRequest)
-                }
-            })
-            .addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY // 요청 및 응답 로그 출력 레벨 설정
-            })
-            .build()
-
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()) // Gson을 사용한 JSON 파싱 설정
-            .client(httpClient) // OkHttpClient 설정
-            .build() // Retrofit 인스턴스 생성
+            .baseUrl(ApiClient.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
-//    private val retrofit: Retrofit by lazy {
-//        Retrofit.Builder()
-//            .baseUrl(ApiClient.BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//    }
-//
     val getTokenService: LoginApiService by lazy {
         ApiClient.retrofit.create(LoginApiService::class.java)
     }

@@ -4,27 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="35dp"
     tools:context=".view.activities.user.MyPageLogoutActivity">
 
     <TextView
         android:id="@+id/mypage_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="261dp"
-        android:text="로그인 해주세요 "
+        android:text="로그인해주세요 "
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/img_mypage_next"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="124dp"
+        app:layout_constraintStart_toEndOf="@+id/mypage_login"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mypage_next" />
+
+
+
     <LinearLayout
         android:id="@+id/roundedRectangle"
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="165dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/mypage_rounded_rectangle"
@@ -32,7 +40,6 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.619"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mypage_login">
 
         <LinearLayout
@@ -105,17 +112,6 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="221dp"
-        android:src="@drawable/mypage_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/mypage_login"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

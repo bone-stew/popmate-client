@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/orderexample" />
+        android:src="@drawable/orderexample" />
 
     <ImageView
         android:id="@+id/order_back_btn"
@@ -43,7 +43,7 @@
         android:id="@+id/order_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingLeft="10dp"
+        android:paddingHorizontal="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -53,9 +53,10 @@
 
     <FrameLayout
         android:id="@+id/order_bottom"
-        android:layout_width="420dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginBottom="16dp"
+        android:paddingHorizontal="10dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/order_recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
