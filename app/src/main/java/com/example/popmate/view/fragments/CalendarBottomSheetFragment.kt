@@ -4,54 +4,38 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.TypedValue
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import androidx.core.view.children
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.CalendarDayLayoutBinding
 import com.example.popmate.databinding.CalendarMonthHeaderBinding
 import com.example.popmate.databinding.FragmentCalendarBottomSheetBinding
-import com.example.popmate.databinding.FragmentPopupStoreBinding
+import com.example.popmate.util.CalendarDataListener
 import com.example.popmate.util.ContinuousSelectionHelper.getSelection
 import com.example.popmate.util.ContinuousSelectionHelper.isInDateBetweenSelection
 import com.example.popmate.util.ContinuousSelectionHelper.isOutDateBetweenSelection
 import com.example.popmate.util.DateSelection
 import com.example.popmate.util.dateRangeDisplayText
 import com.example.popmate.util.displayText
-import com.example.popmate.util.getColorCompat
 import com.example.popmate.util.getDrawableCompat
 import com.example.popmate.util.makeInVisible
 import com.example.popmate.util.makeVisible
 import com.example.popmate.util.setTextColorRes
-import com.example.popmate.view.adapters.PopupStoreAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
 import com.kizitonwose.calendar.core.daysOfWeek
-import com.kizitonwose.calendar.core.firstDayOfWeekFromLocale
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.kizitonwose.calendar.view.ViewContainer
-import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.Month
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import java.time.format.TextStyle
-import java.time.temporal.ChronoUnit
-import java.util.Locale
-import kotlin.LazyThreadSafetyMode.NONE
 
 
 class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
@@ -61,27 +45,20 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
 
     private var selection = DateSelection()
 
-    private val headerDateFormatter = DateTimeFormatter.ofPattern("EEE'\n'd MMM")
+    private val headerDateFormatter = DateTimeFormatter.ofPattern("MM.dd")
 
     private var _binding: FragmentCalendarBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-
-
-    class DayViewContainer(view: View) : ViewContainer(view) {
-        val textView = view.findViewById<TextView>(R.id.exFourDayText)
-
-        // With ViewBinding
-        // val textView = CalendarDayLayoutBinding.bind(view).calendarDayText
-    }
-
+    private var dataListener: CalendarDataListener? = null
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
+
 
         _binding = FragmentCalendarBottomSheetBinding.inflate(inflater, container, false)
         val daysOfWeek = daysOfWeek()
@@ -90,40 +67,190 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
             (child as TextView).apply {
                 text = daysOfWeek[index].displayText()
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 15f)
-                setTextColorRes(R.color.tx_gray)
+                setTextColorRes(com.example.popmate.R.color.tx_gray)
             }
         }
+
 
         configureBinders()
 
 
         val currentMonth = YearMonth.now()
-        val startMonth = currentMonth.minusMonths(100)  // Adjust as needed
-        val endMonth = currentMonth.plusMonths(100)  // Adjust as needed
-        val firstDayOfWeek = firstDayOfWeekFromLocale() // Available from the library
-        binding.calendarView.setup(startMonth, endMonth, firstDayOfWeek)
+        binding.calendarView.setup(currentMonth, currentMonth.plusMonths(12), daysOfWeek.first())
         binding.calendarView.scrollToMonth(currentMonth)
 
+        binding.saveButton.setOnClickListener click@{
+            val (startDate, endDate) = selection
+            if (startDate != null && endDate != null) {
+                val text = dateRangeDisplayText(startDate, endDate)
+                dataListener?.onDataSaved(startDate, endDate)
+                dismiss()
+            }
+        }
+
+        binding.resetButton.setOnClickListener click@{
+            selection = DateSelection()
+            binding.calendarView.notifyCalendarChanged()
+            bindSummaryViews()
+            true
+        }
 
         return binding.root
-//        return inflater.inflate(R.layout.fragment_calendar_bottom_sheet, container, false)
+    }
+
+    private fun bindSummaryViews() {
+        binding.startDateText.apply {
+            if (selection.startDate != null) {
+                text = headerDateFormatter.format(selection.startDate)
+                setTextColorRes(com.example.popmate.R.color.tx_gray)
+            } else {
+                text = getString(com.example.popmate.R.string.start_date)
+                setTextColor(Color.GRAY)
+            }
+        }
+
+        binding.endDateText.apply {
+            if (selection.endDate != null) {
+                text = headerDateFormatter.format(selection.endDate)
+                setTextColorRes(com.example.popmate.R.color.tx_gray)
+            } else {
+                text = getString(com.example.popmate.R.string.end_date)
+                setTextColor(Color.GRAY)
+            }
+        }
+        binding.saveButton.isEnabled = selection.daysBetween != null
+    }
+
+    fun setDataListener(listener: CalendarDataListener) {
+        dataListener = listener
     }
 
     private fun configureBinders() {
-        binding.calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
-            // Called only when a new container is needed.
-            override fun create(view: View) = DayViewContainer(view)
+        val clipLevelHalf = 5000
+        val ctx = requireContext()
+        val rangeStartBackground =
+            ctx.getDrawableCompat(com.example.popmate.R.drawable.calendar_continuous_selected_bg_satrt).also {
+                it.level = clipLevelHalf // Used by ClipDrawable
+            }
+        val rangeEndBackground =
+            ctx.getDrawableCompat(com.example.popmate.R.drawable.calendar_continuous_selected_bg_end).also {
+                it.level = clipLevelHalf // Used by ClipDrawable
+            }
+        val rangeMiddleBackground =
+            ctx.getDrawableCompat(com.example.popmate.R.drawable.calendar_continuous_selected_bg_middle)
+        val singleBackground = ctx.getDrawableCompat(com.example.popmate.R.drawable.calendar_single_selected_bg)
+        val todayBackground = ctx.getDrawableCompat(com.example.popmate.R.drawable.calendar_today)
 
-            // Called every time we need to reuse a container.
-            override fun bind(container: DayViewContainer, data: CalendarDay) {
-                container.textView.text = data.date.dayOfMonth.toString()
+        class DayViewContainer(view: View) : ViewContainer(view) {
+            lateinit var day: CalendarDay
+            val binding = CalendarDayLayoutBinding.bind(view)
+
+            init {
+                view.setOnClickListener {
+                    if (day.position == DayPosition.MonthDate &&
+                        (day.date == today || day.date.isAfter(today))
+                    ) {
+                        selection = getSelection(
+                            clickedDate = day.date,
+                            dateSelection = selection,
+                        )
+                        this@CalendarBottomSheetFragment.binding.calendarView.notifyCalendarChanged()
+                        bindSummaryViews()
+                    }
+                }
             }
         }
+
+        binding.calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
+            override fun create(view: View) = DayViewContainer(view)
+            override fun bind(container: DayViewContainer, data: CalendarDay) {
+                container.day = data
+                val textView = container.binding.dayText
+                val roundBgView = container.binding.roundBackgroundView
+                val continuousBgView = container.binding.continuousBackgroundView
+
+                textView.text = null
+                roundBgView.makeInVisible()
+                continuousBgView.makeInVisible()
+                val (startDate, endDate) = selection
+
+                when (data.position) {
+                    DayPosition.MonthDate -> {
+                        textView.text = data.date.dayOfMonth.toString()
+                        if (data.date.isBefore(today)) {
+                            textView.setTextColorRes(com.example.popmate.R.color.tx_gray)
+                        } else {
+                            when {
+                                startDate == data.date && endDate == null -> {
+                                    textView.setTextColorRes(com.example.popmate.R.color.white)
+                                    roundBgView.applyBackground(singleBackground)
+                                }
+
+                                data.date == startDate -> {
+                                    textView.setTextColorRes(com.example.popmate.R.color.white)
+                                    continuousBgView.applyBackground(rangeStartBackground)
+                                    roundBgView.applyBackground(singleBackground)
+                                }
+
+                                startDate != null && endDate != null && (data.date > startDate && data.date < endDate) -> {
+                                    textView.setTextColorRes(com.example.popmate.R.color.tx_gray)
+                                    continuousBgView.applyBackground(rangeMiddleBackground)
+                                }
+
+                                data.date == endDate -> {
+                                    textView.setTextColorRes(com.example.popmate.R.color.white)
+                                    continuousBgView.applyBackground(rangeEndBackground)
+                                    roundBgView.applyBackground(singleBackground)
+                                }
+
+                                data.date == today -> {
+                                    textView.setTextColorRes(R.color.tx_gray)
+                                    roundBgView.applyBackground(todayBackground)
+                                }
+
+                                else -> textView.setTextColorRes(R.color.tx_gray)
+                            }
+                        }
+                    }
+
+                    DayPosition.InDate ->
+                        if (startDate != null && endDate != null &&
+                            isInDateBetweenSelection(data.date, startDate, endDate)
+                        ) {
+                            continuousBgView.applyBackground(rangeMiddleBackground)
+                        }
+
+                    DayPosition.OutDate ->
+                        if (startDate != null && endDate != null &&
+                            isOutDateBetweenSelection(data.date, startDate, endDate)
+                        ) {
+                            continuousBgView.applyBackground(rangeMiddleBackground)
+                        }
+                }
+            }
+
+            private fun View.applyBackground(drawable: Drawable) {
+                makeVisible()
+                background = drawable
+            }
+        }
+
+
+        class MonthViewContainer(view: View) : ViewContainer(view) {
+            val textView = CalendarMonthHeaderBinding.bind(view).headerText
+        }
+        binding.calendarView.monthHeaderBinder =
+            object : MonthHeaderFooterBinder<MonthViewContainer> {
+                override fun create(view: View) = MonthViewContainer(view)
+                override fun bind(container: MonthViewContainer, data: CalendarMonth) {
+                    container.textView.text = data.yearMonth.displayText()
+                }
+            }
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        addStatusBarColorUpdate(R.color.white)
+        bindSummaryViews()
     }
 }

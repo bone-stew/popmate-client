@@ -25,6 +25,8 @@ import java.time.temporal.ChronoUnit
 import java.util.Locale
 import kotlin.LazyThreadSafetyMode.NONE
 
+
+
 data class DateSelection(val startDate: LocalDate? = null, val endDate: LocalDate? = null) {
     val daysBetween by lazy(NONE) {
         if (startDate == null || endDate == null) null else {
@@ -96,30 +98,10 @@ fun DayOfWeek.displayText(uppercase: Boolean = false): String {
     }
 }
 
-fun Context.findActivity(): Activity {
-    var context = this
-    while (context is ContextWrapper) {
-        if (context is Activity) return context
-        context = context.baseContext
-    }
-    throw IllegalStateException("no activity")
+interface CalendarDataListener {
+    fun onDataSaved(startDate: LocalDate, endDate: LocalDate)
 }
 
-fun getWeekPageTitle(week: Week): String {
-    val firstDate = week.days.first().date
-    val lastDate = week.days.last().date
-    return when {
-        firstDate.yearMonth == lastDate.yearMonth -> {
-            firstDate.yearMonth.displayText()
-        }
-        firstDate.year == lastDate.year -> {
-            "${firstDate.month.displayText(short = false)} - ${lastDate.yearMonth.displayText()}"
-        }
-        else -> {
-            "${firstDate.yearMonth.displayText()} - ${lastDate.yearMonth.displayText()}"
-        }
-    }
-}
 
 internal fun Context.getColorCompat(@ColorRes color: Int) = ContextCompat.getColor(this, color)
 

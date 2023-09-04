@@ -14,18 +14,21 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.util.CalendarDataListener
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.adapters.PopupStoreAdapter
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
 
 
-class PopupStoreFragment : Fragment() {
+class PopupStoreFragment : Fragment(), CalendarDataListener {
     private var _binding: FragmentPopupStoreBinding? = null
     private val binding get() = _binding!!
     private var isOpeningSoon = false
@@ -48,6 +51,7 @@ class PopupStoreFragment : Fragment() {
         val calendarLayout = view.findViewById<LinearLayout>(R.id.calendarLayout)
     calendarLayout.setOnClickListener{
             val bottomSheetFragment = CalendarBottomSheetFragment()
+            bottomSheetFragment.setDataListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
 
     }
@@ -72,19 +76,13 @@ class PopupStoreFragment : Fragment() {
         _binding = FragmentPopupStoreBinding.inflate(inflater, container, false)
         val items = getDataFromApi()
 
-        val screenWidthInPixels = resources.displayMetrics.widthPixels // Get the screen width in pixels
-        val screenDensity = resources.displayMetrics.density // Get the screen density
+        val screenWidthInPixels = resources.displayMetrics.widthPixels
+        val screenDensity = resources.displayMetrics.density
 
-// Calculate the screen width in dp
         val screenWidthInDp = screenWidthInPixels / screenDensity
-//        val screenWidth = resources.displayMetrics.widthPixels  // Get the screen width
 
-        Log.i("POPUPSTORE", screenWidthInDp.toString())
-        // Calculate the desired left padding
         val desiredPadding = (screenWidthInDp - TWO_POPUPSTORES_WIDTH) / 2
-        Log.i("POPUPSTORE", desiredPadding.toString())
 
-        // Apply the left padding to popupstoreRecyclerView
         binding.popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, 0, 0)
 
         binding.popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -241,6 +239,10 @@ class PopupStoreFragment : Fragment() {
 
         )
         return sampleData
+    }
+
+    override fun onDataSaved(startDate: LocalDate, endDate: LocalDate) {
+        Log.i("POPMATE", startDate.toString() + endDate.toString())
     }
 
 
