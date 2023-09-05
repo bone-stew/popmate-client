@@ -1,5 +1,6 @@
 package com.example.popmate.view.adapters
 
+import android.content.Context
 import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,17 +8,15 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-//import com.example.popmate.databinding.RowPopupstoreBinding
-import com.example.popmate.databinding.RowPopupstoreHorizontalBinding
-import com.example.popmate.databinding.RowPopupstoreVerticalBinding
-import com.example.popmate.databinding.RowPopupstoreVisitedBinding
-import com.example.popmate.model.data.local.PopupStore
 import com.bumptech.glide.Glide
+import com.example.popmate.R
+import com.example.popmate.databinding.*
+import com.example.popmate.model.data.local.PopupStore
 
-
-
-class PopupStoreAdapter(private var popupStores: List<PopupStore>, var viewHolderType: ViewHolderType) :
-    RecyclerView.Adapter<PopupStoreAdapter.PopupStoreViewHolder>() {
+class PopupStoreAdapter(
+    private val popupStores: List<PopupStore>,
+    private val viewHolderType: ViewHolderType
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ViewHolderType {
         HORIZONTAL,
@@ -33,7 +32,9 @@ class PopupStoreAdapter(private var popupStores: List<PopupStore>, var viewHolde
         SMALL
     }
 
-    inner class PopupStoreViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HorizontalViewHolder(private val binding: RowPopupstoreHorizontalBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         init {
             binding.root.setOnClickListener {
                 val popupStore = popupStores[adapterPosition]
@@ -42,111 +43,107 @@ class PopupStoreAdapter(private var popupStores: List<PopupStore>, var viewHolde
         }
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize) {
-            if (binding is RowPopupstoreHorizontalBinding) {
-                binding.popupstore = popupStore
-                Glide.with(binding.itemImageView)
-                    .load(popupStore.bannerImgUrl)
-                    .into(binding.itemImageView)
-            } else if (binding is RowPopupstoreVerticalBinding) {
-                binding.popupstore = popupStore
-                adjustImageSize(binding.itemImageView, imageSize)
-                Glide.with(binding.itemImageView)
-                    .load(popupStore.bannerImgUrl)
-                    .into(binding.itemImageView)
-            } else if (binding is RowPopupstoreVisitedBinding) {
-                binding.popupstore = popupStore
-                Glide.with(binding.itemImageView)
-                    .load(popupStore.bannerImgUrl)
-                    .into(binding.itemImageView)
+            binding.popupstore = popupStore
+            setImage(binding.itemImageView, popupStore.bannerImgUrl)
+            adjustImageSize(binding.itemImageView, imageSize)
+        }
+    }
+
+    inner class VerticalViewHolder(private val binding: RowPopupstoreVerticalBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val popupStore = popupStores[adapterPosition]
+                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
-//            setImage(binding, popupStore)
         }
 
-//        private fun setImage(binding: ViewDataBinding, popupStore: PopupStore) {
-//            binding.popupstore = popupStore
-//            Glide.with(binding.itemImageView)
-//                .load(popupStore.bannerImgUrl)
-//                .into(binding.itemImageView)
-//        }
+        fun bind(popupStore: PopupStore, imageSize: ImageSize) {
+            binding.popupstore = popupStore
+            setImage(binding.itemImageView, popupStore.bannerImgUrl)
+            adjustImageSize(binding.itemImageView, imageSize)
+        }
+    }
 
-        private fun adjustImageSize(imageView: ImageView, imageSize: ImageSize) {
-            val layoutParams = imageView.layoutParams as ViewGroup.LayoutParams
-            if (imageSize == ImageSize.LARGE) {
-                layoutParams.width = 150.dpToPx()
-                layoutParams.height = 150.dpToPx()
-            } else if (imageSize == ImageSize.SMALL) {
-                layoutParams.width = 90.dpToPx()
-                layoutParams.height = 90.dpToPx()
-            } else {
-                layoutParams.width = 120.dpToPx()
-                layoutParams.height = 120.dpToPx()
+    inner class VisitedViewHolder(private val binding: RowPopupstoreVisitedBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val popupStore = popupStores[adapterPosition]
+                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
-            imageView.layoutParams = layoutParams
         }
 
-        fun Int.dpToPx(): Int {
-            val scale = Resources.getSystem().displayMetrics.density
-            return (this * scale).toInt()
+        fun bind(popupStore: PopupStore) {
+            binding.popupstore = popupStore
+            setImage(binding.itemImageView, popupStore.bannerImgUrl)
         }
-
-
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopupStoreViewHolder {
-        val binding = when (viewType) {
-            ViewHolderType.HORIZONTAL.ordinal -> RowPopupstoreHorizontalBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return when (viewType) {
+            ViewHolderType.HORIZONTAL.ordinal -> {
+                val binding = RowPopupstoreHorizontalBinding.inflate(inflater, parent, false)
+                HorizontalViewHolder(binding)
+            }
 
-            ViewHolderType.VERTICAL_LARGE.ordinal -> RowPopupstoreVerticalBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-            ViewHolderType.VERTICAL_MEDIUM.ordinal -> RowPopupstoreVerticalBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            ViewHolderType.VERTICAL_LARGE.ordinal,
+            ViewHolderType.VERTICAL_MEDIUM.ordinal,
+            ViewHolderType.VERTICAL_SMALL.ordinal -> {
+                val binding = RowPopupstoreVerticalBinding.inflate(inflater, parent, false)
+                VerticalViewHolder(binding)
+            }
 
-            ViewHolderType.VERTICAL_SMALL.ordinal -> RowPopupstoreVerticalBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            ViewHolderType.VISITED.ordinal -> {
+                val binding = RowPopupstoreVisitedBinding.inflate(inflater, parent, false)
+                VisitedViewHolder(binding)
+            }
 
-            ViewHolderType.VISITED.ordinal -> RowPopupstoreVisitedBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-
-            else -> RowPopupstoreHorizontalBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            else -> throw IllegalArgumentException("Invalid viewType")
         }
-        return PopupStoreViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PopupStoreViewHolder, position: Int) {
-        val popupStore = popupStores.get(position)
-        val imageSize = if (viewHolderType == ViewHolderType.VERTICAL_LARGE) {
-            ImageSize.LARGE
-        } else if (viewHolderType == ViewHolderType.VERTICAL_SMALL) {
-            ImageSize.SMALL
-        } else {
-            ImageSize.MEDIUM
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val popupStore = popupStores[position]
+        val imageSize = when (viewHolderType) {
+            ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
+            ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
+            else -> ImageSize.MEDIUM
         }
-        popupStore?.let { holder.bind(it, imageSize) }
+        when (holder) {
+            is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
+            is VerticalViewHolder -> holder.bind(popupStore, imageSize)
+            is VisitedViewHolder -> holder.bind(popupStore)
+        }
     }
 
-    override fun getItemCount(): Int {
-        return popupStores.size!!
+    override fun getItemCount(): Int = popupStores.size
+
+    override fun getItemViewType(position: Int): Int = viewHolderType.ordinal
+
+    private fun setImage(imageView: ImageView, imageUrl: String) {
+        Glide.with(imageView)
+            .load(imageUrl)
+            .into(imageView)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return viewHolderType.ordinal
+    private fun adjustImageSize(imageView: ImageView, imageSize: ImageSize) {
+        val layoutParams = imageView.layoutParams
+        val sizeInDp = when (imageSize) {
+            ImageSize.LARGE -> 150
+            ImageSize.SMALL -> 90
+            ImageSize.MEDIUM -> 120
+        }
+        layoutParams.width = dpToPx(sizeInDp)
+        layoutParams.height = dpToPx(sizeInDp)
+        imageView.layoutParams = layoutParams
     }
 
-
+    private fun dpToPx(dp: Int): Int {
+        val scale = Resources.getSystem().displayMetrics.density
+        return (dp * scale).toInt()
+    }
 }
