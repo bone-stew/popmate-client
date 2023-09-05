@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
+import com.example.popmate.config.BaseFragment
 import com.example.popmate.databinding.FragmentPreReservationBinding
 import com.example.popmate.model.data.remote.reservation.MyReservationRequest
 import com.example.popmate.view.adapters.reservation.PreReservationAdapter
