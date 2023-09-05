@@ -1,6 +1,8 @@
 package com.example.popmate.view.activities.detail
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -37,6 +39,7 @@ class PopupDetailActivity :
     private fun setInfoFragment() {
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance()).commit()
+        binding.reserveBtn.visibility = View.VISIBLE
         binding.run {
             infoBtn.run {
                 setTextColor(ContextCompat.getColor(context, R.color.black))
@@ -50,6 +53,7 @@ class PopupDetailActivity :
     }
 
     private fun setChatFragment() {
+        binding.reserveBtn.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
         binding.run {
@@ -61,6 +65,7 @@ class PopupDetailActivity :
                 setTextColor(ContextCompat.getColor(context, R.color.black))
                 setBackgroundResource(R.drawable.bottom_line)
             }
+
         }
     }
 }
