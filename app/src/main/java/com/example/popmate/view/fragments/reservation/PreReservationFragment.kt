@@ -10,7 +10,7 @@ import com.example.popmate.R
 import com.example.popmate.config.BaseFragment
 import com.example.popmate.databinding.FragmentPreReservationBinding
 import com.example.popmate.model.data.remote.reservation.MyReservationRequest
-import com.example.popmate.view.adapters.reservation.PreReservationAdapter
+import com.example.popmate.view.adapters.reservation.MyReservationAdapter
 import com.example.popmate.viewmodel.reservation.MyReservationViewModel
 
 class PreReservationFragment :
@@ -40,7 +40,7 @@ class PreReservationFragment :
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         // 리사이클러뷰 어댑터 설정
-        val adapter = PreReservationAdapter(reservationItems)
+        val adapter = MyReservationAdapter(reservationItems)
         recyclerView.adapter = adapter
     }
 
