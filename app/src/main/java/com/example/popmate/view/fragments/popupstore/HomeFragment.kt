@@ -13,6 +13,7 @@ import com.example.popmate.R
 import com.example.popmate.databinding.FragmentHomeBinding
 import com.example.popmate.model.data.local.Banner
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.view.activities.detail.PopupDetailInfo
 import com.example.popmate.view.adapters.BannerAdapter
 import com.example.popmate.view.adapters.PopupStoreAdapter
 import com.example.popmate.viewmodel.popupstore.HomeViewModel
@@ -20,15 +21,20 @@ import com.example.popmate.viewmodel.popupstore.HomeViewModel
 
 class HomeFragment : Fragment() {
 
-   private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    companion object {
+        fun newInstance() = HomeFragment()
+    }
+
+
+
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
                               override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false )
         viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false )
         viewModel.getHome().observe(viewLifecycleOwner) {
             binding.run {
                 home = it
@@ -50,7 +56,6 @@ class HomeFragment : Fragment() {
                 endingSoonView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
         }
-
         return binding.root
     }
 

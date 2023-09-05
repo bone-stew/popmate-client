@@ -56,7 +56,7 @@
       android:id="@+id/locationTextView"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:text="@{popupstore.description}"
+      android:text="@{popupstore.placeDetail}"
       android:textSize="@dimen/h5"
       android:textColor="@color/tx_light_gray"
       app:layout_constraintStart_toEndOf="@id/itemImageView"
