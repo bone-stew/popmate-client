@@ -35,18 +35,18 @@
 
         <activity
             android:name=".view.activities.detail.PopupDetailActivity"
-            android:exported="true"/>
+            android:exported="true">            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
 
         <!-- OrderActivity 부분-->
         <activity
             android:name=".view.activities.order.OrderActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
