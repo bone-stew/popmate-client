@@ -1,4 +1,4 @@
-package com.example.popmate.view.fragments
+package com.example.popmate.view.fragments.popupstore
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -25,7 +25,6 @@ import com.example.popmate.util.makeInVisible
 import com.example.popmate.util.makeVisible
 import com.example.popmate.util.setTextColorRes
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition

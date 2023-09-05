@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+  <variable
+    name="home"
+    type="com.example.popmate.model.data.remote.popupstore.HomeResponse" />
 
+</data>
 <ScrollView
   android:layout_width="match_parent"
   android:layout_height="match_parent">
@@ -70,7 +75,7 @@
 
 
     <LinearLayout
-      android:id="@+id/reccommendLayout"
+      android:id="@+id/recommendLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
@@ -102,7 +107,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      app:layout_constraintTop_toBottomOf="@+id/reccommendLayout">
+      app:layout_constraintTop_toBottomOf="@+id/recommendLayout">
 
       <TextView
         android:id="@+id/closingSoonText"
@@ -115,7 +120,7 @@
         android:textSize="@dimen/h6"/>
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/horizontalView"
+      android:id="@+id/endingSoonView"
       android:layout_width="match_parent"
       android:layout_height="200dp"
       app:layout_constraintTop_toBottomOf="@id/closingSoonText"

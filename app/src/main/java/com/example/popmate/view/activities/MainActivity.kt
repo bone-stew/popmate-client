@@ -1,15 +1,12 @@
 package com.example.popmate.view.activities
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.fragment.app.Fragment
 import com.example.popmate.R
-import com.example.popmate.view.fragments.HomeFragment
+import com.example.popmate.view.fragments.popupstore.HomeFragment
 //import com.example.popmate.view.fragments.MyPageFragment
-import com.example.popmate.view.fragments.PopupStoreFragment
+import com.example.popmate.view.fragments.popupstore.PopupStoreFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Stack
 

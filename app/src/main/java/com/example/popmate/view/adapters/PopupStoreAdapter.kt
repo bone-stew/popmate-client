@@ -12,6 +12,8 @@ import com.example.popmate.databinding.RowPopupstoreHorizontalBinding
 import com.example.popmate.databinding.RowPopupstoreVerticalBinding
 import com.example.popmate.databinding.RowPopupstoreVisitedBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.bumptech.glide.Glide
+
 
 
 class PopupStoreAdapter(private var popupStores: List<PopupStore>, var viewHolderType: ViewHolderType) :
@@ -42,13 +44,30 @@ class PopupStoreAdapter(private var popupStores: List<PopupStore>, var viewHolde
         fun bind(popupStore: PopupStore, imageSize: ImageSize) {
             if (binding is RowPopupstoreHorizontalBinding) {
                 binding.popupstore = popupStore
+                Glide.with(binding.itemImageView)
+                    .load(popupStore.bannerImgUrl)
+                    .into(binding.itemImageView)
             } else if (binding is RowPopupstoreVerticalBinding) {
                 binding.popupstore = popupStore
                 adjustImageSize(binding.itemImageView, imageSize)
+                Glide.with(binding.itemImageView)
+                    .load(popupStore.bannerImgUrl)
+                    .into(binding.itemImageView)
             } else if (binding is RowPopupstoreVisitedBinding) {
                 binding.popupstore = popupStore
+                Glide.with(binding.itemImageView)
+                    .load(popupStore.bannerImgUrl)
+                    .into(binding.itemImageView)
             }
+//            setImage(binding, popupStore)
         }
+
+//        private fun setImage(binding: ViewDataBinding, popupStore: PopupStore) {
+//            binding.popupstore = popupStore
+//            Glide.with(binding.itemImageView)
+//                .load(popupStore.bannerImgUrl)
+//                .into(binding.itemImageView)
+//        }
 
         private fun adjustImageSize(imageView: ImageView, imageSize: ImageSize) {
             val layoutParams = imageView.layoutParams as ViewGroup.LayoutParams

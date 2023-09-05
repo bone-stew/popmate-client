@@ -7,7 +7,7 @@
   android:clickable="true"
   android:focusable="true"
   android:orientation="vertical"
-  tools:context=".view.fragments.CalendarBottomSheetFragment">
+  tools:context=".view.fragments.popupstore.CalendarBottomSheetFragment">
 
   <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/exFourAppBarLayout"
