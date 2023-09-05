@@ -13,7 +13,7 @@ class StoreCardAdapter(private val stores: List<PopupStore>) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(store: PopupStore) {
                 binding.run {
-                    storePlace.text = store.location
+                    storePlace.text = store.departmentName
                     storeTitle.text = store.title
                 }
             }

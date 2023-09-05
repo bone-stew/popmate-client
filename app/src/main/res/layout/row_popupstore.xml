@@ -51,7 +51,7 @@
       android:id="@+id/locationTextView"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:text="@{popupstore.location}"
+      android:text="@{popupstore.description}"
       app:layout_constraintStart_toEndOf="@id/itemImageView"
       app:layout_constraintTop_toBottomOf="@id/dateTextView"
       app:layout_constraintEnd_toEndOf="parent"
