@@ -159,7 +159,7 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<LoginTokenVO>{
             override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
                 val token = response.body()
-                ApiClient.setJwtToken(token)
+//                ApiClient.setJwtToken(token)
                 nextMainActivity()
             }
             override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
@@ -175,7 +175,7 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<LoginTokenVO> {
             override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
                 val token = response.body()
-                ApiClient.setJwtToken(token)
+//                ApiClient.setJwtToken(token)
                 //ApiClient.getJwtToken()?.let { Log.d("ddd", it) }
                 nextMainActivity()
             }

@@ -4,7 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data />
+    <data>
+        <variable
+            name="store"
+            type="com.example.popmate.model.data.local.PopupStore" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,10 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:adjustViewBounds="true"
-                    android:background="@color/bg_gray"
-                    android:contentDescription="@string/app_name"
                     android:scaleType="center"
-                    android:src="@drawable/test_banner"
                     android:tintMode="src_atop"
                     app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintTop_toTopOf="parent"
@@ -51,7 +52,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:maxWidth="280dp"
-                    android:text="SE SO NEON: A Pirateship"
+                    android:text="@{store.title}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/h2"
                     app:layout_constraintBottom_toBottomOf="@+id/bannerImage"
@@ -66,7 +67,7 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:maxWidth="280dp"
-                    android:text="새소년이라는 이름의 해적선, 일명 ‘Pirateship’(파이럿쉽)이 더 현대 서울 지하 2층에 10일간정박합니다. SE SO NEON: A Pirateship"
+                    android:text="@{store.description}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/h4"
                     app:layout_constraintBottom_toBottomOf="@+id/bannerImage"
@@ -96,7 +97,7 @@
                     android:layout_marginVertical="8dp"
                     android:background="@color/bg_light_gray"
                     android:padding="10dp"
-                    android:text="[POP-UP LIMITED GIFT]\n-웰컴 기프트: 부채 &amp; 스티커\n-꽝 없는 래플: 키링, 스티커\n\n[POP-UP EXCLUSIVE EDITION] 새소년 써머캔\n팝업 스토어에서만 8월 한달 동안 선보이는 새소년 상품\n\n* 이벤트 내용은 상황에 따라 달라질수 있습니다."
+                    android:text="@{store.eventDescription}"
                     android:textColor="@color/tx_gray"
                     android:textSize="@dimen/h5"
                     app:layout_constraintTop_toBottomOf="@id/eventText" />

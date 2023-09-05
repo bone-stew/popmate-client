@@ -3,6 +3,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -11,15 +12,16 @@
         android:id="@+id/login_main_name"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginTop="235dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="8dp"
         android:text="팝업 스토어는,"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/login_main_name2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.362"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,14 +29,12 @@
         android:id="@+id/login_main_name2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="팝메이트와 함께"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_main_name" />
 
@@ -42,42 +42,34 @@
         android:id="@+id/kakao_button"
         android:layout_width="380dp"
         android:layout_height="60dp"
-        android:paddingLeft="15dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="284dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_radius"
         android:backgroundTint="#FEE500"
         android:drawableLeft="@drawable/kakao_logo"
+        android:paddingLeft="15dp"
         android:text="카카오톡으로 시작하기"
         android:textColor="@color/black"
         android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/google_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_main_name2" />
+        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/google_button"
-        android:paddingLeft="10dp"
         android:layout_width="380dp"
         android:layout_height="60dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/button_radius"
         android:drawableLeft="@drawable/google_logo"
+        android:paddingLeft="10dp"
         android:text="Google로 시작하기"
         android:textColor="@color/black"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/kakao_button" />
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

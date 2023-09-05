@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!-- 변경 가능한 변수 -->
+        <variable
+            name="titleText"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_my_page_purchase_total_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fragments.user.MyPagePurchaseFragment">
+
+        <include
+            android:id="@+id/layout_page_title"
+            layout="@layout/layout_title_simple"
+            app:titleText="@{`구매 내역`}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_my_page_purchase_fragment"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="35dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_page_title">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_page_purchase_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

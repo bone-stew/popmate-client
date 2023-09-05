@@ -15,9 +15,9 @@ class BannerAdapter(private var banners: List<Banner>) : RecyclerView.Adapter<Ba
 
     inner class BannerViewHolder(private val binding: RowBannerBinding): RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.root.setOnClickListener{
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${binding.banner!!.id}", Toast.LENGTH_LONG).show()
-            }
+//            binding.root.setOnClickListener{
+//                Toast.makeText(binding.root.context, "클릭된 아이템 = ${binding.banner!!.id}", Toast.LENGTH_LONG).show()
+//            }
         }
         fun setItem(banner: Banner){
             binding.banner = banner
