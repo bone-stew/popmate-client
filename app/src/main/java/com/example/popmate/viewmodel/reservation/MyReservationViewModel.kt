@@ -1,4 +1,5 @@
 package com.example.popmate.viewmodel.reservation
 
-class MyReservationViewModel {
+class MyReservationViewModel : BaseViewModel() {
+    // TODO: Implement the ViewModel
 }
