@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.popmate.viewmodel.reservation.MyReservationViewModel" />
     </data>
 
     <LinearLayout
@@ -18,7 +21,7 @@
             android:id="@+id/rv_pre_reservations"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical" />
 
         <!-- 예약 내역이 없는 경우를 나타내는 뷰 -->
         <TextView
