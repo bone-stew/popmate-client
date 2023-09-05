@@ -30,7 +30,7 @@ class MyReservationActivity :
         /**
          * TabLayout에 ViewPager2 연결
          */
-        val tabTextList = listOf("예약전", "예약후", "취소됨")
+        val tabTextList = listOf("이용전", "이용후", "취소됨")
 
         val layoutVisitTab = binding.layoutVisitTab
         val vpVisit = binding.vpVisit

@@ -20,17 +20,6 @@
             layout="@layout/layout_title_simple"
             app:titleText="@{`팝업스토어 예약내역`}" />
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/tv_reservation_title"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="15dp"-->
-        <!--            android:text="@string/reservation_receipt"-->
-        <!--            android:textColor="@color/tx_gray"-->
-        <!--            android:textSize="@dimen/h3"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/layout_page_title"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"/>-->
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/layout_visit_tab"
             android:layout_width="0dp"
