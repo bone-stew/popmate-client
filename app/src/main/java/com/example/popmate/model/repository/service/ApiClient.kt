@@ -5,7 +5,7 @@ import android.util.Log
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.service.login.LoginApiService
 import com.example.popmate.model.repository.service.popupStore.StoreApiService
-import okhttp3.Interceptor
+import com.example.popmate.model.repository.service.reservation.ReservationApiService
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -102,6 +102,10 @@ object ApiClient {
 
     val storeService: StoreApiService by lazy {
         retrofit.create(StoreApiService::class.java)
+    }
+
+    val reservationService: ReservationApiService by lazy {
+        retrofit.create(ReservationApiService::class.java)
     }
 //    fun setJwtToken(token: LoginTokenVO?) {
 //        if (token != null) {
