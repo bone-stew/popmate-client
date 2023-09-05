@@ -5,6 +5,7 @@ import java.util.Date
 import java.util.Locale
 
 class Banner(
-    val id: Int,
+    val popupStoreImgId: Int,
     val imgUrl: String,
 )
+

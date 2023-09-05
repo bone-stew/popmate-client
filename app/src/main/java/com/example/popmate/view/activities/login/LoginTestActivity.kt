@@ -16,24 +16,24 @@ class LoginTestActivity : AppCompatActivity() {
         binding = ActivityLoginTestBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        if(ApiClient.getJwtToken() != null){
+//        if(ApiClient.getJwtToken() != null){
             Log.d("ddd","로그인되어있습니다.")
         }
-        binding.loginTestBtn.setOnClickListener {
-            val apiService = ApiClient.getTokenService
-            val call: Call<LoginTokenVO> = apiService.loginTest()
-            call.enqueue(object : Callback<LoginTokenVO>{
-                override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
-                    Log.d("ddd","${response.body()}")
-                }
+//        binding.loginTestBtn.setOnClickListener {
+//            val apiService = ApiClient.getTokenService
+//            val call: Call<LoginTokenVO> = apiService.loginTest()
+//            call.enqueue(object : Callback<LoginTokenVO>{
+//                override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
+//                    Log.d("ddd","${response.body()}")
+//                }
+//
+//                override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
+//                    Log.d("ddd","오류야")
+//                    Log.d("ddd","$t")
+//                }
+//
+//            })
+//        }
 
-                override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
-                    Log.d("ddd","오류야")
-                    Log.d("ddd","$t")
-                }
-
-            })
-        }
-
-    }
+//    }
 }
