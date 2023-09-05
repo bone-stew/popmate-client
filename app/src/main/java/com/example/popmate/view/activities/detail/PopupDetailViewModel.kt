@@ -18,10 +18,19 @@ class PopupDetailViewModel : ViewModel() {
         }
     }
 
+    private val recommendStore: MutableLiveData<List<PopupStore>> by lazy {
+        MutableLiveData<List<PopupStore>>().also {
+            loadRecommendStore()
+        }
+    }
+
     fun getStore(): LiveData<PopupStore> {
         return store
     }
 
+    fun getRecommendStore(): LiveData<List<PopupStore>> {
+        return recommendStore
+    }
     private fun loadStore() {
         ApiClient.storeService.getStoreDetail().enqueue(object : Callback<ApiResponse<PopupStore>>{
             override fun onResponse(call: Call<ApiResponse<PopupStore>>, response: Response<ApiResponse<PopupStore>>) {
@@ -33,4 +42,8 @@ class PopupDetailViewModel : ViewModel() {
             }
         })
     }
+
+    private fun loadRecommendStore() {
+    }
+
 }

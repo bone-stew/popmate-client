@@ -6,14 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupDetailInfoBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.model.data.local.PopupStoreSnsResponse
 import com.example.popmate.view.adapters.BannerAdapter
 import com.example.popmate.view.adapters.StoreCardAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -50,12 +52,18 @@ class PopupDetailInfo : Fragment(), OnMapReadyCallback {
                 store = it
                 imageCarousel.adapter = BannerAdapter(it.popupStoreImgResponses)
                 imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                val indicator = indicator
                 indicator.setViewPager(imageCarousel)
+                for (sns in it.popupStoreSnsResponses) {
+                    when (sns.platform) {
+                        "instagram" -> setSnsView(instagram, instagramUrl, sns)
+                        "youtube" -> setSnsView(youtube, youtubeUrl, sns)
+                        "homePage" -> setSnsView(homePage, homePageUrl, sns)
+                    }
+                }
+                locationDetailText.text = it.placeDetail
             }
         }
-
-        this.mapView = binding.storeLocationMap
+        mapView = binding.storeLocationMap
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this@PopupDetailInfo)
 
@@ -63,6 +71,13 @@ class PopupDetailInfo : Fragment(), OnMapReadyCallback {
             LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         binding.recommendStore.adapter = StoreCardAdapter(getSampleStores())
         return binding.root;
+    }
+
+    private fun setSnsView(
+        snsView: LinearLayout, snsUrlView: TextView, sns: PopupStoreSnsResponse
+    ) {
+        snsView.visibility = View.VISIBLE
+        snsUrlView.text = sns.url
     }
 
     private fun getSampleStores(): List<PopupStore> {
