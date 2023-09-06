@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         viewModel.getHome().observe(viewLifecycleOwner) {
             binding.run {
                 home = it
-                imageCarousel.adapter = BannerAdapter(it.banners)
+                imageCarousel.adapter = BannerAdapter(requireContext(), it.banners)
                 imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
                 val indicator = binding.indicator
                 indicator.setViewPager(binding.imageCarousel)

@@ -4,8 +4,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class Banner(
-    val popupStoreImgId: Int,
+data class Banner(
+    val bannerId: Long,
     val imgUrl: String,
+    val popupStoreId: Long
 )
 

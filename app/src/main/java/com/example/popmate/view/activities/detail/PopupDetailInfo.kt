@@ -17,6 +17,8 @@ import com.example.popmate.databinding.FragmentPopupDetailInfoBinding
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.model.data.local.PopupStoreSnsResponse
 import com.example.popmate.view.adapters.BannerAdapter
+import com.example.popmate.view.adapters.DetailCarouselAdapter
+import com.example.popmate.view.adapters.PopupStoreAdapter
 import com.example.popmate.view.adapters.StoreCardAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -50,7 +52,7 @@ class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
             binding.run {
                 Log.d("kww", "onCreateView: " + it.openDateFormatted)
                 store = it
-                imageCarousel.adapter = BannerAdapter(it.popupStoreImgResponses)
+                imageCarousel.adapter = DetailCarouselAdapter(it.popupStoreImgResponses)
                 imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
                 indicator.setViewPager(imageCarousel)
                 for (sns in it.popupStoreSnsResponses) {
@@ -61,15 +63,16 @@ class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
                     }
                 }
                 locationDetailText.text = it.placeDetail
+
+                recommendStore.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                recommendStore.adapter =
+                    PopupStoreAdapter(requireContext(), it.popupStoresNearBy, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE)
             }
         }
         mapView = binding.storeLocationMap
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this@PopupDetailInfo)
-
-        binding.recommendStore.layoutManager =
-            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        binding.recommendStore.adapter = StoreCardAdapter(getSampleStores())
         return binding.root;
     }
 
@@ -80,12 +83,12 @@ class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
         snsUrlView.text = sns.url
     }
 
-    private fun getSampleStores(): List<PopupStore> {
-        return listOf(
-//            PopupStore(1, "망그러진곰", Date(), Date(),"더현대 서울 지하 2층", "", "url to 1"),
-//            PopupStore(1, "망그러진곰", Date(), Date(),"더현대 서울 지하 2층", "", "url to 1")
-        )
-    }
+//    private fun getSampleStores(): List<PopupStore> {
+//        return listOf(
+////            PopupStore(1, "망그러진곰", Date(), Date(),"더현대 서울 지하 2층", "", "url to 1"),
+////            PopupStore(1, "망그러진곰", Date(), Date(),"더현대 서울 지하 2층", "", "url to 1")
+//        )
+//    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap

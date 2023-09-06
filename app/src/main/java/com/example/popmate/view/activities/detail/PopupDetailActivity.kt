@@ -30,6 +30,10 @@ class PopupDetailActivity :
 
         }
 
+        binding.backBtn.setOnClickListener{
+            finish()
+        }
+
 
 
     val model: PopupDetailViewModel by viewModels()

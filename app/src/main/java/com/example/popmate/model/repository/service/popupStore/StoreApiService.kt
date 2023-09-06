@@ -11,8 +11,8 @@ import retrofit2.http.Query
 
 interface StoreApiService {
 
-    @GET("popup-stores/{popupstoreId}")
-    fun getStoreDetail(@Path("popupstoreId") popupStoreId: Long, @Query("userId") userId: Long): Call<ApiResponse<PopupStore>>
+    @GET("popup-stores/{popupStoreId}")
+    fun getStoreDetail(@Path("popupStoreId") popupStoreId: Long, @Query("userId") userId: Long): Call<ApiResponse<PopupStore>>
 
     @GET("popup-stores/home")
     fun getStoreHome(@Query("userId") userId: Long): Call<ApiResponse<HomeResponse>>

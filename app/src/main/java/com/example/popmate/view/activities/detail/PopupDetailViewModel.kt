@@ -38,10 +38,10 @@ class PopupDetailViewModel() : ViewModel() {
         ApiClient.storeService.getStoreDetail(popupStoreId!!, userId).enqueue(object : Callback<ApiResponse<PopupStore>>{
             override fun onResponse(call: Call<ApiResponse<PopupStore>>, response: Response<ApiResponse<PopupStore>>) {
                 Log.d("kww", "onResponse: " + response.body())
+                Log.d("kww", "onResponse: " + response)
                 store.value = response.body()?.data
             }
             override fun onFailure(call: Call<ApiResponse<PopupStore>>, t: Throwable) {
-                TODO("Not yet implemented")
             }
         })
     }

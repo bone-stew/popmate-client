@@ -44,6 +44,12 @@ class PopupStoreAdapter(
         init {
             binding.root.setOnClickListener {
                 val popupStore = popupStores[adapterPosition]
+                val intent = Intent(context, PopupDetailActivity::class.java)
+                intent.putExtra("id", popupStore.popupStoreId)
+                Log.d("DETAIL", popupStore.popupStoreId.toString())
+
+
+                context.startActivity(intent)
                 Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
         }
@@ -61,6 +67,11 @@ class PopupStoreAdapter(
         init {
             binding.root.setOnClickListener {
                 val popupStore = popupStores[adapterPosition]
+                val intent = Intent(context, PopupDetailActivity::class.java)
+                intent.putExtra("id", popupStore.popupStoreId)
+                Log.d("DETAIL", popupStore.popupStoreId.toString())
+
+                context.startActivity(intent)
                 Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
         }
@@ -79,11 +90,11 @@ class PopupStoreAdapter(
             binding.root.setOnClickListener {
                 val popupStore = popupStores[adapterPosition]
                 val intent = Intent(context, PopupDetailActivity::class.java)
-                intent.putExtra("id", popupStore.id)
-                Log.d("DETAIL", popupStore.id.toString())
+                intent.putExtra("id", popupStore.popupStoreId)
+                Log.d("DETAIL", popupStore.popupStoreId.toString())
 
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.id}", Toast.LENGTH_LONG).show()
+                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.popupStoreId}", Toast.LENGTH_LONG).show()
             }
         }
 
