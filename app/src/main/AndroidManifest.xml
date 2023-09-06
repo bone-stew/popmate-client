@@ -94,6 +94,10 @@
             android:name=".view.activities.reservation.MyReservationActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.activities.reservation.MyReservationDetailActivity"
+            android:exported="true" />
+
         <!-- Chat Activity 설정 -->
 
         <meta-data
