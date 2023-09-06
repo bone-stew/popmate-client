@@ -17,11 +17,11 @@ class PreReservationFragment :
         ViewModelProvider(this)[MyReservationViewModel::class.java]
     }
 
-    // OnViewCreated(): 뷰가 생성되고 난 후 호출되는 메서드
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView();
+        initView()
+        setObserve()
     }
 
     private fun initView() {
@@ -30,6 +30,12 @@ class PreReservationFragment :
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = MyReservationAdapter(reservationItems)
             }
+        }
+    }
+
+    private fun setObserve() {
+        viewModel.noReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
+            binding.noReservationsText.visibility = visibility
         }
     }
 }

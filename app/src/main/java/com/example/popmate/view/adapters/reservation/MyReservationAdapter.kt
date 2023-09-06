@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.ItemMyReservationBinding
-import com.example.popmate.model.data.remote.reservation.MyReservationRequest
+import com.example.popmate.model.data.remote.reservation.MyReservationsResponse.MyReservationResponse
 
 class MyReservationAdapter(
-    private val itemList: List<MyReservationRequest>
+    private val itemList: List<MyReservationResponse>
 ) : RecyclerView.Adapter<MyReservationAdapter.PreReservationViewHolder>() {
 
     inner class PreReservationViewHolder(binding: ItemMyReservationBinding) : RecyclerView.ViewHolder(binding.root) {

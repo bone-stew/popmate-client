@@ -20,7 +20,8 @@ class PostReservationFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initView();
+        initView()
+        setObserve()
     }
 
     private fun initView() {
@@ -29,6 +30,12 @@ class PostReservationFragment :
                 layoutManager = LinearLayoutManager(requireContext())
                 adapter = MyReservationAdapter(reservationItems)
             }
+        }
+    }
+
+    private fun setObserve() {
+        viewModel.noReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
+            binding.noReservationsText.visibility = visibility
         }
     }
 }

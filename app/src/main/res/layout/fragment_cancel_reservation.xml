@@ -10,7 +10,7 @@
             type="com.example.popmate.viewmodel.reservation.MyReservationViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -21,15 +21,19 @@
             android:id="@+id/rv_cancel_reservations"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical" />
 
         <!-- 예약 내역이 없는 경우를 나타내는 뷰 -->
         <TextView
             android:id="@+id/no_reservations_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="예약 내역이 없습니다."
-            android:visibility="gone" /> <!-- 초기에는 숨깁니다. -->
+            android:text="@string/no_reservation"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
