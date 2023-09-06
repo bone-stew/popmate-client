@@ -11,9 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentOrderDetailBinding
-import com.example.popmate.model.data.remote.order.StoreItem
 import com.example.popmate.view.adapters.order.OrderDetailAdapter
-import java.util.Date
 
 
 class OrderDetailFragment : Fragment() {
@@ -34,9 +32,7 @@ class OrderDetailFragment : Fragment() {
 //        totalCnt = view.findViewById(R.id.order_detail_cnt)
 //        totalPrice2 = view.findViewById(R.id.order_detail_total_price2)
 
-        val data:MutableList<StoreItem> = loadData()
         var adapter = OrderDetailAdapter()
-        adapter.listData = data
 
         binding.orderDetailRecyclerview.adapter = adapter
 
@@ -49,14 +45,4 @@ class OrderDetailFragment : Fragment() {
         return binding.root
     }
 
-    private fun loadData(): MutableList<StoreItem> {
-        val data:MutableList<StoreItem> = mutableListOf()
-        for(no in 1..5){
-            val price = 10000 * no
-            val name = "테스트 ${no}"
-            var store = StoreItem(tbItemId = no, storeId = 0, name = name, price = price, imgUrl = "", stock = 0, order_limit = 0, createdAt = Date())
-            data.add(store)
-        }
-        return data
-    }
 }

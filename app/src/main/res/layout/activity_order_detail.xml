@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/img_activity_order_detail_before"
             android:layout_width="20dp"
             android:layout_height="15dp"
             android:layout_marginTop="4dp"
@@ -39,9 +39,9 @@
             android:layout_height="wrap_content"
             android:text="팝바구니"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/img_activity_order_detail_before"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -51,7 +51,7 @@
             android:layout_marginTop="4dp"
             android:text="전체삭제"
             android:textColor="@color/tx_gray"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +63,7 @@
             android:layout_marginTop="32dp"
             android:text="SE SO NEON : A Pirateship"
             android:textColor="@color/black"
-            android:textSize="14dp"
+            android:textSize="@dimen/h4"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -93,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="픽업 준비 10분"
+                android:textSize="12sp"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/yourImageView"
@@ -137,7 +138,7 @@
             android:layout_marginLeft="5dp"
             android:text="메뉴 추가하기"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -160,14 +161,14 @@
             android:paddingLeft="15dp"
             android:text="총 주문금액"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="18000"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -175,7 +176,7 @@
             android:layout_weight="0.3"
             android:text="원"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

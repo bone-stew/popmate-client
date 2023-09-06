@@ -14,6 +14,13 @@ class OrderDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderDetailBinding.inflate(layoutInflater)
+
+        binding.imgActivityOrderDetailBefore.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+        binding.orderDetailLinearLayout1.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
         fragment = OrderDetailFragment()
         fragment1 = OrderDetailBottomFragment()
         supportFragmentManager.beginTransaction()

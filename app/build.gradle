@@ -117,7 +117,4 @@ dependencies {
     // 토스페이먼츠
     implementation 'com.github.tosspayments:payment-sdk-android:0.1.11'
 
-    //gson
-    implementation 'com.google.code.gson:gson:2.8.8'
-    
 }

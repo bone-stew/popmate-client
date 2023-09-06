@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.ListOrderPurchaseItemBinding
-import com.example.popmate.model.data.remote.order.StoreItem
+import com.example.popmate.model.data.remote.order.PopupStoreItem
 
 
 class OrderDetailAdapter():RecyclerView.Adapter<OrderDetailAdapter.orderDetailHolder>() {
-    var listData = mutableListOf<StoreItem>()
+    var listData = mutableListOf<PopupStoreItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): orderDetailHolder {
         val binding = ListOrderPurchaseItemBinding.inflate(LayoutInflater.from(parent.context),
         parent,false)
@@ -27,9 +27,9 @@ class OrderDetailAdapter():RecyclerView.Adapter<OrderDetailAdapter.orderDetailHo
     }
 
     inner class orderDetailHolder(val binding: ListOrderPurchaseItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun setGoods(item: StoreItem) {
+        fun setGoods(item: PopupStoreItem) {
             binding.orderDetailName.text = item.name
-            binding.orderDetailPrice.text = item.price.toString()
+            binding.orderDetailPrice.text = item.amount.toString()
         }
     }
 }

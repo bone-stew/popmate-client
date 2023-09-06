@@ -4,6 +4,7 @@ package com.example.popmate.model.repository.service
 import android.util.Log
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.service.login.LoginApiService
+import com.example.popmate.model.repository.service.order.OrderApiService
 import com.example.popmate.model.repository.service.popupStore.StoreApiService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,6 +13,7 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.io.IOException
 
 
@@ -98,6 +100,10 @@ object ApiClient {
 
     val getTokenService: LoginApiService by lazy {
         ApiClient.retrofit.create(LoginApiService::class.java)
+    }
+
+    val orderService: OrderApiService by lazy {
+        retrofit.create(OrderApiService::class.java)
     }
 
     val storeService: StoreApiService by lazy {
