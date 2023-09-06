@@ -17,4 +17,8 @@
     <item name="android:background">@drawable/rounded_top_sheet_background</item>
   </style>
 
+  <style name="SearchQeuryHintTextColor">
+    <item name="android:textColor">@color/tx_light_gray</item>
+  </style>
+
 </resources>

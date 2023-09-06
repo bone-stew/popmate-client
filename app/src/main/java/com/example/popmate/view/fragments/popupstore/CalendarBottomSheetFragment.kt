@@ -49,7 +49,7 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentCalendarBottomSheetBinding? = null
     private val binding get() = _binding!!
 
-    private var dataListener: CalendarDataListener? = null
+    private var dateRangeListener: CalendarDataListener? = null
 
 
     override fun onCreateView(
@@ -82,7 +82,7 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
             val (startDate, endDate) = selection
             if (startDate != null && endDate != null) {
                 val text = dateRangeDisplayText(startDate, endDate)
-                dataListener?.onDataSaved(startDate, endDate)
+                dateRangeListener?.onDataSaved(startDate, endDate)
                 dismiss()
             }
         }
@@ -121,7 +121,7 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     fun setDataListener(listener: CalendarDataListener) {
-        dataListener = listener
+        dateRangeListener = listener
     }
 
     private fun configureBinders() {

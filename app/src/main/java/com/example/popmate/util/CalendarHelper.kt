@@ -100,6 +100,7 @@ fun DayOfWeek.displayText(uppercase: Boolean = false): String {
 
 interface CalendarDataListener {
     fun onDataSaved(startDate: LocalDate, endDate: LocalDate)
+    fun refreshCalendarText(startDate: LocalDate, endDate: LocalDate)
 }
 
 

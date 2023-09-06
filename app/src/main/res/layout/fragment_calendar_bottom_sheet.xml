@@ -137,7 +137,7 @@
     android:layout_gravity="center"
     android:text="검색 결과 보러가기"
     android:textSize="@dimen/h8"
-    android:background="@color/orange_light"
+    android:background="@drawable/btn_calendar_range"
   android:textColor="@android:color/white" />
 
 </LinearLayout>

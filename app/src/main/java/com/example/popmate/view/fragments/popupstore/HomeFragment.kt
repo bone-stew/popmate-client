@@ -21,12 +21,6 @@ import com.example.popmate.viewmodel.popupstore.HomeViewModel
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
-
-
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
                               override fun onCreateView(
@@ -47,10 +41,8 @@ class HomeFragment : Fragment() {
                 visitedRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 visitedLayout.visibility = if (it.popupStoresVisitedBy.isNullOrEmpty())  View.GONE else View.VISIBLE
 
-
                 listView.adapter = PopupStoreAdapter(it.popupStoresRecommend, PopupStoreAdapter.ViewHolderType.HORIZONTAL)
                 listView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
 
                 endingSoonView.adapter = PopupStoreAdapter(it.popupStoresEndingSoon, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
                 endingSoonView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

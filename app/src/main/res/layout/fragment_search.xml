@@ -35,11 +35,14 @@
       android:iconifiedByDefault="false"
       android:queryBackground="@null"
       android:searchIcon="@null"
-      android:layout_marginTop="10dp"
+      android:layout_marginTop="9dp"
       android:layout_marginLeft="8dp"
-      android:padding="8dp"
+      android:layout_marginRight="16dp"
+      android:padding="2dp"
+      style="@style/SearchQeuryHintTextColor"
       android:queryHint="검색어를 입력해주세요" />
   </LinearLayout>
+
 
   <LinearLayout
     android:id="@+id/closingSoonLayout"
