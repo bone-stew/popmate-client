@@ -1,19 +1,25 @@
 package com.example.popmate.view.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.R
 import com.example.popmate.databinding.*
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.view.activities.detail.PopupDetailActivity
 
 class PopupStoreAdapter(
+    private val context: Context,
     private val popupStores: List<PopupStore>,
     private val viewHolderType: ViewHolderType
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -72,7 +78,12 @@ class PopupStoreAdapter(
         init {
             binding.root.setOnClickListener {
                 val popupStore = popupStores[adapterPosition]
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
+                val intent = Intent(context, PopupDetailActivity::class.java)
+                intent.putExtra("id", popupStore.id)
+                Log.d("DETAIL", popupStore.id.toString())
+
+                context.startActivity(intent)
+                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.id}", Toast.LENGTH_LONG).show()
             }
         }
 

@@ -6,12 +6,13 @@ import com.example.popmate.model.data.remote.popupstore.HomeResponse
 import com.example.popmate.model.data.remote.popupstore.SearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface StoreApiService {
 
-    @GET("popup-stores/1")
-    fun getStoreDetail(): Call<ApiResponse<PopupStore>>
+    @GET("popup-stores/{popupstoreId}")
+    fun getStoreDetail(@Path("popupstoreId") popupStoreId: Long, @Query("userId") userId: Long): Call<ApiResponse<PopupStore>>
 
     @GET("popup-stores/home")
     fun getStoreHome(@Query("userId") userId: Long): Call<ApiResponse<HomeResponse>>

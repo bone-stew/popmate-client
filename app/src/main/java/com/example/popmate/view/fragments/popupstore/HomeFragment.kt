@@ -37,14 +37,14 @@ class HomeFragment : Fragment() {
                 val indicator = binding.indicator
                 indicator.setViewPager(binding.imageCarousel)
 
-                visitedRecyclerView.adapter = PopupStoreAdapter(it.popupStoresVisitedBy, PopupStoreAdapter.ViewHolderType.VISITED)
+                visitedRecyclerView.adapter = PopupStoreAdapter(requireContext(), it.popupStoresVisitedBy, PopupStoreAdapter.ViewHolderType.VISITED)
                 visitedRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 visitedLayout.visibility = if (it.popupStoresVisitedBy.isNullOrEmpty())  View.GONE else View.VISIBLE
 
-                listView.adapter = PopupStoreAdapter(it.popupStoresRecommend, PopupStoreAdapter.ViewHolderType.HORIZONTAL)
+                listView.adapter = PopupStoreAdapter(requireContext(), it.popupStoresRecommend, PopupStoreAdapter.ViewHolderType.HORIZONTAL)
                 listView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-                endingSoonView.adapter = PopupStoreAdapter(it.popupStoresEndingSoon, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
+                endingSoonView.adapter = PopupStoreAdapter(requireContext(), it.popupStoresEndingSoon, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
                 endingSoonView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
         }

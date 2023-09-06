@@ -61,7 +61,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 stores = it
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 popupstoreRecyclerView.adapter =
-                    PopupStoreAdapter(it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE)
+                    PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE)
                 popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, 0, 0)
                 imgArrow.setOnClickListener {
                     mainActivity.goBack()

@@ -11,7 +11,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PopupDetailViewModel : ViewModel() {
+class PopupDetailViewModel() : ViewModel() {
+    private var userId = 1L
+    private var popupStoreId: Long? = null
     private val store: MutableLiveData<PopupStore> by lazy {
         MutableLiveData<PopupStore>().also {
             loadStore()
@@ -24,7 +26,8 @@ class PopupDetailViewModel : ViewModel() {
         }
     }
 
-    fun getStore(): LiveData<PopupStore> {
+    fun getStore(popupstoreId: Long): LiveData<PopupStore> {
+        popupStoreId = popupstoreId
         return store
     }
 
@@ -32,7 +35,7 @@ class PopupDetailViewModel : ViewModel() {
         return recommendStore
     }
     private fun loadStore() {
-        ApiClient.storeService.getStoreDetail().enqueue(object : Callback<ApiResponse<PopupStore>>{
+        ApiClient.storeService.getStoreDetail(popupStoreId!!, userId).enqueue(object : Callback<ApiResponse<PopupStore>>{
             override fun onResponse(call: Call<ApiResponse<PopupStore>>, response: Response<ApiResponse<PopupStore>>) {
                 Log.d("kww", "onResponse: " + response.body())
                 store.value = response.body()?.data

@@ -30,7 +30,7 @@ class SearchFragment : Fragment()  {
 
         binding.run {
             horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            horizontalView.adapter = PopupStoreAdapter(recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
+            horizontalView.adapter = PopupStoreAdapter(requireContext(), recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
             searchView.setIconifiedByDefault(false)
             imgArrow.setOnClickListener {
                 val fragmentManager = requireActivity().supportFragmentManager
