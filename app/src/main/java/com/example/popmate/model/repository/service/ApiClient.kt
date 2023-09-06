@@ -1,18 +1,11 @@
 package com.example.popmate.model.repository.service
 
 
-import android.util.Log
-import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.service.login.LoginApiService
 import com.example.popmate.model.repository.service.popupStore.StoreApiService
 import com.example.popmate.model.repository.service.reservation.ReservationApiService
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 
 
 object ApiClient {
@@ -91,13 +84,13 @@ object ApiClient {
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(ApiClient.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     val getTokenService: LoginApiService by lazy {
-        ApiClient.retrofit.create(LoginApiService::class.java)
+        retrofit.create(LoginApiService::class.java)
     }
 
     val storeService: StoreApiService by lazy {
@@ -107,6 +100,7 @@ object ApiClient {
     val reservationService: ReservationApiService by lazy {
         retrofit.create(ReservationApiService::class.java)
     }
+
 //    fun setJwtToken(token: LoginTokenVO?) {
 //        if (token != null) {
 //            jwtToken = token.token
