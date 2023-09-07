@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.model.data.remote.ApiResponse
-import com.example.popmate.model.repository.service.ApiClient
+import com.example.popmate.model.repository.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +31,7 @@ class PopupDetailViewModel : ViewModel() {
     fun getRecommendStore(): LiveData<List<PopupStore>> {
         return recommendStore
     }
+
     private fun loadStore() {
         ApiClient.storeService.getStoreDetail().enqueue(object : Callback<ApiResponse<PopupStore>>{
             override fun onResponse(call: Call<ApiResponse<PopupStore>>, response: Response<ApiResponse<PopupStore>>) {
