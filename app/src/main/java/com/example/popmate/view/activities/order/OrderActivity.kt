@@ -11,7 +11,8 @@ import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.data.remote.order.PopupStoreItemsResponse
 import com.example.popmate.view.adapters.order.OnItemClick
 import com.example.popmate.view.adapters.order.OrderAdapter
-import com.example.popmate.view.framents.order.OrderBottomFragment
+import com.example.popmate.view.fragments.order.OrderBottomFragment
+
 import com.example.popmate.viewmodel.order.OrderViewModel
 
 

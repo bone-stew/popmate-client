@@ -14,7 +14,6 @@ import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.view.adapters.PopupStoreAdapter
 import java.util.Calendar
-import java.util.Date
 
 
 // TODO: Rename parameter arguments, choose names that match
