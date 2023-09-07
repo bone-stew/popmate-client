@@ -5,8 +5,7 @@
   android:layout_height="wrap_content"
   android:clickable="true"
   android:focusable="true"
-  android:background="@drawable/btn_calendar"
-  android:onClick="onCalendarLayoutClick">
+  android:background="@drawable/btn_calendar">
 
   <TextView
     android:id="@+id/keywordText"
