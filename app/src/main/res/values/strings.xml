@@ -15,4 +15,7 @@
     <string name="cancel_visit">취소됨</string>
     <string name="purchase">구매내역</string>
     <string name="no_reservation">예약 내역이 없습니다.</string>
+    <string name="entry_time">입장시간</string>
+    <string name="guest_count">예약인원</string>
+    <string name="popup_store_place">팝업스토어 장소</string>
 </resources>
