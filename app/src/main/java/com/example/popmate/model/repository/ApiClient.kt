@@ -3,6 +3,7 @@ package com.example.popmate.model.repository
 
 import com.example.popmate.model.repository.service.chat.ChatApiService
 import com.example.popmate.model.repository.service.login.LoginApiService
+import com.example.popmate.model.repository.service.order.OrderApiService
 import com.example.popmate.model.repository.service.popupStore.StoreApiService
 import com.example.popmate.model.repository.service.reservation.ReservationApiService
 import retrofit2.Retrofit
