@@ -1,6 +1,7 @@
 package com.example.popmate.view.fragments.popupstore
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +11,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
+import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.FragmentSearchBinding
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.util.SearchQueryListener
 import com.example.popmate.view.adapters.PopupStoreAdapter
 
 
-class SearchFragment : Fragment()  {
+class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private var searchQueryListener: SearchQueryListener? = null
 
@@ -25,12 +27,25 @@ class SearchFragment : Fragment()  {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        val recentlyViewedStores = emptyList<PopupStore>()
+//        var recentlyViewedStores = emptyList<PopupStore>()
+        var recentlyViewedStores = PopmateApplication.prefs.getList()
 
 
+        Log.i("SEARCHRECENT", PopmateApplication.prefs.getList().toString())
+//        Log.i("SEARCHRECENT", PopmateApplication.prefs.getList().toString())
+        Log.i("SEARCHRECENT", PopmateApplication.prefs.getList().isNullOrEmpty().toString())
         binding.run {
-            horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            horizontalView.adapter = PopupStoreAdapter(requireContext(), recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
+           refreshUI(recentlyViewedStores)
+//            if (recentlyViewedStores.isNullOrEmpty()) {
+//                horizontalView.visibility = View.GONE
+//                closingSoonText.visibility = View.GONE
+//            } else {
+//                horizontalView.visibility = View.VISIBLE
+//                closingSoonText.visibility = View.VISIBLE
+//                horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//                horizontalView.adapter =
+//                    PopupStoreAdapter(requireContext(), recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
+//            }
             searchView.setIconifiedByDefault(false)
             imgArrow.setOnClickListener {
                 val fragmentManager = requireActivity().supportFragmentManager
@@ -42,7 +57,7 @@ class SearchFragment : Fragment()  {
                         .commit()
                 }
             }
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     searchQueryListener?.onSearchQuerySubmitted(query.orEmpty())
                     val fragmentManager = requireActivity().supportFragmentManager
@@ -70,6 +85,27 @@ class SearchFragment : Fragment()  {
 
     fun setSearchQueryListener(listener: SearchQueryListener) {
         searchQueryListener = listener
+    }
+
+    override fun onResume() {
+        super.onResume()
+        var recentlyViewedStores = PopmateApplication.prefs.getList()
+        refreshUI(recentlyViewedStores)
+    }
+
+    private fun refreshUI(recentlyViewedStores: List<PopupStore>?) {
+        if (recentlyViewedStores.isNullOrEmpty()) {
+            binding.horizontalView.visibility = View.GONE
+            binding.closingSoonText.visibility = View.GONE
+        } else {
+            Log.i("SEARCHRECENT", "INSIDE REFRESHUI" + recentlyViewedStores.toString())
+            binding.horizontalView.visibility = View.VISIBLE
+            binding.closingSoonText.visibility = View.VISIBLE
+            binding.horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.horizontalView.adapter =
+                PopupStoreAdapter(requireContext(), recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
+        }
+
     }
 
 

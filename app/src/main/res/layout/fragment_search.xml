@@ -55,7 +55,7 @@
       android:id="@+id/closingSoonText"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="최근 검색한 팝업스토어"
+      android:text="최근에 봤던 팝업스토어"
       android:layout_marginVertical="23dp"
       android:gravity="start|center_vertical"
       android:layout_marginLeft="16dp"

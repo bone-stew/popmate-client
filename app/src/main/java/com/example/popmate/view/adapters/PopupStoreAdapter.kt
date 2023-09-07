@@ -130,6 +130,12 @@ class PopupStoreAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val popupStore = popupStores[position]
+        Log.i("SEARCHRECENT", "===================================================")
+
+        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + popupStores.toString())
+        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + position.toString())
+        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + popupStore.toString())
+
         val imageSize = when (viewHolderType) {
             ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
             ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
