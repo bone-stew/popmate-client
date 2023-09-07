@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources >
 
-  <style name="Theme.Popmate" parent="Theme.AppCompat.Light.NoActionBar">
+  <style name="Theme.Popmate" parent="Theme.AppCompat.Light">
     <item name="windowNoTitle">true</item>
+    <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+  </style>
+
+  <style name="AppBottomSheetDialogTheme"
+    parent="Theme.Design.Light.BottomSheetDialog">
+    <item name="bottomSheetStyle">@style/AppModalStyle</item>
+  </style>
+
+  <style name="AppModalStyle"
+    parent="Widget.Design.BottomSheet.Modal">
+    <item name="android:background">@drawable/rounded_top_sheet_background</item>
+  </style>
+
+  <style name="SearchQeuryHintTextColor">
+    <item name="android:textColor">@color/tx_light_gray</item>
   </style>
 
 </resources>

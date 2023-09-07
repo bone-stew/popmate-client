@@ -1,0 +1,30 @@
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:clickable="true"
+  android:focusable="true"
+  android:background="@drawable/btn_calendar">
+
+  <TextView
+    android:id="@+id/keywordText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="키워드"
+    android:textColor="@color/tx_light_gray"
+    android:textSize="@dimen/h5"
+    android:layout_marginStart="8dp"
+    android:layout_gravity="center"/>
+
+
+  <ImageView
+    android:id="@+id/cancelIcon"
+    android:layout_width="28dp"
+    android:layout_height="28dp"
+    android:src="@drawable/cancel"
+    android:layout_gravity="start|center_vertical"
+    android:padding="8dp"
+    app:tint="@color/tx_light_gray" />
+
+</LinearLayout>

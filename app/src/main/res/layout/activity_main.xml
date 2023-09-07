@@ -34,7 +34,9 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:menu="@menu/menu_navbar"
-    app:itemBackground="@android:color/white"
+    app:itemBackground="@color/white"
+    app:itemIconTint="@color/bottom_nav_item_text_color"
+    app:itemTextColor="@color/bottom_nav_item_text_color"
     />
 
 

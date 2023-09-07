@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
-        android:name=".config.GlobalApplication"
+        android:name=".config.PopmateApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -63,9 +63,9 @@
         <activity
             android:name=".view.activities.order.OrderActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate">
+            android:theme="@style/Theme.Popmate"/>
 
-        </activity>
+
 
         <activity
             android:name=".view.activities.order.OrderPaymentCompleteActivity"

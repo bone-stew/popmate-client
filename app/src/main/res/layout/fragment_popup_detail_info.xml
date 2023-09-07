@@ -307,12 +307,12 @@
             </LinearLayout>
 
             <LinearLayout
+              android:id="@+id/mapLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="60dp"
                 app:layout_constraintTop_toBottomOf="@+id/map_section">
@@ -321,15 +321,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="같은 지점에서 진행되고 있는 팝업스토어"
+                  android:paddingHorizontal="16dp"
+
+                  android:text="같은 지점에서 진행되고 있는 팝업스토어"
                     android:textColor="@color/black"
                     android:textSize="@dimen/h3" />
-
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recommend_store"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                  android:id="@+id/recommend_store"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintTop_toBottomOf="@+id/mapLayout"/>
+
             </LinearLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

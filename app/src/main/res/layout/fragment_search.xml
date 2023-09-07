@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
+
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".view.fragments.SearchFragment">
+  tools:context=".view.fragments.popupstore.SearchFragment">
+  <LinearLayout
+    android:id="@+id/searchLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
 
-  <!-- TODO: Update blank fragment layout -->
-  <TextView
+    <ImageView
+      android:id="@+id/img_arrow"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginStart="15dp"
+      android:src="@drawable/arrow2"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <SearchView
+      android:background="@drawable/shape_search_view"
+      android:id="@+id/searchView"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:iconifiedByDefault="false"
+      android:queryBackground="@null"
+      android:searchIcon="@null"
+      android:layout_marginTop="9dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="16dp"
+      android:padding="2dp"
+      style="@style/SearchQeuryHintTextColor"
+      android:queryHint="검색어를 입력해주세요" />
+  </LinearLayout>
+
+
+  <LinearLayout
+    android:id="@+id/closingSoonLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="@string/hello_blank_fragment" />
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@+id/searchLayout">
 
-</FrameLayout>
+    <TextView
+      android:id="@+id/closingSoonText"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="최근에 봤던 팝업스토어"
+      android:layout_marginVertical="23dp"
+      android:gravity="start|center_vertical"
+      android:layout_marginLeft="16dp"
+      android:textSize="@dimen/h6"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/horizontalView"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      app:layout_constraintTop_toBottomOf="@id/closingSoonText"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent" />
+  </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
