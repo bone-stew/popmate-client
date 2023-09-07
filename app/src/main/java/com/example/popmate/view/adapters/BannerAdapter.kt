@@ -47,7 +47,7 @@ class BannerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
         val binding = RowBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return BannerViewHolder(binding)
+        return BannerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BannerViewHolder, position: Int) {
