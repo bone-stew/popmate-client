@@ -103,18 +103,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/order_detail_middle"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_detail_recyclerview"
         android:layout_width="match_parent"
-        android:paddingHorizontal="20dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:paddingHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/order_detail_first">
-        <include layout="@layout/fragment_order_detail" />
-    </FrameLayout>
+        app:layout_constraintTop_toBottomOf="@+id/order_detail_first" />
 
     <LinearLayout
         android:id="@+id/order_detail_linearLayout1"
@@ -125,7 +124,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/order_detail_middle">
+        app:layout_constraintTop_toBottomOf="@id/order_detail_recyclerview">
 
         <ImageView
             android:layout_width="15dp"
@@ -158,17 +157,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:paddingLeft="15dp"
             android:text="총 주문금액"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/order_detail_total_price1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="18000"
             android:textColor="@color/black"
-            android:textSize="12sp" />
+            android:textSize="12sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -176,19 +175,100 @@
             android:layout_weight="0.3"
             android:text="원"
             android:textColor="@color/black"
-            android:textSize="12sp" />
+            android:textSize="12sp"/>
 
     </LinearLayout>
 
-    <FrameLayout
+<!--    <FrameLayout-->
+<!--        android:id="@+id/order_detail_bottom"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:paddingHorizontal="10dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/order_detail_bottom"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:paddingHorizontal="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/button_radius"
+        android:backgroundTint="@color/orange_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <ImageView
+            android:id="@+id/img_order_detail_imageview"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/eclipse2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/order_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textColor="@color/tx_dark_gray"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_order_detail_imageview"
+            app:layout_constraintEnd_toEndOf="@+id/img_order_detail_imageview"
+            app:layout_constraintStart_toStartOf="@+id/img_order_detail_imageview"
+            app:layout_constraintTop_toTopOf="@+id/img_order_detail_imageview" />
+
+        <TextView
+            android:id="@+id/order_detail_papbaguni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="팝바구니 주문하기"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/order_detail_total_price"
+            app:layout_constraintStart_toEndOf="@+id/img_order_detail_imageview"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/order_detail_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="16000"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txt_order_detail_one"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.538" />
+
+        <TextView
+            android:id="@+id/txt_order_detail_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="원"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.52" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

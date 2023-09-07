@@ -10,13 +10,15 @@ data class PopupStoreItem(
     val imgUrl: String,
     val amount: Int,
     val stock: Int,
-    val orderLimit: Int
+    val orderLimit: Int,
+    var totalQuantity: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString() ?: "",
         parcel.readLong(),
         parcel.readString() ?: "",
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
@@ -30,6 +32,7 @@ data class PopupStoreItem(
         parcel.writeInt(amount)
         parcel.writeInt(stock)
         parcel.writeInt(orderLimit)
+        parcel.writeInt(totalQuantity)
     }
 
     override fun describeContents(): Int {
