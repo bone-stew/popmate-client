@@ -4,6 +4,7 @@ package com.example.popmate.model.repository
 import com.example.popmate.model.repository.service.chat.ChatApiService
 import com.example.popmate.model.repository.service.login.LoginApiService
 import com.example.popmate.model.repository.service.popupStore.StoreApiService
+import com.example.popmate.model.repository.service.reservation.ReservationApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -99,6 +100,10 @@ object ApiClient {
 
     val chatService: ChatApiService by lazy {
         retrofit.create(ChatApiService::class.java)
+    }
+
+    val reservationService: ReservationApiService by lazy {
+        retrofit.create(ReservationApiService::class.java)
     }
 //    fun setJwtToken(token: LoginTokenVO?) {
 //        if (token != null) {

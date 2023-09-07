@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="toss_client_key">test_ck_LlDJaYngronGYAPYQnRVezGdRpXx</string>
+    <string name="toss_secret_key">test_sk_Poxy1XQL8Rg1k60M1jZ37nO5Wmlg</string>
+</resources>
