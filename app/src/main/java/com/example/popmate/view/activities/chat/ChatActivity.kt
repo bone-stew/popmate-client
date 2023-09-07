@@ -18,7 +18,7 @@ import ua.naiksoftware.stomp.dto.LifecycleEvent
 import java.time.LocalDateTime
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
-
+  
     private val roomId: Long = 3
     private val url = "ws://15.164.48.244:8080/ws-chat"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
@@ -76,21 +76,10 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         }
         stompClient.lifecycle().subscribe {
             when (it.type) {
-                LifecycleEvent.Type.OPENED -> {
-                    Log.i("kww", "OPEND")
-                }
-
-                LifecycleEvent.Type.CLOSED -> {
-                    Log.i("kww", "CLOSED")
-                }
-
-                LifecycleEvent.Type.ERROR -> {
-                    Log.e("kww", it.exception.toString())
-                }
-
-                else -> {
-                    Log.i("kww", it.message)
-                }
+                LifecycleEvent.Type.OPENED -> { Log.i("kww", "OPEND") }
+                LifecycleEvent.Type.CLOSED -> { Log.i("kww", "CLOSED") }
+                LifecycleEvent.Type.ERROR -> { Log.e("kww", it.exception.toString()) }
+                else -> { Log.i("kww", it.message) }
             }
         }
     }

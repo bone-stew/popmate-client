@@ -13,4 +13,5 @@ interface ChatApiService {
     fun loadMessages(
         @Path("roomId") roomId: Long
     ): Call<ApiResponse<MessagesResponse>>
+
 }
