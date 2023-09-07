@@ -27,25 +27,11 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-//        var recentlyViewedStores = emptyList<PopupStore>()
         var recentlyViewedStores = PopmateApplication.prefs.getList()
 
 
-        Log.i("SEARCHRECENT", PopmateApplication.prefs.getList().toString())
-//        Log.i("SEARCHRECENT", PopmateApplication.prefs.getList().toString())
-        Log.i("SEARCHRECENT", PopmateApplication.prefs.getList().isNullOrEmpty().toString())
         binding.run {
            refreshUI(recentlyViewedStores)
-//            if (recentlyViewedStores.isNullOrEmpty()) {
-//                horizontalView.visibility = View.GONE
-//                closingSoonText.visibility = View.GONE
-//            } else {
-//                horizontalView.visibility = View.VISIBLE
-//                closingSoonText.visibility = View.VISIBLE
-//                horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//                horizontalView.adapter =
-//                    PopupStoreAdapter(requireContext(), recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
-//            }
             searchView.setIconifiedByDefault(false)
             imgArrow.setOnClickListener {
                 val fragmentManager = requireActivity().supportFragmentManager
@@ -98,7 +84,6 @@ class SearchFragment : Fragment() {
             binding.horizontalView.visibility = View.GONE
             binding.closingSoonText.visibility = View.GONE
         } else {
-            Log.i("SEARCHRECENT", "INSIDE REFRESHUI" + recentlyViewedStores.toString())
             binding.horizontalView.visibility = View.VISIBLE
             binding.closingSoonText.visibility = View.VISIBLE
             binding.horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

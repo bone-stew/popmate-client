@@ -1,5 +1,6 @@
 package com.example.popmate.view.activities.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,27 +12,19 @@ import com.example.popmate.config.BaseActivity
 import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.ActivityPopupDetailBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.view.activities.order.OrderActivity
+import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import java.util.LinkedList
 
 class PopupDetailActivity :
     BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail) {
 
-    //        val popupStoreId = intent.getStringExtra("id")?.toLong()
     var popupStoreId: Long? = null
+    var hasVisited: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         this.popupStoreId = intent.getLongExtra("id", -1)
-        Log.i("DETAIL", intent.toString())
-        Log.i("DETAIL", intent.extras.toString())
-        Log.d("DETAIL", "Received intent: $intent")
-        Log.i("DETAIL", intent.getLongExtra("id", -1).toString())
-
-        if (intent.hasExtra("id")) {
-            Log.i("DETAIL", "HELLO")
-            Log.i("DETAIL", intent.getLongExtra("id", -1).toString())
-
-        }
 
         binding.backBtn.setOnClickListener {
             finish()
@@ -45,7 +38,38 @@ class PopupDetailActivity :
                 .load(it.bannerImgUrl)
                 .into(binding.bannerImage)
 
-            saveToSharedPrefs(it)
+            hasVisited = it.status==1
+            Log.i("HASVISITED", "status: "+it.status.toString())
+            if (hasVisited){
+                Log.i("HASVISITED", "status: TRUE"+it.status.toString())
+                binding.reserveBtn.visibility = View.GONE
+                binding.orderLayout.orderBtnPost.visibility = View.VISIBLE
+                binding.orderLayout.reserveBtnPost.visibility = View.VISIBLE
+            } else {
+                binding.reserveBtn.visibility = View.VISIBLE
+                binding.orderLayout.orderBtnPost.visibility = View.GONE
+                binding.orderLayout.reserveBtnPost.visibility = View.GONE
+                Log.i("HASVISITED", "status: FALSE"+it.status.toString())
+
+            }
+            binding.run {
+                reserveBtn.setOnClickListener{
+                    val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
+//                intent.putExtra("id", popupStore.popupStoreId)
+                    startActivity(intent)
+                }
+                orderLayout.orderBtnPost.setOnClickListener{
+                    val intent = Intent(applicationContext, OrderActivity::class.java)
+//                intent.putExtra("id", popupStore.popupStoreId)
+                    startActivity(intent)
+                }
+                orderLayout.reserveBtnPost.setOnClickListener{
+                    val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
+//                intent.putExtra("id", popupStore.popupStoreId)
+                    startActivity(intent)
+                }
+            }
+            saveToRecentlyViewedSharedPrefs(it)
         }
         setInfoFragment()
         binding.run {
@@ -58,10 +82,8 @@ class PopupDetailActivity :
         }
     }
 
-    private fun saveToSharedPrefs(store: PopupStore?) {
+    private fun saveToRecentlyViewedSharedPrefs(store: PopupStore?) {
         var storeList = PopmateApplication.prefs.getList()
-        Log.i("SEARCHRECENT", "ADDING TO LIST" + storeList.toString())
-        Log.i("SEARCHRECENT", "ADDING THE STORE" + store.toString())
         var storeLinkedList: LinkedList<PopupStore>? = null
         if (storeList == null) {
             storeLinkedList = LinkedList<PopupStore>()
@@ -80,21 +102,8 @@ class PopupDetailActivity :
 
 
     private fun setInfoFragment() {
-        Log.i("SEARCHRECENT", "FRAGMENT" + binding.store.toString())
-
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance(popupStoreId!!)).commit()
-        binding.reserveBtn.visibility = View.VISIBLE
-        binding.run {
-            infoBtn.run {
-                setTextColor(ContextCompat.getColor(context, R.color.black))
-                setBackgroundResource(R.drawable.bottom_line)
-            }
-            chatBtn.run {
-                setTextColor(ContextCompat.getColor(context, R.color.tx_light_gray))
-                setBackgroundResource(R.drawable.bottom_line_selected)
-            }
-        }
     }
 
 

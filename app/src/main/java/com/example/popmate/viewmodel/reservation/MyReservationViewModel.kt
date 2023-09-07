@@ -7,7 +7,7 @@ import com.example.popmate.config.BaseViewModel
 import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.reservation.MyReservationsResponse
 import com.example.popmate.model.data.remote.reservation.MyReservationsResponse.MyReservationResponse
-import com.example.popmate.model.repository.service.ApiClient.reservationService
+import com.example.popmate.model.repository.ApiClient.reservationService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
