@@ -3,10 +3,13 @@ package com.example.popmate.model.repository
 
 import com.example.popmate.model.repository.service.chat.ChatApiService
 import com.example.popmate.model.repository.service.login.LoginApiService
+import com.example.popmate.model.repository.service.order.OrderApiService
 import com.example.popmate.model.repository.service.popupStore.StoreApiService
 import com.example.popmate.model.repository.service.reservation.ReservationApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
+import java.io.IOException
 
 
 object ApiClient {
@@ -92,6 +95,10 @@ object ApiClient {
 
     val getTokenService: LoginApiService by lazy {
         retrofit.create(LoginApiService::class.java)
+    }
+
+    val orderService: OrderApiService by lazy {
+        retrofit.create(OrderApiService::class.java)
     }
 
     val storeService: StoreApiService by lazy {

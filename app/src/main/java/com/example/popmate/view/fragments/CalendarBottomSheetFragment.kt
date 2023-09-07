@@ -7,9 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import androidx.fragment.app.DialogFragment
-import com.example.popmate.R
 import com.example.popmate.databinding.FragmentCalendarBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Calendar

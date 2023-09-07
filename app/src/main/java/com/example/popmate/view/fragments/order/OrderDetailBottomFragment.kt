@@ -1,4 +1,4 @@
-package com.example.popmate.view.framents.order
+package com.example.popmate.view.fragments.order
 
 import android.content.Intent
 import android.os.Bundle
