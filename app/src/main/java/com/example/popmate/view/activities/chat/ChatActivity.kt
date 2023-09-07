@@ -18,35 +18,48 @@ import ua.naiksoftware.stomp.dto.LifecycleEvent
 import java.time.LocalDateTime
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
-    val roomId: Long = 3
-    private val url = "ws://10.0.2.2:8080/ws-chat"
+
+    private val roomId: Long = 3
+    private val url = "ws://15.164.48.244:8080/ws-chat"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
     private val model: ChatViewModel by viewModels()
+    private var myId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.chatBox.layoutManager = LinearLayoutManager(this)
-        binding.chatBox.adapter = ChatAdapter(listOf())
-        model.getChatList().observe(this) {
-            (binding.chatBox.adapter as ChatAdapter).addChat(it)
+        binding.run {
+            chatBox.layoutManager =
+                LinearLayoutManager(this@ChatActivity).apply { this.stackFromEnd = true }
+            sendBtn.setOnClickListener {
+                val message = binding.inputText.text
+                if (!message.isNullOrBlank()) sendMessage(Chat(message.toString(), roomId))
+                inputText.text = null
+            }
         }
-        binding.sendBtn.setOnClickListener {
-            val message = binding.inputText.text
-            val chat = Chat(message.toString(), roomId);
-            sendMessage(chat)
+        model.run {
+            loadChatMessage(roomId)
+            currUserId.observe(this@ChatActivity) {
+                myId = it
+                binding.chatBox.adapter = ChatAdapter(listOf(), it)
+            }
+            chatList.observe(this@ChatActivity) {
+                (binding.chatBox.adapter as ChatAdapter).addChat(it)
+                val position =
+                    (binding.chatBox.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                if (position == it.size - 2 || it.last().sender == myId)
+                    binding.chatBox.smoothScrollToPosition(it.size - 1)
+            }
         }
-
     }
 
     private fun sendMessage(chat: Chat) {
         val data = Gson().toJson(chat, Chat::class.java)
-        Log.d("kww", "sendMessage: $data")
         stompClient.send("/pub/message", data).subscribe()
     }
 
     override fun onStart() {
         super.onStart()
-        getStompConnection(3)
+        getStompConnection(roomId)
     }
 
     override fun onStop() {
@@ -74,6 +87,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
                 LifecycleEvent.Type.ERROR -> {
                     Log.e("kww", it.exception.toString())
                 }
+
                 else -> {
                     Log.i("kww", it.message)
                 }
