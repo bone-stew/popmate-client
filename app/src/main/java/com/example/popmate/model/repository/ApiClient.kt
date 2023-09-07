@@ -1,16 +1,10 @@
 package com.example.popmate.model.repository
 
 
-import android.util.Log
-import com.example.popmate.model.data.remote.login.LoginTokenVO
+import com.example.popmate.model.repository.service.chat.ChatApiService
 import com.example.popmate.model.repository.service.login.LoginApiService
-import com.example.popmate.model.repository.service.order.OrderApiService
 import com.example.popmate.model.repository.service.popupStore.StoreApiService
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
+import com.example.popmate.model.repository.service.reservation.ReservationApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -21,7 +15,7 @@ object ApiClient {
 //
 //    private var jwtToken: String? = null
 //
-    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
+    private const val BASE_URL = "http://15.164.48.244:8080/api/v1/"
 //
 //    private val retrofit: Retrofit by lazy {
 //
@@ -93,13 +87,13 @@ object ApiClient {
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(ApiClient.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     val getTokenService: LoginApiService by lazy {
-        ApiClient.retrofit.create(LoginApiService::class.java)
+        retrofit.create(LoginApiService::class.java)
     }
 
     val orderService: OrderApiService by lazy {
@@ -108,6 +102,14 @@ object ApiClient {
 
     val storeService: StoreApiService by lazy {
         retrofit.create(StoreApiService::class.java)
+    }
+
+    val chatService: ChatApiService by lazy {
+        retrofit.create(ChatApiService::class.java)
+    }
+
+    val reservationService: ReservationApiService by lazy {
+        retrofit.create(ReservationApiService::class.java)
     }
 //    fun setJwtToken(token: LoginTokenVO?) {
 //        if (token != null) {

@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.popmate"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -58,17 +58,17 @@ apply plugin: 'kotlin-kapt'
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.0')
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.5.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.activity:activity-compose:1.7.2'
     implementation platform('androidx.compose:compose-bom:2022.10.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
@@ -82,23 +82,24 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
     // okhttp3
-    implementation 'com.squareup.okhttp3:okhttp:3.12.6'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
     implementation 'com.squareup.okhttp3:mockwebserver:3.12.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
 
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     // 카카오 로그인
-    implementation "com.kakao.sdk:v2-all:2.15.0"
+    implementation 'com.kakao.sdk:v2-all:2.15.0'
 
     //구글 로그인
     implementation platform('com.google.firebase:firebase-bom:32.2.2')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation("com.google.android.gms:play-services-auth:20.6.0")
+    implementation 'com.google.android.gms:play-services-auth:20.7.0'
+
     // viewpager2
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     // circleindicator
     implementation 'me.relex:circleindicator:2.1.6'
@@ -111,8 +112,19 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     
     //recyclerview와 cardview
-    implementation ('androidx.recyclerview:recyclerview:1.3.1')
+    implementation('androidx.recyclerview:recyclerview:1.3.1')
     implementation('androidx.cardview:cardview:1.0.0')
+
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
+
+    implementation 'com.github.NaikSoftware:StompProtocolAndroid:1.6.6'
+    //rx
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
+    implementation 'androidx.recyclerview:recyclerview:1.3.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
 
     // 토스페이먼츠
     implementation 'com.github.tosspayments:payment-sdk-android:0.1.11'

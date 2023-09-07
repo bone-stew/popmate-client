@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="@string/popup_store_visit_time"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/h5" />
 
             </LinearLayout>
 
@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:text="@string/popup_store_visit_time"
-                        android:textSize="10sp" />
+                        android:textSize="@dimen/h5" />
 
                     <TextView
                         android:id="@+id/tv_visit_status"
@@ -81,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:text="@string/popup_store_visit_status"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/h3"
                         android:textStyle="bold" />
 
                     <TextView
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10시 30분 ~ 10시 45분 입장"
-                        android:textSize="10sp" />
+                        android:textSize="@dimen/h5" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -113,7 +113,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:text="@string/popup_store_visiter_count"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/h5" />
 
             </LinearLayout>
 
@@ -186,7 +186,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:text="@string/reservation"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/h5" />
 
             </LinearLayout>
 
@@ -232,14 +232,14 @@
                             android:layout_marginBottom="5dp"
                             android:text="빵빵이의 생일파티"
                             android:textColor="@color/black"
-                            android:textSize="10dp" />
+                            android:textSize="@dimen/h5" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:text="설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명"
-                            android:textSize="10dp" />
+                            android:textSize="@dimen/h5" />
 
                         <View
                             android:layout_width="match_parent"
@@ -258,7 +258,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="운영시간"
                                 android:textColor="@color/black"
-                                android:textSize="10dp" />
+                                android:textSize="@dimen/h5" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -266,20 +266,20 @@
                                 android:layout_marginLeft="10dp"
                                 android:text="10:00"
                                 android:textColor="@color/black"
-                                android:textSize="10dp" />
+                                android:textSize="@dimen/h5" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=" ~ "
-                                android:textSize="12dp" />
+                                android:textSize="@dimen/h5" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="10:15"
                                 android:textColor="@color/black"
-                                android:textSize="10dp" />
+                                android:textSize="@dimen/h5" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

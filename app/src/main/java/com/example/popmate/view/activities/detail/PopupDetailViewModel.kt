@@ -31,6 +31,7 @@ class PopupDetailViewModel : ViewModel() {
     fun getRecommendStore(): LiveData<List<PopupStore>> {
         return recommendStore
     }
+
     private fun loadStore() {
         ApiClient.storeService.getStoreDetail().enqueue(object : Callback<ApiResponse<PopupStore>>{
             override fun onResponse(call: Call<ApiResponse<PopupStore>>, response: Response<ApiResponse<PopupStore>>) {
