@@ -61,8 +61,10 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 stores = it
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 popupstoreRecyclerView.adapter =
-                    PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE)
+                    PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
                 popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, 0, 0)
+//                popupstoreRecyclerView.setNestedScrollingEnabled(false);
+
                 imgArrow.setOnClickListener {
                     mainActivity.goBack()
                 }

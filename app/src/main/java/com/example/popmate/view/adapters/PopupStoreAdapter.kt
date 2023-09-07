@@ -26,6 +26,7 @@ class PopupStoreAdapter(
 
     enum class ViewHolderType {
         HORIZONTAL,
+        VERTICAL_LARGE_GRID,
         VERTICAL_LARGE,
         VERTICAL_MEDIUM,
         VERTICAL_SMALL,
@@ -61,7 +62,7 @@ class PopupStoreAdapter(
         }
     }
 
-    inner class VerticalViewHolder(private val binding: RowPopupstoreVerticalBinding) :
+    inner class VerticalViewHolder(private val binding: RowPopupstoreVerticalBinding, private val isGridLayout: Boolean) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -76,10 +77,17 @@ class PopupStoreAdapter(
             }
         }
 
-        fun bind(popupStore: PopupStore, imageSize: ImageSize) {
+        fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
             binding.popupstore = popupStore
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
+
+            if (isGridLayout && position >= popupStores.size - 2) {
+                val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.bottomMargin = dpToPx(130)
+                binding.root.layoutParams = layoutParams
+            }
+
         }
     }
 
@@ -115,8 +123,14 @@ class PopupStoreAdapter(
             ViewHolderType.VERTICAL_LARGE.ordinal,
             ViewHolderType.VERTICAL_MEDIUM.ordinal,
             ViewHolderType.VERTICAL_SMALL.ordinal -> {
+
                 val binding = RowPopupstoreVerticalBinding.inflate(inflater, parent, false)
-                VerticalViewHolder(binding)
+                VerticalViewHolder(binding, false)
+            }
+
+            ViewHolderType.VERTICAL_LARGE_GRID.ordinal -> {
+                val binding = RowPopupstoreVerticalBinding.inflate(inflater, parent, false)
+                VerticalViewHolder(binding, true)
             }
 
             ViewHolderType.VISITED.ordinal -> {
@@ -137,13 +151,14 @@ class PopupStoreAdapter(
         Log.i("SEARCHRECENT", "INSIDE ADAPTER" + popupStore.toString())
 
         val imageSize = when (viewHolderType) {
+            ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.LARGE
             ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
             ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
             else -> ImageSize.MEDIUM
         }
         when (holder) {
             is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
-            is VerticalViewHolder -> holder.bind(popupStore, imageSize)
+            is VerticalViewHolder -> holder.bind(popupStore, imageSize, position)
             is VisitedViewHolder -> holder.bind(popupStore)
         }
     }

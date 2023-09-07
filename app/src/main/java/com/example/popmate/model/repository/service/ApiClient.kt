@@ -1,4 +1,4 @@
-package com.example.popmate.model.repository.service
+package com.example.popmate.model.repository
 
 
 import android.util.Log

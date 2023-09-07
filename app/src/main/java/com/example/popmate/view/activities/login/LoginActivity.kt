@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.popmate.databinding.ActivityLoginBinding
 import com.example.popmate.model.data.remote.login.GoogleLoginVO
 import com.example.popmate.model.data.remote.login.LoginTokenVO
-import com.example.popmate.model.repository.service.ApiClient
+import com.example.popmate.model.repository.ApiClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
