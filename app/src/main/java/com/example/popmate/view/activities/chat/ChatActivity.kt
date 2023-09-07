@@ -1,124 +1,83 @@
 package com.example.popmate.view.activities.chat
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import android.util.Log
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityChatBinding
-import com.example.popmate.databinding.ItemChatMineBinding
-import com.example.popmate.databinding.ItemChatOthersBinding
 import com.example.popmate.model.data.local.Chat
+import com.google.gson.Gson
+import ua.naiksoftware.stomp.Stomp
+import ua.naiksoftware.stomp.StompClient
+import ua.naiksoftware.stomp.dto.LifecycleEvent
+import java.time.LocalDateTime
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
+    val roomId: Long = 3
+    private val url = "ws://10.0.2.2:8080/ws-chat"
+    private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
+    private val model: ChatViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.chatBox.layoutManager = LinearLayoutManager(this )
-        binding.chatBox.adapter = ChatAdapter(getTempMessages())
-    }
-
-    private fun getTempMessages(): List<Chat> {
-        return listOf(
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕ㅣㅏㄴ머라ㅣ넘;리ㅏㅓㅁ나ㅣ헝니마호망니호ㅑㅐㅈ돔ㅎ라ㅣㅈㅁ돟라ㅣㅁ;너ㅗ아리ㅗㄶ마ㅣㅇㄴ머리암러하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "김우원", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-            Chat("64e8861662effb35e29084d0", "서명현", "안녕하세요", "testRoom","2023-08-25T19:45:13.646"),
-        )
-    }
-}
-
-class ChatAdapter(private val messages: List<Chat>) : RecyclerView.Adapter<ViewHolder>() {
-
-    private val auth = "김우원"
-
-    inner class MyChatViewHolder(private val binding: ItemChatMineBinding) :
-        ViewHolder(binding.root) {
-        fun bind(chat: Chat) {
-            binding.chatMessage.text = chat.message
-            binding.timeStamp.text = chat.createdAt.substring(11, 16)
+        binding.chatBox.layoutManager = LinearLayoutManager(this)
+        binding.chatBox.adapter = ChatAdapter(listOf())
+        model.getChatList().observe(this) {
+            (binding.chatBox.adapter as ChatAdapter).addChat(it)
         }
-    }
-
-    inner class OtherChatViewHolder(private val binding: ItemChatOthersBinding) :
-        ViewHolder(binding.root) {
-        fun bind(chat: Chat) {
-            binding.chatMessage.text = chat.message
-            binding.timeStamp.text = chat.createdAt.substring(11, 16)
-            binding.sender.text = chat.sender
+        binding.sendBtn.setOnClickListener {
+            val message = binding.inputText.text
+            val chat = Chat(message.toString(), roomId);
+            sendMessage(chat)
         }
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return when (viewType) {
-            MY_CHAT -> {
-                val view = ItemChatMineBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
-                MyChatViewHolder(view)
-            }
+    private fun sendMessage(chat: Chat) {
+        val data = Gson().toJson(chat, Chat::class.java)
+        Log.d("kww", "sendMessage: $data")
+        stompClient.send("/pub/message", data).subscribe()
+    }
 
-            else -> {
-                val view = ItemChatOthersBinding.inflate(
-                    LayoutInflater.from(parent.context), parent, false
-                )
-                OtherChatViewHolder(view)
+    override fun onStart() {
+        super.onStart()
+        getStompConnection(3)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        stompClient.disconnect()
+    }
+
+    @SuppressLint("CheckResult")
+    private fun getStompConnection(roomId: Long) {
+        stompClient.connect()
+        stompClient.topic("/sub/$roomId").subscribe {
+            val chat = Gson().fromJson(it.payload, Chat::class.java)
+            model.addChat(chat)
+        }
+        stompClient.lifecycle().subscribe {
+            when (it.type) {
+                LifecycleEvent.Type.OPENED -> {
+                    Log.i("kww", "OPEND")
+                }
+
+                LifecycleEvent.Type.CLOSED -> {
+                    Log.i("kww", "CLOSED")
+                }
+
+                LifecycleEvent.Type.ERROR -> {
+                    Log.e("kww", it.exception.toString())
+                }
+                else -> {
+                    Log.i("kww", it.message)
+                }
             }
         }
-    }
-
-    override fun getItemCount(): Int {
-        return messages.size
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        when (getItemViewType(position)) {
-            MY_CHAT -> {
-                (holder as MyChatViewHolder).bind(messages[position])
-            }
-            OTHER_CHAT -> {
-                (holder as OtherChatViewHolder).bind(messages[position])
-            }
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return if (auth == messages[position].sender) MY_CHAT
-        else OTHER_CHAT
-    }
-
-    companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Chat>() {
-            override fun areItemsTheSame(oldItem: Chat, newItem: Chat): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areContentsTheSame(oldItem: Chat, newItem: Chat): Boolean {
-                return oldItem == newItem
-            }
-        }
-        private const val MY_CHAT = 1
-        private const val OTHER_CHAT = 2
     }
 }
