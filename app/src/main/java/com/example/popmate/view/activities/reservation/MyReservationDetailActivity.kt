@@ -37,8 +37,10 @@ class MyReservationDetailActivity :
             binding.tvVisitPeopleCount.text = it.guestCount.toString()
             binding.tvVisitLocation.text = it.popupStorePlaceDetail
             binding.tvVisitPeopleCount.text = it.guestCount.toString()
-            binding.tvVisitStartTime.text = DateTimeUtils().toDateTimeString(it.visitStartTime.toLocalDateTime())
-            binding.tvVisitEndTime.text = DateTimeUtils().toTimeString(it.visitEndTime.toLocalDateTime())
+            binding.tvVisitStartTime.text =
+                DateTimeUtils().toDateTimeString(it.visitStartTime.toLocalDateTime())
+            binding.tvVisitEndTime.text =
+                DateTimeUtils().toTimeString(it.visitEndTime.toLocalDateTime())
             Glide.with(this)
                 .load(it.popupStoreImageUrl)
                 .into(binding.imgPopupStore)
