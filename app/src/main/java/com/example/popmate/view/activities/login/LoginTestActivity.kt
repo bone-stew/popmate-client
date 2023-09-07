@@ -4,11 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.popmate.databinding.ActivityLoginTestBinding
-import com.example.popmate.model.data.remote.login.LoginTokenVO
-import com.example.popmate.model.repository.ApiClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginTestActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginTestBinding

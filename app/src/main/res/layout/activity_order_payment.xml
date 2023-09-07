@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activities.order.OrderPaymentActivity">
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -156,13 +165,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/thired_costarint"
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@color/black"
-        android:foregroundGravity="center_vertical"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_order_popupstore" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_order_popupstore">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <com.tosspayments.paymentsdk.view.PaymentMethod
+                    android:id="@+id/payment_method_widget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" />
+
+                <com.tosspayments.paymentsdk.view.Agreement
+                    android:id="@+id/agreement_widget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -214,11 +251,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="105dp"
-        android:layout_marginBottom="5dp"
         android:paddingHorizontal="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_order_detail_payment_totalprice">
 
         <TextView
             android:id="@+id/textView11"
@@ -236,30 +272,31 @@
             android:id="@+id/btn_order_payment"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:backgroundTint="@color/orange_light"
             android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
             android:background="@drawable/button_radius"
+            android:backgroundTint="@color/orange_light"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:gravity="center"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/txt_order_detail_payment_bottom_totalprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:text="18000"
                 android:textColor="@color/white"
-                android:text="18000" />
+                android:textSize="14dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14dp"
+                android:text="원 주문하기"
                 android:textColor="@color/white"
-                android:text="원 주문하기" />
+                android:textSize="14dp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
