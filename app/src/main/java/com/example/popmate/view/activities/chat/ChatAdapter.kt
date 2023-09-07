@@ -7,9 +7,8 @@ import com.example.popmate.databinding.ItemChatMineBinding
 import com.example.popmate.databinding.ItemChatOthersBinding
 import com.example.popmate.model.data.local.Chat
 
-class ChatAdapter(private var messages: List<Chat>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatAdapter(private var messages: List<Chat>, private val currUserId: Long) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val auth = 3L
     companion object {
         private const val MY_CHAT = 1
         private const val OTHER_CHAT = 2
@@ -65,7 +64,7 @@ class ChatAdapter(private var messages: List<Chat>) : RecyclerView.Adapter<Recyc
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (auth == messages[position].sender) MY_CHAT
+        return if (currUserId == messages[position].sender) MY_CHAT
         else OTHER_CHAT
     }
 

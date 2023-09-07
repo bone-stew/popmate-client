@@ -1,4 +1,4 @@
-package com.example.popmate.view.framents.order
+package com.example.popmate.view.fragments.order
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.popmate.R
-import com.example.popmate.model.data.remote.order.StoreItem
+import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.view.activities.order.OrderDetailActivity
 
 
@@ -18,7 +18,7 @@ class OrderBottomFragment : Fragment(){
     var index = 0
     var totalPrice =0
     var totalCnt = 0
-    val hashMap = HashMap<Int, Int>()
+    val hashMap = HashMap<Int, PopupStoreItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,18 +34,17 @@ class OrderBottomFragment : Fragment(){
         return view
     }
 
-    fun update(value: StoreItem) {
-        index = value.tbItemId
+    fun update(value: PopupStoreItem) {
+        index = value.itemId.toInt()
         if(hashMap.containsKey(index)){
             totalCnt -= 1
-            totalPrice -= hashMap[index] ?: 0
+            totalPrice -= hashMap[index]?.amount ?: 0
             hashMap.remove(index)
         }else{
-            hashMap.put(index,value.price)
+            hashMap.put(index,value)
             totalCnt += 1
-            totalPrice += value.price
+            totalPrice += value.amount
         }
-
 
         price.text = totalPrice.toString()
         cnt.text = totalCnt.toString()

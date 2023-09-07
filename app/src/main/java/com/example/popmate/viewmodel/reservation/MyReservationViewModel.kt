@@ -15,10 +15,12 @@ import retrofit2.Response
 class MyReservationViewModel : BaseViewModel() {
 
     private val _preReservationItems = MutableLiveData<List<MyReservationResponse>>()
-    private val _postReservationItems = MutableLiveData<List<MyReservationResponse>>()
-    private val _cancelReservationItems = MutableLiveData<List<MyReservationResponse>>()
     val preReservationItems: LiveData<List<MyReservationResponse>> = _preReservationItems
+
+    private val _postReservationItems = MutableLiveData<List<MyReservationResponse>>()
     val postReservationItems: LiveData<List<MyReservationResponse>> = _postReservationItems
+
+    private val _cancelReservationItems = MutableLiveData<List<MyReservationResponse>>()
     val cancelReservationItems: LiveData<List<MyReservationResponse>> = _cancelReservationItems
 
     private val _noReservationsTextVisibility = MutableLiveData<Int>()

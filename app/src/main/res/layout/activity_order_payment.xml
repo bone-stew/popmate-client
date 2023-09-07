@@ -42,7 +42,7 @@
             android:layout_marginStart="40dp"
             android:text="주문하기"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/txt_order_payment_delete"
             app:layout_constraintStart_toStartOf="@+id/img_arrow"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="전체삭제"
             android:textColor="@color/tx_gray"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -89,7 +89,7 @@
             android:layout_marginStart="8dp"
             android:text="픽업하러 직접 갈게요"
             android:textColor="@color/black"
-            android:textSize="14dp"
+            android:textSize="@dimen/h4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_order_detail_payment_popbaguni"
             app:layout_constraintTop_toTopOf="parent"
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text="10분 후 픽업"
             android:textColor="@color/black"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -144,7 +144,7 @@
             android:layout_marginTop="8dp"
             android:text="SE SO NEON : A Pirateship"
             android:textColor="@color/black"
-            android:textSize="14dp"
+            android:textSize="@dimen/h4"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txt_order_detail_payment_department"
             app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +157,7 @@
             android:layout_marginBottom="16dp"
             android:text="더 현대 서울 5층 팝업스토어 매장"
             android:textColor="@color/black"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -219,7 +219,7 @@
             android:layout_height="wrap_content"
             android:text="총 주문금액"
             android:textColor="@color/black"
-            android:textSize="12dp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -230,7 +230,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="18000"
-            android:textSize="12dp"
+            android:textSize="12sp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/txt_order_detail_payment_won"
@@ -240,7 +240,7 @@
             android:id="@+id/txt_order_detail_payment_won"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
+            android:textSize="12sp"
             android:textColor="@color/black"
             android:text="원"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -263,7 +263,7 @@
             android:layout_marginTop="22dp"
             android:text="팝업스토어에 직접 방문하여 상품을 픽업해주세요"
             android:textColor="@color/black"
-            android:textSize="10dp"
+            android:textSize="@dimen/h5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -287,14 +287,14 @@
                 android:layout_height="wrap_content"
                 android:text="18000"
                 android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textSize="@dimen/h4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="원 주문하기"
                 android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textSize="@dimen/h4" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
