@@ -19,7 +19,7 @@ import java.time.LocalDateTime
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
   
-    private val roomId: Long = 3
+    private var roomId: Long = 0
     private val url = "ws://15.164.48.244:8080/ws-chat"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
     private val model: ChatViewModel by viewModels()
@@ -27,6 +27,8 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        roomId = intent.getLongExtra("storeId", 0)
+        Log.d("kww", "onCreate: $roomId")
         binding.run {
             chatBox.layoutManager =
                 LinearLayoutManager(this@ChatActivity).apply { this.stackFromEnd = true }

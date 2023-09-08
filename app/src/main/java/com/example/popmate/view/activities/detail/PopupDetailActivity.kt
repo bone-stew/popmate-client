@@ -12,6 +12,7 @@ import com.example.popmate.config.BaseActivity
 import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.ActivityPopupDetailBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.view.activities.chat.ChatActivity
 import com.example.popmate.view.activities.order.OrderActivity
 import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import java.util.LinkedList
@@ -19,20 +20,20 @@ import java.util.LinkedList
 class PopupDetailActivity :
     BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail) {
 
-    var popupStoreId: Long? = null
-    var hasVisited: Boolean = false
+    private var popupStoreId: Long = 0
+    private var hasVisited: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         this.popupStoreId = intent.getLongExtra("id", -1)
-
         binding.backBtn.setOnClickListener {
             finish()
         }
 
-
         val model: PopupDetailViewModel by viewModels()
-        model.getStore(popupStoreId!!).observe(this) {
+        model.loadStore(popupStoreId)
+        model.store.observe(this) {
             binding.store = it
             Glide.with(this)
                 .load(it.bannerImgUrl)
@@ -66,6 +67,11 @@ class PopupDetailActivity :
                 orderLayout.reserveBtnPost.setOnClickListener{
                     val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
 //                intent.putExtra("id", popupStore.popupStoreId)
+                    startActivity(intent)
+                }
+                chatEnterBtn.setOnClickListener{
+                    val intent = Intent(applicationContext, ChatActivity::class.java)
+                    intent.putExtra("storeId", popupStoreId)
                     startActivity(intent)
                 }
             }
@@ -102,13 +108,14 @@ class PopupDetailActivity :
 
 
     private fun setInfoFragment() {
+        binding.reserveBtn.visibility = View.VISIBLE
+        binding.chatEnterBtn.visibility = View.GONE
         supportFragmentManager.beginTransaction()
-            .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance(popupStoreId!!)).commit()
+            .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance(popupStoreId)).commit()
     }
 
 
     private fun setChatFragment() {
-        binding.reserveBtn.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
         binding.run {
@@ -120,7 +127,8 @@ class PopupDetailActivity :
                 setTextColor(ContextCompat.getColor(context, R.color.black))
                 setBackgroundResource(R.drawable.bottom_line)
             }
-
+            reserveBtn.visibility = View.GONE
+            chatEnterBtn.visibility = View.VISIBLE
         }
     }
 }
