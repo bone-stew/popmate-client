@@ -1,5 +1,8 @@
 package com.example.popmate.view.activities.detail
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,16 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupDetailInfoBinding
-import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.model.data.local.PopupStoreSnsResponse
-import com.example.popmate.view.adapters.BannerAdapter
-import com.example.popmate.view.adapters.StoreCardAdapter
+import com.example.popmate.view.adapters.DetailCarouselAdapter
+import com.example.popmate.view.adapters.PopupStoreAdapter
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -26,10 +29,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class PopupDetailInfo : Fragment(), OnMapReadyCallback {
+class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
 
     companion object {
-        fun newInstance() = PopupDetailInfo()
+        fun newInstance(popupStoreId: Long) = PopupDetailInfo(popupStoreId)
     }
 
     private lateinit var binding: FragmentPopupDetailInfoBinding
@@ -37,7 +40,7 @@ class PopupDetailInfo : Fragment(), OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
     private lateinit var viewModel: PopupDetailViewModel
     private var currentMarker: Marker? = null
-
+    private var popupStoreId = popupStoreId
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -46,11 +49,10 @@ class PopupDetailInfo : Fragment(), OnMapReadyCallback {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_popup_detail_info, container, false)
 
-        viewModel.getStore().observe(viewLifecycleOwner) {
+        viewModel.getStore(popupStoreId).observe(viewLifecycleOwner) {
             binding.run {
-                Log.d("kww", "onCreateView: " + it.openDateFormatted)
                 store = it
-                imageCarousel.adapter = BannerAdapter(it.popupStoreImgResponses)
+                imageCarousel.adapter = DetailCarouselAdapter(it.popupStoreImgResponses)
                 imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
                 indicator.setViewPager(imageCarousel)
                 for (sns in it.popupStoreSnsResponses) {
@@ -60,16 +62,28 @@ class PopupDetailInfo : Fragment(), OnMapReadyCallback {
                         "homePage" -> setSnsView(homePage, homePageUrl, sns)
                     }
                 }
-                locationDetailText.text = it.placeDetail
+                val address =  it.department.placeDescription + " " + it.placeDetail
+                locationDetailText.text = address
+                locationDetailText.setOnClickListener {
+                    val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                    val clipData = ClipData.newPlainText("locationDetail", address)
+                    clipboard.setPrimaryClip(clipData)
+                    Toast.makeText(
+                        context,
+                        "주소가 복사되었습니다",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                recommendStore.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                recommendStore.adapter =
+                    PopupStoreAdapter(requireContext(), it.popupStoresNearBy, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE)
             }
         }
         mapView = binding.storeLocationMap
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this@PopupDetailInfo)
-
-        binding.recommendStore.layoutManager =
-            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        binding.recommendStore.adapter = StoreCardAdapter(getSampleStores())
         return binding.root;
     }
 
@@ -80,16 +94,10 @@ class PopupDetailInfo : Fragment(), OnMapReadyCallback {
         snsUrlView.text = sns.url
     }
 
-    private fun getSampleStores(): List<PopupStore> {
-        return listOf(
-//            PopupStore(1, "망그러진곰", Date(), Date(),"더현대 서울 지하 2층", "", "url to 1"),
-//            PopupStore(1, "망그러진곰", Date(), Date(),"더현대 서울 지하 2층", "", "url to 1")
-        )
-    }
 
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
-        viewModel.getStore().observe(viewLifecycleOwner) {
+        viewModel.getStore(popupStoreId).observe(viewLifecycleOwner) {
             currentMarker = setupMarker(LatLngEntity(it.latitude, it.longitude))
         }
 //        currentMarker?.showInfoWindow()

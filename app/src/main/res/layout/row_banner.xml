@@ -6,6 +6,9 @@
     <variable
       name="banner"
       type="com.example.popmate.model.data.local.Banner" />
+    <variable
+      name="popupStoreImgResponse"
+      type="com.example.popmate.model.data.local.PopupStoreImgResponse" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout

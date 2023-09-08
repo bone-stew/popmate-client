@@ -1,12 +1,12 @@
 package com.example.popmate.model.data.local
 
 data class PopupStore(
-    val id: Long,
+    val popupStoreId: Long,
     val bannerImgUrl: String,
     val closeDate: String,
     val closeTime: String,
-    val departmentDescription: String,
-    val departmentName: String,
+//    val departmentDescription: String,
+//    val departmentName: String,
     val description: String,
     val entryFee: Int,
     val eventDescription: String,
@@ -16,11 +16,13 @@ data class PopupStore(
     val openTime: String,
     val organizer: String,
     val placeDetail: String,
-    val popupStoreImgResponses: List<Banner>,
+    val popupStoreImgResponses: List<PopupStoreImgResponse>,
     val popupStoreSnsResponses: List<PopupStoreSnsResponse>,
+    val popupStoresNearBy: List<PopupStore>,
     val status: Int,
     val title: String,
-    val views: Int
+    val views: Int,
+    val department: Department
 ) {
     val openDateFormatted: String
         get() {

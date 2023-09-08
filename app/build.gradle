@@ -28,6 +28,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -51,7 +52,6 @@ android {
     dataBinding {
         enabled = true
     }
-
 }
 
 apply plugin: 'kotlin-kapt'
@@ -106,8 +106,13 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    // circleimageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+    // kizitonwose calendar
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+    implementation 'com.kizitonwose.calendar:view:2.3.0'
 
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     
@@ -128,5 +133,8 @@ dependencies {
 
     // 토스페이먼츠
     implementation 'com.github.tosspayments:payment-sdk-android:0.1.11'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.10.1'
 
 }

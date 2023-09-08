@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">popmate</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="app_name">popmate</string>
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="start_date">시작 </string>
+  <string name="end_date"> 종료</string>
     <string name="popup_store_visit_time">팝업스토어 방문 시간</string>
     <string name="popup_store_visit_status">예약 중</string>
     <string name="reservation">예약하기</string>
@@ -14,6 +15,7 @@
     <string name="reservation_receipt">팝업스토어 예약내역</string>
     <string name="cancel_visit">취소됨</string>
     <string name="purchase">구매내역</string>
+
     <string name="no_reservation">예약 내역이 없습니다.</string>
     <string name="entry_time">입장시간</string>
     <string name="guest_count">예약인원</string>

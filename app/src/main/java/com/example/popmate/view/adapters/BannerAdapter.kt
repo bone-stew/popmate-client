@@ -1,38 +1,49 @@
 package com.example.popmate.view.adapters
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.databinding.RowBannerBinding
 import com.example.popmate.model.data.local.Banner
+import com.example.popmate.model.data.local.PopupStoreImgResponse
+import com.example.popmate.view.activities.detail.PopupDetailActivity
 
 
-class BannerAdapter(private var banners: List<Banner>) :
+class BannerAdapter(
+    private val context: Context,
+    private val banners: List<Banner>
+) :
     RecyclerView.Adapter<BannerAdapter.BannerViewHolder>() {
-    private var bannerList: ArrayList<Banner>? = null
+//    private var bannerList: ArrayList<Banner>? = null
 
     inner class BannerViewHolder(private val binding: RowBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
-                Toast.makeText(
-                    binding.root.context,
-                    "클릭된 아이템 = ${binding.banner!!.popupStoreImgId}",
-                    Toast.LENGTH_LONG
-                ).show()
+                val banner = banners[adapterPosition]
+
+                val intent = Intent(context, PopupDetailActivity::class.java)
+                intent.putExtra("id", banner.popupStoreId)
+                Log.d("DETAIL", banner.popupStoreId.toString())
+
+
+                context.startActivity(intent)
             }
         }
 
         fun setItem(banner: Banner) {
             binding.banner = banner
-            Glide.with(binding.bannerImage)
-                .load(banner.imgUrl)
-                .into(binding.bannerImage)
+            setImage(binding.bannerImage, banner.imgUrl)
         }
 
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
         val binding = RowBannerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -49,4 +60,13 @@ class BannerAdapter(private var banners: List<Banner>) :
     }
 
 
+    private fun setImage(imageView: ImageView, imageUrl: String) {
+        Glide.with(imageView)
+            .load(imageUrl)
+            .into(imageView)
+    }
+
+
 }
+
+
