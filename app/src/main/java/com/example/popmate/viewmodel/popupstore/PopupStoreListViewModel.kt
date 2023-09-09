@@ -18,18 +18,11 @@ class PopupStoreListViewModel: ViewModel() {
 
     private val userId: Long = 1L
 
-    private val storeList: MutableLiveData<SearchResponse> by lazy {
-        MutableLiveData<SearchResponse>().also {
-            loadList(null, null, null, null, null, null)
-        }
-    }
-
-    fun getList(): LiveData<SearchResponse> {
-        return storeList
-    }
+    private val _storeList: MutableLiveData<SearchResponse> = MutableLiveData<SearchResponse>()
+    val storeList : LiveData<SearchResponse> = _storeList
 
     fun clearList() {
-        storeList.value =  SearchResponse(emptyList())
+        _storeList.value =  SearchResponse(emptyList())
     }
 
     fun refreshList(
@@ -43,7 +36,7 @@ class PopupStoreListViewModel: ViewModel() {
         loadList(isOpeningSoon, startDate, endDate, keyword, offSetRows, rowsToGet)
     }
 
-    private fun loadList(
+    fun loadList(
         isOpeningSoon: Boolean?,
         startDate: String?,
         endDate: String?,
@@ -61,7 +54,7 @@ class PopupStoreListViewModel: ViewModel() {
             rowsToGet
         ).enqueue(object : Callback<ApiResponse<SearchResponse>> {
             override fun onResponse(call: Call<ApiResponse<SearchResponse>>, response: Response<ApiResponse<SearchResponse>>) {
-                storeList.value = response.body()?.data
+                _storeList.value = response.body()?.data
             }
             override fun onFailure(call: Call<ApiResponse<SearchResponse>>, t: Throwable) {
 

@@ -23,13 +23,15 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
-                              override fun onCreateView(
+
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false )
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-        viewModel.getHome().observe(viewLifecycleOwner) {
+        viewModel.loadHome()
+        viewModel.home.observe(viewLifecycleOwner) {
             binding.run {
                 home = it
                 imageCarousel.adapter = BannerAdapter(requireContext(), it.banners)
@@ -37,14 +39,20 @@ class HomeFragment : Fragment() {
                 val indicator = binding.indicator
                 indicator.setViewPager(binding.imageCarousel)
 
-                visitedRecyclerView.adapter = PopupStoreAdapter(requireContext(), it.popupStoresVisitedBy, PopupStoreAdapter.ViewHolderType.VISITED)
+                visitedRecyclerView.adapter =
+                    PopupStoreAdapter(requireContext(), it.popupStoresVisitedBy, PopupStoreAdapter.ViewHolderType.VISITED)
                 visitedRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                visitedLayout.visibility = if (it.popupStoresVisitedBy.isNullOrEmpty())  View.GONE else View.VISIBLE
+                visitedLayout.visibility = if (it.popupStoresVisitedBy.isNullOrEmpty()) View.GONE else View.VISIBLE
 
-                listView.adapter = PopupStoreAdapter(requireContext(), it.popupStoresRecommend, PopupStoreAdapter.ViewHolderType.HORIZONTAL)
+                listView.adapter =
+                    PopupStoreAdapter(requireContext(), it.popupStoresRecommend, PopupStoreAdapter.ViewHolderType.HORIZONTAL)
                 listView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-                endingSoonView.adapter = PopupStoreAdapter(requireContext(), it.popupStoresEndingSoon, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
+                endingSoonView.adapter = PopupStoreAdapter(
+                    requireContext(),
+                    it.popupStoresEndingSoon,
+                    PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM
+                )
                 endingSoonView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             }
         }
@@ -54,11 +62,8 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.refreshHome()
+        viewModel.loadHome()
     }
-
-
-
 
 
 }

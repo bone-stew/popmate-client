@@ -15,25 +15,28 @@ class HomeViewModel : ViewModel(){
 
     private val userId: Long = 1L
 
-    private val home: MutableLiveData<HomeResponse> by lazy {
-        MutableLiveData<HomeResponse>().also {
-            loadHome()
-        }
-    }
+    private val _home: MutableLiveData<HomeResponse> = MutableLiveData<HomeResponse>()
 
-    fun getHome(): LiveData<HomeResponse> {
-        return home
-    }
+    val home: LiveData<HomeResponse> = _home
+//    by lazy {
+//        MutableLiveData<HomeResponse>().also {
+//            loadHome()
+//        }
+//    }
+//
+//    fun getHome(): LiveData<HomeResponse> {
+//        return home
+//    }
 
-    fun refreshHome() {
-        loadHome()
-    }
+//    fun refreshHome() {
+//        loadHome()
+//    }
 
-    private fun loadHome() {
+    fun loadHome() {
         ApiClient.storeService.getStoreHome(userId).enqueue(object : Callback<ApiResponse<HomeResponse>> {
             override fun onResponse(call: Call<ApiResponse<HomeResponse>>, response: Response<ApiResponse<HomeResponse>>) {
                 Log.d("HOMEFRAGMENT", "onResponse: " + response.body())
-                home.value = response.body()?.data
+                _home.value = response.body()?.data
             }
             override fun onFailure(call: Call<ApiResponse<HomeResponse>>, t: Throwable) {
                 Log.d("kww", "onFailure: ")

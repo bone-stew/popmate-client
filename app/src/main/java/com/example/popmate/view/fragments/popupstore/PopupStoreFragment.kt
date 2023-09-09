@@ -56,7 +56,13 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popup_store, container, false)
         viewModel = ViewModelProvider(requireActivity())[PopupStoreListViewModel::class.java]
-        viewModel.getList().observe(viewLifecycleOwner) {
+        viewModel.loadList(isOpeningSoon,
+            startDate.toString(),
+            endDate.toString(),
+            null,
+            offSetRows,
+            rowsToGet)
+        viewModel.storeList.observe(viewLifecycleOwner) {
             binding.run {
                 stores = it
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -73,7 +79,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         refreshCalendarText(startDate, endDate.minusYears(1).plusMonths(1))
 
         binding.keywordResult.cancelIcon.setOnClickListener{
-            viewModel.refreshList(
+            viewModel.loadList(
                 isOpeningSoon,
                 startDate.toString(),
                 endDate.toString(),
@@ -82,7 +88,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 rowsToGet
             )
             isSearchResult = false
-            refreshUI()
+            refreshSearchText()
         }
 
         return binding.root
@@ -132,7 +138,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         mainActivity = context as MainActivity
     }
 
-    override fun onDataSaved(startDateFromCalendar: LocalDate, endDateFromCalendar: LocalDate) {
+    override fun onDateRangeSelected(startDateFromCalendar: LocalDate, endDateFromCalendar: LocalDate) {
         startDate = startDateFromCalendar
         endDate = endDateFromCalendar
         refreshCalendarText(startDate, endDate)
@@ -181,11 +187,11 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             offSetRows,
             rowsToGet
         )
-        refreshUI()
+        refreshSearchText()
         binding.keywordResult.keywordText.setText(searchQuery)
     }
 
-    fun refreshUI() {
+    fun refreshSearchText() {
         if (isSearchResult) {
             binding.keywordResult.keywordText.visibility = View.VISIBLE
             binding.keywordResult.cancelIcon.visibility = View.VISIBLE
