@@ -12,11 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentHomeBinding
-import com.example.popmate.model.data.local.Banner
-import com.example.popmate.model.data.local.PopupStore
-import com.example.popmate.view.activities.detail.PopupDetailInfo
-import com.example.popmate.view.adapters.BannerAdapter
-import com.example.popmate.view.adapters.PopupStoreAdapter
+import com.example.popmate.view.adapters.popupstore.BannerAdapter
+import com.example.popmate.view.adapters.popupstore.PopupStoreAdapter
 import com.example.popmate.viewmodel.popupstore.HomeViewModel
 
 
@@ -60,9 +57,6 @@ class HomeFragment : Fragment() {
 
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
-                Log.i("swc", "LOADING")
-//                binding.popupstoreRecyclerView.adapter =
-//                    PopupStoreAdapter(requireContext(), emptyList(), PopupStoreAdapter.ViewHolderType.SHIMMER)
                 binding.homeShimmerLayout.startShimmer()
                 binding.carouselShimmerLayout.startShimmer()
                 binding.openingSoonShimmerLayout.startShimmer()

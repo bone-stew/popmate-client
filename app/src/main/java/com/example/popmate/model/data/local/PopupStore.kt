@@ -5,8 +5,6 @@ data class PopupStore(
     val bannerImgUrl: String,
     val closeDate: String,
     val closeTime: String,
-//    val departmentDescription: String,
-//    val departmentName: String,
     val description: String,
     val entryFee: Int,
     val eventDescription: String,

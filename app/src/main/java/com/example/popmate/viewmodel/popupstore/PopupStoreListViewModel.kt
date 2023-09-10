@@ -1,12 +1,9 @@
 package com.example.popmate.viewmodel.popupstore
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.model.data.remote.ApiResponse
-import com.example.popmate.model.data.remote.popupstore.HomeResponse
 import com.example.popmate.model.data.remote.popupstore.SearchResponse
 import com.example.popmate.model.repository.ApiClient
 import retrofit2.Call
@@ -16,7 +13,6 @@ import retrofit2.Response
 class PopupStoreListViewModel: ViewModel() {
 
 
-//    private val userId: Long = 1L
 
     private val _storeList: MutableLiveData<SearchResponse> = MutableLiveData<SearchResponse>()
     val storeList : LiveData<SearchResponse> = _storeList
@@ -42,7 +38,6 @@ class PopupStoreListViewModel: ViewModel() {
     ) {
         _loading.value = true
         _error.value = false
-        Log.i("swc", "LOADING" + offSetRows.toString() + rowsToGet.toString())
 
         ApiClient.storeService.getStoreSearch(
             isOpeningSoon,

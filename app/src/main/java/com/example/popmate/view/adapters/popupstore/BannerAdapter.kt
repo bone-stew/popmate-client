@@ -1,4 +1,4 @@
-package com.example.popmate.view.adapters
+package com.example.popmate.view.adapters.popupstore
 
 import android.content.Context
 import android.content.Intent
@@ -6,12 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.databinding.RowBannerBinding
 import com.example.popmate.model.data.local.Banner
-import com.example.popmate.model.data.local.PopupStoreImgResponse
 import com.example.popmate.view.activities.detail.PopupDetailActivity
 
 
@@ -20,7 +18,6 @@ class BannerAdapter(
     private val banners: List<Banner>
 ) :
     RecyclerView.Adapter<BannerAdapter.BannerViewHolder>() {
-//    private var bannerList: ArrayList<Banner>? = null
 
     inner class BannerViewHolder(private val binding: RowBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {

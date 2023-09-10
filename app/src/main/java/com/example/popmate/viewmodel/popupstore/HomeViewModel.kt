@@ -32,7 +32,6 @@ class HomeViewModel : ViewModel(){
         _error.value = false
         ApiClient.storeService.getStoreHome(userId).enqueue(object : Callback<ApiResponse<HomeResponse>> {
             override fun onResponse(call: Call<ApiResponse<HomeResponse>>, response: Response<ApiResponse<HomeResponse>>) {
-                Log.d("HOMEFRAGMENT", "onResponse: " + response.body())
                 _loading.value = false
                 if (response.isSuccessful){
                 _home.value = response.body()?.data
@@ -41,7 +40,6 @@ class HomeViewModel : ViewModel(){
                 }
             }
             override fun onFailure(call: Call<ApiResponse<HomeResponse>>, t: Throwable) {
-                Log.d("kww", "onFailure: ")
                 _loading.value = false
                 _error.value = true
             }

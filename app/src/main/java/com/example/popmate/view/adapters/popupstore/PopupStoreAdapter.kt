@@ -1,13 +1,11 @@
-package com.example.popmate.view.adapters
+package com.example.popmate.view.adapters.popupstore
 
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.R
@@ -47,10 +45,7 @@ class PopupStoreAdapter(
                 val popupStore = popupStores[adapterPosition]
                 val intent = Intent(context, PopupDetailActivity::class.java)
                 intent.putExtra("id", popupStore.popupStoreId)
-                Log.d("DETAIL", popupStore.popupStoreId.toString())
-
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -69,10 +64,7 @@ class PopupStoreAdapter(
                 val popupStore = popupStores[adapterPosition]
                 val intent = Intent(context, PopupDetailActivity::class.java)
                 intent.putExtra("id", popupStore.popupStoreId)
-                Log.d("DETAIL", popupStore.popupStoreId.toString())
-
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -98,10 +90,7 @@ class PopupStoreAdapter(
                 val popupStore = popupStores[adapterPosition]
                 val intent = Intent(context, PopupDetailActivity::class.java)
                 intent.putExtra("id", popupStore.popupStoreId)
-                Log.d("DETAIL", popupStore.popupStoreId.toString())
-
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.popupStoreId}", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -155,7 +144,6 @@ class PopupStoreAdapter(
 
             ViewHolderType.SHIMMER.ordinal -> {
                 val shimmerLayout = inflater.inflate(R.layout.row_popupstore_vertical_shimmer, parent, false) as ShimmerFrameLayout
-//                val shimmerLayout = inflater.inflate(R.layout.item_shimmer, parent, false) as ShimmerFrameLayout
                 ShimmerViewHolder(shimmerLayout)
             }
 
@@ -163,16 +151,12 @@ class PopupStoreAdapter(
         }
     }
 
-//    fun clearData() {
-//        popupStores = emptyList()
-//    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ShimmerViewHolder) {
             holder.bind()
         } else {
             val popupStore = popupStores[position]
-//            val popupStore = popupStores[position - getShimmerCountBefore(position)]
 
             val imageSize = when (viewHolderType) {
                 ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.LARGE
@@ -188,15 +172,8 @@ class PopupStoreAdapter(
         }
     }
 
-    private fun getShimmerCountBefore(position: Int): Int {
-        return 6 * (position / 4)
-    }
-
     override fun getItemCount(): Int = popupStores.size
 
-    private fun getShimmerCount(): Int {
-        return 6
-    }
 
     override fun getItemViewType(position: Int): Int = viewHolderType.ordinal
 
