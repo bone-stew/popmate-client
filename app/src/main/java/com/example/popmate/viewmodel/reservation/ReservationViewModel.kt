@@ -65,6 +65,7 @@ class ReservationViewModel : ViewModel() {
                             _reservationId = it.reservationId
                             _currentReservation.postValue(it)
                         }
+                        Log.d("Reservation", "response: $response")
                     }
                 }
 
@@ -89,11 +90,13 @@ class ReservationViewModel : ViewModel() {
                         response: Response<ApiResponse<Void>>
                     ) {
                         if (response.isSuccessful) {
-                            Log.d("Reservation", "response: $response")
                             callback(true)
                         } else {
                             callback(false)
                         }
+                        Log.d("Reservation", "request: reservationId $_reservationId")
+                        Log.d("Reservation", "예약 성공 여부: $response")
+                        Log.d("Reservation", "예약 성공 여부: ${response.body()}")
                     }
 
                     override fun onFailure(

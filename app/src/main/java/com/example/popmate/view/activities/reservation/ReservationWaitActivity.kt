@@ -42,8 +42,10 @@ class ReservationWaitActivity :
                 binding.tvEntryEndTime.text = DateTimeUtils().toHourMinuteString(it.endTime)
                 binding.tvPopupStoreName.text = it.popupStoreTitle
                 binding.tvPopupStoreDescription.text = it.popupStoreDescription
-                binding.tvPopupStoreOpenTime.text = DateTimeUtils().toTimeString(it.popupStoreOpenTime)
-                binding.tvPopupStoreCloseTime.text = DateTimeUtils().toTimeString(it.popupStoreCloseTime)
+                binding.tvPopupStoreOpenTime.text =
+                    DateTimeUtils().toTimeString(it.popupStoreOpenTime)
+                binding.tvPopupStoreCloseTime.text =
+                    DateTimeUtils().toTimeString(it.popupStoreCloseTime)
             }
         }
     }
@@ -56,8 +58,7 @@ class ReservationWaitActivity :
             viewModel.increment()
         }
         binding.btnReserve.setOnClickListener {
-            viewModel.reserve() {
-                isSuccess ->
+            viewModel.reserve { isSuccess ->
                 if (isSuccess) {
                     Log.d("Reservation", "예약 성공")
                     showReservationSuccessDialog()
