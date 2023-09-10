@@ -7,15 +7,15 @@
     android:layout_height="match_parent"
     android:foregroundGravity="center_vertical">
 
-    <ImageView
-      android:id="@+id/img_arrow"
-      android:layout_width="20dp"
-      android:layout_height="20dp"
-      android:layout_marginTop="20dp"
-      android:layout_marginStart="15dp"
-      android:src="@drawable/arrow2"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+<!--    <ImageView-->
+<!--      android:id="@+id/img_arrow"-->
+<!--      android:layout_width="20dp"-->
+<!--      android:layout_height="20dp"-->
+<!--      android:layout_marginTop="20dp"-->
+<!--      android:layout_marginStart="15dp"-->
+<!--      android:src="@drawable/arrow2"-->
+<!--      app:layout_constraintStart_toStartOf="parent"-->
+<!--      app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageView
       android:id="@+id/searchButton"
@@ -28,14 +28,13 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-      android:id="@+id/tv_page_title"
+      android:id="@+id/titleText"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
       android:text="팝업스토어"
-      app:layout_constraintEnd_toStartOf="@+id/searchButton"
-      app:layout_constraintHorizontal_chainStyle="packed"
-      app:layout_constraintStart_toEndOf="@+id/img_arrow"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -45,22 +44,23 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
-      android:layout_marginEnd="20dp"
-      app:layout_constraintStart_toStartOf="@id/img_arrow"
-      app:layout_constraintTop_toBottomOf="@id/img_arrow" />
+      android:layout_marginStart="20dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/titleText" />
 
     <ToggleButton
       android:id="@+id/isOpeningSoonBtn"
       android:layout_width="67dp"
       android:layout_height="27dp"
       android:layout_marginEnd="6dp"
+      android:layout_marginTop="20dp"
       android:background="@drawable/btn_is_opening_soon_selector"
       android:textColor="@drawable/txt_is_opening_soon_selector"
       android:textOff="오픈예정"
       android:textOn="오픈예정"
       android:textSize="@dimen/h5"
       app:layout_constraintEnd_toStartOf="@+id/calendarLayout"
-      app:layout_constraintTop_toTopOf="@id/calendarLayout" />
+      app:layout_constraintTop_toBottomOf="@id/titleText" />
 
     <View
       android:id="@+id/search_divider"
@@ -68,7 +68,7 @@
       android:layout_height="1dp"
       android:layout_marginTop="11dp"
       android:background="@android:drawable/divider_horizontal_bright"
-      app:layout_constraintTop_toBottomOf="@id/calendarLayout" />
+      app:layout_constraintTop_toBottomOf="@id/isOpeningSoonBtn" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -81,6 +81,40 @@
       app:layout_constraintTop_toBottomOf="@id/search_divider"/>
 
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+      app:layout_constraintTop_toBottomOf="@id/search_divider"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/shimmerLayout"
+      app:shimmer_auto_start="true"
+      app:shimmer_duration="2000">
+
+      <GridLayout
+        android:id="@+id/shimmerGridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+
+      </GridLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
 
     <include
       android:id="@+id/calendarLayout"
@@ -90,7 +124,7 @@
       android:layout_marginTop="20dp"
       android:layout_marginEnd="20dp"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/img_arrow" />
+      app:layout_constraintTop_toBottomOf="@id/titleText" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
   <data>

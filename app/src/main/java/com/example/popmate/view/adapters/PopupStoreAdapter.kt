@@ -10,9 +10,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.popmate.R
 import com.example.popmate.databinding.*
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.view.activities.detail.PopupDetailActivity
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class PopupStoreAdapter(
     private val context: Context,
@@ -26,7 +29,8 @@ class PopupStoreAdapter(
         VERTICAL_LARGE,
         VERTICAL_MEDIUM,
         VERTICAL_SMALL,
-        VISITED
+        VISITED,
+        SHIMMER
     }
 
     enum class ImageSize {
@@ -107,6 +111,22 @@ class PopupStoreAdapter(
         }
     }
 
+    inner class ShimmerViewHolder(private val shimmerLayout: ShimmerFrameLayout) :
+        RecyclerView.ViewHolder(shimmerLayout) {
+
+        fun bind() {
+            val shimmer = Shimmer.AlphaHighlightBuilder()
+                .setBaseAlpha(0.7f)
+                .setHighlightAlpha(0.9f)
+                .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+                .setAutoStart(true)
+                .build()
+
+            shimmerLayout.setShimmer(shimmer)
+            shimmerLayout.startShimmer()
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
@@ -133,32 +153,50 @@ class PopupStoreAdapter(
                 VisitedViewHolder(binding)
             }
 
+            ViewHolderType.SHIMMER.ordinal -> {
+                val shimmerLayout = inflater.inflate(R.layout.row_popupstore_vertical_shimmer, parent, false) as ShimmerFrameLayout
+//                val shimmerLayout = inflater.inflate(R.layout.item_shimmer, parent, false) as ShimmerFrameLayout
+                ShimmerViewHolder(shimmerLayout)
+            }
+
             else -> throw IllegalArgumentException("Invalid viewType")
         }
     }
 
+//    fun clearData() {
+//        popupStores = emptyList()
+//    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val popupStore = popupStores[position]
-        Log.i("SEARCHRECENT", "===================================================")
+        if (holder is ShimmerViewHolder) {
+            holder.bind()
+        } else {
+            val popupStore = popupStores[position]
+//            val popupStore = popupStores[position - getShimmerCountBefore(position)]
 
-        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + popupStores.toString())
-        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + position.toString())
-        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + popupStore.toString())
-
-        val imageSize = when (viewHolderType) {
-            ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.LARGE
-            ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
-            ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
-            else -> ImageSize.MEDIUM
-        }
-        when (holder) {
-            is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
-            is VerticalViewHolder -> holder.bind(popupStore, imageSize, position)
-            is VisitedViewHolder -> holder.bind(popupStore)
+            val imageSize = when (viewHolderType) {
+                ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.LARGE
+                ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
+                ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
+                else -> ImageSize.MEDIUM
+            }
+            when (holder) {
+                is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
+                is VerticalViewHolder -> holder.bind(popupStore, imageSize, position)
+                is VisitedViewHolder -> holder.bind(popupStore)
+            }
         }
     }
 
+    private fun getShimmerCountBefore(position: Int): Int {
+        return 6 * (position / 4)
+    }
+
     override fun getItemCount(): Int = popupStores.size
+
+    private fun getShimmerCount(): Int {
+        return 6
+    }
 
     override fun getItemViewType(position: Int): Int = viewHolderType.ordinal
 

@@ -1,6 +1,7 @@
 package com.example.popmate.view.fragments.popupstore
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,33 @@ class HomeFragment : Fragment() {
                     PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM
                 )
                 endingSoonView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            }
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                Log.i("swc", "LOADING")
+//                binding.popupstoreRecyclerView.adapter =
+//                    PopupStoreAdapter(requireContext(), emptyList(), PopupStoreAdapter.ViewHolderType.SHIMMER)
+                binding.homeShimmerLayout.startShimmer()
+                binding.carouselShimmerLayout.startShimmer()
+                binding.openingSoonShimmerLayout.startShimmer()
+                binding.imageCarousel.visibility = View.GONE
+                binding.listView.visibility = View.GONE
+                binding.endingSoonView.visibility = View.GONE
+                binding.homeShimmerLayout.visibility = View.VISIBLE
+                binding.carouselShimmerLayout.visibility = View.VISIBLE
+                binding.openingSoonShimmerLayout.visibility = View.VISIBLE
+            } else {
+                binding.homeShimmerLayout.stopShimmer()
+                binding.carouselShimmerLayout.stopShimmer()
+                binding.openingSoonShimmerLayout.stopShimmer()
+                binding.imageCarousel.visibility = View.VISIBLE
+                binding.listView.visibility = View.VISIBLE
+                binding.endingSoonView.visibility = View.VISIBLE
+                binding.homeShimmerLayout.visibility = View.GONE
+                binding.carouselShimmerLayout.visibility = View.GONE
+                binding.openingSoonShimmerLayout.visibility = View.GONE
             }
         }
         return binding.root

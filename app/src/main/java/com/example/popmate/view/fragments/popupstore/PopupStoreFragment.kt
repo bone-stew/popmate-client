@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.model.data.local.PopupStore
@@ -38,8 +39,8 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private var startDate: LocalDate = LocalDate.now()
     private var endDate: LocalDate = LocalDate.now().plusYears(1)
     private var keyword = null
-    private var offSetRows = null
-    private var rowsToGet = null
+    private var offSetRows = 0
+    private var rowsToGet = 4
 
     companion object {
         private const val TWO_POPUPSTORES_WIDTH = 362
@@ -56,12 +57,15 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popup_store, container, false)
         viewModel = ViewModelProvider(requireActivity())[PopupStoreListViewModel::class.java]
-        viewModel.loadList(isOpeningSoon,
+        viewModel.loadList(
+            isOpeningSoon,
             startDate.toString(),
             endDate.toString(),
             null,
             offSetRows,
-            rowsToGet)
+            rowsToGet
+        )
+
         viewModel.storeList.observe(viewLifecycleOwner) {
             binding.run {
                 stores = it
@@ -69,16 +73,45 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
                 popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, 0, 0)
-//                popupstoreRecyclerView.setNestedScrollingEnabled(false);
-
-                imgArrow.setOnClickListener {
-                    mainActivity.goBack()
-                }
             }
         }
+
+        val scrollListener = binding.popupstoreRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if(!binding.popupstoreRecyclerView.canScrollVertically(1)){
+                    Log.i("SCROLL", "ENDING HERE")
+                }
+            }
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                Log.i("swc", "LOADING")
+//                binding.popupstoreRecyclerView.adapter =
+//                    PopupStoreAdapter(requireContext(), emptyList(), PopupStoreAdapter.ViewHolderType.SHIMMER)
+                binding.shimmerLayout.startShimmer()
+                binding.popupstoreRecyclerView.visibility = View.GONE
+                binding.shimmerLayout.visibility = View.VISIBLE
+            } else {
+                binding.shimmerLayout.stopShimmer()
+                binding.popupstoreRecyclerView.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.GONE
+
+            }
+        }
+
+//        viewModel.error.observe(viewLifecycleOwner) { isError ->
+//            if (isError) {
+//                Log.i("swc", "LOADING")
+//            } else {
+//                Log.i("swc", "NOT LOADING")
+//            }
+//        }
+
         refreshCalendarText(startDate, endDate.minusYears(1).plusMonths(1))
 
-        binding.keywordResult.cancelIcon.setOnClickListener{
+        binding.keywordResult.cancelIcon.setOnClickListener {
             viewModel.loadList(
                 isOpeningSoon,
                 startDate.toString(),
@@ -90,45 +123,51 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             isSearchResult = false
             refreshSearchText()
         }
-
+        binding.run {
+            isOpeningSoonBtn.setOnClickListener {
+                isOpeningSoon = !isOpeningSoon
+                viewModel.loadList(
+                    isOpeningSoon,
+                    startDate.toString(),
+                    endDate.toString(),
+                    keyword,
+                    offSetRows,
+                    rowsToGet
+                )
+            }
+            keywordResult.cancelIcon.setOnClickListener {
+                viewModel.loadList(
+                    isOpeningSoon,
+                    startDate.toString(),
+                    endDate.toString(),
+                    null,
+                    offSetRows,
+                    rowsToGet
+                )
+                isSearchResult = false
+                refreshSearchText()
+            }
+        }
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val isOpeningSoonBtn = binding.isOpeningSoonBtn
-
-        isOpeningSoonBtn.setOnClickListener {
-            isOpeningSoon = !isOpeningSoon
-            viewModel.refreshList(
-                isOpeningSoon,
-                startDate.toString(),
-                endDate.toString(),
-                keyword,
-                offSetRows,
-                rowsToGet
-            )
+        binding.searchButton.setOnClickListener {
+            val searchFragment = SearchFragment()
+            searchFragment.setSearchQueryListener(this)
+            binding.popupstoreRecyclerView.visibility = View.GONE
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.flFragment, searchFragment)
+                .addToBackStack(null)
+                .commit()
         }
-
-
         val calendarLayout = view.findViewById<LinearLayout>(R.id.calendarLayout)
         calendarLayout.setOnClickListener {
             val bottomSheetFragment = CalendarBottomSheetFragment()
             bottomSheetFragment.setDataListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
-
-        }
-
-        binding.searchButton.setOnClickListener {
-            val searchFragment = SearchFragment()
-            searchFragment.setSearchQueryListener(this)
-            viewModel.clearList()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.flFragment, searchFragment)
-                .addToBackStack(null)
-                .commit()
         }
 
     }
@@ -142,7 +181,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         startDate = startDateFromCalendar
         endDate = endDateFromCalendar
         refreshCalendarText(startDate, endDate)
-        viewModel.refreshList(
+        viewModel.loadList(
             isOpeningSoon,
             startDate.toString(),
             endDate.toString(),
@@ -159,27 +198,29 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     }
 
     override fun onSearchQuerySubmitted(query: String) {
-        Log.i("LISTFRAGMENT SEARCHING BACK", query.toString() )
-        if (query == ""){
+        Log.i("LISTFRAGMENT SEARCHING BACK", query.toString())
+        if (query == "") {
             searchQuery = null
         } else {
             searchQuery = query
         }
+        binding.popupstoreRecyclerView.visibility = View.GONE
         isSearchResult = true
-        searchQuery = query
-        viewModel.refreshList(
-            isOpeningSoon,
-            startDate.toString(),
-            endDate.toString(),
-            searchQuery,
-            offSetRows,
-            rowsToGet
-        )
+//        viewModel.loadList(
+//            isOpeningSoon,
+//            startDate.toString(),
+//            endDate.toString(),
+//            searchQuery,
+//            offSetRows,
+//            rowsToGet
+//        )
+        binding.popupstoreRecyclerView.visibility = View.VISIBLE
+
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.refreshList(
+        viewModel.loadList(
             isOpeningSoon,
             startDate.toString(),
             endDate.toString(),
@@ -188,10 +229,17 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             rowsToGet
         )
         refreshSearchText()
-        binding.keywordResult.keywordText.setText(searchQuery)
     }
 
-    fun refreshSearchText() {
+    private fun refreshSearchText() {
+        val maxKeywordLength = 20 // Adjust this value as needed
+        val truncatedQuery = if (searchQuery?.length ?: 0 > maxKeywordLength) {
+            searchQuery?.substring(0, maxKeywordLength - 3) + "..." // Replace the end with ...
+        } else {
+            searchQuery
+        }
+        binding.keywordResult.keywordText.setText(truncatedQuery)
+
         if (isSearchResult) {
             binding.keywordResult.keywordText.visibility = View.VISIBLE
             binding.keywordResult.cancelIcon.visibility = View.VISIBLE
