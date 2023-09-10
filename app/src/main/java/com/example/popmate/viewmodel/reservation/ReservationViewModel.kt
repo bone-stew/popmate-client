@@ -1,7 +1,6 @@
 package com.example.popmate.viewmodel.reservation
 
 import android.util.Log
-import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +9,6 @@ import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.reservation.CurrentReservationResponse
 import com.example.popmate.model.data.remote.reservation.ReservationRequest
 import com.example.popmate.model.repository.ApiClient
-import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,8 +62,6 @@ class ReservationViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         val result = response.body()?.data
                         result?.let {
-                            Log.d("Reservation", "result: $result")
-                            Log.d("Reservation", "before _reservationId: ${_reservationId}")
                             _reservationId = it.reservationId
                             _currentReservation.postValue(it)
                         }
@@ -82,9 +78,8 @@ class ReservationViewModel : ViewModel() {
             })
     }
 
-    fun reserve(): Boolean {
+    fun reserve(callback: (Boolean) -> Unit) {
         val guestCount = count.get() ?: 0
-        var isSuccessful = false
         _reservationId?.let {
             // 예약하기 버튼 클릭 시 동작
             ApiClient.reservationService.reserve(_reservationId!!, ReservationRequest(guestCount))
@@ -94,11 +89,11 @@ class ReservationViewModel : ViewModel() {
                         response: Response<ApiResponse<Void>>
                     ) {
                         if (response.isSuccessful) {
-                            isSuccessful = true
-                            val result = response.body()?.data
-                            Log.d("Reservation", "예약 완료: $result")
+                            Log.d("Reservation", "response: $response")
+                            callback(true)
+                        } else {
+                            callback(false)
                         }
-                        Log.d("Reservation", "response: $response")
                     }
 
                     override fun onFailure(
@@ -107,6 +102,7 @@ class ReservationViewModel : ViewModel() {
                     ) {
                         // 예약이 마감되는 경우
                         Log.d("Reservation", "onFailure: $t")
+                        callback(false)
                     }
                 })
         }
@@ -116,7 +112,5 @@ class ReservationViewModel : ViewModel() {
 
         // retrofit 호출 후
         isReservationPending.set(false)
-
-        return isSuccessful
     }
 }

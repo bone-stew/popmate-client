@@ -30,11 +30,8 @@ class ReservationWaitActivity :
 
     private fun initView() {
         val popupStoreId: Long = intent.getLongExtra("id", 1)
-        Log.d("Reservation", "popupStoreId: $popupStoreId")
         viewModel.getCurrentReservation(popupStoreId)
-        Log.d("Reservation", "currentReservation: ${viewModel.currentReservation.value}")
         viewModel.currentReservation.observe(this) {
-            Log.d("Reservation", "currentReservation: $it")
             if (it != null) {
                 binding.layoutPageTitle.titleText = it.popupStoreTitle
                 binding.btnMinus.isEnabled = true
@@ -59,14 +56,16 @@ class ReservationWaitActivity :
             viewModel.increment()
         }
         binding.btnReserve.setOnClickListener {
-            val isReserved = viewModel.reserve()
-            if (isReserved) {
-                Log.d("Reservation", "예약 성공")
-                showReservationSuccessDialog()
-            } else {
-                Log.d("Reservation", "예약 실패")
-                showToast("예약이 마감되었습니다.")
-                initView() // 예약 실패 시 다음 예약을 위해 초기화
+            viewModel.reserve() {
+                isSuccess ->
+                if (isSuccess) {
+                    Log.d("Reservation", "예약 성공")
+                    showReservationSuccessDialog()
+                } else {
+                    Log.d("Reservation", "예약 실패")
+                    showToast("예약이 마감되었습니다.")
+                    initView() // 예약 실패 시 다음 예약을 위해 초기화
+                }
             }
         }
     }
@@ -77,6 +76,9 @@ class ReservationWaitActivity :
 
     private fun showReservationSuccessDialog() {
         val dialog = ReservationSuccessDialogFragment()
+        val bundle = Bundle()
+        bundle.putLong("reservationId", viewModel.reservationId!!) // 예약 성공 시 reservationId를 넘겨줌
+        dialog.arguments = bundle
         dialog.show(supportFragmentManager, "ReservationSuccessDialogFragment")
     }
 }
