@@ -46,8 +46,8 @@ class PopupDetailViewModel() : ViewModel() {
         PopmateApplication.prefs.setList("popmate", storeLinkedList.toList())
     }
 
-    fun loadStore(popupstoreId: Long) {
-        ApiClient.storeService.getStoreDetail(popupstoreId, userId)
+    fun loadStore(popupStoreId: Long) {
+        ApiClient.storeService.getStoreDetail(popupStoreId, userId)
             .enqueue(object : Callback<ApiResponse<PopupStore>> {
                 override fun onResponse(
                     call: Call<ApiResponse<PopupStore>>,
@@ -62,7 +62,5 @@ class PopupDetailViewModel() : ViewModel() {
             })
     }
 
-    private fun loadRecommendStore() {
-    }
 
 }

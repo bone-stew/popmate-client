@@ -29,10 +29,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
+class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
 
     companion object {
-        fun newInstance(popupStoreId: Long) = PopupDetailInfo(popupStoreId)
+        fun newInstance() = PopupDetailInfo()
     }
 
     private lateinit var binding: FragmentPopupDetailInfoBinding
