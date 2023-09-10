@@ -59,13 +59,14 @@ class ReservationWaitActivity :
             viewModel.increment()
         }
         binding.btnReserve.setOnClickListener {
-            val isReserved = viewModel.onReserveButtonClick()
+            val isReserved = viewModel.reserve()
             if (isReserved) {
                 Log.d("Reservation", "예약 성공")
                 showReservationSuccessDialog()
             } else {
                 Log.d("Reservation", "예약 실패")
-                showToast("예약에 실패했습니다.")
+                showToast("예약이 마감되었습니다.")
+                initView() // 예약 실패 시 다음 예약을 위해 초기화
             }
         }
     }

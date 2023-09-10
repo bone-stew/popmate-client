@@ -6,7 +6,7 @@ data class CurrentReservationResponse(
     val popupStoreDescription: String,
     val popupStoreOpenTime: String,
     val popupStoreTitle: String,
-    val reservationId: Int,
+    val reservationId: Long,
     val startTime: String,
     val status: String
 )
