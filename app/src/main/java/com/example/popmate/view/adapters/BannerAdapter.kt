@@ -66,7 +66,4 @@ class BannerAdapter(
             .into(imageView)
     }
 
-
 }
-
-

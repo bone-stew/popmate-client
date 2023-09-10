@@ -1,11 +1,9 @@
 package com.example.popmate.view.activities.chat
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
@@ -13,20 +11,18 @@ import com.example.popmate.databinding.ActivityChatBinding
 import com.example.popmate.model.data.local.Chat
 import com.google.gson.Gson
 import ua.naiksoftware.stomp.Stomp
-import ua.naiksoftware.stomp.StompClient
 import ua.naiksoftware.stomp.dto.LifecycleEvent
-import java.time.LocalDateTime
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
   
-    private val roomId: Long = 3
+    private var roomId: Long = 0
     private val url = "ws://15.164.48.244:8080/ws-chat"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
     private val model: ChatViewModel by viewModels()
-    private var myId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        roomId = intent.getLongExtra("storeId", 0)
         binding.run {
             chatBox.layoutManager =
                 LinearLayoutManager(this@ChatActivity).apply { this.stackFromEnd = true }
@@ -35,18 +31,20 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
                 if (!message.isNullOrBlank()) sendMessage(Chat(message.toString(), roomId))
                 inputText.text = null
             }
+            finishBtn.setOnClickListener {
+                finish()
+            }
         }
         model.run {
             loadChatMessage(roomId)
             currUserId.observe(this@ChatActivity) {
-                myId = it
                 binding.chatBox.adapter = ChatAdapter(listOf(), it)
             }
             chatList.observe(this@ChatActivity) {
                 (binding.chatBox.adapter as ChatAdapter).addChat(it)
                 val position =
                     (binding.chatBox.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-                if (position == it.size - 2 || it.last().sender == myId)
+                if ( it.size >= 3 && (position == it.size - 2 || it.last().sender == currUserId.value))
                     binding.chatBox.smoothScrollToPosition(it.size - 1)
             }
         }

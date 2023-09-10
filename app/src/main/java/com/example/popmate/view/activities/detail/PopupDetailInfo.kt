@@ -29,10 +29,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
+class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
 
     companion object {
-        fun newInstance(popupStoreId: Long) = PopupDetailInfo(popupStoreId)
+        fun newInstance() = PopupDetailInfo()
     }
 
     private lateinit var binding: FragmentPopupDetailInfoBinding
@@ -40,7 +40,7 @@ class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
     private lateinit var viewModel: PopupDetailViewModel
     private var currentMarker: Marker? = null
-    private var popupStoreId = popupStoreId
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -49,7 +49,7 @@ class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_popup_detail_info, container, false)
 
-        viewModel.getStore(popupStoreId).observe(viewLifecycleOwner) {
+        viewModel.store.observe(viewLifecycleOwner) {
             binding.run {
                 store = it
                 imageCarousel.adapter = DetailCarouselAdapter(it.popupStoreImgResponses)
@@ -97,7 +97,7 @@ class PopupDetailInfo(popupStoreId: Long) : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
-        viewModel.getStore(popupStoreId).observe(viewLifecycleOwner) {
+        viewModel.store.observe(viewLifecycleOwner) {
             currentMarker = setupMarker(LatLngEntity(it.latitude, it.longitude))
         }
 //        currentMarker?.showInfoWindow()
