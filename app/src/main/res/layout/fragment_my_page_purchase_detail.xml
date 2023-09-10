@@ -81,11 +81,11 @@
                     android:text="구매일시 : 2023년 9월 12일 오후 12:40"
                     android:textColor="@color/tx_gray"
                     android:textSize="13dp"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_fragment_my_page_purchase_detail_order_numberrr"
+                    app:layout_constraintBottom_toTopOf="@+id/txt_fragment_my_page_purchase_detail_order_number"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_fragment_my_page_purchase_detail_order_numberrr"
+                    android:id="@+id/txt_fragment_my_page_purchase_detail_order_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -146,7 +146,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_my_page_purchase_detail_third"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="60dp"
                 android:layout_marginTop="12dp"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -158,11 +158,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
                     android:text="결제방법"
                     android:textColor="@color/black"
                     android:textSize="13dp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -170,25 +170,14 @@
                     android:id="@+id/txt_fragment_my_page_purchase_detail_payment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="20dp"
                     android:text="신용/체크카드"
                     android:textColor="@color/black"
                     android:textSize="13dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txt_fragment_my_page_purchase_detail_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="롯데카드"
-                    android:textColor="@color/tx_gray"
-                    android:textSize="13dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
