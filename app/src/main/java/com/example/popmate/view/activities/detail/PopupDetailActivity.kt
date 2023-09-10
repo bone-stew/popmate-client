@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
-import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import com.bumptech.glide.Glide
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
@@ -17,8 +15,6 @@ import com.example.popmate.view.activities.chat.ChatActivity
 import com.example.popmate.view.activities.order.OrderActivity
 import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.google.android.material.tabs.TabLayoutMediator
 import java.util.LinkedList
 
 class PopupDetailActivity :
@@ -36,14 +32,13 @@ class PopupDetailActivity :
                 addTab(newTab().setText("상세"))
                 addTab(newTab().setText("채팅"))
             }
-            infoChatTab.addOnTabSelectedListener(object : OnTabSelectedListener{
+            infoChatTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     Log.d("kww", "onTabSelected: ${tab?.position}")
                 }
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
                     TODO("Not yet implemented")
                 }
-
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                     TODO("Not yet implemented")
                 }
@@ -58,6 +53,8 @@ class PopupDetailActivity :
             }
             orderLayout.reserveBtnPost.setOnClickListener {
                 val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
+                Log.d("Reservation", "put popupStoreId: $popupStoreId")
+                    intent.putExtra("id", popupStoreId)
                 startActivity(intent)
             }
             chatEnterBtn.setOnClickListener {

@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMainBinding
+import com.example.popmate.view.activities.user.MyPageLogoutActivity
 import com.example.popmate.view.fragments.popupstore.HomeFragment
 //import com.example.popmate.view.fragments.MyPageFragment
 import com.example.popmate.view.fragments.popupstore.PopupStoreFragment
+import com.example.popmate.view.fragments.user.MyPageLogoutFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kakao.k.r
 import java.util.Stack
@@ -26,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             when (item.itemId) {
                 R.id.page_home -> setCurrentFragment(HomeFragment(), false)
                 R.id.page_popupstore -> setCurrentFragment(PopupStoreFragment(), false)
-//                R.id.page_mypage -> setCurrentFragment(MyPageFragment(), false)
+                R.id.page_mypage -> setCurrentFragment(MyPageLogoutFragment(), false)
             }
             true
         }

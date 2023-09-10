@@ -28,7 +28,7 @@ class PreReservationFragment :
         viewModel.preReservationItems.observe(viewLifecycleOwner) { reservationItems ->
             binding.rvPreReservations.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = MyReservationAdapter(reservationItems)
+                adapter = MyReservationAdapter(context, reservationItems)
             }
         }
     }
