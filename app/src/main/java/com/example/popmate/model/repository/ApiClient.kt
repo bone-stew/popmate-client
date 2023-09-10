@@ -16,7 +16,7 @@ object ApiClient {
 //
 //    private var jwtToken: String? = null
 //
-    private const val BASE_URL = "http://15.164.48.244:8080/api/v1/"
+    private const val BASE_URL = "https://popmate.xyz/api/v1/"
 //
 //    private val retrofit: Retrofit by lazy {
 //
