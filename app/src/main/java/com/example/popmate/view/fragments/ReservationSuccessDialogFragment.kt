@@ -1,5 +1,6 @@
 package com.example.popmate.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
 import com.example.popmate.util.DateTimeUtils
+import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.viewmodel.ReservationSuccessViewModel
 
 class ReservationSuccessDialogFragment : DialogFragment() {
@@ -45,6 +47,7 @@ class ReservationSuccessDialogFragment : DialogFragment() {
         viewModel.reservationId = arguments?.getLong("reservationId", 0) ?: 0
 
         initView()
+        initEvent()
     }
 
     private fun initView() {
@@ -57,6 +60,13 @@ class ReservationSuccessDialogFragment : DialogFragment() {
                 binding.tvVisitPeopleCount.text = it.guestCount.toString()
                 binding.tvPopupStorePlaceDetail.text = it.popupStorePlaceDetail
             }
+        }
+    }
+
+    private fun initEvent() {
+        binding.btnClose.setOnClickListener {
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
