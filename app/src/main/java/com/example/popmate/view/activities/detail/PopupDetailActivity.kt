@@ -65,7 +65,8 @@ class PopupDetailActivity :
                 }
                 orderLayout.reserveBtnPost.setOnClickListener{
                     val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
-//                intent.putExtra("id", popupStore.popupStoreId)
+                    Log.d("Reservation", "put popupStoreId: $popupStoreId")
+                    intent.putExtra("id", popupStoreId)
                     startActivity(intent)
                 }
             }

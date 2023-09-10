@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityReservationWaitBinding
+import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.view.fragments.ReservationSuccessDialogFragment
 import com.example.popmate.viewmodel.reservation.ReservationViewModel
 
@@ -23,7 +24,31 @@ class ReservationWaitActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        setObserve();
+        initView()
+        setObserve()
+    }
+
+    private fun initView() {
+        val popupStoreId: Long = intent.getLongExtra("id", 1)
+        Log.d("Reservation", "popupStoreId: $popupStoreId")
+        viewModel.getCurrentReservation(popupStoreId)
+        Log.d("Reservation", "currentReservation: ${viewModel.currentReservation.value}")
+        viewModel.currentReservation.observe(this) {
+            Log.d("Reservation", "currentReservation: $it")
+            if (it != null) {
+                binding.layoutPageTitle.titleText = it.popupStoreTitle
+                binding.btnMinus.isEnabled = true
+                binding.btnPlus.isEnabled = true
+                binding.btnReserve.isEnabled = true
+                binding.tvVisitStatus.text = it.status
+                binding.tvEntryStartTime.text = DateTimeUtils().toHourMinuteString(it.startTime)
+                binding.tvEntryEndTime.text = DateTimeUtils().toHourMinuteString(it.endTime)
+                binding.tvPopupStoreName.text = it.popupStoreTitle
+                binding.tvPopupStoreDescription.text = it.popupStoreDescription
+                binding.tvPopupStoreOpenTime.text = DateTimeUtils().toTimeString(it.popupStoreOpenTime)
+                binding.tvPopupStoreCloseTime.text = DateTimeUtils().toTimeString(it.popupStoreCloseTime)
+            }
+        }
     }
 
     private fun setObserve() {
