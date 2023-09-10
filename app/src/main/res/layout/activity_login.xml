@@ -12,35 +12,32 @@
         android:id="@+id/login_main_name"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="235dp"
-        android:layout_marginEnd="125dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="2dp"
         android:text="팝업 스토어는,"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/login_main_name2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/login_main_name2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="270dp"
         android:text="팝메이트와 함께"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/kakao_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_main_name" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/kakao_button"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/button_radius"
@@ -57,7 +54,7 @@
 
     <Button
         android:id="@+id/google_button"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_radius"

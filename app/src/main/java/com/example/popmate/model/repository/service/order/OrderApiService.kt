@@ -15,6 +15,11 @@ interface OrderApiService {
 
     @POST("orders/new")
     fun orderItems(
-        @Body popupStore : List<PopupStoreItem>
+        @Body popupStore: List<PopupStoreItem>,
+        orderId: String,
+        url: String,
+        cardType: String,
+        easyPay: Any?,
+        method: String
     ): Call<ApiResponse<OrderResponse>>
 }
