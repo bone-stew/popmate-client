@@ -35,12 +35,12 @@ class PopupDetailActivity :
             infoChatTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     Log.d("kww", "onTabSelected: ${tab?.position}")
+                    if (tab?.position == 0) setInfoFragment()
+                    else setChatFragment()
                 }
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    TODO("Not yet implemented")
                 }
                 override fun onTabReselected(tab: TabLayout.Tab?) {
-                    TODO("Not yet implemented")
                 }
             })
             reserveBtn.setOnClickListener {
