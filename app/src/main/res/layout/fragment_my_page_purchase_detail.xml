@@ -43,7 +43,7 @@
                     android:layout_marginTop="23dp"
                     android:text="픽업 대기중이에요"
                     android:textColor="@color/blue"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,7 +55,7 @@
                     android:layout_marginTop="4dp"
                     android:text="빵빵이의 생일 파티"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_fragment_my_page_purchase_detail_pickup" />
@@ -68,7 +68,7 @@
                     android:layout_marginTop="4dp"
                     android:text="무럭무럭 잔 외 1개"
                     android:textColor="@color/tx_gray"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_fragment_my_page_purchase_detail_store_name" />
 
@@ -80,7 +80,7 @@
                     android:layout_marginBottom="2dp"
                     android:text="구매일시 : 2023년 9월 12일 오후 12:40"
                     android:textColor="@color/tx_gray"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toTopOf="@+id/txt_fragment_my_page_purchase_detail_order_number"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -92,7 +92,7 @@
                     android:layout_marginBottom="23dp"
                     android:text="주문번호 : T1KQ00007FYJ"
                     android:textColor="@color/tx_gray"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -124,7 +124,7 @@
                     android:layout_marginStart="20dp"
                     android:text="총 주문금액"
                     android:textColor="@color/black"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +137,7 @@
                     android:layout_marginEnd="20dp"
                     android:text="18000원"
                     android:textColor="@color/black"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -160,7 +160,7 @@
                     android:layout_marginStart="20dp"
                     android:text="결제방법"
                     android:textColor="@color/black"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +173,7 @@
                     android:layout_marginEnd="20dp"
                     android:text="신용/체크카드"
                     android:textColor="@color/black"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -199,7 +199,7 @@
                     android:layout_marginTop="12dp"
                     android:text="픽업장소"
                     android:textColor="@color/black"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -234,7 +234,7 @@
                     android:background="@color/white"
                     android:text="주문내역 삭제"
                     android:textColor="@color/red"
-                    android:textSize="13dp"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
