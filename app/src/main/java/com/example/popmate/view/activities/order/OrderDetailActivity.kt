@@ -78,9 +78,9 @@ class OrderDetailActivity : AppCompatActivity() {
         binding.orderDetailBottom.setOnClickListener {
             Log.d("jjyaf",data.toString())
             //stockCheck(data)
-//            val intent = Intent(this,OrderPaymentActivity::class.java)
-//            intent.putExtra("item",data)
-//            startActivity(intent)
+            val intent = Intent(this,OrderPaymentActivity::class.java)
+            intent.putExtra("item",data)
+            startActivity(intent)
         }
 
     }
