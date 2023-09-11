@@ -29,7 +29,7 @@ class ReservationWaitActivity :
     }
 
     private fun initView() {
-        val popupStoreId: Long = intent.getLongExtra("id", 1)
+        val popupStoreId: Long = intent.getLongExtra("id", -1)
         viewModel.getCurrentReservation(popupStoreId)
         viewModel.currentReservation.observe(this) {
             if (it != null) {
