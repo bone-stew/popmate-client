@@ -28,7 +28,7 @@ class CancelReservationFragment :
         viewModel.cancelReservationItems.observe(viewLifecycleOwner) { reservationItems ->
             binding.rvCancelReservations.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = MyReservationAdapter(reservationItems)
+                adapter = MyReservationAdapter(context, reservationItems)
             }
         }
     }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMainBinding
+import com.example.popmate.view.activities.user.MyPageLogoutActivity
 import com.example.popmate.view.fragments.popupstore.HomeFragment
 import com.example.popmate.view.fragments.popupstore.PopupStoreFragment
 import com.example.popmate.view.fragments.user.MyPageLogoutFragment

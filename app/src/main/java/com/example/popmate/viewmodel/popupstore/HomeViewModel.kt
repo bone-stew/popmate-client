@@ -36,6 +36,7 @@ class HomeViewModel : ViewModel(){
                 home.value = response.body()?.data
             }
             override fun onFailure(call: Call<ApiResponse<HomeResponse>>, t: Throwable) {
+                Log.d("kww", "onFailure: ")
             }
         })
     }
