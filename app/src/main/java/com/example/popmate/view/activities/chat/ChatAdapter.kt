@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.ItemChatMineBinding
 import com.example.popmate.databinding.ItemChatOthersBinding
 import com.example.popmate.model.data.local.Chat
+import com.example.popmate.model.data.local.CurrUser
 
-class ChatAdapter(private var messages: List<Chat>, private val currUserId: Long) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChatAdapter(private var messages: List<Chat>, private val currUser: CurrUser) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val MY_CHAT = 1
@@ -64,7 +65,7 @@ class ChatAdapter(private var messages: List<Chat>, private val currUserId: Long
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (currUserId == messages[position].sender) MY_CHAT
+        return if (currUser.userId == messages[position].sender) MY_CHAT
         else OTHER_CHAT
     }
 

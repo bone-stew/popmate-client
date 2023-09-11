@@ -8,6 +8,9 @@
         <variable
             name="titleText"
             type="String" />
+        <variable
+            name="orderlistitem"
+            type="com.example.popmate.model.data.remote.user.OrderListItemsResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

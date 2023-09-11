@@ -75,7 +75,7 @@
 
             <!-- 예약 안내 내용 -->
             <TextView
-                android:id="@+id/tvReservationDetail"
+                android:id="@+id/tv_popup_store_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -155,14 +155,30 @@
                     app:layout_constraintStart_toStartOf="@+id/tv_visit_time"
                     app:layout_constraintTop_toTopOf="@id/img_human" />
 
-                <TextView
-                    android:id="@+id/tv_visit_people_count"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2명"
-                    android:textSize="10sp"
+                    android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="@+id/tv_visit_start_time"
-                    app:layout_constraintTop_toTopOf="@id/img_human" />
+                    app:layout_constraintTop_toTopOf="@id/img_human">
+
+                    <TextView
+                        android:id="@+id/tv_visit_people_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_visit_start_time"
+                        app:layout_constraintTop_toTopOf="@id/img_human" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="명"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="@+id/tv_visit_start_time"
+                        app:layout_constraintTop_toTopOf="@id/img_human" />
+                </LinearLayout>
 
                 <!-- 예약 장소 -->
                 <ImageView
@@ -184,6 +200,7 @@
                     app:layout_constraintTop_toTopOf="@id/img_location" />
 
                 <TextView
+                    android:id="@+id/tv_popup_store_place_detail"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:text="더 현대 서울 3층 팝업스토어 매장"

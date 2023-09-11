@@ -28,7 +28,7 @@ class PostReservationFragment :
         viewModel.postReservationItems.observe(viewLifecycleOwner) { reservationItems ->
             binding.rvPostReservations.apply {
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = MyReservationAdapter(reservationItems)
+                adapter = MyReservationAdapter(context, reservationItems)
             }
         }
     }

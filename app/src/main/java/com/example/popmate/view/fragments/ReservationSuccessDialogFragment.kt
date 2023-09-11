@@ -1,19 +1,25 @@
 package com.example.popmate.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
+import com.example.popmate.util.DateTimeUtils
+import com.example.popmate.view.activities.MainActivity
+import com.example.popmate.viewmodel.ReservationSuccessViewModel
 
 class ReservationSuccessDialogFragment : DialogFragment() {
 
     private var _binding: FragmentReservationSuccessDialogBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: ReservationSuccessViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +32,7 @@ class ReservationSuccessDialogFragment : DialogFragment() {
             container,
             false
         )
-        binding.lifecycleOwner = viewLifecycleOwner // 뷰의 라이프사이클을 옵저빙하도록 설정
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }
@@ -37,7 +43,31 @@ class ReservationSuccessDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.i("ReservationSuccessDialogFragment", "onViewCreated")
+        viewModel = ViewModelProvider(this)[ReservationSuccessViewModel::class.java]
+        viewModel.reservationId = arguments?.getLong("reservationId", 0) ?: 0
+
+        initView()
+        initEvent()
+    }
+
+    private fun initView() {
+        viewModel.getReservationInfo()
+        viewModel.myReservation.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.tvPopupStoreName.text = it.popupStoreTitle
+                binding.tvVisitStartTime.text = DateTimeUtils().toTimeString(it.visitStartTime)
+                binding.tvVisitEndTime.text = DateTimeUtils().toTimeString(it.visitEndTime)
+                binding.tvVisitPeopleCount.text = it.guestCount.toString()
+                binding.tvPopupStorePlaceDetail.text = it.popupStorePlaceDetail
+            }
+        }
+    }
+
+    private fun initEvent() {
+        binding.btnClose.setOnClickListener {
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

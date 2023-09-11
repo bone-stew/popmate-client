@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityReservationWaitBinding
+import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.view.fragments.ReservationSuccessDialogFragment
 import com.example.popmate.viewmodel.reservation.ReservationViewModel
 
@@ -23,7 +24,30 @@ class ReservationWaitActivity :
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        setObserve();
+        initView()
+        setObserve()
+    }
+
+    private fun initView() {
+        val popupStoreId: Long = intent.getLongExtra("id", 1)
+        viewModel.getCurrentReservation(popupStoreId)
+        viewModel.currentReservation.observe(this) {
+            if (it != null) {
+                binding.layoutPageTitle.titleText = it.popupStoreTitle
+                binding.btnMinus.isEnabled = true
+                binding.btnPlus.isEnabled = true
+                binding.btnReserve.isEnabled = true
+                binding.tvVisitStatus.text = it.status
+                binding.tvEntryStartTime.text = DateTimeUtils().toHourMinuteString(it.startTime)
+                binding.tvEntryEndTime.text = DateTimeUtils().toHourMinuteString(it.endTime)
+                binding.tvPopupStoreName.text = it.popupStoreTitle
+                binding.tvPopupStoreDescription.text = it.popupStoreDescription
+                binding.tvPopupStoreOpenTime.text =
+                    DateTimeUtils().toTimeString(it.popupStoreOpenTime)
+                binding.tvPopupStoreCloseTime.text =
+                    DateTimeUtils().toTimeString(it.popupStoreCloseTime)
+            }
+        }
     }
 
     private fun setObserve() {
@@ -34,13 +58,15 @@ class ReservationWaitActivity :
             viewModel.increment()
         }
         binding.btnReserve.setOnClickListener {
-            val isReserved = viewModel.onReserveButtonClick()
-            if (isReserved) {
-                Log.d("Reservation", "예약 성공")
-                showReservationSuccessDialog()
-            } else {
-                Log.d("Reservation", "예약 실패")
-                showToast("예약에 실패했습니다.")
+            viewModel.reserve { isSuccess ->
+                if (isSuccess) {
+                    Log.d("Reservation", "예약 성공")
+                    showReservationSuccessDialog()
+                } else {
+                    Log.d("Reservation", "예약 실패")
+                    showToast("예약이 마감되었습니다.")
+                    initView() // 예약 실패 시 다음 예약을 위해 초기화
+                }
             }
         }
     }
@@ -51,6 +77,9 @@ class ReservationWaitActivity :
 
     private fun showReservationSuccessDialog() {
         val dialog = ReservationSuccessDialogFragment()
+        val bundle = Bundle()
+        bundle.putLong("reservationId", viewModel.reservationId!!) // 예약 성공 시 reservationId를 넘겨줌
+        dialog.arguments = bundle
         dialog.show(supportFragmentManager, "ReservationSuccessDialogFragment")
     }
 }

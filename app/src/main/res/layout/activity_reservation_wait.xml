@@ -84,12 +84,31 @@
                         android:textSize="@dimen/h3"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_entry_time"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10시 30분 ~ 10시 45분 입장"
-                        android:textSize="@dimen/h5" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_entry_start_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10시 30분"
+                            android:textSize="@dimen/h5" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" ~ "
+                            android:textSize="@dimen/h5" />
+
+                        <TextView
+                            android:id="@+id/tv_entry_end_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10시 50분"
+                            android:textSize="@dimen/h5" />
+                    </LinearLayout>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -227,6 +246,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_popup_store_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -235,6 +255,7 @@
                             android:textSize="@dimen/h5" />
 
                         <TextView
+                            android:id="@+id/tv_popup_store_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -261,6 +282,7 @@
                                 android:textSize="@dimen/h5" />
 
                             <TextView
+                                android:id="@+id/tv_popup_store_open_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
@@ -275,6 +297,7 @@
                                 android:textSize="@dimen/h5" />
 
                             <TextView
+                                android:id="@+id/tv_popup_store_close_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="10:15"

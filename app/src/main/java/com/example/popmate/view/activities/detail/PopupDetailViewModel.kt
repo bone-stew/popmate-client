@@ -14,6 +14,7 @@ import retrofit2.Response
 import java.util.LinkedList
 
 class PopupDetailViewModel() : ViewModel() {
+    private var userId = 1L
     private val _store: MutableLiveData<PopupStore> =
         MutableLiveData<PopupStore>()
 
@@ -45,8 +46,8 @@ class PopupDetailViewModel() : ViewModel() {
         PopmateApplication.prefs.setList("popmate", storeLinkedList.toList())
     }
 
-    fun loadStore(popupstoreId: Long) {
-        ApiClient.storeService.getStoreDetail(popupstoreId)
+    fun loadStore(popupStoreId: Long) {
+        ApiClient.storeService.getStoreDetail(popupStoreId, userId)
             .enqueue(object : Callback<ApiResponse<PopupStore>> {
                 override fun onResponse(
                     call: Call<ApiResponse<PopupStore>>,
@@ -60,5 +61,6 @@ class PopupDetailViewModel() : ViewModel() {
                 }
             })
     }
+
 
 }
