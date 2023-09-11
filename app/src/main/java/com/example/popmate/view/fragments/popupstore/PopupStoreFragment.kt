@@ -72,14 +72,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             }
         }
 
-//        val scrollListener = binding.popupstoreRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                if(!binding.popupstoreRecyclerView.canScrollVertically(1)){
-//                    Log.i("SCROLL", "ENDING HERE")
-//                }
-//            }
-//        })
+
 
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {

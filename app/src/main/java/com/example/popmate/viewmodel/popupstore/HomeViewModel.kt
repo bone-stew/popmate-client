@@ -13,8 +13,6 @@ import retrofit2.Response
 
 class HomeViewModel : ViewModel(){
 
-    private val userId: Long = 1L
-
     private val _home: MutableLiveData<HomeResponse> = MutableLiveData<HomeResponse>()
 
     val home: LiveData<HomeResponse> = _home
@@ -30,7 +28,7 @@ class HomeViewModel : ViewModel(){
     fun loadHome() {
         _loading.value = true
         _error.value = false
-        ApiClient.storeService.getStoreHome(userId).enqueue(object : Callback<ApiResponse<HomeResponse>> {
+        ApiClient.storeService.getStoreHome().enqueue(object : Callback<ApiResponse<HomeResponse>> {
             override fun onResponse(call: Call<ApiResponse<HomeResponse>>, response: Response<ApiResponse<HomeResponse>>) {
                 _loading.value = false
                 if (response.isSuccessful){
