@@ -77,7 +77,7 @@ class PopupStoreAdapter(
                 if (position >= popupStores.size - 1) {
                     setLayout(binding)
                 }
-            } else {
+            } else if(!isOdd && isGridLayout) {
                 if (position >= popupStores.size - 2) {
                     setLayout(binding)
                 }
@@ -136,7 +136,6 @@ class PopupStoreAdapter(
             ViewHolderType.VERTICAL_LARGE.ordinal,
             ViewHolderType.VERTICAL_MEDIUM.ordinal,
             ViewHolderType.VERTICAL_SMALL.ordinal -> {
-
                 val binding = RowPopupstoreVerticalBinding.inflate(inflater, parent, false)
                 VerticalViewHolder(binding, false)
             }
