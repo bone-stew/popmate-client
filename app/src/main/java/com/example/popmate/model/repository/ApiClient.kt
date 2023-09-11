@@ -19,10 +19,10 @@ import java.io.IOException
 
 
 object ApiClient {
-    private var jwtToken: String? = null
+    private var jwtToken: String = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcm9nczYyMjVAbmF2ZXIuY29tIiwidXNlcklkIjo0MiwidXNlck5hbWUiOiLsobDsnqzro6EiLCJpYXQiOjE2OTQ0MTczMTQsImV4cCI6MTY5OTY1NTQ1OH0.vzkIRAc3Vt3Cj4HXnbXyAoUt2EAy7qRxzttZDRQ_VAE"
 
-//    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
-    private const val BASE_URL = "https://popmate.xyz/api/v1/"
+    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
+//    private const val BASE_URL = "https://popmate.xyz/api/v1/"
 
     private val retrofit: Retrofit by lazy {
 
@@ -33,8 +33,8 @@ object ApiClient {
                     val originalRequest: Request = chain.request()
 
                     // JWT 토큰이 있는 경우 헤더에 추가
-                    val token = getJwtToken()
-                    //val token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwidXNlcklkIjoxLCJpYXQiOjE2OTQ0MDk5NjIsImV4cCI6MTY5NDQxMzU0N30._VTVFj8xv64Vqwkue2htG-OVVrb_JWEXEGj89HSp3Z0"
+                    //val token = getJwtToken()
+                    val token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcm9nczYyMjVAbmF2ZXIuY29tIiwidXNlcklkIjo0MiwidXNlck5hbWUiOiLsobDsnqzro6EiLCJpYXQiOjE2OTQ0MTczMTQsImV4cCI6MTY5OTY1NTQ1OH0.vzkIRAc3Vt3Cj4HXnbXyAoUt2EAy7qRxzttZDRQ_VAE"
                     val newRequest: Request = if (token != null) {
                         originalRequest.newBuilder()
                             .header("Authorization", "Bearer ${token}") // 헤더에 토큰 추가

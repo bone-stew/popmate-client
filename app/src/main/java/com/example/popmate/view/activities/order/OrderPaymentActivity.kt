@@ -39,8 +39,10 @@ class OrderPaymentActivity : AppCompatActivity() {
         setContentView(binding.root)
         data = ArrayList<PopupStoreItem>()
         if (intent.hasExtra("item")) {
-            val storeitem = intent.getSerializableExtra("item") as? ArrayList<PopupStoreItem>
+            //val storeitem = intent.getSerializableExtra("item") as? ArrayList<PopupStoreItem>
+            val storeitem = intent.getParcelableArrayListExtra<PopupStoreItem>("item")
 
+            Log.d("ddd",storeitem.toString())
             if (storeitem != null) {
                 for (value in storeitem) {
                     data.add(value)

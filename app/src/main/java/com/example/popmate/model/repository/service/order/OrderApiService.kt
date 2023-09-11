@@ -4,6 +4,7 @@ import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.data.remote.order.PopupStoreItemsResponse
+import com.example.popmate.model.data.remote.order.StockCheckItemsResponse
 import com.example.popmate.model.data.remote.user.OrderListItemsResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -31,5 +32,5 @@ interface OrderApiService {
 
     @POST("orders/stockCheck")
     fun checkOrderItemsStock(
-        @Body popupStore: ArrayList<PopupStoreItem>) : Call<OrderResponse>
+        @Body stockCheckRequest: ArrayList<PopupStoreItem>) : Call<ApiResponse<StockCheckItemsResponse>>
 }

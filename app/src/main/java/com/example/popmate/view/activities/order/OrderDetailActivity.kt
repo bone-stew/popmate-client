@@ -13,6 +13,7 @@ import com.example.popmate.databinding.ActivityOrderDetailBinding
 import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
+import com.example.popmate.model.data.remote.order.StockCheckItemsResponse
 import com.example.popmate.model.repository.ApiClient
 import com.example.popmate.view.adapters.order.OrderDetailAdapter
 import retrofit2.Call
@@ -77,15 +78,46 @@ class OrderDetailActivity : AppCompatActivity() {
 
         binding.orderDetailBottom.setOnClickListener {
             Log.d("jjyaf",data.toString())
-            //stockCheck(data)
-            val intent = Intent(this,OrderPaymentActivity::class.java)
-            intent.putExtra("item",data)
-            startActivity(intent)
+            stockCheck(data)
+//            val intent = Intent(this,OrderPaymentActivity::class.java)
+//            intent.putExtra("item",data)
+//            startActivity(intent)
         }
 
     }
 
+    private fun stockCheck(data: ArrayList<PopupStoreItem>) {
+        val call : Call<ApiResponse<StockCheckItemsResponse>> = ApiClient.orderService.checkOrderItemsStock(data)
 
+        call.enqueue(object : Callback<ApiResponse<StockCheckItemsResponse>>{
+            override fun onResponse(
+                call: Call<ApiResponse<StockCheckItemsResponse>>,
+                response: Response<ApiResponse<StockCheckItemsResponse>>
+            ) {
+                var check : Boolean  = true;
+                var message: String = ""
+                val datae = response.body()?.data?.stockCheckItemResponse
+                datae?.forEach { storeCheckItem ->
+                    if(!storeCheckItem.check){
+                        check = false
+                        message += "${storeCheckItem.itemId} 의 재고가 부족합니다\n"
+                    }
+                }
+                if(!check){
+                    Toast.makeText(this@OrderDetailActivity, message, Toast.LENGTH_SHORT).show()
+                }else{
+                    val intent = Intent(this@OrderDetailActivity,OrderPaymentActivity::class.java)
+                    intent.putExtra("item",data)
+                    startActivity(intent)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<StockCheckItemsResponse>>, t: Throwable) {
+                Log.d("ddd", t.message.toString())
+            }
+
+        })
+    }
 
 
     private fun updateTotalAmount(item: PopupStoreItem, sign : String) {

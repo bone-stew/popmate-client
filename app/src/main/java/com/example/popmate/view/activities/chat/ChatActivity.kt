@@ -19,7 +19,7 @@ import ua.naiksoftware.stomp.dto.StompHeader
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
     private var roomId: Long = 0
-    private val url = "ws://10.0.2.2:8080/ws-chat"
+    private val url = "wss://popmate.xyz/ws-chat"
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
     private val model: ChatViewModel by viewModels()
     private lateinit var currUser: CurrUser
