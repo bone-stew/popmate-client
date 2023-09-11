@@ -10,8 +10,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.ActivityOrderDetailBinding
+import com.example.popmate.model.data.remote.ApiResponse
+import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
+import com.example.popmate.model.repository.ApiClient
 import com.example.popmate.view.adapters.order.OrderDetailAdapter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class OrderDetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityOrderDetailBinding
@@ -70,13 +76,17 @@ class OrderDetailActivity : AppCompatActivity() {
         }
 
         binding.orderDetailBottom.setOnClickListener {
-            //Log.d("jjy",data.toString())
-            val intent = Intent(this,OrderPaymentActivity::class.java)
-            intent.putExtra("item",data)
-            startActivity(intent)
+            Log.d("jjyaf",data.toString())
+            //stockCheck(data)
+//            val intent = Intent(this,OrderPaymentActivity::class.java)
+//            intent.putExtra("item",data)
+//            startActivity(intent)
         }
 
     }
+
+
+
 
     private fun updateTotalAmount(item: PopupStoreItem, sign : String) {
         if(sign == "plus"){
