@@ -47,7 +47,7 @@ class PopupDetailViewModel() : ViewModel() {
     }
 
     fun loadStore(popupStoreId: Long) {
-        ApiClient.storeService.getStoreDetail(popupStoreId, userId)
+        ApiClient.storeService.getStoreDetail(popupStoreId)
             .enqueue(object : Callback<ApiResponse<PopupStore>> {
                 override fun onResponse(
                     call: Call<ApiResponse<PopupStore>>,

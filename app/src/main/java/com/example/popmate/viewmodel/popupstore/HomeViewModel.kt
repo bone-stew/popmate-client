@@ -13,30 +13,33 @@ import retrofit2.Response
 
 class HomeViewModel : ViewModel(){
 
-    private val userId: Long = 1L
+    private val _home: MutableLiveData<HomeResponse> = MutableLiveData<HomeResponse>()
 
-    private val home: MutableLiveData<HomeResponse> by lazy {
-        MutableLiveData<HomeResponse>().also {
-            loadHome()
-        }
-    }
+    val home: LiveData<HomeResponse> = _home
 
-    fun getHome(): LiveData<HomeResponse> {
-        return home
-    }
 
-    fun refreshHome() {
-        loadHome()
-    }
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> = _loading
 
-    private fun loadHome() {
-        ApiClient.storeService.getStoreHome(userId).enqueue(object : Callback<ApiResponse<HomeResponse>> {
+    private val _error: MutableLiveData<Boolean> = MutableLiveData()
+    val error: LiveData<Boolean> = _error
+
+
+    fun loadHome() {
+        _loading.value = true
+        _error.value = false
+        ApiClient.storeService.getStoreHome().enqueue(object : Callback<ApiResponse<HomeResponse>> {
             override fun onResponse(call: Call<ApiResponse<HomeResponse>>, response: Response<ApiResponse<HomeResponse>>) {
-                Log.d("HOMEFRAGMENT", "onResponse: " + response.body())
-                home.value = response.body()?.data
+                _loading.value = false
+                if (response.isSuccessful){
+                _home.value = response.body()?.data!!
+                } else {
+                    _error.value = true
+                }
             }
             override fun onFailure(call: Call<ApiResponse<HomeResponse>>, t: Throwable) {
-                Log.d("kww", "onFailure: ")
+                _loading.value = false
+                _error.value = true
             }
         })
     }

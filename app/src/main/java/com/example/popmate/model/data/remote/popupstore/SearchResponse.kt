@@ -1,6 +1,5 @@
 package com.example.popmate.model.data.remote.popupstore
 
-import com.example.popmate.model.data.local.Banner
 import com.example.popmate.model.data.local.PopupStore
 
 data class SearchResponse(

@@ -54,6 +54,8 @@ android {
     }
 }
 
+
+
 apply plugin: 'kotlin-kapt'
 
 dependencies {
@@ -137,4 +139,6 @@ dependencies {
     //gson
     implementation 'com.google.code.gson:gson:2.10.1'
 
+    // facebook shimmer - skeleton loading ui
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }

@@ -1,18 +1,19 @@
-package com.example.popmate.view.adapters
+package com.example.popmate.view.adapters.popupstore
 
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.popmate.R
 import com.example.popmate.databinding.*
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.view.activities.detail.PopupDetailActivity
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class PopupStoreAdapter(
     private val context: Context,
@@ -26,7 +27,8 @@ class PopupStoreAdapter(
         VERTICAL_LARGE,
         VERTICAL_MEDIUM,
         VERTICAL_SMALL,
-        VISITED
+        VISITED,
+        SHIMMER
     }
 
     enum class ImageSize {
@@ -43,10 +45,7 @@ class PopupStoreAdapter(
                 val popupStore = popupStores[adapterPosition]
                 val intent = Intent(context, PopupDetailActivity::class.java)
                 intent.putExtra("id", popupStore.popupStoreId)
-                Log.d("DETAIL", popupStore.popupStoreId.toString())
-
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -65,10 +64,7 @@ class PopupStoreAdapter(
                 val popupStore = popupStores[adapterPosition]
                 val intent = Intent(context, PopupDetailActivity::class.java)
                 intent.putExtra("id", popupStore.popupStoreId)
-                Log.d("DETAIL", popupStore.popupStoreId.toString())
-
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.title}", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -94,16 +90,29 @@ class PopupStoreAdapter(
                 val popupStore = popupStores[adapterPosition]
                 val intent = Intent(context, PopupDetailActivity::class.java)
                 intent.putExtra("id", popupStore.popupStoreId)
-                Log.d("DETAIL", popupStore.popupStoreId.toString())
-
                 context.startActivity(intent)
-                Toast.makeText(binding.root.context, "클릭된 아이템 = ${popupStore.popupStoreId}", Toast.LENGTH_LONG).show()
             }
         }
 
         fun bind(popupStore: PopupStore) {
             binding.popupstore = popupStore
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
+        }
+    }
+
+    inner class ShimmerViewHolder(private val shimmerLayout: ShimmerFrameLayout) :
+        RecyclerView.ViewHolder(shimmerLayout) {
+
+        fun bind() {
+            val shimmer = Shimmer.AlphaHighlightBuilder()
+                .setBaseAlpha(0.7f)
+                .setHighlightAlpha(0.9f)
+                .setDirection(Shimmer.Direction.LEFT_TO_RIGHT)
+                .setAutoStart(true)
+                .build()
+
+            shimmerLayout.setShimmer(shimmer)
+            shimmerLayout.startShimmer()
         }
     }
 
@@ -133,32 +142,38 @@ class PopupStoreAdapter(
                 VisitedViewHolder(binding)
             }
 
+            ViewHolderType.SHIMMER.ordinal -> {
+                val shimmerLayout = inflater.inflate(R.layout.row_popupstore_vertical_shimmer, parent, false) as ShimmerFrameLayout
+                ShimmerViewHolder(shimmerLayout)
+            }
+
             else -> throw IllegalArgumentException("Invalid viewType")
         }
     }
 
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val popupStore = popupStores[position]
-        Log.i("SEARCHRECENT", "===================================================")
+        if (holder is ShimmerViewHolder) {
+            holder.bind()
+        } else {
+            val popupStore = popupStores[position]
 
-        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + popupStores.toString())
-        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + position.toString())
-        Log.i("SEARCHRECENT", "INSIDE ADAPTER" + popupStore.toString())
-
-        val imageSize = when (viewHolderType) {
-            ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.LARGE
-            ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
-            ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
-            else -> ImageSize.MEDIUM
-        }
-        when (holder) {
-            is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
-            is VerticalViewHolder -> holder.bind(popupStore, imageSize, position)
-            is VisitedViewHolder -> holder.bind(popupStore)
+            val imageSize = when (viewHolderType) {
+                ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.LARGE
+                ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
+                ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
+                else -> ImageSize.MEDIUM
+            }
+            when (holder) {
+                is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
+                is VerticalViewHolder -> holder.bind(popupStore, imageSize, position)
+                is VisitedViewHolder -> holder.bind(popupStore)
+            }
         }
     }
 
     override fun getItemCount(): Int = popupStores.size
+
 
     override fun getItemViewType(position: Int): Int = viewHolderType.ordinal
 

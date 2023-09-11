@@ -23,6 +23,29 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
+      <com.facebook.shimmer.ShimmerFrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/carouselShimmerLayout"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="1000">
+
+
+        <View
+          android:id="@+id/itemPlaceholder"
+          android:layout_width="match_parent"
+          android:layout_height="310dp"
+          android:background="@color/tx_light_gray"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_marginBottom="8dp" />
+
+      </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
 
       <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/imageCarousel"
@@ -92,6 +115,29 @@
         android:layout_marginVertical="23dp"
         android:textSize="@dimen/h6"/>
 
+
+
+      <com.facebook.shimmer.ShimmerFrameLayout
+        app:layout_constraintTop_toBottomOf="@id/visitedLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeShimmerLayout"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="1000">
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+                <include layout="@layout/row_popupstore_horizontal_shimmer"/>
+                <include layout="@layout/row_popupstore_horizontal_shimmer"/>
+                <include layout="@layout/row_popupstore_horizontal_shimmer"/>
+                <include layout="@layout/row_popupstore_horizontal_shimmer"/>
+        </LinearLayout>
+      </com.facebook.shimmer.ShimmerFrameLayout>
+
+
       <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="match_parent"
@@ -129,6 +175,26 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintBottom_toBottomOf="parent" />
+
+
+      <com.facebook.shimmer.ShimmerFrameLayout
+        app:layout_constraintTop_toBottomOf="@id/visitedLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:id="@+id/openingSoonShimmerLayout"
+        android:layout_height="wrap_content"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="1000">
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+        <include layout="@layout/row_popupstore_vertical_shimmer"/>
+      </LinearLayout>
+      </com.facebook.shimmer.ShimmerFrameLayout>
     </LinearLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 <!--</FrameLayout>-->

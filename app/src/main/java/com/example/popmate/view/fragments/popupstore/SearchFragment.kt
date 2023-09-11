@@ -1,7 +1,6 @@
 package com.example.popmate.view.fragments.popupstore
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.FragmentSearchBinding
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.util.SearchQueryListener
-import com.example.popmate.view.adapters.PopupStoreAdapter
+import com.example.popmate.view.adapters.popupstore.PopupStoreAdapter
 
 
 class SearchFragment : Fragment() {

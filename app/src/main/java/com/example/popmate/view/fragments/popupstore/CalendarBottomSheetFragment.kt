@@ -82,7 +82,7 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
             val (startDate, endDate) = selection
             if (startDate != null && endDate != null) {
                 val text = dateRangeDisplayText(startDate, endDate)
-                dateRangeListener?.onDataSaved(startDate, endDate)
+                dateRangeListener?.onDateRangeSelected(startDate, endDate)
                 dismiss()
             }
         }
