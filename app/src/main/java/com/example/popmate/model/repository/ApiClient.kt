@@ -2,7 +2,6 @@ package com.example.popmate.model.repository
 
 
 import android.util.Log
-import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.service.chat.ChatApiService
 import com.example.popmate.model.repository.service.login.LoginApiService
 import com.example.popmate.model.repository.service.order.OrderApiService
@@ -16,17 +15,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 //import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import java.io.IOException
 
 
 object ApiClient {
-//
     private var jwtToken: String? = null
-//
-//    private const val BASE_URL = "http://15.164.48.244:8080/api/v1/"
-//    private const val BASE_URL = "http://3.38.233.175:8080/api/v1/"
-    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
+
+//    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
+    private const val BASE_URL = "https://popmate.xyz/api/v1/"
 
     private val retrofit: Retrofit by lazy {
 
@@ -38,6 +34,7 @@ object ApiClient {
 
                     // JWT 토큰이 있는 경우 헤더에 추가
                     val token = getJwtToken()
+                    //val token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwidXNlcklkIjoxLCJpYXQiOjE2OTQ0MDk5NjIsImV4cCI6MTY5NDQxMzU0N30._VTVFj8xv64Vqwkue2htG-OVVrb_JWEXEGj89HSp3Z0"
                     val newRequest: Request = if (token != null) {
                         originalRequest.newBuilder()
                             .header("Authorization", "Bearer ${token}") // 헤더에 토큰 추가
@@ -82,9 +79,9 @@ object ApiClient {
     val reservationService: ReservationApiService by lazy {
         retrofit.create(ReservationApiService::class.java)
     }
-    fun setJwtToken(token: LoginTokenVO?) {
+    fun setJwtToken(token: String) {
         if (token != null) {
-            jwtToken = token.token
+            jwtToken = token
         }
     }
 

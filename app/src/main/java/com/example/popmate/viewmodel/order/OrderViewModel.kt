@@ -24,7 +24,7 @@ class OrderViewModel : ViewModel(){
     }
 
     private fun loadOrderItem() {
-        ApiClient.orderService.getPopupStoreItems().enqueue(object:
+        ApiClient.orderService.getPopupStoreItems(1).enqueue(object:
             Callback<ApiResponse<PopupStoreItemsResponse>> {
             override fun onResponse(
                 call: Call<ApiResponse<PopupStoreItemsResponse>>,
