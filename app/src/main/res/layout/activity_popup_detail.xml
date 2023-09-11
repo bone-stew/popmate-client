@@ -149,19 +149,6 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <Button
-            android:id="@+id/chat_enter_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/button_radius"
-            android:backgroundTint="@color/orange_light"
-            android:text="입장하기"
-            android:textColor="@color/white"
-            android:visibility="gone"
-            android:textSize="14sp"
-            />
 
 
         <include
