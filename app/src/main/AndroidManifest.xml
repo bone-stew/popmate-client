@@ -29,7 +29,13 @@
         <activity
             android:name=".view.activities.login.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate" />
+            android:theme="@style/Theme.Popmate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.activities.login.LoginTestActivity"
             android:exported="false"

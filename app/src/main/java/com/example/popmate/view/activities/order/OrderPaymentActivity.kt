@@ -148,7 +148,7 @@ class OrderPaymentActivity : AppCompatActivity() {
     }
 
     private fun ordercomplete(payment: Payment) {
-        val call : Call<ApiResponse<OrderResponse>> = ApiClient.orderService.orderItems(data)
+        val call : Call<ApiResponse<OrderResponse>> = ApiClient.orderService.orderItems(data, payment.orderId, payment.receipt.url, payment.card.cardType, payment.easyPay, payment.method)
         call.enqueue(object : Callback<ApiResponse<OrderResponse>>{
             override fun onResponse(
                 call: Call<ApiResponse<OrderResponse>>,
