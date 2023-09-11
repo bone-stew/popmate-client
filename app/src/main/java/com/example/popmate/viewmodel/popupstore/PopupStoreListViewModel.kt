@@ -50,7 +50,7 @@ class PopupStoreListViewModel: ViewModel() {
             override fun onResponse(call: Call<ApiResponse<SearchResponse>>, response: Response<ApiResponse<SearchResponse>>) {
                 _loading.value = false
                 if (response.isSuccessful){
-                    _storeList.value = response.body()?.data
+                    _storeList.value = response.body()?.data!!
                 } else {
                     _error.value = true
                 }

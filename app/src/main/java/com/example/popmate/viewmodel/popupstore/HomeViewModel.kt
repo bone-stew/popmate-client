@@ -32,7 +32,7 @@ class HomeViewModel : ViewModel(){
             override fun onResponse(call: Call<ApiResponse<HomeResponse>>, response: Response<ApiResponse<HomeResponse>>) {
                 _loading.value = false
                 if (response.isSuccessful){
-                _home.value = response.body()?.data
+                _home.value = response.body()?.data!!
                 } else {
                     _error.value = true
                 }
