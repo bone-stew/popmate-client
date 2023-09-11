@@ -4,12 +4,12 @@ import android.os.Bundle
 
 data class Chat(
     val id: String?,
-    val sender: Long?,
-    val name: String?,
+    var sender: Long?,
+    var name: String?,
     val message: String,
     val roomId: Long,
     val createdAt: String?
 ) {
 
-    constructor(message: String, roomId: Long) : this(null, null, null, message, roomId, null);
+    constructor(message: String, roomId: Long, sender: Long, name: String) : this(null, sender, name, message, roomId, null);
 }
