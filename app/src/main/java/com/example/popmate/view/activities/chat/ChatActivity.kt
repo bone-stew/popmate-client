@@ -12,15 +12,18 @@ import com.example.popmate.model.data.local.Chat
 import com.example.popmate.model.data.local.CurrUser
 import com.example.popmate.model.repository.ApiClient
 import com.google.gson.Gson
+import okhttp3.OkHttpClient
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.dto.LifecycleEvent
 import ua.naiksoftware.stomp.dto.StompHeader
+import java.util.concurrent.TimeUnit
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
     private var roomId: Long = 0
     private val url = "wss://popmate.xyz/ws-chat"
-    private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
+    private val okHttp = OkHttpClient().newBuilder().pingInterval(10, TimeUnit.SECONDS).build()
+    private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url, mapOf(Pair("Authorization", ApiClient.getJwtToken())) ,okHttp)
     private val model: ChatViewModel by viewModels()
     private lateinit var currUser: CurrUser
 
@@ -40,6 +43,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
             }
         }
         model.run {
+            enterRoom(roomId)
             loadChatMessage(roomId)
             currUser.observe(this@ChatActivity) {
                 this@ChatActivity.currUser = it

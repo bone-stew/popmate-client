@@ -72,13 +72,22 @@ class PopupStoreAdapter(
             binding.popupstore = popupStore
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
-
-            if (isGridLayout && position >= popupStores.size - 2) {
-                val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
-                layoutParams.bottomMargin = dpToPx(130)
-                binding.root.layoutParams = layoutParams
+            val isOdd = popupStores.size % 2 == 1
+            if (isOdd && isGridLayout) {
+                if (position >= popupStores.size - 1) {
+                    setLayout(binding)
+                }
+            } else if(!isOdd && isGridLayout) {
+                if (position >= popupStores.size - 2) {
+                    setLayout(binding)
+                }
             }
+        }
 
+        fun setLayout(binding: RowPopupstoreVerticalBinding){
+            val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.bottomMargin = dpToPx(130)
+            binding.root.layoutParams = layoutParams
         }
     }
 
@@ -127,7 +136,6 @@ class PopupStoreAdapter(
             ViewHolderType.VERTICAL_LARGE.ordinal,
             ViewHolderType.VERTICAL_MEDIUM.ordinal,
             ViewHolderType.VERTICAL_SMALL.ordinal -> {
-
                 val binding = RowPopupstoreVerticalBinding.inflate(inflater, parent, false)
                 VerticalViewHolder(binding, false)
             }
@@ -143,7 +151,8 @@ class PopupStoreAdapter(
             }
 
             ViewHolderType.SHIMMER.ordinal -> {
-                val shimmerLayout = inflater.inflate(R.layout.row_popupstore_vertical_shimmer, parent, false) as ShimmerFrameLayout
+                val shimmerLayout =
+                    inflater.inflate(R.layout.row_popupstore_vertical_shimmer, parent, false) as ShimmerFrameLayout
                 ShimmerViewHolder(shimmerLayout)
             }
 
@@ -188,7 +197,7 @@ class PopupStoreAdapter(
         val sizeInDp = when (imageSize) {
             ImageSize.LARGE -> 150
             ImageSize.SMALL -> 90
-            ImageSize.MEDIUM -> 120
+            ImageSize.MEDIUM -> 135
         }
         layoutParams.width = dpToPx(sizeInDp)
         layoutParams.height = dpToPx(sizeInDp)

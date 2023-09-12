@@ -4,7 +4,7 @@
   <style name="Theme.Popmate" parent="Theme.AppCompat.Light">
     <item name="windowNoTitle">true</item>
     <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-
+    <item name="android:windowBackground">@color/white</item>
   </style>
 
   <style name="AppBottomSheetDialogTheme"
