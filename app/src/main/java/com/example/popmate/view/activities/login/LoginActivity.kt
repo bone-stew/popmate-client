@@ -8,9 +8,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.popmate.databinding.ActivityLoginBinding
+import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.login.GoogleLoginVO
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.ApiClient
+import com.example.popmate.view.activities.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -155,34 +157,43 @@ class LoginActivity : AppCompatActivity() {
     // 구글 유저 정보 넘겨서 JWT토큰 가져오는 곳
     private fun getGoogleToken(googleLoginVO: GoogleLoginVO){
         val apiService = ApiClient.getTokenService
-        val call: Call<LoginTokenVO> = apiService.getGoogleToken(googleLoginVO)
-        call.enqueue(object : Callback<LoginTokenVO>{
-            override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
+        val call: Call<ApiResponse<LoginTokenVO>> = apiService.getGoogleToken(googleLoginVO)
+        call.enqueue(object : Callback<ApiResponse<LoginTokenVO>>{
+            override fun onResponse(
+                call: Call<ApiResponse<LoginTokenVO>>,
+                response: Response<ApiResponse<LoginTokenVO>>
+            ) {
                 val token = response.body()
-//                ApiClient.setJwtToken(token)
+                ApiClient.setJwtToken(token?.data?.token.toString())
                 nextMainActivity()
             }
-            override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
+
+            override fun onFailure(call: Call<ApiResponse<LoginTokenVO>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
+
         })
     }
 
     // 카카오 토큰 넘겨서 JWT토큰 가져오는 곳
     private fun getKakaoToken(token : String) {
         val apiService = ApiClient.getTokenService
-        val call: Call<LoginTokenVO> = apiService.getKakaoToken(token)
-        call.enqueue(object : Callback<LoginTokenVO> {
-            override fun onResponse(call: Call<LoginTokenVO>, response: Response<LoginTokenVO>) {
+        val call: Call<ApiResponse<LoginTokenVO>> = apiService.getKakaoToken(token)
+        call.enqueue(object : Callback<ApiResponse<LoginTokenVO>> {
+            override fun onResponse(
+                call: Call<ApiResponse<LoginTokenVO>>,
+                response: Response<ApiResponse<LoginTokenVO>>
+            ) {
                 val token = response.body()
-//                ApiClient.setJwtToken(token)
-                //ApiClient.getJwtToken()?.let { Log.d("ddd", it) }
+                ApiClient.setJwtToken(token?.data?.token.toString())
+                Log.d("token",ApiClient.getJwtToken().toString())
                 nextMainActivity()
             }
 
-            override fun onFailure(call: Call<LoginTokenVO>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse<LoginTokenVO>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
+
         })
     }
 
@@ -190,7 +201,7 @@ class LoginActivity : AppCompatActivity() {
 
     // 다음 Activity로 가는 코드
     private fun nextMainActivity() {
-        val intent = Intent(this, LoginTestActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

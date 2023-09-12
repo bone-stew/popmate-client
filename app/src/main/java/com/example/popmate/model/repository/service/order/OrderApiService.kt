@@ -9,21 +9,27 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface OrderApiService {
-    @GET("popup-stores/1/items")
-    fun getPopupStoreItems(): Call<ApiResponse<PopupStoreItemsResponse>>
+    @GET("popup-stores/{popupStoreId}/items")
+    fun getPopupStoreItems(@Path("popupStoreId") popupStoreId: Int): Call<ApiResponse<PopupStoreItemsResponse>>
 
     @POST("orders/new")
     fun orderItems(
         @Body popupStore: List<PopupStoreItem>,
-        orderId: String,
-        url: String,
-        cardType: String,
-        easyPay: Any?,
-        method: String
+        @Query("orderId") orderId: String,
+        @Query("url") url: String,
+        @Query("cardType") cardType: String,
+        @Query("easyPay") easyPay: Any?,
+        @Query("method") method: String
     ): Call<ApiResponse<OrderResponse>>
 
     @GET("orders/me")
     fun getOrderListItems():Call<ApiResponse<OrderListItemsResponse>>
+
+    @POST("orders/stockCheck")
+    fun checkOrderItemsStock(
+        @Body popupStore: ArrayList<PopupStoreItem>) : Call<OrderResponse>
 }

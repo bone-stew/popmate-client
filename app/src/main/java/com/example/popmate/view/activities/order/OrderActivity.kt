@@ -2,6 +2,7 @@ package com.example.popmate.view.activities.order
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popmate.R
@@ -27,7 +28,7 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
         val model : OrderViewModel by viewModels()
         model.getPopupStoreItems().observe(this){
             binding.popupstoreitem = it
-            Log.d("jjr", it.toString())
+            Log.d("jjra", it.toString())
             val data = (binding.popupstoreitem as? PopupStoreItemsResponse)?.popupStoreItemResponse?.toMutableList()
             var adapter = OrderAdapter(this)
             adapter.listData = data!!
@@ -46,10 +47,14 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
     }
 
     override fun onClick(value: PopupStoreItem) {
-        supportFragmentManager.beginTransaction()
-            .show(fragment)
-            .commit()
-        fragment.update(value)
+        if(value.stock==0){
+            Toast.makeText(this, "재고가 없습니다.", Toast.LENGTH_SHORT).show()
+        }else{
+            supportFragmentManager.beginTransaction()
+                .show(fragment)
+                .commit()
+            fragment.update(value)
+        }
     }
 
 }

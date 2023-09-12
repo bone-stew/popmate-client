@@ -1,5 +1,6 @@
 package com.example.popmate.model.repository.service.login
 
+import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.login.GoogleLoginVO
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import retrofit2.Call
@@ -11,12 +12,12 @@ interface LoginApiService {
     @POST("oauth/kakao")
     fun getKakaoToken(
         @Body token: String
-    ): Call<LoginTokenVO>
+    ): Call<ApiResponse<LoginTokenVO>>
 
     @POST("oauth/google")
     fun getGoogleToken(
         @Body googleLoginVO: GoogleLoginVO
-    ): Call<LoginTokenVO>
+    ): Call<ApiResponse<LoginTokenVO>>
 
     @GET("oauth/resource")
     fun loginTest() : Call<LoginTokenVO>

@@ -59,7 +59,7 @@
       android:layout_marginVertical="23dp"
       android:gravity="start|center_vertical"
       android:layout_marginLeft="16dp"
-      android:textSize="@dimen/h6"/>
+      android:textSize="@dimen/h4"/>
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/horizontalView"
