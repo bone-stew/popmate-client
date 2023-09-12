@@ -40,26 +40,26 @@ class OrderViewModel : ViewModel(){
             })
     }
 
-    fun loadPlaceDetail
-                (popupStoreId:Long?
-    ) {
-        ApiClient.orderService.getPlaceDetails(popupStoreId!!).enqueue(
-            object : Callback<ApiResponse<PlaceDetailResponse>>{
-
-            override fun onResponse(
-                call: Call<ApiResponse<PlaceDetailResponse>>,
-                response: Response<ApiResponse<PlaceDetailResponse>>
-            ) {
-                _placeDetail.value = response.body()?.data!!
-                Log.e("jjra", response.body()?.data.toString())
-            }
-
-            override fun onFailure(call: Call<ApiResponse<PlaceDetailResponse>>, t: Throwable) {
-                Log.e("jjra", "API 요청 실패", t)
-            }
-
-        })
-    }
+//    fun loadPlaceDetail
+//                (popupStoreId:Long?
+//    ) {
+//        ApiClient.orderService.getPlaceDetails(popupStoreId!!).enqueue(
+//            object : Callback<ApiResponse<PlaceDetailResponse>>{
+//
+//            override fun onResponse(
+//                call: Call<ApiResponse<PlaceDetailResponse>>,
+//                response: Response<ApiResponse<PlaceDetailResponse>>
+//            ) {
+//                _placeDetail.value = response.body()?.data!!
+//                Log.e("jjra", response.body()?.data.toString())
+//            }
+//
+//            override fun onFailure(call: Call<ApiResponse<PlaceDetailResponse>>, t: Throwable) {
+//                Log.e("jjra", "API 요청 실패", t)
+//            }
+//
+//        })
+//    }
 
 
 }
