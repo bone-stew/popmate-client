@@ -19,6 +19,7 @@ import java.util.LinkedList
 
 class PopupDetailActivity :
     BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail) {
+    var hasVisited = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,11 +70,14 @@ class PopupDetailActivity :
             Glide.with(this).load(it.bannerImgUrl).into(binding.bannerImage)
             binding.run {
                 store = it
-                if (it.status == 1) {
+                hasVisited = it.status==1
+                if (hasVisited) {
+                    Log.d("DETAIL", "true: " + it.status.toString())
                     reserveBtn.visibility = View.GONE
                     orderLayout.orderBtnPost.visibility = View.VISIBLE
                     orderLayout.reserveBtnPost.visibility = View.VISIBLE
                 } else {
+                    Log.d("DETAIL", "false: " + it.status.toString())
                     reserveBtn.visibility = View.VISIBLE
                     orderLayout.orderBtnPost.visibility = View.GONE
                     orderLayout.reserveBtnPost.visibility = View.GONE
@@ -108,7 +112,12 @@ class PopupDetailActivity :
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance()).commit()
         binding.run {
-            reserveBtn.visibility = View.VISIBLE
+            if(hasVisited){
+                orderLayout.orderBtnPost.visibility = View.VISIBLE
+                orderLayout.reserveBtnPost.visibility = View.VISIBLE
+            } else {
+                reserveBtn.visibility = View.VISIBLE
+            }
             chatEnterBtn.visibility = View.GONE
         }
     }
@@ -118,7 +127,12 @@ class PopupDetailActivity :
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
         binding.run {
-            reserveBtn.visibility = View.GONE
+            if(hasVisited){
+                orderLayout.orderBtnPost.visibility = View.GONE
+                orderLayout.reserveBtnPost.visibility = View.GONE
+            } else {
+                reserveBtn.visibility = View.GONE
+            }
             chatEnterBtn.visibility = View.VISIBLE
         }
     }

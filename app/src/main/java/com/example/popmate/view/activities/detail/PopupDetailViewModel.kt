@@ -14,37 +14,10 @@ import retrofit2.Response
 import java.util.LinkedList
 
 class PopupDetailViewModel() : ViewModel() {
-    private var userId = 1L
     private val _store: MutableLiveData<PopupStore> =
         MutableLiveData<PopupStore>()
 
     val store: LiveData<PopupStore> = _store
-
-    fun saveToPrefs() {
-//        addToViewedRecently(store.value)
-        Log.i("SEARCHRECENT", "Save to PREFS" + store.value.toString())
-
-    }
-
-    private fun addToViewedRecently(store: PopupStore?) {
-        var storeList = PopmateApplication.prefs.getList()
-        Log.i("SEARCHRECENT", "ADDING TO LIST" + storeList.toString())
-        Log.i("SEARCHRECENT", "ADDING THE STORE" + store.toString())
-        var storeLinkedList: LinkedList<PopupStore>? = null
-        if (storeList == null) {
-            storeLinkedList = LinkedList<PopupStore>()
-        } else {
-            storeLinkedList = LinkedList(storeList)
-        }
-        if (storeLinkedList.contains(store)) {
-            storeLinkedList.remove(store)
-        }
-        storeLinkedList.addFirst(store)
-        if (storeLinkedList.size > 5) {
-            storeLinkedList.removeLast()
-        }
-        PopmateApplication.prefs.setList("popmate", storeLinkedList.toList())
-    }
 
     fun loadStore(popupStoreId: Long) {
         ApiClient.storeService.getStoreDetail(popupStoreId)
@@ -53,7 +26,6 @@ class PopupDetailViewModel() : ViewModel() {
                     call: Call<ApiResponse<PopupStore>>,
                     response: Response<ApiResponse<PopupStore>>
                 ) {
-                    Log.d("kww", "onResponse: " + response.body())
                     _store.value = response.body()?.data!!
                 }
 
