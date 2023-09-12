@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
@@ -19,16 +20,21 @@ import com.example.popmate.viewmodel.order.OrderViewModel
 
 class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order), OnItemClick {
     private lateinit var fragment: OrderBottomFragment
-
+    private var popupStoreId: Long = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        popupStoreId = intent.getLongExtra("id", 0)
 
         val model : OrderViewModel by viewModels()
-        model.getPopupStoreItems().observe(this){
+
+        // 나중에 popupStoreId로 바꾸면 된다.
+        model.loadList(1)
+        model.loadPlaceDetail(1)
+
+        model.popupStoreItem.observe(this){
             binding.popupstoreitem = it
-            Log.d("jjra", it.toString())
             val data = (binding.popupstoreitem as? PopupStoreItemsResponse)?.popupStoreItemResponse?.toMutableList()
             var adapter = OrderAdapter(this)
             adapter.listData = data!!
@@ -39,6 +45,11 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
                 .hide(fragment)
                 .commit()
             binding.orderRecyclerView.layoutManager = GridLayoutManager(this,2)
+        }
+
+        model.placeDetail.observe(this){
+            binding.placedetail = it
+            Log.d("jjra", it.toString())
         }
 
         binding.orderBackBtn.setOnClickListener {
