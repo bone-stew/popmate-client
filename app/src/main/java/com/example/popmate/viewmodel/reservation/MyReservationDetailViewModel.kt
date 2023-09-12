@@ -20,17 +20,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MyReservationDetailViewModel : BaseViewModel() {
-    val reservationId: Long
-        get() = 0 // reservationId를 받아오는 코드
+    var reservationId: Long = 0
 
     private val _myReservation = MutableLiveData<MyReservationDetailResponse>()
     val myReservation: LiveData<MyReservationDetailResponse> = _myReservation
 
-    init {
-        loadMyReservationDetail(1)
-    }
-
-    private fun loadMyReservationDetail(reservationId: Long) {
+    fun loadMyReservationDetail(reservationId: Long) {
         Log.d("Reservation", "loadMyReservationDetail: $reservationId")
         reservationService.getMyReservation(reservationId)
             .enqueue(object : Callback<ApiResponse<MyReservationDetailResponse>> {

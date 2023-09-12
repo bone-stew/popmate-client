@@ -28,9 +28,10 @@ class MyReservationDetailActivity :
     }
 
     private fun initView() {
-        Log.d("MyReservationDetailActivity", "initView: ")
+        viewModel.reservationId = intent.getLongExtra("reservationId", -1)
         println("viewModel.reservationId = ${viewModel.reservationId}")
 
+        viewModel.loadMyReservationDetail(viewModel.reservationId)
         viewModel.myReservation.observe(this) {
             Log.d("MyReservationDetailActivity", "initView: $it")
             binding.tvPopupStoreName.text = it.popupStoreTitle

@@ -25,6 +25,7 @@ class PopupDetailActivity :
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val popupStoreId = intent.getLongExtra("id", -1)
+        val model: PopupDetailViewModel by viewModels()
 
         binding.run {
             backBtn.setOnClickListener { finish() }
@@ -38,13 +39,16 @@ class PopupDetailActivity :
                     if (tab?.position == 0) setInfoFragment()
                     else setChatFragment()
                 }
+
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
                 }
+
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                 }
             })
             reserveBtn.setOnClickListener {
                 val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
+                intent.putExtra("id", popupStoreId)
                 startActivity(intent)
             }
             orderLayout.orderBtnPost.setOnClickListener {
@@ -53,8 +57,7 @@ class PopupDetailActivity :
             }
             orderLayout.reserveBtnPost.setOnClickListener {
                 val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
-                Log.d("Reservation", "put popupStoreId: $popupStoreId")
-                    intent.putExtra("id", popupStoreId)
+                intent.putExtra("id", popupStoreId)
                 startActivity(intent)
             }
             chatEnterBtn.setOnClickListener {
