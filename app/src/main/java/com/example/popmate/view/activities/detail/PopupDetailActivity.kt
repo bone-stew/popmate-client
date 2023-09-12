@@ -19,12 +19,12 @@ import java.util.LinkedList
 
 class PopupDetailActivity :
     BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail) {
+    val model: PopupDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val popupStoreId = intent.getLongExtra("id", -1)
-        Log.d("smh", "onCreate: $popupStoreId")
         val model: PopupDetailViewModel by viewModels()
 
         binding.run {
@@ -72,18 +72,38 @@ class PopupDetailActivity :
             Glide.with(this).load(it.bannerImgUrl).into(binding.bannerImage)
             binding.run {
                 store = it
-                if (it.status == 1) {
-                    reserveBtn.visibility = View.GONE
-                    orderLayout.orderBtnPost.visibility = View.VISIBLE
-                    orderLayout.reserveBtnPost.visibility = View.VISIBLE
-                } else {
-                    reserveBtn.visibility = View.VISIBLE
-                    orderLayout.orderBtnPost.visibility = View.GONE
-                    orderLayout.reserveBtnPost.visibility = View.GONE
-                }
             }
             setInfoFragment()
             saveToRecentlyViewedSharedPrefs(it)
+        }
+
+        model.status.observe(this) {
+            binding.run{
+            if(it == true){
+                reserveBtn.visibility = View.GONE
+                orderLayout.orderBtnPost.visibility = View.VISIBLE
+                orderLayout.reserveBtnPost.visibility = View.VISIBLE
+            } else{
+                reserveBtn.visibility = View.VISIBLE
+                orderLayout.orderBtnPost.visibility = View.GONE
+                orderLayout.reserveBtnPost.visibility = View.GONE
+            }
+            }
+        }
+
+        model.loading.observe(this){ isLoading ->
+            binding.run{
+                if(isLoading){
+                    reserveBtn.visibility = View.GONE
+                    orderLayout.orderBtnPost.visibility = View.GONE
+                    chatEnterBtn.visibility = View.GONE
+                } else {
+                    reserveBtn.visibility = View.VISIBLE
+                    orderLayout.orderBtnPost.visibility = View.VISIBLE
+                    chatEnterBtn.visibility = View.VISIBLE
+                }
+
+            }
         }
 
     }
@@ -111,8 +131,13 @@ class PopupDetailActivity :
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance()).commit()
         binding.run {
-            reserveBtn.visibility = View.VISIBLE
             chatEnterBtn.visibility = View.GONE
+            if(model.status.value==true){
+                orderLayout.orderBtnPost.visibility = View.VISIBLE
+                orderLayout.reserveBtnPost.visibility = View.VISIBLE
+            } else {
+                reserveBtn.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -121,8 +146,13 @@ class PopupDetailActivity :
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
         binding.run {
-            reserveBtn.visibility = View.GONE
             chatEnterBtn.visibility = View.VISIBLE
+            if(model.status.value==true){
+                orderLayout.orderBtnPost.visibility = View.GONE
+                orderLayout.reserveBtnPost.visibility = View.GONE
+            } else {
+                reserveBtn.visibility = View.GONE
+            }
         }
     }
 }
