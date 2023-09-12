@@ -65,6 +65,7 @@ class PopupDetailActivity :
         }
 
         model.loadStore(popupStoreId)
+        model.loadChatThumbnail(popupStoreId)
         model.store.observe(this) {
             Glide.with(this).load(it.bannerImgUrl).into(binding.bannerImage)
             binding.run {
@@ -103,7 +104,6 @@ class PopupDetailActivity :
         PopmateApplication.prefs.setList("popmate", storeLinkedList.toList())
     }
 
-
     private fun setInfoFragment() {
         supportFragmentManager.beginTransaction()
             .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance()).commit()
@@ -112,7 +112,6 @@ class PopupDetailActivity :
             chatEnterBtn.visibility = View.GONE
         }
     }
-
 
     private fun setChatFragment() {
         supportFragmentManager.beginTransaction()

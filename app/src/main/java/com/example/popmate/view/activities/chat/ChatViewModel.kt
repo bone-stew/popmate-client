@@ -27,6 +27,21 @@ class ChatViewModel : BaseViewModel() {
         _chatList.postValue(_chatList.value?.plus(chat))
     }
 
+    fun enterRoom(roomId: Long) {
+        ApiClient.chatService.enter(roomId).enqueue(object : Callback<ApiResponse<String>> {
+            override fun onResponse(
+                call: Call<ApiResponse<String>>, response: Response<ApiResponse<String>>
+            ) {
+                response.body()?.message?.let { Log.d("kww", it) }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<String>>, t: Throwable) {
+                t.message?.let { Log.d("kww", it) }
+            }
+
+        })
+    }
+
     fun loadChatMessage(roomId: Long) {
         ApiClient.chatService.loadMessages(roomId)
             .enqueue(object : Callback<ApiResponse<MessagesResponse>> {
@@ -38,6 +53,7 @@ class ChatViewModel : BaseViewModel() {
                     _chatList.postValue(response.body()?.data?.messages ?: emptyList())
                     Log.d("kww", "onResponse: ${response.body()?.data}")
                 }
+
                 override fun onFailure(call: Call<ApiResponse<MessagesResponse>>, t: Throwable) {
                     TODO("Not yet implemented")
                 }
