@@ -186,7 +186,6 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 val token = response.body()
                 ApiClient.setJwtToken(token?.data?.token.toString())
-                Log.d("token",ApiClient.getJwtToken().toString())
                 nextMainActivity()
             }
 
