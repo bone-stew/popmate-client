@@ -1,10 +1,15 @@
 package com.example.popmate.view.activities.detail
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
@@ -17,14 +22,19 @@ import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import com.google.android.material.tabs.TabLayout
 import java.util.LinkedList
 
+
 class PopupDetailActivity :
     BaseActivity<ActivityPopupDetailBinding>(R.layout.activity_popup_detail) {
     val model: PopupDetailViewModel by viewModels()
 
+    private val wifiPermissionCode = 1000 // 권한 요청 코드
+    private var popupStoreId: Long = -1
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val popupStoreId = intent.getLongExtra("id", -1)
+        popupStoreId = intent.getLongExtra("id", -1)
         val model: PopupDetailViewModel by viewModels()
 
         binding.run {
@@ -47,18 +57,34 @@ class PopupDetailActivity :
                 }
             })
             reserveBtn.setOnClickListener {
-                val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
-                intent.putExtra("id", popupStoreId)
-                startActivity(intent)
+                /**
+                 * 와이파이 권한 요청
+                 */
+                if (hasWifiScanPermission()) {
+                    Log.d("smh", "와이파이 권한이 허용되어 있음")
+                    val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
+                    intent.putExtra("id", popupStoreId)
+                    startActivity(intent)
+                } else {
+                    Log.d("smh", "와이파이 권한이 허용되어 있지 않음")
+                    requestWifiScanPermission()
+                }
             }
             orderLayout.orderBtnPost.setOnClickListener {
                 val intent = Intent(applicationContext, OrderActivity::class.java)
                 startActivity(intent)
             }
             orderLayout.reserveBtnPost.setOnClickListener {
-                val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
-                intent.putExtra("id", popupStoreId)
-                startActivity(intent)
+                /**
+                 * 와이파이 권한 요청
+                 */
+                if (hasWifiScanPermission()) {
+                    val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
+                    intent.putExtra("id", popupStoreId)
+                    startActivity(intent)
+                } else {
+                    requestWifiScanPermission()
+                }
             }
             chatEnterBtn.setOnClickListener {
                 val intent = Intent(applicationContext, ChatActivity::class.java)
@@ -79,22 +105,22 @@ class PopupDetailActivity :
         }
 
         model.status.observe(this) {
-            binding.run{
-            if(it == true){
-                reserveBtn.visibility = View.GONE
-                orderLayout.orderBtnPost.visibility = View.VISIBLE
-                orderLayout.reserveBtnPost.visibility = View.VISIBLE
-            } else{
-                reserveBtn.visibility = View.VISIBLE
-                orderLayout.orderBtnPost.visibility = View.GONE
-                orderLayout.reserveBtnPost.visibility = View.GONE
-            }
+            binding.run {
+                if (it == true) {
+                    reserveBtn.visibility = View.GONE
+                    orderLayout.orderBtnPost.visibility = View.VISIBLE
+                    orderLayout.reserveBtnPost.visibility = View.VISIBLE
+                } else {
+                    reserveBtn.visibility = View.VISIBLE
+                    orderLayout.orderBtnPost.visibility = View.GONE
+                    orderLayout.reserveBtnPost.visibility = View.GONE
+                }
             }
         }
 
-        model.loading.observe(this){ isLoading ->
-            binding.run{
-                if(isLoading){
+        model.loading.observe(this) { isLoading ->
+            binding.run {
+                if (isLoading) {
                     reserveBtn.visibility = View.GONE
                     orderLayout.orderBtnPost.visibility = View.GONE
                     chatEnterBtn.visibility = View.GONE
@@ -106,7 +132,45 @@ class PopupDetailActivity :
 
             }
         }
+    }
 
+    private fun hasWifiScanPermission(): Boolean {
+        return (ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED)
+    }
+
+    private fun requestWifiScanPermission() {
+        Log.d("smh", "와이파이 권한을 요청함")
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            wifiPermissionCode
+        )
+    }
+
+    /**
+     * 권한 요청 결과 처리
+     */
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == wifiPermissionCode) {
+            if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                Log.d("smh", "와이파이 권한이 승인됨")
+                Log.d("smh", grantResults.toString())
+                val intent = Intent(applicationContext, ReservationWaitActivity::class.java)
+                intent.putExtra("id", popupStoreId)
+                startActivity(intent)
+            } else {
+                Log.d("smh", grantResults.toString())
+                Toast.makeText(this, "와이파이 스캔 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun saveToRecentlyViewedSharedPrefs(store: PopupStore?) {
@@ -132,7 +196,7 @@ class PopupDetailActivity :
             .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance()).commit()
         binding.run {
             chatEnterBtn.visibility = View.GONE
-            if(model.status.value==true){
+            if (model.status.value == true) {
                 orderLayout.orderBtnPost.visibility = View.VISIBLE
                 orderLayout.reserveBtnPost.visibility = View.VISIBLE
             } else {
@@ -146,7 +210,7 @@ class PopupDetailActivity :
             .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
         binding.run {
             chatEnterBtn.visibility = View.VISIBLE
-            if(model.status.value==true){
+            if (model.status.value == true) {
                 orderLayout.orderBtnPost.visibility = View.GONE
                 orderLayout.reserveBtnPost.visibility = View.GONE
             } else {
