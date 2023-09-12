@@ -88,6 +88,21 @@ class PopupDetailActivity :
             }
         }
 
+        model.loading.observe(this){ isLoading ->
+            binding.run{
+                if(isLoading){
+                    reserveBtn.visibility = View.GONE
+                    orderLayout.orderBtnPost.visibility = View.GONE
+                    chatEnterBtn.visibility = View.GONE
+                } else {
+                    reserveBtn.visibility = View.VISIBLE
+                    orderLayout.orderBtnPost.visibility = View.VISIBLE
+                    chatEnterBtn.visibility = View.VISIBLE
+                }
+
+            }
+        }
+
     }
 
     private fun saveToRecentlyViewedSharedPrefs(store: PopupStore?) {
