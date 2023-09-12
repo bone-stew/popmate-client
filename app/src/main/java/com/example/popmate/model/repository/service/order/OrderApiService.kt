@@ -1,6 +1,7 @@
 package com.example.popmate.model.repository.service.order
 
 import com.example.popmate.model.data.remote.ApiResponse
+import com.example.popmate.model.data.remote.order.OrderItemRequest
 import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.data.remote.order.PopupStoreItemsResponse
@@ -19,12 +20,8 @@ interface OrderApiService {
 
     @POST("orders/new")
     fun orderItems(
-        @Body popupStore: List<PopupStoreItem>,
-        @Query("orderId") orderId: String,
-        @Query("url") url: String,
-        @Query("cardType") cardType: String,
-        @Query("easyPay") easyPay: Any?,
-        @Query("method") method: String
+        @Body popupStore: OrderItemRequest,
+
     ): Call<ApiResponse<OrderResponse>>
 
     @GET("orders/me")

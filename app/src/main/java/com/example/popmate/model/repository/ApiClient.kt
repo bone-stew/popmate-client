@@ -21,7 +21,8 @@ import java.io.IOException
 object ApiClient {
     private var jwtToken: String = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmcm9nczYyMjVAbmF2ZXIuY29tIiwidXNlcklkIjo0MiwidXNlck5hbWUiOiLsobDsnqzro6EiLCJpYXQiOjE2OTQ0MTczMTQsImV4cCI6MTY5OTY1NTQ1OH0.vzkIRAc3Vt3Cj4HXnbXyAoUt2EAy7qRxzttZDRQ_VAE"
 
-    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
+//    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
+    private const val BASE_URL = "http://192.168.0.64:8080/api/v1/"
 //    private const val BASE_URL = "https://popmate.xyz/api/v1/"
 
     private val retrofit: Retrofit by lazy {
