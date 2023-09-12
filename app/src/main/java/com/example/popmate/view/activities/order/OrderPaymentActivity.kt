@@ -56,6 +56,8 @@ class OrderPaymentActivity : AppCompatActivity() {
                 }
             }
         }
+        binding.txtOrderDetailPaymentWon.text = totalAmount.toString()
+        binding.txtOrderDetailPaymentBottomTotalprice.text = totalAmount.toString()
 
         val orderId = generateOrderId(10)
 
@@ -158,7 +160,6 @@ class OrderPaymentActivity : AppCompatActivity() {
         Log.d("ddd",orderItemRequest.orderId)
         Log.d("ddd",orderItemRequest.cardType)
         Log.d("ddd",orderItemRequest.toString())
-        Log.d("ddd", "아아")
         val call : Call<ApiResponse<OrderResponse>> = ApiClient.orderService.orderItems(orderItemRequest)
         call.enqueue(object : Callback<ApiResponse<OrderResponse>>{
             override fun onResponse(
@@ -167,7 +168,7 @@ class OrderPaymentActivity : AppCompatActivity() {
             ) {
                 Log.d("jja","서버 왔어요")
                 val intent = Intent(this@OrderPaymentActivity,OrderPaymentCompleteActivity::class.java)
-                intent.putExtra("data",payment.receipt.url)
+                intent.putExtra("item",data)
                 startActivity(intent)
             }
 

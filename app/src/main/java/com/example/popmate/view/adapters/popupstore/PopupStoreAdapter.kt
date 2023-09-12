@@ -3,6 +3,7 @@ package com.example.popmate.view.adapters.popupstore
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView

@@ -25,6 +25,7 @@ class PopupDetailActivity :
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val popupStoreId = intent.getLongExtra("id", -1)
+        Log.d("dddd","1 : ${popupStoreId}")
         val model: PopupDetailViewModel by viewModels()
 
         binding.run {
@@ -53,6 +54,7 @@ class PopupDetailActivity :
             }
             orderLayout.orderBtnPost.setOnClickListener {
                 val intent = Intent(applicationContext, OrderActivity::class.java)
+                intent.putExtra("id", popupStoreId)
                 startActivity(intent)
             }
             orderLayout.reserveBtnPost.setOnClickListener {

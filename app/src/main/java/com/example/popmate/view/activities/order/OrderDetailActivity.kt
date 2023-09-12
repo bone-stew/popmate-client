@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.ActivityOrderDetailBinding
 import com.example.popmate.model.data.remote.ApiResponse
-import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.data.remote.order.StockCheckItemsResponse
 import com.example.popmate.model.repository.ApiClient
@@ -146,4 +145,3 @@ class OrderDetailActivity : AppCompatActivity() {
 
     }
 }
-
