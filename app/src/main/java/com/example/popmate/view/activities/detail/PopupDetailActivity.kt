@@ -16,7 +16,10 @@ import com.example.popmate.config.BaseActivity
 import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.ActivityPopupDetailBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.model.repository.ApiClient
+import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.view.activities.chat.ChatActivity
+import com.example.popmate.view.activities.login.LoginActivity
 import com.example.popmate.view.activities.order.OrderActivity
 import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import com.google.android.material.tabs.TabLayout
@@ -57,6 +60,20 @@ class PopupDetailActivity :
                 }
             })
             reserveBtn.setOnClickListener {
+                if (ApiClient.getJwtToken() == null) {
+                    /**
+                     * dialog_lesson_login 다이얼로그 띄우기
+                     */
+                    val dialog = LessonLoginDialog(this@PopupDetailActivity)
+                    dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
+                        override fun onOkClicked() {
+                            val intent = Intent(this@PopupDetailActivity, LoginActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    dialog.start()
+                    return@setOnClickListener
+                }
                 /**
                  * 와이파이 권한 요청
                  */
