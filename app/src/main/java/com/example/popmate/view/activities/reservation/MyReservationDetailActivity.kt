@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMyReservationDetailBinding
-import com.example.popmate.model.data.remote.reservation.toLocalDateTime
 import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.viewmodel.reservation.MyReservationDetailViewModel
 
