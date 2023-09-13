@@ -19,9 +19,9 @@
 
         <ImageView
             android:id="@+id/img_arrow"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:padding="10dp"
             android:src="@drawable/arrow2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
