@@ -2,18 +2,22 @@ package com.example.popmate.view.adapters.order
 
 
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.ListOrderPurchaseItemBinding
+import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
+import com.example.popmate.view.activities.order.OrderDetailActivity
 
 
 class OrderDetailAdapter(
+    private val context : OrderDetailActivity,
+    placeDetail: OrderPlaceDetailResponse,
     private val onAmountChanged: (position: Int, totalQuantity: Int, sign: String) -> Unit,
-    private val onItemRemoved: (position: Int, item : PopupStoreItem) -> Unit
-    ):RecyclerView.Adapter<OrderDetailAdapter.orderDetailHolder>() {
+    private val onItemRemoved: (position: Int, item: PopupStoreItem) -> Unit
+):RecyclerView.Adapter<OrderDetailAdapter.orderDetailHolder>() {
 
     var listData = mutableListOf<PopupStoreItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): orderDetailHolder {
@@ -53,13 +57,14 @@ class OrderDetailAdapter(
                     binding.orderDetailListCnt.text = item.totalQuantity.toString()
                     notifyItemChanged(bindingAdapterPosition)
                     onAmountChanged(bindingAdapterPosition, item.totalQuantity, "plus")
+                }else if(item.totalQuantity==item.orderLimit){
+                    Toast.makeText(context, "주문 가능한 최대 수량입니다", Toast.LENGTH_SHORT).show()
                 }
             }
 
             binding.orderDetailClose.setOnClickListener {
                 val position = bindingAdapterPosition
                 val item = listData.removeAt(position)
-                Log.d("jjrr", listData.size.toString())
                 notifyItemRemoved(position)
                 onItemRemoved(position, item)
             }

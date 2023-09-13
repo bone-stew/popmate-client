@@ -25,15 +25,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val pref = getSharedPreferences("autoLogin", 0)
+        val jwtToken =pref.getString("JwtToken", "").toString()
+        Log.d("dddddd", jwtToken)
         Log.d("dddddd", ApiClient.getJwtToken().toString())
+
+        ApiClient.setJwtToken(jwtToken)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_home -> setCurrentFragment(HomeFragment(), false)
                 R.id.page_popupstore -> setCurrentFragment(PopupStoreFragment(), false)
-                R.id.page_mypage -> if(ApiClient.getJwtToken()==null){
+                R.id.page_mypage -> if(jwtToken==""){
                     setCurrentFragment(MyPageLoginFragment(), false)
                 }else{
+                    ApiClient.setJwtToken(jwtToken)
                     setCurrentFragment(MyPageLogoutFragment(), false)
                 }
             }
