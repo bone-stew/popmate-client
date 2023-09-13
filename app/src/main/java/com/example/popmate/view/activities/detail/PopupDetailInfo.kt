@@ -63,9 +63,19 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
                 }
                 val address =  it.department.placeDescription + " " + it.placeDetail
                 locationDetailText.text = address
-                locationDetailText.setOnClickListener {
                     val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                     val clipData = ClipData.newPlainText("locationDetail", address)
+                locationCopyBtn.setOnClickListener {
+                    clipboard.setPrimaryClip(clipData)
+                    Toast.makeText(
+                        context,
+                        "주소가 복사되었습니다",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                locationDetailText.setOnClickListener {
+//                    val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+//                    val clipData = ClipData.newPlainText("locationDetail", address)
                     clipboard.setPrimaryClip(clipData)
                     Toast.makeText(
                         context,

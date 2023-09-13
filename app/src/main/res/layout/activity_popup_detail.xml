@@ -132,6 +132,7 @@
             android:background="@drawable/button_radius"
             android:backgroundTint="@color/orange_light"
             android:text="예약하기"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="@dimen/h4"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -145,7 +146,7 @@
             android:backgroundTint="@color/orange_light"
             android:text="입장하기"
             android:textColor="@color/white"
-            android:textSize="@dimen/h4"
+          android:textSize="@dimen/h4"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -156,8 +157,7 @@
             layout="@layout/order_btn_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+          app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
