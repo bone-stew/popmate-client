@@ -16,7 +16,8 @@ import retrofit2.Response
 
 class ReservationViewModel : ViewModel() {
     val count = ObservableField(1)
-    val isReservationPending = ObservableField(false)
+    val maxGuestCount: Int = 6
+    private val isReservationPending = ObservableField(false)
 
     private var _popupStoreId: Long? = null
     val popupStoreId: Long?
@@ -31,12 +32,9 @@ class ReservationViewModel : ViewModel() {
         get() = _toastMessage
 
 
-    private val _currentReservation: MutableLiveData<CurrentReservationResponse> by lazy {
-        MutableLiveData<CurrentReservationResponse>().also {
-//            loadCurrentReservation()
-        }
-    }
-    val currentReservation: LiveData<CurrentReservationResponse> = _currentReservation
+    private val _currentReservation = MutableLiveData<CurrentReservationResponse?>()
+
+    val currentReservation: MutableLiveData<CurrentReservationResponse?> = _currentReservation
 
 
     fun getCurrentReservation(popupStoreId: Long) {
@@ -44,19 +42,17 @@ class ReservationViewModel : ViewModel() {
         loadCurrentReservation(_popupStoreId!!)
     }
 
-    fun showToast(message: String) {
-        _toastMessage.value = message
-    }
-
     fun increment() {
         val currentCount = count.get() ?: 0
-        count.set(currentCount + 1)
+        if (currentCount < maxGuestCount) {
+            count.set(currentCount + 1) // 6명 이하 예약해야 함
+        }
     }
 
     fun decrement() {
         val currentCount = count.get() ?: 0
         if (currentCount > 1) {
-            count.set(currentCount - 1)
+            count.set(currentCount - 1) // 1명 이상 예약해야 함
         }
     }
 
@@ -79,7 +75,7 @@ class ReservationViewModel : ViewModel() {
                     } else {
                         Log.d("smh", "response: ${response.body()?.message}")
                         if (response.code() == 404) {
-                            Log.d("smh", "진행중인 예약이 없습니다")
+                            Log.d("smh", "진행 중인 예약이 없습니다")
                             _currentReservation.postValue(null)
                         }
                     }
@@ -110,6 +106,7 @@ class ReservationViewModel : ViewModel() {
                             callback(true)
                         } else if (response.code() == 400) {
                             _toastMessage.value = "이미 예약되었습니다."
+                            callback(false)
                         } else {
                             callback(false)
                         }

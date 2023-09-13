@@ -27,6 +27,7 @@ class ReservationWaitActivity :
 
         initView()
         setObserve()
+        initEvent()
     }
 
     private fun initView() {
@@ -53,7 +54,7 @@ class ReservationWaitActivity :
                 binding.tvPopupStoreCloseTime.text =
                     DateTimeUtils().toTimeString(it.popupStoreCloseTime)
             } else {
-                showToast("진행 중인 예약이 아닙니다")
+                showToast("진행 중인 예약이 없습니다")
                 finish()
             }
         }
@@ -62,9 +63,15 @@ class ReservationWaitActivity :
     private fun setObserve() {
         binding.btnMinus.setOnClickListener {
             viewModel.decrement()
+            if (viewModel.count.get() == viewModel.maxGuestCount) {
+                binding.btnMinus.isEnabled = false
+            }
         }
         binding.btnPlus.setOnClickListener {
             viewModel.increment()
+            if (viewModel.count.get() == 1) {
+                binding.btnMinus.isEnabled = false
+            }
         }
         binding.btnReserve.setOnClickListener {
             viewModel.reserve { isSuccess ->
@@ -85,6 +92,12 @@ class ReservationWaitActivity :
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun initEvent() {
+        binding.layoutPageTitle.imgArrow.setOnClickListener {
+            finish()
+        }
     }
 
     private fun showToast(message: String) {
