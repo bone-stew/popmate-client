@@ -40,6 +40,7 @@ class PopupDetailViewModel() : ViewModel() {
                     call: Call<ApiResponse<PopupStore>>,
                     response: Response<ApiResponse<PopupStore>>
                 ) {
+                    Log.i("HELLO",response.body()?.data!!.toString() )
                     _loading.value = false
                     _store.value = response.body()?.data!!
                     _status.value = response.body()?.data!!.status == 1

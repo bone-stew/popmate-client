@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -39,7 +40,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private var rowsToGet = null
 
     companion object {
-        private const val TWO_POPUPSTORES_WIDTH = 362
+        private const val TWO_POPUPSTORES_WIDTH = 330
     }
 
     override fun onCreateView(
@@ -68,7 +69,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
-                popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, 0, 0)
+                popupstoreRecyclerView.setPadding(desiredPadding.toInt()-8, 0, desiredPadding.toInt(), 0)
             }
         }
 
@@ -142,7 +143,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 .addToBackStack(null)
                 .commit()
         }
-        val calendarLayout = view.findViewById<LinearLayout>(R.id.calendarLayout)
+        val calendarLayout = view.findViewById<ConstraintLayout>(R.id.calendarLayout)
         calendarLayout.setOnClickListener {
             val bottomSheetFragment = CalendarBottomSheetFragment()
             bottomSheetFragment.setDataListener(this)

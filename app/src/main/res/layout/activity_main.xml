@@ -37,6 +37,8 @@
     app:itemBackground="@color/white"
     app:itemIconTint="@color/bottom_nav_item_text_color"
     app:itemTextColor="@color/bottom_nav_item_text_color"
+    app:itemTextAppearanceActive="@style/TabTextStyle"
+    app:itemTextAppearanceInactive="@style/TabTextStyle"
     />
 
 
