@@ -27,7 +27,11 @@
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- LoginActivity 부분-->
@@ -68,11 +72,6 @@
             android:name=".view.activities.order.OrderActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
