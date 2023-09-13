@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMyReservationDetailBinding
-import com.example.popmate.model.data.remote.reservation.toLocalDateTime
 import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.viewmodel.reservation.MyReservationDetailViewModel
 
@@ -28,9 +27,10 @@ class MyReservationDetailActivity :
     }
 
     private fun initView() {
-        Log.d("MyReservationDetailActivity", "initView: ")
+        viewModel.reservationId = intent.getLongExtra("reservationId", -1)
         println("viewModel.reservationId = ${viewModel.reservationId}")
 
+        viewModel.loadMyReservationDetail(viewModel.reservationId)
         viewModel.myReservation.observe(this) {
             Log.d("MyReservationDetailActivity", "initView: $it")
             binding.tvPopupStoreName.text = it.popupStoreTitle

@@ -8,9 +8,9 @@ data class MyReservationsResponse(
     data class MyReservationResponse(
         val bannerImgUrl: String,
         val endTime: String,
-        val popupStoreId: Int,
+        val popupStoreId: Long,
         val popupStoreTitle: String,
-        val reservationId: Int,
+        val reservationId: Long,
         val reservationStatus: String,
         val startTime: String
     )
