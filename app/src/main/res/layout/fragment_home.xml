@@ -77,6 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="오늘 방문한 팝업스토어"
+        android:textStyle="bold"
         android:layout_marginLeft="16dp"
         android:gravity="start|center_vertical"
         android:layout_marginVertical="23dp"
@@ -112,6 +113,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="팝메이트가 추천하는 특별한 공간"
+        android:textStyle="bold"
         android:gravity="start|center_vertical"
         android:layout_marginVertical="23dp"
         android:textSize="@dimen/h4"/>
@@ -163,8 +165,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="끝나기전에 방문하세요!"
+        android:textStyle="bold"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="15dp"
         android:gravity="start|center_vertical"
         android:layout_marginLeft="16dp"
         android:textSize="@dimen/h4"/>

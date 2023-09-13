@@ -33,6 +33,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constrainedWidth="true"
       android:textSize="@dimen/h8"
+      android:textStyle="bold"
       app:layout_constraintHorizontal_bias="0.0"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp" />
