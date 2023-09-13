@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
@@ -26,10 +27,16 @@ class ReservationWaitActivity :
 
         initView()
         setObserve()
+        initEvent()
     }
 
     private fun initView() {
         val popupStoreId: Long = intent.getLongExtra("id", -1)
+        if (popupStoreId == -1L) {
+            showToast("존재하는 팝업스토어가 아닙니다")
+            finish()
+        }
+        Log.d("smh", "예약시 진입한 popupStoreId: $popupStoreId")
         viewModel.getCurrentReservation(popupStoreId)
         viewModel.currentReservation.observe(this) {
             if (it != null) {
@@ -46,6 +53,9 @@ class ReservationWaitActivity :
                     DateTimeUtils().toTimeString(it.popupStoreOpenTime)
                 binding.tvPopupStoreCloseTime.text =
                     DateTimeUtils().toTimeString(it.popupStoreCloseTime)
+            } else {
+                showToast("진행 중인 예약이 없습니다")
+                finish()
             }
         }
     }
@@ -53,21 +63,40 @@ class ReservationWaitActivity :
     private fun setObserve() {
         binding.btnMinus.setOnClickListener {
             viewModel.decrement()
+            if (viewModel.count.get() == viewModel.maxGuestCount) {
+                binding.btnMinus.isEnabled = false
+            }
         }
         binding.btnPlus.setOnClickListener {
             viewModel.increment()
+            if (viewModel.count.get() == 1) {
+                binding.btnMinus.isEnabled = false
+            }
         }
         binding.btnReserve.setOnClickListener {
             viewModel.reserve { isSuccess ->
                 if (isSuccess) {
-                    Log.d("Reservation", "예약 성공")
+                    Log.d("smh", "예약 성공")
                     showReservationSuccessDialog()
+                    binding.btnReserve.isEnabled = false
+                    binding.btnReserve.text = "예약 완료"
                 } else {
-                    Log.d("Reservation", "예약 실패")
+                    Log.d("smh", "예약 실패")
                     showToast("예약이 마감되었습니다.")
                     initView() // 예약 실패 시 다음 예약을 위해 초기화
                 }
             }
+        }
+        viewModel.toastMessage.observe(this, Observer { message ->
+            if (!message.isNullOrEmpty()) {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun initEvent() {
+        binding.layoutPageTitle.imgArrow.setOnClickListener {
+            finish()
         }
     }
 

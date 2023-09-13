@@ -24,6 +24,7 @@ class MyReservationDetailActivity :
         binding.lifecycleOwner = this
 
         initView()
+        initEvent()
     }
 
     private fun initView() {
@@ -32,7 +33,7 @@ class MyReservationDetailActivity :
 
         viewModel.loadMyReservationDetail(viewModel.reservationId)
         viewModel.myReservation.observe(this) {
-            Log.d("MyReservationDetailActivity", "initView: $it")
+            Log.d("smh", "initView: $it")
             binding.tvPopupStoreName.text = it.popupStoreTitle
             binding.tvVisitPeopleCount.text = it.guestCount.toString()
             binding.tvVisitLocation.text = it.popupStorePlaceDetail
@@ -47,6 +48,15 @@ class MyReservationDetailActivity :
             Glide.with(this)
                 .load(it.reservationQrImageUrl)
                 .into(binding.imgReservationQr)
+            if (it.reservationStatus == "VISITED") {
+                binding.imgVisitedSuccess.visibility = android.view.View.VISIBLE
+            }
+        }
+    }
+
+    private fun initEvent() {
+        binding.layoutTitleSimple.imgArrow.setOnClickListener {
+            finish()
         }
     }
 }
