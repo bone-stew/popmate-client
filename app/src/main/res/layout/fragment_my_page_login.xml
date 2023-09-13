@@ -106,7 +106,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="오픈소스 라이선스"
+                android:text="오픈소스"
                 android:textColor="@color/black"
                 android:textSize="@dimen/h4" />
 
