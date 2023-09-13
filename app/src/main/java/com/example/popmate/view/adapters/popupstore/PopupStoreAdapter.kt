@@ -3,7 +3,6 @@ package com.example.popmate.view.adapters.popupstore
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
-
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -55,6 +54,7 @@ class PopupStoreAdapter(
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize) {
             binding.popupstore = popupStore
+            binding.itemImageView.clipToOutline = true
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
         }
@@ -73,14 +73,21 @@ class PopupStoreAdapter(
         }
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
+            binding.itemImageView.clipToOutline = true
             binding.popupstore = popupStore
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
             val isOdd = popupStores.size % 2 == 1
 
+//            val displayMetrics = Resources.getSystem().displayMetrics
+//            val screenWidth = displayMetrics.widthPixels
+//
+//            val horizontalPadding = pxToDp(screenWidth - dpToPx(150 * 2) / 2)
+//            Log.i("HELLO", horizontalPadding.toString())
+
             if (isGridLayout) {
                 if (isOdd) {
-
+//                    binding.root.setPadding(5, 0,0,0)
                     if (position >= popupStores.size - 1) {
                         setLayout(binding)
                     }
@@ -89,6 +96,7 @@ class PopupStoreAdapter(
                         setLayout(binding)
                     }
                 }
+//                binding.root.setPadding(0, binding.root.paddingTop, 0, binding.root.paddingBottom)
             }
         }
 
@@ -112,6 +120,7 @@ class PopupStoreAdapter(
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
             binding.popupstore = popupStore
+            binding.itemImageView.clipToOutline = true
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
         }

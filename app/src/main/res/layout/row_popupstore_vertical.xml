@@ -10,17 +10,21 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginBottom="10dp">
+
 
     <ImageView
       android:id="@+id/itemImageView"
       android:layout_width="120dp"
       android:layout_height="120dp"
-      android:scaleType="centerCrop"
-      android:src="@drawable/googlelogo"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toTopOf="@id/titleTextView"
+      android:background="@drawable/round_image_view"
+      android:scaleType="centerCrop"
+      android:src="@drawable/googlelogo"
+      android:adjustViewBounds="true"
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp" />
 
@@ -35,6 +39,7 @@
       app:layout_constrainedWidth="true"
       android:textSize="@dimen/h8"
       android:textStyle="bold"
+      android:textColor="@color/black"
       app:layout_constraintHorizontal_bias="0.0"
       android:layout_marginTop="8dp"/>
 
