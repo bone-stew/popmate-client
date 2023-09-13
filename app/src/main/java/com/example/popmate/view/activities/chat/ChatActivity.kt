@@ -30,6 +30,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         roomId = intent.getLongExtra("storeId", 0)
+        val roomTitle = intent.getStringExtra("storeName")
         binding.run {
             chatBox.layoutManager =
                 LinearLayoutManager(this@ChatActivity).apply { this.stackFromEnd = true }
@@ -38,9 +39,10 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
                 if (!message.isNullOrBlank()) sendMessage(message.toString())
                 inputText.text = null
             }
-            finishBtn.setOnClickListener {
+            layoutPageTitle.imgArrow.setOnClickListener {
                 finish()
             }
+            layoutPageTitle.titleText=roomTitle
         }
         model.run {
             enterRoom(roomId)
@@ -48,6 +50,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
             currUser.observe(this@ChatActivity) {
                 this@ChatActivity.currUser = it
                 binding.chatBox.adapter = ChatAdapter(listOf(), it)
+                binding.inputText.hint = it.name + binding.inputText.hint
             }
             chatList.observe(this@ChatActivity) {
                 (binding.chatBox.adapter as ChatAdapter).addChat(it)
