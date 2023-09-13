@@ -40,7 +40,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private var rowsToGet = null
 
     companion object {
-        private const val TWO_POPUPSTORES_WIDTH = 362
+        private const val TWO_POPUPSTORES_WIDTH = 330
     }
 
     override fun onCreateView(
@@ -69,7 +69,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
-                popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, 0, 0)
+                popupstoreRecyclerView.setPadding(desiredPadding.toInt()-8, 0, desiredPadding.toInt(), 0)
             }
         }
 

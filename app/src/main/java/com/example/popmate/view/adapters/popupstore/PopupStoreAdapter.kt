@@ -3,6 +3,8 @@ package com.example.popmate.view.adapters.popupstore
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,25 +73,32 @@ class PopupStoreAdapter(
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
             binding.popupstore = popupStore
-//            if (imageSize == ImageSize.SMALL) {
-//                binding.dateTextView.visibility = View.GONE
-//                binding.locationTextView.text = popupStore.organizer
-//            }
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
             val isOdd = popupStores.size % 2 == 1
-            if (isOdd && isGridLayout) {
-                if (position >= popupStores.size - 1) {
-                    setLayout(binding)
+
+//            val displayMetrics = Resources.getSystem().displayMetrics
+//            val screenWidth = displayMetrics.widthPixels
+//
+//            val horizontalPadding = pxToDp(screenWidth - dpToPx(150 * 2) / 2)
+//            Log.i("HELLO", horizontalPadding.toString())
+
+            if (isGridLayout) {
+                if (isOdd) {
+//                    binding.root.setPadding(5, 0,0,0)
+                    if (position >= popupStores.size - 1) {
+                        setLayout(binding)
+                    }
+                } else if (!isOdd) {
+                    if (position >= popupStores.size - 2) {
+                        setLayout(binding)
+                    }
                 }
-            } else if(!isOdd && isGridLayout) {
-                if (position >= popupStores.size - 2) {
-                    setLayout(binding)
-                }
+//                binding.root.setPadding(0, binding.root.paddingTop, 0, binding.root.paddingBottom)
             }
         }
 
-        fun setLayout(binding: RowPopupstoreVerticalBinding){
+        fun setLayout(binding: RowPopupstoreVerticalBinding) {
             val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
             layoutParams.bottomMargin = dpToPx(130)
             binding.root.layoutParams = layoutParams
@@ -114,7 +123,6 @@ class PopupStoreAdapter(
         }
 
     }
-
 
 
     inner class VisitedViewHolder(private val binding: RowPopupstoreVisitedBinding) :
@@ -207,7 +215,7 @@ class PopupStoreAdapter(
                 is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
                 is VerticalViewHolder -> holder.bind(popupStore, imageSize, position)
                 is VisitedViewHolder -> holder.bind(popupStore)
-                is VerticalSmallViewHolder -> holder.bind(popupStore,imageSize,position)
+                is VerticalSmallViewHolder -> holder.bind(popupStore, imageSize, position)
             }
         }
     }
@@ -238,5 +246,10 @@ class PopupStoreAdapter(
     private fun dpToPx(dp: Int): Int {
         val scale = Resources.getSystem().displayMetrics.density
         return (dp * scale).toInt()
+    }
+
+    private fun pxToDp(px: Int): Int {
+        val scale = Resources.getSystem().displayMetrics.density
+        return (px / scale + 0.5f).toInt()
     }
 }
