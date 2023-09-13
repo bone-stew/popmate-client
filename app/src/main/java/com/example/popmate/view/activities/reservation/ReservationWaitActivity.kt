@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
@@ -68,15 +69,22 @@ class ReservationWaitActivity :
         binding.btnReserve.setOnClickListener {
             viewModel.reserve { isSuccess ->
                 if (isSuccess) {
-                    Log.d("Reservation", "예약 성공")
+                    Log.d("smh", "예약 성공")
                     showReservationSuccessDialog()
+                    binding.btnReserve.isEnabled = false
+                    binding.btnReserve.text = "예약 완료"
                 } else {
-                    Log.d("Reservation", "예약 실패")
+                    Log.d("smh", "예약 실패")
                     showToast("예약이 마감되었습니다.")
                     initView() // 예약 실패 시 다음 예약을 위해 초기화
                 }
             }
         }
+        viewModel.toastMessage.observe(this, Observer { message ->
+            if (!message.isNullOrEmpty()) {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun showToast(message: String) {

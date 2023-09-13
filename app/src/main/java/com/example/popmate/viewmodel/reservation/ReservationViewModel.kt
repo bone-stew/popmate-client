@@ -1,6 +1,7 @@
 package com.example.popmate.viewmodel.reservation
 
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,6 +26,10 @@ class ReservationViewModel : ViewModel() {
     val reservationId: Long?
         get() = _reservationId
 
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String>
+        get() = _toastMessage
+
 
     private val _currentReservation: MutableLiveData<CurrentReservationResponse> by lazy {
         MutableLiveData<CurrentReservationResponse>().also {
@@ -37,6 +42,10 @@ class ReservationViewModel : ViewModel() {
     fun getCurrentReservation(popupStoreId: Long) {
         _popupStoreId = popupStoreId
         loadCurrentReservation(_popupStoreId!!)
+    }
+
+    fun showToast(message: String) {
+        _toastMessage.value = message
     }
 
     fun increment() {
@@ -99,12 +108,12 @@ class ReservationViewModel : ViewModel() {
                     ) {
                         if (response.isSuccessful) {
                             callback(true)
+                        } else if (response.code() == 400) {
+                            _toastMessage.value = "이미 예약되었습니다."
                         } else {
                             callback(false)
                         }
-                        Log.d("Reservation", "request: reservationId $_reservationId")
-                        Log.d("Reservation", "예약 성공 여부: $response")
-                        Log.d("Reservation", "예약 성공 여부: ${response.body()}")
+                        Log.d("smh", "예약 성공 여부: $response")
                     }
 
                     override fun onFailure(
