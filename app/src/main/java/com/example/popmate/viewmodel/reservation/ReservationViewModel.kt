@@ -102,6 +102,7 @@ class ReservationViewModel : ViewModel() {
                         call: Call<ApiResponse<Void>>,
                         response: Response<ApiResponse<Void>>
                     ) {
+                        Log.d("smh", "예약 성공 여부: ${response.body()!!.message}")
                         if (response.isSuccessful) {
                             callback(true)
                         } else if (response.code() == 400) {
@@ -110,7 +111,7 @@ class ReservationViewModel : ViewModel() {
                         } else {
                             callback(false)
                         }
-                        Log.d("smh", "예약 성공 여부: $response")
+
                     }
 
                     override fun onFailure(
