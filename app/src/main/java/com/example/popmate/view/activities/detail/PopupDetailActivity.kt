@@ -61,7 +61,7 @@ class PopupDetailActivity :
                 }
             })
             reserveBtn.setOnClickListener {
-                if (ApiClient.getJwtToken() == null) {
+                if (!ApiClient.loginCheck()) {
                     /**
                      * dialog_lesson_login 다이얼로그 띄우기
                      */
