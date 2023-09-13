@@ -74,8 +74,6 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
                     ).show()
                 }
                 locationDetailText.setOnClickListener {
-//                    val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//                    val clipData = ClipData.newPlainText("locationDetail", address)
                     clipboard.setPrimaryClip(clipData)
                     Toast.makeText(
                         context,

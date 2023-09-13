@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -142,7 +143,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 .addToBackStack(null)
                 .commit()
         }
-        val calendarLayout = view.findViewById<LinearLayout>(R.id.calendarLayout)
+        val calendarLayout = view.findViewById<ConstraintLayout>(R.id.calendarLayout)
         calendarLayout.setOnClickListener {
             val bottomSheetFragment = CalendarBottomSheetFragment()
             bottomSheetFragment.setDataListener(this)

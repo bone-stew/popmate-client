@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -70,6 +71,10 @@ class PopupStoreAdapter(
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
             binding.popupstore = popupStore
+//            if (imageSize == ImageSize.SMALL) {
+//                binding.dateTextView.visibility = View.GONE
+//                binding.locationTextView.text = popupStore.organizer
+//            }
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
             val isOdd = popupStores.size % 2 == 1
@@ -90,6 +95,27 @@ class PopupStoreAdapter(
             binding.root.layoutParams = layoutParams
         }
     }
+
+    inner class VerticalSmallViewHolder(private val binding: RowPopupstoreVerticalSmallBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                val popupStore = popupStores[adapterPosition]
+                val intent = Intent(context, PopupDetailActivity::class.java)
+                intent.putExtra("id", popupStore.popupStoreId)
+                context.startActivity(intent)
+            }
+        }
+
+        fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
+            binding.popupstore = popupStore
+            setImage(binding.itemImageView, popupStore.bannerImgUrl)
+            adjustImageSize(binding.itemImageView, imageSize)
+        }
+
+    }
+
+
 
     inner class VisitedViewHolder(private val binding: RowPopupstoreVisitedBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -134,10 +160,14 @@ class PopupStoreAdapter(
             }
 
             ViewHolderType.VERTICAL_LARGE.ordinal,
-            ViewHolderType.VERTICAL_MEDIUM.ordinal,
-            ViewHolderType.VERTICAL_SMALL.ordinal -> {
+            ViewHolderType.VERTICAL_MEDIUM.ordinal -> {
                 val binding = RowPopupstoreVerticalBinding.inflate(inflater, parent, false)
                 VerticalViewHolder(binding, false)
+            }
+
+            ViewHolderType.VERTICAL_SMALL.ordinal -> {
+                val binding = RowPopupstoreVerticalSmallBinding.inflate(inflater, parent, false)
+                VerticalSmallViewHolder(binding)
             }
 
             ViewHolderType.VERTICAL_LARGE_GRID.ordinal -> {
@@ -177,6 +207,7 @@ class PopupStoreAdapter(
                 is HorizontalViewHolder -> holder.bind(popupStore, imageSize)
                 is VerticalViewHolder -> holder.bind(popupStore, imageSize, position)
                 is VisitedViewHolder -> holder.bind(popupStore)
+                is VerticalSmallViewHolder -> holder.bind(popupStore,imageSize,position)
             }
         }
     }

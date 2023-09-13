@@ -87,7 +87,7 @@ class SearchFragment : Fragment() {
             binding.closingSoonText.visibility = View.VISIBLE
             binding.horizontalView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.horizontalView.adapter =
-                PopupStoreAdapter(requireContext(), recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_MEDIUM)
+                PopupStoreAdapter(requireContext(), recentlyViewedStores, PopupStoreAdapter.ViewHolderType.VERTICAL_SMALL)
         }
 
     }

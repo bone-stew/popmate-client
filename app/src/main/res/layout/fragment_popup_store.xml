@@ -110,7 +110,7 @@
     <include
       android:id="@+id/calendarLayout"
       layout="@layout/btn_calendar"
-      android:layout_width="107dp"
+      android:layout_width="wrap_content"
       android:layout_height="27dp"
       android:layout_marginTop="20dp"
       android:layout_marginEnd="20dp"
