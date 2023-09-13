@@ -34,7 +34,7 @@ class CancelReservationFragment :
     }
 
     private fun setObserve() {
-        viewModel.noReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
+        viewModel.noCanceledReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
             binding.noReservationsText.visibility = visibility
         }
     }
