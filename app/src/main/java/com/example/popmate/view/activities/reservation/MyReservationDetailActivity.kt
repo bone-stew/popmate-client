@@ -24,6 +24,7 @@ class MyReservationDetailActivity :
         binding.lifecycleOwner = this
 
         initView()
+        initEvent()
     }
 
     private fun initView() {
@@ -47,6 +48,12 @@ class MyReservationDetailActivity :
             Glide.with(this)
                 .load(it.reservationQrImageUrl)
                 .into(binding.imgReservationQr)
+        }
+    }
+
+    private fun initEvent() {
+        binding.layoutTitleSimple.imgArrow.setOnClickListener {
+            finish()
         }
     }
 }
