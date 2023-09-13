@@ -1,7 +1,11 @@
 package com.example.popmate.model.data.remote.reservation
 
-data class ReservationRequest (
+data class ReservationRequest(
     val guestCount: Int,
-    val latitude: Double? = 127.123, // TODO: API 스펙 변경 예정
-    val longitude: Double? = 37.123,
+    val wifiList: List<Wifi>
+)
+
+data class Wifi(
+    val bssid: String,
+    val ssid: String
 )

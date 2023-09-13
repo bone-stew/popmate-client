@@ -1,7 +1,6 @@
 package com.example.popmate.viewmodel.reservation
 
 import android.util.Log
-import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.reservation.CurrentReservationResponse
 import com.example.popmate.model.data.remote.reservation.ReservationRequest
+import com.example.popmate.model.data.remote.reservation.Wifi
 import com.example.popmate.model.repository.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -96,13 +96,13 @@ class ReservationViewModel : ViewModel() {
         val guestCount = count.get() ?: 0
         _reservationId?.let {
             // 예약하기 버튼 클릭 시 동작
-            ApiClient.reservationService.reserve(_reservationId!!, ReservationRequest(guestCount))
+            ApiClient.reservationService.reserve(_reservationId!!, ReservationRequest(guestCount, getCurrentLocation()))
                 .enqueue(object : Callback<ApiResponse<Void>> {
                     override fun onResponse(
                         call: Call<ApiResponse<Void>>,
                         response: Response<ApiResponse<Void>>
                     ) {
-                        Log.d("smh", "예약 성공 여부: ${response.body()!!.message}")
+                        Log.d("smh", "예약 성공 여부: ${response}")
                         if (response.isSuccessful) {
                             callback(true)
                         } else if (response.code() == 400) {
@@ -130,5 +130,15 @@ class ReservationViewModel : ViewModel() {
 
         // retrofit 호출 후
         isReservationPending.set(false)
+    }
+
+    /**
+     * 임시 wifi 정보
+     */
+    private fun getCurrentLocation(): List<Wifi> {
+        return listOf(
+            Wifi("bssid", "ssid"),
+            Wifi("00:11:22:33:44:55", "ssid2")
+        )
     }
 }
