@@ -20,6 +20,7 @@
       android:scaleType="centerCrop"
       android:src="@drawable/googlelogo"
       android:layout_marginLeft="0dp"
+      android:background="@drawable/round_image_view"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent" />
@@ -31,6 +32,7 @@
       android:text="@{popupstore.title}"
       android:textSize="@dimen/h8"
       android:textStyle="bold"
+      android:textColor="@color/black"
       app:layout_constraintStart_toEndOf="@id/itemImageView"
       app:layout_constraintTop_toTopOf="@id/itemImageView"
       app:layout_constraintEnd_toEndOf="parent"
@@ -57,9 +59,9 @@
       android:textSize="@dimen/h5"
       android:textColor="@color/tx_light_gray"
       app:layout_constraintStart_toEndOf="@id/itemImageView"
-      app:layout_constraintBottom_toTopOf="@id/locationTextView"
+      app:layout_constraintTop_toBottomOf="@id/organizerTextView"
       app:layout_constraintEnd_toEndOf="parent"
-      android:layout_marginTop="17dp"
+      android:layout_marginTop="10dp"
       android:layout_marginBottom="4dp"
       android:layout_marginStart="17dp"/>
 
@@ -71,7 +73,7 @@
       android:textSize="@dimen/h5"
       android:textColor="@color/tx_light_gray"
       app:layout_constraintStart_toEndOf="@id/itemImageView"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/dateTextView"
       app:layout_constraintEnd_toEndOf="parent"
       android:layout_marginTop="4dp"
       android:layout_marginBottom="4dp"

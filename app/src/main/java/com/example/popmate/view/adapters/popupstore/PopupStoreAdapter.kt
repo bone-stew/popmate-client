@@ -54,6 +54,7 @@ class PopupStoreAdapter(
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize) {
             binding.popupstore = popupStore
+            binding.itemImageView.clipToOutline = true
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
         }
@@ -72,6 +73,7 @@ class PopupStoreAdapter(
         }
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
+            binding.itemImageView.clipToOutline = true
             binding.popupstore = popupStore
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
@@ -118,6 +120,7 @@ class PopupStoreAdapter(
 
         fun bind(popupStore: PopupStore, imageSize: ImageSize, position: Int) {
             binding.popupstore = popupStore
+            binding.itemImageView.clipToOutline = true
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
         }

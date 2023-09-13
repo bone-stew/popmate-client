@@ -50,7 +50,13 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         val screenWidthInPixels = resources.displayMetrics.widthPixels
         val screenDensity = resources.displayMetrics.density
         val screenWidthInDp = screenWidthInPixels / screenDensity
-        val desiredPadding = (screenWidthInDp - TWO_POPUPSTORES_WIDTH) / 2
+        val desiredPadding = (screenWidthInDp - 332) / 2
+
+        Log.i("HELLO", screenWidthInPixels.toString())
+        Log.i("HELLO", screenDensity.toString())
+        Log.i("HELLO", screenWidthInDp.toString())
+//        Log.i("HELLO", binding.toString())
+
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popup_store, container, false)
         viewModel = ViewModelProvider(requireActivity())[PopupStoreListViewModel::class.java]
@@ -69,7 +75,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
-                popupstoreRecyclerView.setPadding(desiredPadding.toInt()-8, 0, desiredPadding.toInt(), 0)
+//                popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, desiredPadding.toInt(), 0)
             }
         }
 
