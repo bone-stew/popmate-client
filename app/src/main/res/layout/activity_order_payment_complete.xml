@@ -10,13 +10,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
         tools:context=".view.activities.order.OrderPaymentCompleteActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_order_payment_complete_first"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:paddingHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,7 +36,6 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:paddingHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layout_order_payment_complete_first">
@@ -85,8 +84,6 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="7dp"
             app:cardElevation="4dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="24dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +130,6 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingHorizontal="20dp"
             android:id="@+id/layout_order_payment_complete_middle"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -237,7 +233,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:paddingHorizontal="20dp"
             android:text="- 결제 취소는 팝업스토어에서 취소 요청 문의 바랍니다."
             android:textColor="@color/tx_gray"
             android:textSize="11dp"
@@ -252,8 +247,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:paddingHorizontal="10dp"
             android:background="@drawable/button_radius"
             android:backgroundTint="@color/orange_light"
             android:gravity="center"

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
@@ -31,8 +32,17 @@ class MyPagePurchaseFragment : Fragment() {
             val data: MutableList<Orders> = binding.orderlistitem?.orderListItemResponses?.toMutableList() ?: mutableListOf()
             val adapter = MyPageOrderAdapter()
             adapter.listData = data
+            if (data.isEmpty()) {
+                binding.txtNoguma.visibility = View.VISIBLE // 뷰를 화면에 보이게 설정
+            } else {
+                binding.txtNoguma.visibility = View.GONE // 뷰를 화면에서 숨김
+            }
             binding.myPagePurchaseRecyclerview.adapter = adapter
             binding.myPagePurchaseRecyclerview.layoutManager = LinearLayoutManager(requireContext())
+            binding.layoutPageTitle.imgArrow.setOnClickListener {
+                val fragmentManager = requireActivity().supportFragmentManager
+                fragmentManager.popBackStack()
+            }
             // 아이템 클릭 이벤트 처리
             adapter.setOnItemClickListener { clickedItem ->
                 val newFragment = MyPagePurchaseDetailFragment(clickedItem)

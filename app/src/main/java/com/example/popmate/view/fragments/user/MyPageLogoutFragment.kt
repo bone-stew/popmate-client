@@ -14,6 +14,7 @@ import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.util.LessonLogoutDialog
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.reservation.MyReservationActivity
+import com.example.popmate.view.activities.user.TermsOfUseActivity
 import com.example.popmate.viewmodel.user.MyPageLogoutViewModel
 
 
@@ -72,6 +73,24 @@ class MyPageLogoutFragment : BaseFragment<FragmentMyPageLogoutBinding, MyPageLog
                 }
             }
             dialog.start()
+        }
+
+        /**
+         * 이용약관 클릭 시 Activity로 이동 (이용약관 url)
+         */
+        binding.layoutMyPageLogoutUse.setOnClickListener {
+            val intent = Intent(context, TermsOfUseActivity::class.java)
+            intent.putExtra("url", "https://naver.com") // 이동할 웹페이지 URL을 넣어주세요.
+            context?.startActivity(intent)
+        }
+
+        /**
+         * 오픈소스 클릭 시 Activity로 이동 (깃허브)
+         */
+        binding.layoutOpensource.setOnClickListener {
+            val intent = Intent(context, TermsOfUseActivity::class.java)
+            intent.putExtra("url", "https://github.com/bone-stew") // 이동할 웹페이지 URL을 넣어주세요.
+            context?.startActivity(intent)
         }
     }
 

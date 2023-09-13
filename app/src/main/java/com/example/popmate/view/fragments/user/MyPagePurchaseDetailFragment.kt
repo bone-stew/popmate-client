@@ -23,7 +23,10 @@ class MyPagePurchaseDetailFragment(private val clickedItem: Orders) : Fragment()
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMyPagePurchaseDetailBinding.inflate(layoutInflater)
-
+        binding.layoutPagePurchaseDetailTitle.imgArrow.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
+        }
         val adapter = MyPageOrderDetailAdapter()
         adapter.listData = clickedItem.orderItemList as MutableList<OrderListItem>
         if(clickedItem.status==0){

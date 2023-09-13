@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.popmate.databinding.FragmentMyPageLoginBinding
 import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.view.activities.login.LoginActivity
+import com.example.popmate.view.activities.user.TermsOfUseActivity
 
 
 class MyPageLoginFragment : Fragment() {
@@ -29,6 +30,20 @@ class MyPageLoginFragment : Fragment() {
             }
             dialog.start()
         }
+
+        binding.gonotion.setOnClickListener {
+            val intent = Intent(context, TermsOfUseActivity::class.java)
+            intent.putExtra("url", "https://naver.com") // 이동할 웹페이지 URL을 넣어주세요.
+            context?.startActivity(intent)
+        }
+
+        binding.gogithub.setOnClickListener {
+            val intent = Intent(context, TermsOfUseActivity::class.java)
+            intent.putExtra("url", "https://github.com/bone-stew") // 이동할 웹페이지 URL을 넣어주세요.
+            context?.startActivity(intent)
+        }
+
+
         // Inflate the layout for this fragment
         return binding.root
     }
