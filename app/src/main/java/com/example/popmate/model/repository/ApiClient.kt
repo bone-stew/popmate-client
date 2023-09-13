@@ -92,6 +92,6 @@ object ApiClient {
     }
 
     fun loginCheck(): Boolean{
-        return jwtToken!=null
+        return jwtToken != null && jwtToken != ""
     }
 }
