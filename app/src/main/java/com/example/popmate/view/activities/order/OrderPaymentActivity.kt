@@ -9,6 +9,7 @@ import com.example.popmate.model.data.remote.order.Payment
 import com.example.popmate.databinding.ActivityOrderPaymentBinding
 import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.order.OrderItemRequest
+import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.repository.ApiClient
@@ -33,6 +34,7 @@ class OrderPaymentActivity : AppCompatActivity() {
     private lateinit var data : ArrayList<PopupStoreItem>
     private var totalAmount = 0
     private var orderName = ""
+    private var placeDetail: OrderPlaceDetailResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityOrderPaymentBinding.inflate(layoutInflater)
@@ -43,7 +45,6 @@ class OrderPaymentActivity : AppCompatActivity() {
             //val storeitem = intent.getSerializableExtra("item") as? ArrayList<PopupStoreItem>
             val storeitem = intent.getParcelableArrayListExtra<PopupStoreItem>("item")
 
-            Log.d("ddd",storeitem.toString())
             if (storeitem != null) {
                 for (value in storeitem) {
                     data.add(value)
@@ -56,11 +57,18 @@ class OrderPaymentActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.txtOrderDetailPaymentWon.text = totalAmount.toString()
-        binding.txtOrderDetailPaymentBottomTotalprice.text = totalAmount.toString()
+
+        if(intent.hasExtra("placeDetail")){
+            placeDetail = intent.getParcelableExtra("placeDetail") as? OrderPlaceDetailResponse
+        }
+
+        binding.txtOrderDetailPaymentPopupstoreName.text = placeDetail?.title
+        binding.txtOrderDetailPaymentDepartment.text = placeDetail?.placeDetail
+
+        binding.txtOrderDetailPaymentTotalprice.text = totalAmount.toString()
 
         val orderId = generateOrderId(10)
-
+        Log.d("ddd", orderId)
         val clientKey = getString(R.string.toss_client_key)
         val uuid = UUID.randomUUID()
         val paymentWidget = PaymentWidget(
@@ -118,9 +126,6 @@ class OrderPaymentActivity : AppCompatActivity() {
                                 ordercomplete(payment)
                             } else {
                                 Log.e("ddd", "서버 응답 실패: ${response.code}")
-                                Log.e("ddd", "서버 응답 실패: ${response.body.toString()}")
-                                Log.e("ddd", "서버 응답 실패: ${response.message}")
-                                Log.e("ddd", "서버 응답 실패: ${response.toString()}")
                             }
 
                         }.start()
@@ -139,7 +144,7 @@ class OrderPaymentActivity : AppCompatActivity() {
     }
 
     private fun generateOrderId(length: Int): String {
-        val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=+"
+        val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_,"
         val random = Random()
         val orderId = StringBuilder()
 
@@ -169,6 +174,7 @@ class OrderPaymentActivity : AppCompatActivity() {
                 Log.d("jja","서버 왔어요")
                 val intent = Intent(this@OrderPaymentActivity,OrderPaymentCompleteActivity::class.java)
                 intent.putExtra("item",data)
+                intent.putExtra("placeDetail",placeDetail)
                 startActivity(intent)
             }
 

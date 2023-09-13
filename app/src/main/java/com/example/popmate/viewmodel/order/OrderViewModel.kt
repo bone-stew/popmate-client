@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.popmate.model.data.remote.ApiResponse
-import com.example.popmate.model.data.remote.order.PlaceDetailResponse
+import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItemsResponse
 import com.example.popmate.model.repository.ApiClient
 import retrofit2.Call
@@ -17,8 +17,8 @@ class OrderViewModel : ViewModel(){
     private val _popupStoreItem : MutableLiveData<PopupStoreItemsResponse> = MutableLiveData<PopupStoreItemsResponse>()
     val popupStoreItem : LiveData<PopupStoreItemsResponse> = _popupStoreItem
 
-    private val _placeDetail : MutableLiveData<PlaceDetailResponse> = MutableLiveData<PlaceDetailResponse>()
-    val placeDetail : LiveData<PlaceDetailResponse> = _placeDetail
+    private val _placeDetail : MutableLiveData<OrderPlaceDetailResponse> = MutableLiveData<OrderPlaceDetailResponse>()
+    val placeDetail : LiveData<OrderPlaceDetailResponse> = _placeDetail
     fun loadList(
         popupStoreId:Long?
     ){
@@ -40,26 +40,26 @@ class OrderViewModel : ViewModel(){
             })
     }
 
-//    fun loadPlaceDetail
-//                (popupStoreId:Long?
-//    ) {
-//        ApiClient.orderService.getPlaceDetails(popupStoreId!!).enqueue(
-//            object : Callback<ApiResponse<PlaceDetailResponse>>{
-//
-//            override fun onResponse(
-//                call: Call<ApiResponse<PlaceDetailResponse>>,
-//                response: Response<ApiResponse<PlaceDetailResponse>>
-//            ) {
-//                _placeDetail.value = response.body()?.data!!
-//                Log.e("jjra", response.body()?.data.toString())
-//            }
-//
-//            override fun onFailure(call: Call<ApiResponse<PlaceDetailResponse>>, t: Throwable) {
-//                Log.e("jjra", "API 요청 실패", t)
-//            }
-//
-//        })
-//    }
+    fun loadPlaceDetail
+                (popupStoreId:Long?
+    ) {
+        ApiClient.orderService.getPlaceDetails(popupStoreId!!).enqueue(
+            object : Callback<ApiResponse<OrderPlaceDetailResponse>>{
+
+            override fun onResponse(
+                call: Call<ApiResponse<OrderPlaceDetailResponse>>,
+                response: Response<ApiResponse<OrderPlaceDetailResponse>>
+            ) {
+                _placeDetail.value = response.body()?.data!!
+                Log.d("jjra", response.body()?.data.toString())
+            }
+
+            override fun onFailure(call: Call<ApiResponse<OrderPlaceDetailResponse>>, t: Throwable) {
+                Log.e("jjra", "API 요청 실패", t)
+            }
+
+        })
+    }
 
 
 }

@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
     android:layout_width="match_parent"
     android:layout_height="165dp"
     android:layout_gravity="center"
@@ -19,7 +21,7 @@
         android:layout_marginTop="23dp"
         android:text="9.12"
         android:textColor="@color/tx_gray"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +32,7 @@
         android:layout_marginTop="23dp"
         android:text="픽업 대기"
         android:textColor="@color/tx_gray"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +40,7 @@
         android:id="@+id/img_list_mypage_bannerimg"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="12dp"
@@ -51,11 +54,11 @@
 
     <LinearLayout
         android:id="@+id/btn_mypage_purchase_detail"
-        android:layout_width="50dp"
+        android:layout_width="65dp"
         android:layout_height="25dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/mypage_rounded_rectangle"
+        android:background="@drawable/mypage_order_rounded_rectangle"
         android:clickable="true"
         android:gravity="center"
         android:orientation="vertical"
@@ -67,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="구매 상세"
             android:textColor="@color/black"
-            android:textSize="8dp" />
+            android:textSize="13dp" />
     </LinearLayout>
 
     <TextView
@@ -77,7 +80,7 @@
         android:layout_marginTop="26dp"
         android:text=" ˙ "
         android:textColor="@color/tx_gray"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintEnd_toStartOf="@+id/txt_list_mypage_purchase_pickup"
         app:layout_constraintStart_toEndOf="@+id/txt_list_mypage_purchase_day"
         app:layout_constraintTop_toTopOf="parent" />
@@ -90,7 +93,7 @@
         android:layout_marginTop="50dp"
         android:text="빵빵이의 생일파티"
         android:textColor="@color/black"
-        android:textSize="13dp"
+        android:textSize="16dp"
         app:layout_constraintStart_toEndOf="@+id/img_list_mypage_bannerimg"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,19 +106,10 @@
         android:layout_marginTop="5dp"
         android:text="무럭무럭 잔 1개 + 투두투두 잇 1개"
         android:textColor="@color/tx_gray"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintStart_toEndOf="@+id/img_list_mypage_bannerimg"
         app:layout_constraintTop_toBottomOf="@+id/txt_mypage_order_detail_store_name" />
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintStart_toEndOf="@+id/txt_mypage_order_detail_store_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow3" />
 
     <TextView
         android:id="@+id/textView23"
@@ -125,7 +119,7 @@
         android:layout_marginTop="12dp"
         android:text="픽업 시간"
         android:textColor="@color/tx_gray"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_list_mypage_bannerimg" />
 
@@ -134,24 +128,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="12dp"
         android:text="9.12"
         android:textColor="@color/black"
-        android:textSize="10dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <TextView
         android:id="@+id/txt_list_mypage_purchase_pickup_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="20dp"
         android:text="10:00"
         android:textColor="@color/black"
-        android:textSize="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_list_mypage_purchase_pickup_day" />
+        android:textSize="13dp"
+        app:layout_constraintStart_toEndOf="@+id/txt_list_mypage_purchase_pickup_day"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

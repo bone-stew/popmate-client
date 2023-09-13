@@ -58,6 +58,10 @@ class MyPageLogoutFragment : BaseFragment<FragmentMyPageLogoutBinding, MyPageLog
             val dialog = LessonLogoutDialog(requireContext())
             dialog.listener = object : LessonLogoutDialog.LessonOkDialogClickedListener{
                 override fun onOkClicked() {
+                    val pref = requireContext().getSharedPreferences("autoLogin", 0)
+                    val editor = pref.edit()
+                    editor.remove("JwtToken")
+                    editor.apply()
                     ApiClient.setJwtToken(null)
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)

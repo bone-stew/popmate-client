@@ -26,6 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class LoginActivity : AppCompatActivity() {
     override fun onBackPressed() {
         onBackPressedDispatcher.onBackPressed()
@@ -79,7 +80,6 @@ class LoginActivity : AppCompatActivity() {
                     // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
-                    Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
                     Log.i("LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
                     getKakaoToken(token.accessToken)
                     nextMainActivity()
@@ -165,6 +165,8 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 val token = response.body()
                 ApiClient.setJwtToken(token?.data?.token.toString())
+                saveToken(token)
+
                 nextMainActivity()
             }
 
@@ -174,6 +176,7 @@ class LoginActivity : AppCompatActivity() {
 
         })
     }
+
 
     // 카카오 토큰 넘겨서 JWT토큰 가져오는 곳
     private fun getKakaoToken(token : String) {
@@ -186,6 +189,7 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 val token = response.body()
                 ApiClient.setJwtToken(token?.data?.token.toString())
+                saveToken(token)
                 nextMainActivity()
             }
 
@@ -203,6 +207,13 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun saveToken(token: ApiResponse<LoginTokenVO>?) {
+        val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
+        val autoLoginEdit = auto.edit()
+        autoLoginEdit.putString("JwtToken",token?.data?.token.toString())
+        autoLoginEdit.apply()
     }
 
 

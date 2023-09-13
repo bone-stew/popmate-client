@@ -1,5 +1,6 @@
 package com.example.popmate.view.fragments.user
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentMyPagePurchaseBinding
 import com.example.popmate.model.data.remote.user.Orders
+import com.example.popmate.view.activities.detail.PopupDetailActivity
 import com.example.popmate.view.adapters.user.MyPageOrderAdapter
 import com.example.popmate.viewmodel.user.OrderListViewModel
 
@@ -38,6 +40,11 @@ class MyPagePurchaseFragment : Fragment() {
                     .replace(R.id.flFragment, newFragment)
                     .addToBackStack(null)
                     .commit()
+            }
+            adapter.setOnImgClickListener {
+                val intent = Intent(context, PopupDetailActivity::class.java)
+                intent.putExtra("id", it)
+                context?.startActivity(intent)
             }
         }
 

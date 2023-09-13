@@ -10,7 +10,7 @@
 
         <variable
             name="placedetail"
-            type="com.example.popmate.model.data.remote.order.PlaceDetailResponse" />
+            type="com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

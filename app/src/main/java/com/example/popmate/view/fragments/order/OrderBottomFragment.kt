@@ -2,17 +2,19 @@ package com.example.popmate.view.fragments.order
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.popmate.R
+import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.view.activities.order.OrderDetailActivity
 
 
-class OrderBottomFragment : Fragment(){
+class OrderBottomFragment(private val placedetail: OrderPlaceDetailResponse?) : Fragment(){
     private lateinit var price: TextView
     private lateinit var cnt: TextView
     var index = 0
@@ -29,6 +31,8 @@ class OrderBottomFragment : Fragment(){
         view.setOnClickListener {
             val intent = Intent(requireContext(), OrderDetailActivity::class.java)
             intent.putExtra("data",hashMap)
+            Log.d("jjra","여기는 ${placedetail.toString()}")
+            intent.putExtra("placeDetail",placedetail)
             startActivity(intent)
         }
         return view

@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.compose.runtime.snapshots.Snapshot.Companion.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityOrderBinding
+import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.data.remote.order.PopupStoreItemsResponse
 import com.example.popmate.view.adapters.order.OnItemClick
@@ -31,7 +31,7 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
 
         // 나중에 popupStoreId로 바꾸면 된다.
         model.loadList(1)
-        //model.loadPlaceDetail(1)
+        model.loadPlaceDetail(1)
 
         model.popupStoreItem.observe(this){
             binding.popupstoreitem = it
@@ -39,17 +39,18 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
             var adapter = OrderAdapter(this)
             adapter.listData = data!!
             binding.orderRecyclerView.adapter = adapter
-            fragment = OrderBottomFragment()
-            supportFragmentManager.beginTransaction()
-                .add(R.id.order_bottom,fragment)
-                .hide(fragment)
-                .commit()
             binding.orderRecyclerView.layoutManager = GridLayoutManager(this,2)
         }
 
         model.placeDetail.observe(this){
             binding.placedetail = it
-            Log.d("jjra", it.toString())
+            val placeDetailResponse = binding.placedetail as OrderPlaceDetailResponse
+            binding.orderPopstoreName.text = placeDetailResponse.title
+            fragment = OrderBottomFragment(placeDetailResponse)
+            supportFragmentManager.beginTransaction()
+                .add(R.id.order_bottom,fragment)
+                .hide(fragment)
+                .commit()
         }
 
         binding.orderBackBtn.setOnClickListener {
