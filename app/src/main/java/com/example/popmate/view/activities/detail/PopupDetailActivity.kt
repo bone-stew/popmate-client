@@ -11,7 +11,10 @@ import com.example.popmate.config.BaseActivity
 import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.ActivityPopupDetailBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.model.repository.ApiClient
+import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.view.activities.chat.ChatActivity
+import com.example.popmate.view.activities.login.LoginActivity
 import com.example.popmate.view.activities.order.OrderActivity
 import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import com.google.android.material.tabs.TabLayout
@@ -25,7 +28,7 @@ class PopupDetailActivity :
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val popupStoreId = intent.getLongExtra("id", -1)
-        Log.d("dddd","1 : ${popupStoreId}")
+        Log.d("dddd", "1 : ${popupStoreId}")
         val model: PopupDetailViewModel by viewModels()
 
         binding.run {
@@ -62,10 +65,22 @@ class PopupDetailActivity :
                 intent.putExtra("id", popupStoreId)
                 startActivity(intent)
             }
-            chatEnterBtn.setOnClickListener {
-                val intent = Intent(applicationContext, ChatActivity::class.java)
-                intent.putExtra("storeId", popupStoreId)
-                startActivity(intent)
+            chatEnterBtnClick.setOnClickListener {
+                if (ApiClient.loginCheck()) {
+                    val intent = Intent(applicationContext, ChatActivity::class.java)
+                    intent.putExtra("storeId", popupStoreId)
+                    intent.putExtra("storeName", model.store.value?.title)
+                    startActivity(intent)
+                } else {
+                    val dialog = LessonLoginDialog(this@PopupDetailActivity)
+                    dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
+                        override fun onOkClicked() {
+                            val intent = Intent(this@PopupDetailActivity, LoginActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    dialog.start()
+                }
             }
         }
 
@@ -81,22 +96,22 @@ class PopupDetailActivity :
         }
 
         model.status.observe(this) {
-            binding.run{
-            if(it == true){
-                reserveBtn.visibility = View.GONE
-                orderLayout.orderBtnPost.visibility = View.VISIBLE
-                orderLayout.reserveBtnPost.visibility = View.VISIBLE
-            } else{
-                reserveBtn.visibility = View.VISIBLE
-                orderLayout.orderBtnPost.visibility = View.GONE
-                orderLayout.reserveBtnPost.visibility = View.GONE
-            }
+            binding.run {
+                if (it == true) {
+                    reserveBtn.visibility = View.GONE
+                    orderLayout.orderBtnPost.visibility = View.VISIBLE
+                    orderLayout.reserveBtnPost.visibility = View.VISIBLE
+                } else {
+                    reserveBtn.visibility = View.VISIBLE
+                    orderLayout.orderBtnPost.visibility = View.GONE
+                    orderLayout.reserveBtnPost.visibility = View.GONE
+                }
             }
         }
 
-        model.loading.observe(this){ isLoading ->
-            binding.run{
-                if(isLoading){
+        model.loading.observe(this) { isLoading ->
+            binding.run {
+                if (isLoading) {
                     reserveBtn.visibility = View.GONE
                     orderLayout.orderBtnPost.visibility = View.GONE
                     chatEnterBtn.visibility = View.GONE
@@ -134,7 +149,7 @@ class PopupDetailActivity :
             .replace(binding.detailMainFrame.id, PopupDetailInfo.newInstance()).commit()
         binding.run {
             chatEnterBtn.visibility = View.GONE
-            if(model.status.value==true){
+            if (model.status.value == true) {
                 orderLayout.orderBtnPost.visibility = View.VISIBLE
                 orderLayout.reserveBtnPost.visibility = View.VISIBLE
             } else {
@@ -148,7 +163,7 @@ class PopupDetailActivity :
             .replace(binding.detailMainFrame.id, PopupDetailChat.newInstance()).commit()
         binding.run {
             chatEnterBtn.visibility = View.VISIBLE
-            if(model.status.value==true){
+            if (model.status.value == true) {
                 orderLayout.orderBtnPost.visibility = View.GONE
                 orderLayout.reserveBtnPost.visibility = View.GONE
             } else {
