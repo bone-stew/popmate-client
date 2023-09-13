@@ -52,7 +52,7 @@ class ReservationViewModel : ViewModel() {
     }
 
     private fun loadCurrentReservation(popupStoreId: Long) {
-        Log.d("Reservation", "loadCurrentReservation: $popupStoreId")
+        Log.d("smh", "loadCurrentReservation: $popupStoreId")
         ApiClient.reservationService.getCurrentReservation(popupStoreId!!)
             .enqueue(object : Callback<ApiResponse<CurrentReservationResponse>> {
                 override fun onResponse(
@@ -62,18 +62,26 @@ class ReservationViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         val result = response.body()?.data
                         result?.let {
+                            Log.d("smh", "불러온 현재 예약: $it")
                             _reservationId = it.reservationId
                             _currentReservation.postValue(it)
                         }
-                        Log.d("Reservation", "response: $response")
+                        Log.d("smh", "response: $response")
+                    } else {
+                        Log.d("smh", "response: ${response.body()?.message}")
+                        if (response.code() == 404) {
+                            Log.d("smh", "진행중인 예약이 없습니다")
+                            _currentReservation.postValue(null)
+                        }
                     }
+
                 }
 
                 override fun onFailure(
                     call: Call<ApiResponse<CurrentReservationResponse>>,
                     t: Throwable
                 ) {
-                    Log.d("Reservation", "onFailure: $t")
+                    Log.d("smh", "onFailure: ${t.message}")
                 }
 
             })

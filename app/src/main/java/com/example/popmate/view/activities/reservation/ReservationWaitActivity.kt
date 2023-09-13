@@ -30,6 +30,11 @@ class ReservationWaitActivity :
 
     private fun initView() {
         val popupStoreId: Long = intent.getLongExtra("id", -1)
+        if (popupStoreId == -1L) {
+            showToast("존재하는 팝업스토어가 아닙니다")
+            finish()
+        }
+        Log.d("smh", "예약시 진입한 popupStoreId: $popupStoreId")
         viewModel.getCurrentReservation(popupStoreId)
         viewModel.currentReservation.observe(this) {
             if (it != null) {
@@ -46,6 +51,9 @@ class ReservationWaitActivity :
                     DateTimeUtils().toTimeString(it.popupStoreOpenTime)
                 binding.tvPopupStoreCloseTime.text =
                     DateTimeUtils().toTimeString(it.popupStoreCloseTime)
+            } else {
+                showToast("진행 중인 예약이 아닙니다")
+                finish()
             }
         }
     }
