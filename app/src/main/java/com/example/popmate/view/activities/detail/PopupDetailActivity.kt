@@ -38,6 +38,7 @@ class PopupDetailActivity :
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         popupStoreId = intent.getLongExtra("id", -1)
+        
         val model: PopupDetailViewModel by viewModels()
 
         binding.run {
@@ -104,10 +105,22 @@ class PopupDetailActivity :
                     requestWifiScanPermission()
                 }
             }
-            chatEnterBtn.setOnClickListener {
-                val intent = Intent(applicationContext, ChatActivity::class.java)
-                intent.putExtra("storeId", popupStoreId)
-                startActivity(intent)
+            chatEnterBtnClick.setOnClickListener {
+                if (ApiClient.loginCheck()) {
+                    val intent = Intent(applicationContext, ChatActivity::class.java)
+                    intent.putExtra("storeId", popupStoreId)
+                    intent.putExtra("storeName", model.store.value?.title)
+                    startActivity(intent)
+                } else {
+                    val dialog = LessonLoginDialog(this@PopupDetailActivity)
+                    dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
+                        override fun onOkClicked() {
+                            val intent = Intent(this@PopupDetailActivity, LoginActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                    dialog.start()
+                }
             }
         }
 
