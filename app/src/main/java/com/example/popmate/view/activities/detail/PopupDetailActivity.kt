@@ -89,6 +89,7 @@ class PopupDetailActivity :
             }
             orderLayout.orderBtnPost.setOnClickListener {
                 val intent = Intent(applicationContext, OrderActivity::class.java)
+                intent.putExtra("id", popupStoreId)
                 startActivity(intent)
             }
             orderLayout.reserveBtnPost.setOnClickListener {

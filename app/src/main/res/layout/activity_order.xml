@@ -7,6 +7,10 @@
         <variable
             name="popupstoreitem"
             type="com.example.popmate.model.data.remote.order.PopupStoreItemsResponse" />
+
+        <variable
+            name="placedetail"
+            type="com.example.popmate.model.data.remote.order.PlaceDetailResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

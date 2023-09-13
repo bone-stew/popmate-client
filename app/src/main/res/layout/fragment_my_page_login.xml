@@ -14,7 +14,7 @@
         android:layout_marginTop="120dp"
         android:text="로그인해주세요 "
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,6 @@
         app:srcCompat="@drawable/mypage_next" />
 
 
-
     <LinearLayout
         android:id="@+id/roundedRectangle"
         android:layout_width="match_parent"
@@ -40,6 +39,7 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mypage_login">
 
         <LinearLayout
@@ -53,14 +53,14 @@
                 android:layout_weight="3"
                 android:text="버전 정보"
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="@dimen/h4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1.0.0"
                 android:textColor="@color/tx_light_gray"
-                android:textSize="14dp"
+                android:textSize="@dimen/h4"
                 android:textStyle="normal" />
         </LinearLayout>
 
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="이용 약관"
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="@dimen/h4" />
 
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:text="개인정보처리방침"
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="@dimen/h4" />
 
         </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="오픈소스 라이선스"
                 android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:textSize="@dimen/h4" />
 
         </LinearLayout>
 

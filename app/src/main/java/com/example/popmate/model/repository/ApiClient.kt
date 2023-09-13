@@ -21,9 +21,9 @@ import java.io.IOException
 object ApiClient {
     private var jwtToken: String? = null
 
-    //    private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
+        private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
 //    private const val BASE_URL = "http://192.168.0.64:8080/api/v1/"
-    private const val BASE_URL = "https://popmate.xyz/api/v1/"
+//    private const val BASE_URL = "https://popmate.xyz/api/v1/"
 
     private val retrofit: Retrofit by lazy {
 
@@ -80,10 +80,10 @@ object ApiClient {
     val reservationService: ReservationApiService by lazy {
         retrofit.create(ReservationApiService::class.java)
     }
-    fun setJwtToken(token: String) {
+    fun setJwtToken(token: String?) {
         if (token != null) {
             jwtToken = token
-        }
+        }else jwtToken = token
     }
 
     fun getJwtToken(): String? {

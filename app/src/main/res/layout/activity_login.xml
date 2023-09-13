@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/login_main_name"
-        android:layout_width="125dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:text="팝업 스토어는,"
