@@ -8,6 +8,8 @@ import com.example.popmate.R
 import com.example.popmate.model.data.remote.order.Payment
 import com.example.popmate.databinding.ActivityOrderPaymentBinding
 import com.example.popmate.model.data.remote.ApiResponse
+import com.example.popmate.model.data.remote.order.OrderItemRequest
+import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.repository.ApiClient
@@ -32,6 +34,7 @@ class OrderPaymentActivity : AppCompatActivity() {
     private lateinit var data : ArrayList<PopupStoreItem>
     private var totalAmount = 0
     private var orderName = ""
+    private var placeDetail: OrderPlaceDetailResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityOrderPaymentBinding.inflate(layoutInflater)
@@ -39,7 +42,8 @@ class OrderPaymentActivity : AppCompatActivity() {
         setContentView(binding.root)
         data = ArrayList<PopupStoreItem>()
         if (intent.hasExtra("item")) {
-            val storeitem = intent.getSerializableExtra("item") as? ArrayList<PopupStoreItem>
+            //val storeitem = intent.getSerializableExtra("item") as? ArrayList<PopupStoreItem>
+            val storeitem = intent.getParcelableArrayListExtra<PopupStoreItem>("item")
 
             if (storeitem != null) {
                 for (value in storeitem) {
@@ -54,23 +58,29 @@ class OrderPaymentActivity : AppCompatActivity() {
             }
         }
 
+        if(intent.hasExtra("placeDetail")){
+            placeDetail = intent.getParcelableExtra("placeDetail") as? OrderPlaceDetailResponse
+        }
+
+        binding.txtOrderDetailPaymentPopupstoreName.text = placeDetail?.title
+        binding.txtOrderDetailPaymentDepartment.text = placeDetail?.placeDetail
+
+        binding.txtOrderDetailPaymentTotalprice.text = totalAmount.toString()
+
         val orderId = generateOrderId(10)
-//        Log.d("jjy", totalAmount.toString())
-//        Log.d("jjy", orderName)
-//        Log.d("jjy", orderId)
-        
+        Log.d("ddd", orderId)
         val clientKey = getString(R.string.toss_client_key)
         val uuid = UUID.randomUUID()
         val paymentWidget = PaymentWidget(
             activity = this@OrderPaymentActivity,
             clientKey = clientKey,
-            customerKey = uuid.toString(),
+            customerKey = "refefafe@kfe_ffae11",
         )
 
         val paymentMethodWidgetStatusListener = object : PaymentWidgetStatusListener {
             override fun onLoad() {
                 val message = "결제위젯 렌더링 완료"
-                Log.d("ddd", message)
+                Log.d("jja", message)
             }
         }
 
@@ -106,10 +116,10 @@ class OrderPaymentActivity : AppCompatActivity() {
                         // 백그라운드 스레드에서 실행
                         Thread {
                             val response = client.newCall(request).execute()
-                            Log.d("ddd",response.message)
+                            Log.d("ddd", response.toString())
                             if (response.isSuccessful) {
                                 val responseBody = response.body?.string()
-
+                                Log.d("ddd",response.body.toString())
                                 // Gson을 사용하여 JSON을 Payment 객체로 변환
                                 val gson = Gson()
                                 val payment = gson.fromJson(responseBody, Payment::class.java)
@@ -134,7 +144,7 @@ class OrderPaymentActivity : AppCompatActivity() {
     }
 
     private fun generateOrderId(length: Int): String {
-        val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=+"
+        val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_,"
         val random = Random()
         val orderId = StringBuilder()
 
@@ -148,19 +158,28 @@ class OrderPaymentActivity : AppCompatActivity() {
     }
 
     private fun ordercomplete(payment: Payment) {
-        val call : Call<ApiResponse<OrderResponse>> = ApiClient.orderService.orderItems(data, payment.orderId, payment.receipt.url, payment.card.cardType, payment.easyPay, payment.method)
+        Log.d("ddd", "orderComplete")
+        Log.d("ddd", payment.toString())
+        val orderItemRequest = OrderItemRequest(data,payment.orderId, payment.receipt.url, payment.card.cardType,
+            "", payment.method) //payment.easyPay as String
+        Log.d("ddd",orderItemRequest.orderId)
+        Log.d("ddd",orderItemRequest.cardType)
+        Log.d("ddd",orderItemRequest.toString())
+        val call : Call<ApiResponse<OrderResponse>> = ApiClient.orderService.orderItems(orderItemRequest)
         call.enqueue(object : Callback<ApiResponse<OrderResponse>>{
             override fun onResponse(
                 call: Call<ApiResponse<OrderResponse>>,
                 response: Response<ApiResponse<OrderResponse>>
             ) {
+                Log.d("jja","서버 왔어요")
                 val intent = Intent(this@OrderPaymentActivity,OrderPaymentCompleteActivity::class.java)
-                intent.putExtra("data",payment.receipt.url)
+                intent.putExtra("item",data)
+                intent.putExtra("placeDetail",placeDetail)
                 startActivity(intent)
             }
 
             override fun onFailure(call: Call<ApiResponse<OrderResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("jja","서버 실패")
             }
         })
 

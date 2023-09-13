@@ -1,13 +1,19 @@
 package com.example.popmate.view.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMainBinding
+import com.example.popmate.model.repository.ApiClient
+import com.example.popmate.util.LessonLoginDialog
+import com.example.popmate.view.activities.login.LoginActivity
 import com.example.popmate.view.activities.user.MyPageLogoutActivity
 import com.example.popmate.view.fragments.popupstore.HomeFragment
 import com.example.popmate.view.fragments.popupstore.PopupStoreFragment
+import com.example.popmate.view.fragments.user.MyPageLoginFragment
 import com.example.popmate.view.fragments.user.MyPageLogoutFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Stack
@@ -19,13 +25,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val pref = getSharedPreferences("autoLogin", 0)
+        val jwtToken =pref.getString("JwtToken", "").toString()
+        Log.d("dddddd", jwtToken)
+        Log.d("dddddd", ApiClient.getJwtToken().toString())
 
+        ApiClient.setJwtToken(jwtToken)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.page_home -> setCurrentFragment(HomeFragment(), false)
                 R.id.page_popupstore -> setCurrentFragment(PopupStoreFragment(), false)
-                R.id.page_mypage -> setCurrentFragment(MyPageLogoutFragment(), false)
+                R.id.page_mypage -> if(jwtToken==""){
+                    setCurrentFragment(MyPageLoginFragment(), false)
+                }else{
+                    ApiClient.setJwtToken(jwtToken)
+                    setCurrentFragment(MyPageLogoutFragment(), false)
+                }
             }
             true
         }

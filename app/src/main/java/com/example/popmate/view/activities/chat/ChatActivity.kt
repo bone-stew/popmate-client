@@ -12,21 +12,25 @@ import com.example.popmate.model.data.local.Chat
 import com.example.popmate.model.data.local.CurrUser
 import com.example.popmate.model.repository.ApiClient
 import com.google.gson.Gson
+import okhttp3.OkHttpClient
 import ua.naiksoftware.stomp.Stomp
 import ua.naiksoftware.stomp.dto.LifecycleEvent
 import ua.naiksoftware.stomp.dto.StompHeader
+import java.util.concurrent.TimeUnit
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
     private var roomId: Long = 0
-    private val url = "ws://10.0.2.2:8080/ws-chat"
-    private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url)
+    private val url = "wss://popmate.xyz/ws-chat"
+    private val okHttp = OkHttpClient().newBuilder().pingInterval(10, TimeUnit.SECONDS).build()
+    private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url, mapOf(Pair("Authorization", ApiClient.getJwtToken())) ,okHttp)
     private val model: ChatViewModel by viewModels()
     private lateinit var currUser: CurrUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         roomId = intent.getLongExtra("storeId", 0)
+        val roomTitle = intent.getStringExtra("storeName")
         binding.run {
             chatBox.layoutManager =
                 LinearLayoutManager(this@ChatActivity).apply { this.stackFromEnd = true }
@@ -35,15 +39,18 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
                 if (!message.isNullOrBlank()) sendMessage(message.toString())
                 inputText.text = null
             }
-            finishBtn.setOnClickListener {
+            layoutPageTitle.imgArrow.setOnClickListener {
                 finish()
             }
+            layoutPageTitle.titleText=roomTitle
         }
         model.run {
+            enterRoom(roomId)
             loadChatMessage(roomId)
             currUser.observe(this@ChatActivity) {
                 this@ChatActivity.currUser = it
                 binding.chatBox.adapter = ChatAdapter(listOf(), it)
+                binding.inputText.hint = it.name + binding.inputText.hint
             }
             chatList.observe(this@ChatActivity) {
                 (binding.chatBox.adapter as ChatAdapter).addChat(it)

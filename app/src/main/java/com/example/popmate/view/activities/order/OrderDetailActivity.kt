@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
 import com.example.popmate.databinding.ActivityOrderDetailBinding
 import com.example.popmate.model.data.remote.ApiResponse
-import com.example.popmate.model.data.remote.order.OrderResponse
+import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
+import com.example.popmate.model.data.remote.order.StockCheckItemsResponse
 import com.example.popmate.model.repository.ApiClient
 import com.example.popmate.view.adapters.order.OrderDetailAdapter
 import retrofit2.Call
@@ -24,6 +25,7 @@ class OrderDetailActivity : AppCompatActivity() {
     private lateinit var adapter: OrderDetailAdapter
     private var totalAmount = 0
     private lateinit var data : ArrayList<PopupStoreItem>
+    private var placeDetail: OrderPlaceDetailResponse? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderDetailBinding.inflate(layoutInflater)
@@ -40,20 +42,29 @@ class OrderDetailActivity : AppCompatActivity() {
                 }
             }
         }
+        if(intent.hasExtra("placeDetail")){
+            placeDetail = intent.getParcelableExtra("placeDetail") as? OrderPlaceDetailResponse
+            if (placeDetail != null) {
+                binding.txtPopupStoreName.text = placeDetail?.title.toString()
+            }
+        }
 
 
         // 여기서 리사이클러뷰 콜백처리
-        adapter = OrderDetailAdapter(
-            onAmountChanged = {position, totalQuantity , sign->
-                val item = data[position]
-                item.totalQuantity = totalQuantity
+        adapter = placeDetail?.let {
+            OrderDetailAdapter(
+                this,
+                it,
+                onAmountChanged = {position, totalQuantity , sign->
+                    val item = data[position]
+                    item.totalQuantity = totalQuantity
 
-                updateTotalAmount(item, sign)
-            },
-            onItemRemoved = {position, item ->
-                updateTotalAmount(item,"delete")
+                    updateTotalAmount(item, sign)
+                }
+            ) { position, item ->
+                updateTotalAmount(item, "delete")
             }
-        )
+        }!!
         // 리사이클러뷰
         adapter.listData = data
         binding.orderDetailRecyclerview.adapter = adapter
@@ -64,9 +75,6 @@ class OrderDetailActivity : AppCompatActivity() {
         binding.orderDetailTotalPrice.text = totalAmount.toString()
         binding.orderDetailTotalPrice1.text = totalAmount.toString()
 
-
-
-
         // 뒤로가기 처리
         binding.imgActivityOrderDetailBefore.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -76,23 +84,49 @@ class OrderDetailActivity : AppCompatActivity() {
         }
 
         binding.orderDetailBottom.setOnClickListener {
-            Log.d("jjyaf",data.toString())
-            //stockCheck(data)
-            val intent = Intent(this,OrderPaymentActivity::class.java)
-            intent.putExtra("item",data)
-            startActivity(intent)
+            Log.d("jjra",data.toString())
+            stockCheck(data , placeDetail!!)
         }
 
     }
 
+    private fun stockCheck(data: ArrayList<PopupStoreItem>, placeDetail: OrderPlaceDetailResponse) {
+        val call : Call<ApiResponse<StockCheckItemsResponse>> = ApiClient.orderService.checkOrderItemsStock(data)
 
+        call.enqueue(object : Callback<ApiResponse<StockCheckItemsResponse>>{
+            override fun onResponse(
+                call: Call<ApiResponse<StockCheckItemsResponse>>,
+                response: Response<ApiResponse<StockCheckItemsResponse>>
+            ) {
+                var check : Boolean  = true;
+                var message: String = ""
+                val datae = response.body()?.data?.stockCheckItemResponse
+                datae?.forEach { storeCheckItem ->
+                    if(!storeCheckItem.check){
+                        check = false
+                        message += "${storeCheckItem.itemId} 의 재고가 부족합니다\n"
+                    }
+                }
+                if(!check){
+                    Toast.makeText(this@OrderDetailActivity, message, Toast.LENGTH_SHORT).show()
+                }else{
+                    val intent = Intent(this@OrderDetailActivity,OrderPaymentActivity::class.java)
+                    intent.putExtra("item",data)
+                    intent.putExtra("placeDetail",placeDetail)
+                    startActivity(intent)
+                }
+            }
+
+            override fun onFailure(call: Call<ApiResponse<StockCheckItemsResponse>>, t: Throwable) {
+                Log.d("ddd", t.message.toString())
+            }
+
+        })
+    }
 
 
     private fun updateTotalAmount(item: PopupStoreItem, sign : String) {
         if(sign == "plus"){
-            if(item.totalQuantity == item.orderLimit){
-                Toast.makeText(this, "주문 가능한 최대 수량입니다", Toast.LENGTH_SHORT).show()
-            }
             totalAmount += item.amount
             binding.orderDetailTotalPrice.text = totalAmount.toString()
             binding.orderDetailTotalPrice1.text = totalAmount.toString()
@@ -114,4 +148,3 @@ class OrderDetailActivity : AppCompatActivity() {
 
     }
 }
-

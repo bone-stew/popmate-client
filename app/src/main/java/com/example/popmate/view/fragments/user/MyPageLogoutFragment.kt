@@ -9,6 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.config.BaseFragment
 import com.example.popmate.databinding.FragmentMyPageLogoutBinding
+import com.example.popmate.model.repository.ApiClient
+import com.example.popmate.util.LessonLoginDialog
+import com.example.popmate.util.LessonLogoutDialog
+import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.reservation.MyReservationActivity
 import com.example.popmate.viewmodel.user.MyPageLogoutViewModel
 
@@ -45,6 +49,29 @@ class MyPageLogoutFragment : BaseFragment<FragmentMyPageLogoutBinding, MyPageLog
             Log.d("MyPageLogoutFragment", "나의 예약 정보 클릭")
             val intent = Intent(requireContext(), MyReservationActivity::class.java)
             requireContext().startActivity(intent)
+        }
+
+        /**
+         * 로그아웃 클릭 시 MainActivity로 이동
+         */
+        binding.txtMypageLogout.setOnClickListener {
+            val dialog = LessonLogoutDialog(requireContext())
+            dialog.listener = object : LessonLogoutDialog.LessonOkDialogClickedListener{
+                override fun onOkClicked() {
+                    val pref = requireContext().getSharedPreferences("autoLogin", 0)
+                    val editor = pref.edit()
+                    editor.remove("JwtToken")
+                    editor.apply()
+                    ApiClient.setJwtToken(null)
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onCancelClicked() {
+
+                }
+            }
+            dialog.start()
         }
     }
 

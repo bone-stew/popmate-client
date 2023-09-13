@@ -26,7 +26,13 @@ class MyPagePurchaseDetailFragment(private val clickedItem: Orders) : Fragment()
 
         val adapter = MyPageOrderDetailAdapter()
         adapter.listData = clickedItem.orderItemList as MutableList<OrderListItem>
-
+        if(clickedItem.status==0){
+            binding.txtFragmentMyPagePurchaseDetailPickup.text = "픽업 대기중이에요"
+        }else if(clickedItem.status == 1) {
+            binding.txtFragmentMyPagePurchaseDetailPickup.text = "픽업 완료"
+        }else{
+            binding.txtFragmentMyPagePurchaseDetailPickup.text = "주문 취소"
+        }
         binding.recyclerViewMyPagePuchaseDetail.adapter = adapter
         binding.recyclerViewMyPagePuchaseDetail.layoutManager = LinearLayoutManager(requireContext())
         binding.txtFragmentMyPagePurchaseDetailStoreName.text = clickedItem.title

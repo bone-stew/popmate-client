@@ -11,15 +11,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_light_gray"
     tools:context=".view.activities.order.OrderDetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/order_detail_first"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:background="@color/white"
         android:paddingHorizontal="20dp"
         android:paddingBottom="15dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,33 +35,26 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/arrow2" />
 
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="144dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="168dp"
             android:text="팝바구니"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/img_activity_order_detail_before"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/txt_popup_Store_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="전체삭제"
-            android:textColor="@color/tx_gray"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="32dp"
             android:text="SE SO NEON : A Pirateship"
             android:textColor="@color/black"
@@ -72,29 +67,29 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/order_button_radius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView21">
+            app:layout_constraintTop_toBottomOf="@+id/txt_popup_Store_Name">
 
             <ImageView
                 android:id="@+id/yourImageView"
                 android:layout_width="30dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="20dp"
+                android:src="@drawable/papbaguni"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/papbaguni" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="픽업 준비 10분"
-                android:textSize="12sp"
                 android:textColor="@color/black"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/yourImageView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -109,6 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:background="@color/white"
         android:paddingHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -120,6 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingHorizontal="20dp"
+        android:background="@color/white"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -141,6 +138,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@color/white"
         android:paddingHorizontal="20dp"
         android:id="@+id/order_detail_linearLayout2"
         android:layout_width="match_parent"
@@ -172,7 +170,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+
             android:text="원"
             android:textColor="@color/black"
             android:textSize="12sp"/>

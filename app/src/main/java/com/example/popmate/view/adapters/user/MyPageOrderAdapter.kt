@@ -13,9 +13,13 @@ import java.util.Locale
 
 class MyPageOrderAdapter(): RecyclerView.Adapter<MypageOrderHolder>() {
     private var onItemClickListener: ((Orders) -> Unit)? = null
-
+    private var onImgClickListener : ((Long) -> Unit)? = null
     fun setOnItemClickListener(listener: (Orders) -> Unit) {
         onItemClickListener = listener
+    }
+
+    fun setOnImgClickListener(listener: (Long) -> Unit) {
+        onImgClickListener = listener
     }
     var listData = mutableListOf<Orders>()
 
@@ -24,6 +28,16 @@ class MyPageOrderAdapter(): RecyclerView.Adapter<MypageOrderHolder>() {
             parent,false)
 
         val holder = MypageOrderHolder(binding)
+
+        binding.imgListMypageBannerimg.setOnClickListener {
+            val position = holder.bindingAdapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val popupStoreId = listData[position].popupStoreId.toLong()
+                onImgClickListener?.invoke(popupStoreId)
+            }
+            val popupStoreId  = listData[position].popupStoreId.toLong()
+
+        }
 
         binding.btnMypagePurchaseDetail.setOnClickListener {
             val position = holder.bindingAdapterPosition
@@ -54,15 +68,11 @@ class MypageOrderHolder(val binding: ListMypagePurchaseItemBinding) : RecyclerVi
         val outputFormat = SimpleDateFormat("M.d (EEE) ", koreanLocale)
         val timeFormat = SimpleDateFormat("HH:mm", koreanLocale)
 
-        val calendar = Calendar.getInstance()
-        calendar.time = date
-        calendar.add(Calendar.MINUTE, 10)
         val formattedTime = timeFormat.format(date)
-        val formattedTime1 = timeFormat.format(calendar.time)
 
         binding.txtListMypagePurchaseDay.text =  outputFormat.format(date)
         binding.txtListMypagePurchasePickupDay.text = outputFormat.format(date)
-        binding.txtListMypagePurchasePickupTime.text = "$formattedTime ~ $formattedTime1"
+        binding.txtListMypagePurchasePickupTime.text = "$formattedTime ~"
         if(item.orderItemList.size == 1){
             binding.txtMypageOrderDetailStoreItems.text = item.orderItemList[0].popupStoreItem.name
         }else{

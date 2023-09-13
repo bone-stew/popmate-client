@@ -1,10 +1,13 @@
 package com.example.popmate.view.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +16,7 @@ import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
 import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.viewmodel.ReservationSuccessViewModel
+
 
 class ReservationSuccessDialogFragment : DialogFragment() {
 
@@ -35,6 +39,25 @@ class ReservationSuccessDialogFragment : DialogFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+//      dialog fragment custom width
+        try {
+            val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val display = windowManager.defaultDisplay
+            val deviceSize = Point()
+            display.getSize(deviceSize)
+            val params = dialog!!.window!!.attributes
+            params.width = (deviceSize.x * 0.9).toInt()
+            params.horizontalMargin = 0.0f
+            dialog!!.window!!.attributes = params
+        } catch (e: Exception) {
+            // regardless
+            e.printStackTrace()
+        }
     }
 
     /**

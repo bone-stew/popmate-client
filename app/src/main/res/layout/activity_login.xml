@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/login_main_name"
-        android:layout_width="125dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2dp"
         android:text="팝업 스토어는,"
@@ -45,6 +45,7 @@
         android:drawableLeft="@drawable/kakao_logo"
         android:paddingLeft="15dp"
         android:text="카카오톡으로 시작하기"
+        android:paddingRight="20dp"
         android:textColor="@color/black"
         android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/google_button"
@@ -59,7 +60,8 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_radius"
         android:drawableLeft="@drawable/google_logo"
-        android:paddingLeft="10dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="25dp"
         android:text="Google로 시작하기"
         android:textColor="@color/black"
         android:textSize="14dp"

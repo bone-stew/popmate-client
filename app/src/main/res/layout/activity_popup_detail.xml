@@ -34,20 +34,19 @@
                     android:adjustViewBounds="true"
                     android:scaleType="center"
                     android:tintMode="src_atop"
-                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintDimensionRatio="4:3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="#80000000" />
 
                 <ImageView
                     android:id="@+id/back_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:src="@drawable/arrow4"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:padding="10dp"
+                    android:src="@drawable/arrow2"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
-
 
                 <TextView
                     android:id="@+id/popupTitle"
@@ -82,7 +81,7 @@
                 <TextView
                     android:id="@+id/eventText"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="60dp"
                     android:background="@drawable/bottom_line"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
@@ -108,11 +107,10 @@
                     android:id="@+id/info_chat_tab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:tabTextColor="@color/tx_gray"
                     android:textSize="@dimen/h4"
+                    app:layout_constraintTop_toBottomOf="@id/eventDetail"
                     app:tabIndicatorColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/eventDetail" >
-                </com.google.android.material.tabs.TabLayout>
+                    app:tabTextColor="@color/tx_gray" />
 
                 <FrameLayout
                     android:id="@+id/detail_main_frame"
@@ -137,20 +135,47 @@
             android:textSize="@dimen/h4"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <Button
+
+        <LinearLayout
             android:id="@+id/chat_enter_btn"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/button_radius"
             android:backgroundTint="@color/orange_light"
             android:text="입장하기"
             android:textColor="@color/white"
-          android:textSize="@dimen/h4"
+            android:textSize="@dimen/h4"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="채팅방에 입장하여 전체 메세지를 확인하세요"
+                android:textColor="@color/black"
+                android:paddingHorizontal="8dp"
+                android:textSize="@dimen/h4"
+                android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:text="메시지 작성을 통해 궁금한 점을 해결할 수도 있어요." />
+
+            <Button
+                android:id="@+id/chat_enter_btn_click"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_radius"
+                android:backgroundTint="@color/orange_light"
+                android:text="입장하기"
+                android:textColor="@color/white"
+                android:textSize="@dimen/h4" />
+        </LinearLayout>
 
         <include
             android:id="@+id/orderLayout"

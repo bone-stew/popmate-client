@@ -32,6 +32,6 @@ class MyPageOrderDetailHolder(val binding: ListMypagePurchaseDetailItemBinding) 
     fun setItems(item: OrderListItem) {
         binding.orderDetailName.text = item.popupStoreItem.name
         binding.orderDetailPrice.text = item.popupStoreItem.amount.toString()
-        binding.txtListMypagePurchaseDetailItemCnt.text = "${item.totalQuantity} 개"
+        binding.txtListMypagePurchaseDetailItemCnt.text = "${item.totalQuantity}개"
     }
 }

@@ -14,4 +14,13 @@ interface ChatApiService {
         @Path("roomId") roomId: Long
     ): Call<ApiResponse<MessagesResponse>>
 
+    @GET("chat/enter/{roomId}")
+    fun enter(
+        @Path("roomId") roomId: Long
+    ): Call<ApiResponse<String>>
+
+    @GET("chat/thumbnail/{roomId}")
+    fun getThumbnail(
+        @Path("roomId") roomId: Long
+    ): Call<ApiResponse<MessagesResponse>>
 }

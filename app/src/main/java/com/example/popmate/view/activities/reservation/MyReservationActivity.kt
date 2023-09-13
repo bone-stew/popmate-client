@@ -18,6 +18,7 @@ class MyReservationActivity :
         binding.lifecycleOwner = this
 
         initView()
+        initEvent()
     }
 
     private fun initView() {
@@ -37,5 +38,11 @@ class MyReservationActivity :
         TabLayoutMediator(layoutVisitTab, vpVisit) { tab, position ->
             tab.text = tabTextList[position]
         }.attach()
+    }
+
+    private fun initEvent() {
+        binding.layoutPageTitle.imgArrow.setOnClickListener {
+            finish()
+        }
     }
 }
