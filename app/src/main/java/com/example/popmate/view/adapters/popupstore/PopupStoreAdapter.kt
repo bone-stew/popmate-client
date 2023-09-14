@@ -35,6 +35,7 @@ class PopupStoreAdapter(
     }
 
     enum class ImageSize {
+        EXTRA_LARGE,
         LARGE,
         MEDIUM,
         SMALL
@@ -77,17 +78,17 @@ class PopupStoreAdapter(
             binding.popupstore = popupStore
             setImage(binding.itemImageView, popupStore.bannerImgUrl)
             adjustImageSize(binding.itemImageView, imageSize)
+
+            if (imageSize == ImageSize.MEDIUM || imageSize == ImageSize.LARGE) {
+                val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.leftMargin = dpToPx(16)
+                binding.root.layoutParams = layoutParams
+            }
             val isOdd = popupStores.size % 2 == 1
 
-//            val displayMetrics = Resources.getSystem().displayMetrics
-//            val screenWidth = displayMetrics.widthPixels
-//
-//            val horizontalPadding = pxToDp(screenWidth - dpToPx(150 * 2) / 2)
-//            Log.i("HELLO", horizontalPadding.toString())
 
             if (isGridLayout) {
                 if (isOdd) {
-//                    binding.root.setPadding(5, 0,0,0)
                     if (position >= popupStores.size - 1) {
                         setLayout(binding)
                     }
@@ -96,7 +97,6 @@ class PopupStoreAdapter(
                         setLayout(binding)
                     }
                 }
-//                binding.root.setPadding(0, binding.root.paddingTop, 0, binding.root.paddingBottom)
             }
         }
 
@@ -209,9 +209,10 @@ class PopupStoreAdapter(
             val popupStore = popupStores[position]
 
             val imageSize = when (viewHolderType) {
-                ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.LARGE
+                ViewHolderType.VERTICAL_LARGE_GRID -> ImageSize.EXTRA_LARGE
                 ViewHolderType.VERTICAL_LARGE -> ImageSize.LARGE
                 ViewHolderType.VERTICAL_SMALL -> ImageSize.SMALL
+                ViewHolderType.HORIZONTAL -> ImageSize.LARGE
                 else -> ImageSize.MEDIUM
             }
             when (holder) {
@@ -237,6 +238,7 @@ class PopupStoreAdapter(
     private fun adjustImageSize(imageView: ImageView, imageSize: ImageSize) {
         val layoutParams = imageView.layoutParams
         val sizeInDp = when (imageSize) {
+            ImageSize.EXTRA_LARGE-> 175
             ImageSize.LARGE -> 150
             ImageSize.SMALL -> 90
             ImageSize.MEDIUM -> 135
