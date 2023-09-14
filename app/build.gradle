@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.popmate"
+        applicationId "com.bonestew.popmate"
         minSdk 26
         targetSdk 33
         versionCode 1
