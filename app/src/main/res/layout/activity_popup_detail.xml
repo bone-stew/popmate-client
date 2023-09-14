@@ -61,6 +61,7 @@
                     app:layout_constraintLeft_toLeftOf="@+id/bannerImage"
                     app:layout_constraintRight_toRightOf="@+id/bannerImage"
                     app:layout_constraintTop_toTopOf="@+id/bannerImage"
+                    android:textStyle="bold"
                     app:layout_constraintVertical_bias="0.2" />
 
                 <TextView
@@ -76,7 +77,7 @@
                     app:layout_constraintLeft_toLeftOf="@+id/bannerImage"
                     app:layout_constraintRight_toRightOf="@+id/bannerImage"
                     app:layout_constraintTop_toTopOf="@+id/bannerImage"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintVertical_bias="0.45" />
 
                 <TextView
                     android:id="@+id/eventText"
@@ -139,14 +140,9 @@
         <LinearLayout
             android:id="@+id/chat_enter_btn"
             android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/button_radius"
-            android:backgroundTint="@color/orange_light"
-            android:text="입장하기"
-            android:textColor="@color/white"
-            android:textSize="@dimen/h4"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/white"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent">
 

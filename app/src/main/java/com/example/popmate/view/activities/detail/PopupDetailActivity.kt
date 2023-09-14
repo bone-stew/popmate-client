@@ -106,6 +106,7 @@ class PopupDetailActivity :
                 }
             }
             chatEnterBtnClick.setOnClickListener {
+                Log.d("kww", "onCreate: ${ApiClient.loginCheck()} ${ApiClient.getJwtToken()}")
                 if (ApiClient.loginCheck()) {
                     val intent = Intent(applicationContext, ChatActivity::class.java)
                     intent.putExtra("storeId", popupStoreId)
