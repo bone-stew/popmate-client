@@ -81,9 +81,14 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.loadHome()
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.loadHome()
+//    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.home.removeObservers(viewLifecycleOwner)
     }
 
 

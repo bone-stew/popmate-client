@@ -79,7 +79,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
-//                popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, desiredPadding.toInt(), 0)
             }
         }
 
@@ -210,6 +209,12 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             rowsToGet
         )
         refreshSearchText()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.storeList.removeObservers(viewLifecycleOwner)
+
     }
 
     private fun refreshSearchText() {
