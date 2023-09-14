@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.popmate.databinding.FragmentMyPageLoginBinding
 import com.example.popmate.util.LessonLoginDialog
+import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.login.LoginActivity
 import com.example.popmate.view.activities.user.TermsOfUseActivity
 
@@ -25,6 +26,7 @@ class MyPageLoginFragment : Fragment() {
             dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
                 override fun onOkClicked() {
                     val intent = Intent(requireContext(), LoginActivity::class.java)
+                    intent.putExtra("returnToActivity", MainActivity::class.java.name)
                     startActivity(intent)
                 }
             }

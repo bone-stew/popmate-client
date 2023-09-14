@@ -10,7 +10,6 @@ import com.example.popmate.R
 import com.example.popmate.config.BaseFragment
 import com.example.popmate.databinding.FragmentMyPageLogoutBinding
 import com.example.popmate.model.repository.ApiClient
-import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.util.LessonLogoutDialog
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.reservation.MyReservationActivity
@@ -64,6 +63,7 @@ class MyPageLogoutFragment : BaseFragment<FragmentMyPageLogoutBinding, MyPageLog
                     editor.remove("JwtToken")
                     editor.apply()
                     ApiClient.setJwtToken(null)
+                    ApiClient.setJwtToken("")
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
                 }

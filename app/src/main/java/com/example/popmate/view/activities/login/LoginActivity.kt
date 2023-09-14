@@ -12,7 +12,6 @@ import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.login.GoogleLoginVO
 import com.example.popmate.model.data.remote.login.LoginTokenVO
 import com.example.popmate.model.repository.ApiClient
-import com.example.popmate.view.activities.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -31,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onBackPressed() {
         onBackPressedDispatcher.onBackPressed()
     }
-
+    private var popupStoreId: Long = -1
     private lateinit var binding: ActivityLoginBinding
     private lateinit var gso : GoogleSignInOptions
     private lateinit var gsc : GoogleSignInClient
@@ -204,8 +203,15 @@ class LoginActivity : AppCompatActivity() {
 
     // 다음 Activity로 가는 코드
     private fun nextMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        val returnToActivityName = intent.getStringExtra("returnToActivity")
+        Log.d("ddddd",returnToActivityName.toString())
+        popupStoreId = intent.getLongExtra("id", -1)
+        if (!returnToActivityName.isNullOrEmpty()) {
+            val returnToActivity = Class.forName(returnToActivityName)
+            val intent = Intent(this@LoginActivity, returnToActivity)
+            intent.putExtra("id",popupStoreId)
+            startActivity(intent)
+        }
         finish()
     }
 
@@ -214,6 +220,10 @@ class LoginActivity : AppCompatActivity() {
         val autoLoginEdit = auto.edit()
         autoLoginEdit.putString("JwtToken",token?.data?.token.toString())
         autoLoginEdit.apply()
+        val pref = getSharedPreferences("autoLogin", 0)
+        val jwtToken =pref.getString("JwtToken", "").toString()
+        ApiClient.setJwtToken(jwtToken)
+        Log.d("ddddd",ApiClient.getJwtToken().toString())
     }
 
 
