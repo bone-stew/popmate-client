@@ -15,6 +15,7 @@ import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
 import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.view.activities.MainActivity
+import com.example.popmate.view.activities.detail.PopupDetailActivity
 import com.example.popmate.viewmodel.ReservationSuccessViewModel
 
 
@@ -87,8 +88,10 @@ class ReservationSuccessDialogFragment : DialogFragment() {
     }
 
     private fun initEvent() {
+        val popupStoreId: Long = arguments?.getLong("popupStoreId", 0) ?: 0
         binding.btnClose.setOnClickListener {
-            val intent = Intent(activity, MainActivity::class.java)
+            val intent = Intent(activity, PopupDetailActivity::class.java)
+            intent.putExtra("id", popupStoreId)
             startActivity(intent)
         }
     }
