@@ -30,7 +30,7 @@
 
     <TextView
       android:id="@+id/titleTextView"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@{popupstore.title}"
       app:layout_constraintTop_toBottomOf="@id/itemImageView"
@@ -39,16 +39,18 @@
       app:layout_constrainedWidth="true"
       android:textSize="@dimen/h8"
       android:textStyle="bold"
+      android:maxLines="1"
       android:textColor="@color/black"
       app:layout_constraintHorizontal_bias="0.0"
       android:layout_marginTop="8dp"/>
 
     <TextView
       android:id="@+id/locationTextView"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@{popupstore.placeDetail}"
       android:textSize="@dimen/h5"
+      android:maxLines="2"
       android:textColor="@color/tx_light_gray"
       app:layout_constraintTop_toBottomOf="@id/titleTextView"
       app:layout_constraintStart_toStartOf="parent"
@@ -59,11 +61,12 @@
 
     <TextView
       android:id="@+id/dateTextView"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@{popupstore.openDateFormatted}"
       android:textSize="@dimen/h5"
       android:textColor="@color/tx_light_gray"
+      android:maxLines="1"
       app:layout_constraintTop_toBottomOf="@id/locationTextView"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
