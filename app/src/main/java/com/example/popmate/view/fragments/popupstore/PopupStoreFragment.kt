@@ -1,12 +1,11 @@
 package com.example.popmate.view.fragments.popupstore
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -43,22 +42,27 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         private const val TWO_POPUPSTORES_WIDTH = 330
     }
 
+    inner class GridSpacingDecoration(private val spanCount: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            val position = parent.getChildAdapterPosition(view)
+            val column = position % spanCount
+            outRect.left = spacing - column * spacing / spanCount
+            outRect.right = (column + 1) * spacing / spanCount
+            if (position < spanCount) {
+                outRect.top = spacing
+            }
+            outRect.bottom = spacing
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val screenWidthInPixels = resources.displayMetrics.widthPixels
-        val screenDensity = resources.displayMetrics.density
-        val screenWidthInDp = screenWidthInPixels / screenDensity
-        val desiredPadding = (screenWidthInDp - 332) / 2
-
-        Log.i("HELLO", screenWidthInPixels.toString())
-        Log.i("HELLO", screenDensity.toString())
-        Log.i("HELLO", screenWidthInDp.toString())
-//        Log.i("HELLO", binding.toString())
-
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popup_store, container, false)
+        binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(2, 50))
+
         viewModel = ViewModelProvider(requireActivity())[PopupStoreListViewModel::class.java]
         viewModel.loadList(
             isOpeningSoon,
