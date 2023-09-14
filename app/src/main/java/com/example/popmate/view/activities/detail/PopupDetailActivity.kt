@@ -75,6 +75,10 @@ class PopupDetailActivity :
                     dialog.start()
                     return@setOnClickListener
                 }
+                if (!model.store.value!!.reservationEnabled) {
+                    Toast.makeText(this@PopupDetailActivity, "예약을 하지 않는 팝업스토어입니다", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 /**
                  * 와이파이 권한 요청
                  */

@@ -36,6 +36,13 @@ class DateTimeUtils @Inject constructor() {
         return date.toLocalDateTime().format(DateTimeFormatter.ofPattern("HH시 mm분"))
     }
 
+    /**
+     * String을 MM.dd (D) HH:mm 형식의 String으로 변환
+     */
+    fun toMonthDayTimeString(date: String): String {
+        return date.toLocalDateTime().format(DateTimeFormatter.ofPattern("MM.dd (E) HH:mm"))
+    }
+
     private fun String.toLocalDateTime(): LocalDateTime {
         return LocalDateTime.parse(this)
     }

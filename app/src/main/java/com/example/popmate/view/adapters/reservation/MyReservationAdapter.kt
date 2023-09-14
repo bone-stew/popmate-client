@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.databinding.ItemMyReservationBinding
 import com.example.popmate.model.data.remote.reservation.MyReservationsResponse.MyReservationResponse
+import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.view.activities.detail.PopupDetailActivity
 import com.example.popmate.view.activities.reservation.MyReservationDetailActivity
 
@@ -19,6 +20,7 @@ class MyReservationAdapter(
 
     inner class PreReservationViewHolder(binding: ItemMyReservationBinding) : RecyclerView.ViewHolder(binding.root) {
         val tvVisitStartDate = binding.tvVisitStartDate
+        val tvVisitEndTime = binding.tvVisitEndTime
         val tvPopupStoreName = binding.tvPopupStoreName
         val imgPopupStore = binding.imgPopupStore
         val tvReservationStatus = binding.tvReservationStatus
@@ -59,7 +61,8 @@ class MyReservationAdapter(
         val item = itemList[position]
         holder.tvPopupStoreName.text = item.popupStoreTitle
         holder.tvReservationStatus.text = item.reservationStatus
-        holder.tvVisitStartDate.text = item.startTime
+        holder.tvVisitStartDate.text = DateTimeUtils().toMonthDayTimeString(item.startTime)
+        holder.tvVisitEndTime.text = DateTimeUtils().toTimeString(item.endTime)
         Glide.with(context)
             .load(item.bannerImgUrl)
             .into(holder.imgPopupStore)

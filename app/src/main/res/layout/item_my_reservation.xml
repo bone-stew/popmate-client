@@ -32,7 +32,8 @@
                     android:text="방문 예정"
                     android:textSize="@dimen/h4"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/tx_dark_gray"/>
 
                 <LinearLayout
                     android:id="@+id/layout_reservation_detail"
@@ -50,14 +51,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:text="예약 상세"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h5"
+                        android:textColor="@color/blue_500"/>
 
                     <Button
                         android:id="@+id/btn_reservation_detail"
-                        android:layout_width="10dp"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="3dp"
-                        android:background="@drawable/arrow3" />
+                        android:layout_width="8dp"
+                        android:layout_height="12dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/arrow3"
+                        android:backgroundTint="@color/blue_500"/>
 
                 </LinearLayout>
 
@@ -94,6 +97,7 @@
                         android:layout_marginStart="10dp"
                         android:text="스토어 이름"
                         android:textSize="@dimen/h4"
+                        android:textColor="@color/tx_dark_gray"
                         app:layout_constraintStart_toEndOf="@id/img_popup_store"
                         app:layout_constraintTop_toTopOf="@id/img_popup_store" />
                 </LinearLayout>
@@ -108,15 +112,37 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_popup_store" />
 
-                <TextView
-                    android:id="@+id/tv_visit_start_date"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="9.12 (화) 10:00 ~ 10:15"
-                    android:textSize="@dimen/h5"
+                    android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_visit_start_time" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_visit_start_time">
+
+                    <TextView
+                        android:id="@+id/tv_visit_start_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="9.12 (화) 10:00"
+                        android:textSize="@dimen/h5"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text=" ~ "
+                    android:textSize="@dimen/h5" />
+
+                    <TextView
+                        android:id="@+id/tv_visit_end_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="10:15"
+                    android:textSize="@dimen/h5" />
+                </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView

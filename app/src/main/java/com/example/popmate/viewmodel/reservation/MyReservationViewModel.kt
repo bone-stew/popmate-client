@@ -1,5 +1,6 @@
 package com.example.popmate.viewmodel.reservation
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,8 +24,14 @@ class MyReservationViewModel : BaseViewModel() {
     private val _cancelReservationItems = MutableLiveData<List<MyReservationResponse>>()
     val cancelReservationItems: LiveData<List<MyReservationResponse>> = _cancelReservationItems
 
-    private val _noReservationsTextVisibility = MutableLiveData<Int>()
-    val noReservationsTextVisibility: LiveData<Int> = _noReservationsTextVisibility
+    private val _noPreReservationsTextVisibility = MutableLiveData<Int>()
+    val noPreReservationsTextVisibility: LiveData<Int> = _noPreReservationsTextVisibility
+
+    private val _noPostReservationsTextVisibility = MutableLiveData<Int>()
+    val noPostReservationsTextVisibility: LiveData<Int> = _noPostReservationsTextVisibility
+
+    private val _noCanceledReservationsTextVisibility = MutableLiveData<Int>()
+    val noCanceledReservationsTextVisibility: LiveData<Int> = _noCanceledReservationsTextVisibility
 
     init {
         loadReservationItems()
@@ -43,24 +50,26 @@ class MyReservationViewModel : BaseViewModel() {
                             result.before?.takeIf { it.isNotEmpty() }?.apply {
                                 _preReservationItems.postValue(this)
                             } ?: run {
-                                _noReservationsTextVisibility.postValue(View.VISIBLE)
+                                _noPreReservationsTextVisibility.postValue(View.VISIBLE)
                             }
                             result.after?.takeIf { it.isNotEmpty() }?.apply {
                                 _postReservationItems.postValue(this)
                             } ?: run {
-                                _noReservationsTextVisibility.postValue(View.VISIBLE)
+                                _noPostReservationsTextVisibility.postValue(View.VISIBLE)
                             }
                             result.canceled?.takeIf { it.isNotEmpty() }?.apply {
                                 _cancelReservationItems.postValue(this)
                             } ?: run {
-                                _noReservationsTextVisibility.postValue(View.VISIBLE)
+                                _noCanceledReservationsTextVisibility.postValue(View.VISIBLE)
                             }
                         } else {
-                            _noReservationsTextVisibility.postValue(View.VISIBLE)
+                            _noPreReservationsTextVisibility.postValue(View.VISIBLE)
+                            _noPostReservationsTextVisibility.postValue(View.VISIBLE)
+                            _noCanceledReservationsTextVisibility.postValue(View.VISIBLE)
+                            Log.d("smh", "4")
                         }
                     } else {
-                        _noReservationsTextVisibility.postValue(View.VISIBLE)
-                        // Handle API error here
+                        Log.d("smh", response.toString())
                     }
                 }
 
@@ -68,7 +77,7 @@ class MyReservationViewModel : BaseViewModel() {
                     call: Call<ApiResponse<MyReservationsResponse>>,
                     t: Throwable
                 ) {
-                    TODO("Not yet implemented")
+                    Log.d("smh", t.message.toString())
                 }
             })
     }

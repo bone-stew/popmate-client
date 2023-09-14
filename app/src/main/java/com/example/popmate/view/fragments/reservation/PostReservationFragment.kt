@@ -34,7 +34,7 @@ class PostReservationFragment :
     }
 
     private fun setObserve() {
-        viewModel.noReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
+        viewModel.noPostReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
             binding.noReservationsText.visibility = visibility
         }
     }

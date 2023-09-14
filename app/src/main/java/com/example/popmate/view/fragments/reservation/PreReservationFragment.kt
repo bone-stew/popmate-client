@@ -34,7 +34,7 @@ class PreReservationFragment :
     }
 
     private fun setObserve() {
-        viewModel.noReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
+        viewModel.noPreReservationsTextVisibility.observe(viewLifecycleOwner) { visibility ->
             binding.noReservationsText.visibility = visibility
         }
     }
