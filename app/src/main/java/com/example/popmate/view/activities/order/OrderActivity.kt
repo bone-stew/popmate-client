@@ -30,8 +30,8 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
         val model : OrderViewModel by viewModels()
 
         // 나중에 popupStoreId로 바꾸면 된다.
-        model.loadList(1)
-        model.loadPlaceDetail(1)
+        model.loadList(popupStoreId)
+        model.loadPlaceDetail(popupStoreId)
 
         model.popupStoreItem.observe(this){
             binding.popupstoreitem = it
