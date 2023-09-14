@@ -81,6 +81,8 @@ object ApiClient {
     val reservationService: ReservationApiService by lazy {
         retrofit.create(ReservationApiService::class.java)
     }
+
+
     fun setJwtToken(token: String?) {
         if (token != null) {
             jwtToken = token
