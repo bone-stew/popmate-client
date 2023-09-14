@@ -39,6 +39,7 @@
             android:name=".view.activities.login.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate">
+            
         </activity>
 
 
