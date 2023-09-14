@@ -20,12 +20,13 @@ import java.util.concurrent.TimeUnit
 
 class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
 
+    private val TAG = "ChatActivity"
     private var roomId: Long = 0
+    private lateinit var currUser: CurrUser
     private val url = "wss://popmate.xyz/ws-chat"
     private val okHttp = OkHttpClient().newBuilder().pingInterval(10, TimeUnit.SECONDS).build()
     private val stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, url, mapOf(Pair("Authorization", ApiClient.getJwtToken())) ,okHttp)
     private val model: ChatViewModel by viewModels()
-    private lateinit var currUser: CurrUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,10 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
         val roomTitle = intent.getStringExtra("storeName")
         binding.run {
             chatBox.layoutManager =
-                LinearLayoutManager(this@ChatActivity).apply { this.stackFromEnd = true }
+                LinearLayoutManager(this@ChatActivity).apply {
+                    reverseLayout = true
+                    stackFromEnd = true
+                }
             sendBtn.setOnClickListener {
                 val message = binding.inputText.text
                 if (!message.isNullOrBlank()) sendMessage(message.toString())
@@ -56,8 +60,8 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
                 (binding.chatBox.adapter as ChatAdapter).addChat(it)
                 val position =
                     (binding.chatBox.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-                if (it.size >= 3 && (position == it.size - 2 || it.last().sender == currUser.value?.userId)) binding.chatBox.smoothScrollToPosition(
-                    it.size - 1
+                if (it.size >= 3 && (position == it.size - 2 || it.last().sender == currUser.value?.userId)) binding.chatBox.scrollToPosition(
+                    0
                 )
             }
         }
