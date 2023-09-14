@@ -4,10 +4,12 @@ import android.content.Intent
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.popmate.R
-import com.example.popmate.config.BaseFragment
 import com.example.popmate.databinding.FragmentMyPageLogoutBinding
 import com.example.popmate.model.repository.ApiClient
 import com.example.popmate.util.LessonLogoutDialog
@@ -17,16 +19,24 @@ import com.example.popmate.view.activities.user.TermsOfUseActivity
 import com.example.popmate.viewmodel.user.MyPageLogoutViewModel
 
 
-class MyPageLogoutFragment : BaseFragment<FragmentMyPageLogoutBinding, MyPageLogoutViewModel>(R.layout.fragment_my_page_logout) {
+class MyPageLogoutFragment() : Fragment() {
+    private lateinit var binding : FragmentMyPageLogoutBinding
 
-    override val viewModel: MyPageLogoutViewModel by lazy {
-        ViewModelProvider(this)[MyPageLogoutViewModel::class.java]
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentMyPageLogoutBinding.inflate(layoutInflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+        val model: MyPageLogoutViewModel by viewModels()
+        model.loadUser()
+        model.myName.observe(viewLifecycleOwner) { user ->
+            val name = user?.userName ?: "DefaultUserName"
+            binding.mypageLogin.text = name
+        }
         initEvent()
+
+        return binding.root
     }
 
     private fun initEvent() {
