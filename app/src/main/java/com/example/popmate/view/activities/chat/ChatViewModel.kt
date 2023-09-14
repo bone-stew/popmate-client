@@ -24,7 +24,9 @@ class ChatViewModel : BaseViewModel() {
     val chatList: LiveData<List<Chat>> = _chatList
 
     fun addChat(chat: Chat) {
-        _chatList.postValue(_chatList.value?.plus(chat))
+        val newList: MutableList<Chat> = ArrayList(_chatList.value)
+        newList.add(0, chat)
+        _chatList.postValue(newList)
     }
 
     fun enterRoom(roomId: Long) {
@@ -43,19 +45,19 @@ class ChatViewModel : BaseViewModel() {
     }
 
     fun loadChatMessage(roomId: Long) {
-        ApiClient.chatService.loadMessages(roomId)
+        ApiClient.chatService.loadMessages(roomId = roomId, pageNum = 0)
             .enqueue(object : Callback<ApiResponse<MessagesResponse>> {
                 override fun onResponse(
                     call: Call<ApiResponse<MessagesResponse>>,
                     response: Response<ApiResponse<MessagesResponse>>
                 ) {
+                    Log.d("kww", "onResponse: ${response.body()?.data}")
                     _currUser.postValue(response.body()?.data?.currUser)
                     _chatList.postValue(response.body()?.data?.messages ?: emptyList())
-                    Log.d("kww", "onResponse: ${response.body()?.data}")
                 }
 
                 override fun onFailure(call: Call<ApiResponse<MessagesResponse>>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    t.message?.let { Log.d("kww", it) }
                 }
             })
     }

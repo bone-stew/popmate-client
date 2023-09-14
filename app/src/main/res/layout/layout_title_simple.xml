@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text="@{titleText == null ? `Default Title Text` : titleText}"
             android:textSize="@dimen/h4"
+            android:textColor="@color/tx_dark_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/img_arrow"
