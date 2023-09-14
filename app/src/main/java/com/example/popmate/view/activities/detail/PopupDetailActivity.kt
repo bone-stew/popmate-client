@@ -18,6 +18,7 @@ import com.example.popmate.databinding.ActivityPopupDetailBinding
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.model.repository.ApiClient
 import com.example.popmate.util.LessonLoginDialog
+import com.example.popmate.util.LessonOrderDialog
 import com.example.popmate.view.activities.chat.ChatActivity
 import com.example.popmate.view.activities.login.LoginActivity
 import com.example.popmate.view.activities.order.OrderActivity
@@ -69,7 +70,10 @@ class PopupDetailActivity :
                     dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
                         override fun onOkClicked() {
                             val intent = Intent(this@PopupDetailActivity, LoginActivity::class.java)
+                            intent.putExtra("returnToActivity", PopupDetailActivity::class.java.name)
+                            intent.putExtra("id",popupStoreId)
                             startActivity(intent)
+                            finish()
                         }
                     }
                     dialog.start()
@@ -116,7 +120,10 @@ class PopupDetailActivity :
                     dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
                         override fun onOkClicked() {
                             val intent = Intent(this@PopupDetailActivity, LoginActivity::class.java)
+                            intent.putExtra("returnToActivity", PopupDetailActivity::class.java.name)
+                            intent.putExtra("id",popupStoreId)
                             startActivity(intent)
+                            finish()
                         }
                     }
                     dialog.start()
@@ -230,6 +237,10 @@ class PopupDetailActivity :
             if (model.status.value == true) {
                 orderLayout.orderBtnPost.visibility = View.VISIBLE
                 orderLayout.reserveBtnPost.visibility = View.VISIBLE
+                orderLayout.orderBtnPost.setOnClickListener {
+                    // 안드로이드 출시를 하면 주문 쪽으로 들어가면 안되기 때문에 설정
+                    orderDialog()
+                }
             } else {
                 reserveBtn.visibility = View.VISIBLE
             }
@@ -248,5 +259,14 @@ class PopupDetailActivity :
                 reserveBtn.visibility = View.GONE
             }
         }
+    }
+
+    private fun orderDialog(){
+        val dialog = LessonOrderDialog(this@PopupDetailActivity)
+        dialog.listener = object : LessonOrderDialog.LessonOkDialogClickedListener{
+            override fun onOkClicked() {
+            }
+        }
+        dialog.start()
     }
 }
