@@ -19,6 +19,7 @@ import com.example.popmate.util.SearchQueryListener
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.adapters.popupstore.PopupStoreAdapter
 import com.example.popmate.viewmodel.popupstore.PopupStoreListViewModel
+import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -38,9 +39,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private var offSetRows = null
     private var rowsToGet = null
 
-    companion object {
-        private const val TWO_POPUPSTORES_WIDTH = 330
-    }
 
     inner class GridSpacingDecoration(private val spanCount: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
@@ -82,8 +80,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             }
         }
 
-
-
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
                 binding.shimmerLayout.startShimmer()
@@ -96,7 +92,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
 
             }
         }
-
 
         refreshCalendarText(startDate, endDate.minusYears(1).plusMonths(1))
 
@@ -200,21 +195,12 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
 
     override fun onResume() {
         super.onResume()
-        viewModel.loadList(
-            isOpeningSoon,
-            startDate.toString(),
-            endDate.toString(),
-            searchQuery,
-            offSetRows,
-            rowsToGet
-        )
         refreshSearchText()
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.storeList.removeObservers(viewLifecycleOwner)
-
     }
 
     private fun refreshSearchText() {
