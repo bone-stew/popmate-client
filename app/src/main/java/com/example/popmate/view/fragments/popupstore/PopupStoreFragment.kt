@@ -3,6 +3,7 @@ package com.example.popmate.view.fragments.popupstore
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.util.CalendarDataListener
@@ -19,7 +21,6 @@ import com.example.popmate.util.SearchQueryListener
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.adapters.popupstore.PopupStoreAdapter
 import com.example.popmate.viewmodel.popupstore.PopupStoreListViewModel
-import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -30,7 +31,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private lateinit var viewModel: PopupStoreListViewModel
     private val dateRangeFormatter = DateTimeFormatter.ofPattern("MM.dd")
     private var isSearchResult = false
-    private var searchQuery: String? = ""
+    private var searchQuery: String? = null
 
     private var isOpeningSoon = false
     private var startDate: LocalDate = LocalDate.now()
@@ -66,7 +67,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             isOpeningSoon,
             startDate.toString(),
             endDate.toString(),
-            null,
+            searchQuery,
             offSetRows,
             rowsToGet
         )
@@ -95,18 +96,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
 
         refreshCalendarText(startDate, endDate.minusYears(1).plusMonths(1))
 
-        binding.keywordResult.cancelIcon.setOnClickListener {
-            viewModel.loadList(
-                isOpeningSoon,
-                startDate.toString(),
-                endDate.toString(),
-                null,
-                offSetRows,
-                rowsToGet
-            )
-            isSearchResult = false
-            refreshSearchText()
-        }
         binding.run {
             isOpeningSoonBtn.setOnClickListener {
                 isOpeningSoon = !isOpeningSoon
@@ -114,17 +103,18 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                     isOpeningSoon,
                     startDate.toString(),
                     endDate.toString(),
-                    keyword,
+                    searchQuery,
                     offSetRows,
                     rowsToGet
                 )
             }
             keywordResult.cancelIcon.setOnClickListener {
+                searchQuery = null
                 viewModel.loadList(
                     isOpeningSoon,
                     startDate.toString(),
                     endDate.toString(),
-                    null,
+                    searchQuery,
                     offSetRows,
                     rowsToGet
                 )
@@ -169,7 +159,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             isOpeningSoon,
             startDate.toString(),
             endDate.toString(),
-            keyword,
+            searchQuery,
             offSetRows,
             rowsToGet
         )
@@ -190,17 +180,19 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         binding.popupstoreRecyclerView.visibility = View.GONE
         isSearchResult = true
         binding.popupstoreRecyclerView.visibility = View.VISIBLE
-
     }
 
     override fun onResume() {
-        super.onResume()
+        viewModel.loadList(
+            isOpeningSoon,
+            startDate.toString(),
+            endDate.toString(),
+            searchQuery,
+            offSetRows,
+            rowsToGet
+        )
         refreshSearchText()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        viewModel.storeList.removeObservers(viewLifecycleOwner)
+        super.onResume()
     }
 
     private fun refreshSearchText() {
