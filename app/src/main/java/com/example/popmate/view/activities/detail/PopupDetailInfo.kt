@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,7 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
         fun newInstance() = PopupDetailInfo()
     }
 
+    private val TAG = "DetailInfo"
     private lateinit var binding: FragmentPopupDetailInfoBinding
     private lateinit var mapView: MapView
     private lateinit var googleMap: GoogleMap
@@ -50,6 +52,7 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
 
         viewModel.store.observe(viewLifecycleOwner) {
             binding.run {
+                Log.d(TAG, "onCreateView: $it")
                 store = it
                 imageCarousel.adapter = DetailCarouselAdapter(it.popupStoreImgResponses)
                 imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -105,7 +108,8 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
         viewModel.store.observe(viewLifecycleOwner) {
-            currentMarker = setupMarker(LatLngEntity(it.latitude, it.longitude))
+            Log.d(TAG, "onMapReady: ")
+            currentMarker = setupMarker(LatLngEntity(it.department.latitude, it.department.longitude))
         }
 //        currentMarker?.showInfoWindow()
     }
