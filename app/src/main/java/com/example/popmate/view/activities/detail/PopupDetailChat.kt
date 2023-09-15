@@ -30,8 +30,9 @@ class PopupDetailChat : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_popup_detail_chat, container, false)
         binding.chatThumbnail.layoutManager = LinearLayoutManager(context)
+        binding.chatThumbnail.adapter = ChatAdapter(emptyList(), null)
         viewModel.chat.observe(viewLifecycleOwner) {
-            binding.chatThumbnail.adapter = ChatAdapter(it, null)
+            (binding.chatThumbnail.adapter as ChatAdapter).addChat(it)
         }
         return binding.root
     }
