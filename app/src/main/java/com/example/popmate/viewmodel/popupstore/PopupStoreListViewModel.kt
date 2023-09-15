@@ -1,5 +1,6 @@
 package com.example.popmate.viewmodel.popupstore
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -54,6 +55,8 @@ class PopupStoreListViewModel: ViewModel() {
                 } else {
                     _error.value = true
                 }
+
+                Log.i("HELLO", _storeList.value.toString())
             }
             override fun onFailure(call: Call<ApiResponse<SearchResponse>>, t: Throwable) {
                 _loading.value = false

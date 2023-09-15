@@ -3,6 +3,7 @@ package com.example.popmate.view.fragments.popupstore
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.util.CalendarDataListener
@@ -29,7 +31,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private lateinit var viewModel: PopupStoreListViewModel
     private val dateRangeFormatter = DateTimeFormatter.ofPattern("MM.dd")
     private var isSearchResult = false
-    private var searchQuery: String? = ""
+    private var searchQuery: String? = null
 
     private var isOpeningSoon = false
     private var startDate: LocalDate = LocalDate.now()
@@ -38,9 +40,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private var offSetRows = null
     private var rowsToGet = null
 
-    companion object {
-        private const val TWO_POPUPSTORES_WIDTH = 330
-    }
 
     inner class GridSpacingDecoration(private val spanCount: Int, private val spacing: Int) : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
@@ -68,7 +67,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             isOpeningSoon,
             startDate.toString(),
             endDate.toString(),
-            null,
+            searchQuery,
             offSetRows,
             rowsToGet
         )
@@ -79,11 +78,8 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                 popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
-//                popupstoreRecyclerView.setPadding(desiredPadding.toInt(), 0, desiredPadding.toInt(), 0)
             }
         }
-
-
 
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             if (isLoading) {
@@ -98,21 +94,8 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             }
         }
 
-
         refreshCalendarText(startDate, endDate.minusYears(1).plusMonths(1))
 
-        binding.keywordResult.cancelIcon.setOnClickListener {
-            viewModel.loadList(
-                isOpeningSoon,
-                startDate.toString(),
-                endDate.toString(),
-                null,
-                offSetRows,
-                rowsToGet
-            )
-            isSearchResult = false
-            refreshSearchText()
-        }
         binding.run {
             isOpeningSoonBtn.setOnClickListener {
                 isOpeningSoon = !isOpeningSoon
@@ -120,17 +103,18 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
                     isOpeningSoon,
                     startDate.toString(),
                     endDate.toString(),
-                    keyword,
+                    searchQuery,
                     offSetRows,
                     rowsToGet
                 )
             }
             keywordResult.cancelIcon.setOnClickListener {
+                searchQuery = null
                 viewModel.loadList(
                     isOpeningSoon,
                     startDate.toString(),
                     endDate.toString(),
-                    null,
+                    searchQuery,
                     offSetRows,
                     rowsToGet
                 )
@@ -175,7 +159,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             isOpeningSoon,
             startDate.toString(),
             endDate.toString(),
-            keyword,
+            searchQuery,
             offSetRows,
             rowsToGet
         )
@@ -196,11 +180,9 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         binding.popupstoreRecyclerView.visibility = View.GONE
         isSearchResult = true
         binding.popupstoreRecyclerView.visibility = View.VISIBLE
-
     }
 
     override fun onResume() {
-        super.onResume()
         viewModel.loadList(
             isOpeningSoon,
             startDate.toString(),
@@ -210,6 +192,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             rowsToGet
         )
         refreshSearchText()
+        super.onResume()
     }
 
     private fun refreshSearchText() {
