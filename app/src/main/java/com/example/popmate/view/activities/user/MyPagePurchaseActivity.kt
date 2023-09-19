@@ -39,7 +39,7 @@ class MyPagePurchaseActivity : BaseActivity<ActivityMyPagePurchaseBinding>(R.lay
             adapter.setOnItemClickListener { clickedItem ->
                 val intent = Intent(this, MyPagePurchaseDetailActivity::class.java)
                 Log.d("jjrd",clickedItem.toString())
-                intent.putExtra("id", clickedItem)
+                intent.putExtra("orderId", clickedItem.orderId)
                 startActivity(intent)
             }
             adapter.setOnImgClickListener {

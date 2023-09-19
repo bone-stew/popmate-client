@@ -57,9 +57,13 @@ class MyPagePurchaseDetailActivity : AppCompatActivity() {
             }
 
             binding.txtFragmentMyPagePurchaseDetailDepartment.text = "${clickedItem.placeDetail} 매장"
+
         } else {
         }
 
+        binding.txtMypageQrcode.setOnClickListener {
+
+        }
 
         setContentView(binding.root)
     }

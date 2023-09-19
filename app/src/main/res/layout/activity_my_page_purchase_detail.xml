@@ -109,14 +109,41 @@
                 app:layout_constraintTop_toBottomOf="@+id/layout_my_page_purchase_detail_first" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_my_page_purchase_detail_second"
-                android:background="@color/white"
+                android:id="@+id/btn_mypage_qrcode"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/orange_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView_my_page_puchase_detail">
+
+
+                <TextView
+                    android:id="@+id/txt_mypage_qrcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QR 코드"
+                    android:textSize="13sp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_my_page_purchase_detail_second"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_mypage_qrcode">
 
                 <TextView
                     android:id="@+id/txt_fragment_my_page_purchase_detail_total_price_title"
@@ -151,6 +178,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_my_page_purchase_detail_second">
 
@@ -188,7 +216,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.473"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layout_my_page_purchase_detail_third">
 
