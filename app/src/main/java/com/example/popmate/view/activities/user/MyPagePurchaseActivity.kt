@@ -2,7 +2,6 @@ package com.example.popmate.view.activities.user
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,7 +37,6 @@ class MyPagePurchaseActivity : BaseActivity<ActivityMyPagePurchaseBinding>(R.lay
             // 아이템 클릭 이벤트 처리
             adapter.setOnItemClickListener { clickedItem ->
                 val intent = Intent(this, MyPagePurchaseDetailActivity::class.java)
-                Log.d("jjrd",clickedItem.toString())
                 intent.putExtra("orderId", clickedItem.orderId.toLong())
                 startActivity(intent)
             }

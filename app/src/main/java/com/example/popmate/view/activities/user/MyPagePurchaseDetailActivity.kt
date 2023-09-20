@@ -25,15 +25,12 @@ class MyPagePurchaseDetailActivity : BaseActivity<ActivityMyPagePurchaseDetailBi
 
         setContentView(binding.root)
         val orderId = intent.getLongExtra("orderId",0)
-
         val model : OrderListDetailViewModel by viewModels()
         model.loadDetails(orderId)
 
         model.orderDetailItem.observe(this){
             binding.orderDetailItems = it
             val data = binding.orderDetailItems!!.orderListDetailResponse
-            Log.d("jjrd",data.toString())
-            Log.d("jjrd",data.qrImgUrl)
             val adapter = MyPageOrderDetailAdapter()
             adapter.listData = data.orderItemList as MutableList<OrderListItem>
             if(data.status==0){

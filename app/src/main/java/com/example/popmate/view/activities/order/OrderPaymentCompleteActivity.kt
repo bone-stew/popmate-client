@@ -12,6 +12,7 @@ import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.detail.PopupDetailActivity
 import com.example.popmate.view.activities.user.MyPagePurchaseActivity
+import com.example.popmate.view.activities.user.MyPagePurchaseDetailActivity
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -62,20 +63,17 @@ class OrderPaymentCompleteActivity : BaseActivity<ActivityOrderPaymentCompleteBi
             val intent = Intent(this, PopupDetailActivity::class.java)
             intent.putExtra("id",popupStoreId)
             startActivity(intent)
-            finish()
         }
 
         binding.imgOrderDetailPaymentCompleteClose.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         binding.layoutOrderPaymentOrderList.setOnClickListener {
-            val intent = Intent(this,MyPagePurchaseActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(this,MyPagePurchaseDetailActivity::class.java)
             intent.putExtra("orderId",orderId)
-            finish()
+            startActivity(intent)
         }
     }
 }

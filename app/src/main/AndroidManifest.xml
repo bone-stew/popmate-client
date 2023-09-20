@@ -78,9 +78,8 @@
         <activity
             android:name=".view.activities.order.OrderActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate">
+            android:theme="@style/Theme.Popmate"/>
 
-        </activity>
         <activity
             android:name=".view.activities.order.OrderPaymentCompleteActivity"
             android:exported="false" />
