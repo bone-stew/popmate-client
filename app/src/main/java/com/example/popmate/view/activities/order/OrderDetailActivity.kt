@@ -19,6 +19,8 @@ import com.example.popmate.view.adapters.order.OrderDetailAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.NumberFormat
+import java.util.Locale
 
 class OrderDetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityOrderDetailBinding
@@ -72,8 +74,9 @@ class OrderDetailActivity : AppCompatActivity() {
 
         //여기서 초기 화면 설정
         binding.orderCnt.text = data.size.toString()
-        binding.orderDetailTotalPrice.text = totalAmount.toString()
-        binding.orderDetailTotalPrice1.text = totalAmount.toString()
+        val amount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalAmount)
+        binding.orderDetailTotalPrice.text = amount
+        binding.orderDetailTotalPrice1.text = amount
 
         // 뒤로가기 처리
         binding.imgActivityOrderDetailBefore.setOnClickListener {
@@ -128,17 +131,20 @@ class OrderDetailActivity : AppCompatActivity() {
     private fun updateTotalAmount(item: PopupStoreItem, sign : String) {
         if(sign == "plus"){
             totalAmount += item.amount
-            binding.orderDetailTotalPrice.text = totalAmount.toString()
-            binding.orderDetailTotalPrice1.text = totalAmount.toString()
+            val amount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalAmount)
+            binding.orderDetailTotalPrice.text = amount
+            binding.orderDetailTotalPrice1.text = amount
         }else if(sign == "minus"){
             totalAmount -= item.amount
-            binding.orderDetailTotalPrice.text = totalAmount.toString()
-            binding.orderDetailTotalPrice1.text = totalAmount.toString()
+            val amount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalAmount)
+            binding.orderDetailTotalPrice.text = amount
+            binding.orderDetailTotalPrice1.text = amount
         }else{
             val cnt = binding.orderCnt.text.toString().toInt()
             totalAmount -= (item.amount * item.totalQuantity)
-            binding.orderDetailTotalPrice.text = totalAmount.toString()
-            binding.orderDetailTotalPrice1.text = totalAmount.toString()
+            val amount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalAmount)
+            binding.orderDetailTotalPrice.text = amount
+            binding.orderDetailTotalPrice1.text = amount
             binding.orderCnt.text = (cnt-1).toString()
             if(data.size==0){
                 val constraintLayout = findViewById<ConstraintLayout>(R.id.order_detail_bottom)

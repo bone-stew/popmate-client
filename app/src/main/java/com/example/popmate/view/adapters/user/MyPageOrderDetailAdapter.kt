@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.popmate.databinding.ListMypagePurchaseDetailItemBinding
 import com.example.popmate.model.data.remote.user.OrderListItem
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class MyPageOrderDetailAdapter() : RecyclerView.Adapter<MyPageOrderDetailHolder>() {
@@ -30,8 +32,10 @@ class MyPageOrderDetailAdapter() : RecyclerView.Adapter<MyPageOrderDetailHolder>
 class MyPageOrderDetailHolder(val binding: ListMypagePurchaseDetailItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun setItems(item: OrderListItem) {
-        binding.orderDetailName.text = item.popupStoreItem.name
-        binding.orderDetailPrice.text = item.popupStoreItem.amount.toString()
+        binding.orderDetailName.text = item.popupStoreItem!!.name
+        val amount = item.popupStoreItem!!.amount
+        val totalAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(amount)
+        binding.orderDetailPrice.text = totalAmount
         binding.txtListMypagePurchaseDetailItemCnt.text = "${item.totalQuantity}개"
     }
 }

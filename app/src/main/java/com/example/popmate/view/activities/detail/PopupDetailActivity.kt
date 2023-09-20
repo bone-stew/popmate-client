@@ -244,7 +244,10 @@ class PopupDetailActivity :
                 orderLayout.reserveBtnPost.visibility = View.VISIBLE
                 orderLayout.orderBtnPost.setOnClickListener {
                     // 안드로이드 출시를 하면 주문 쪽으로 들어가면 안되기 때문에 설정
-                    orderDialog()
+                    //orderDialog()
+                    val intent = Intent(applicationContext, OrderActivity::class.java)
+                    intent.putExtra("id", popupStoreId)
+                    startActivity(intent)
                 }
             } else {
                 reserveBtn.visibility = View.VISIBLE

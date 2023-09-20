@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.databinding.ListOrderItemBinding
 import com.example.popmate.model.data.remote.order.PopupStoreItem
+import java.text.NumberFormat
+import java.util.Locale
 
 interface OnItemClick {
     fun onClick(value: PopupStoreItem)
@@ -42,7 +44,9 @@ class OrderAdapter(private val itemClickCallback: OnItemClick):RecyclerView.Adap
         }
         fun setGoods(item: PopupStoreItem) {
             binding.orderGoodsName.text = item.name
-            binding.orderGoodsPrice.text = item.amount.toString()
+            val amount = item.amount
+            val totalAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(amount)
+            binding.orderGoodsPrice.text = totalAmount
             // Glide를 사용하여 이미지 로드 및 표시
             Glide.with(binding.root.context) // Glide를 현재 컨텍스트에 연결
                 .load(item.imgUrl) // 이미지 URL 설정 (item.imgUrl은 이미지의 URL입니다)
