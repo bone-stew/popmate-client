@@ -19,6 +19,7 @@ data class Orders(
     val cardType: String,
     val easyPay: Any?,
     val method: String,
+    val qrImgUrl: String,
     val orderItemList: List<OrderListItem>
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -36,6 +37,7 @@ data class Orders(
         parcel.readString() ?: "",
         parcel.readSerializable() as Any?,
         parcel.readString() ?: "",
+        parcel.readString() ?:"",
         parcel.createTypedArrayList(OrderListItem.CREATOR) ?: ArrayList()
     )
 
@@ -54,6 +56,7 @@ data class Orders(
         parcel.writeString(cardType)
         parcel.writeSerializable(easyPay as Serializable?)
         parcel.writeString(method)
+        parcel.writeString(qrImgUrl)
         parcel.writeTypedList(orderItemList)
     }
 

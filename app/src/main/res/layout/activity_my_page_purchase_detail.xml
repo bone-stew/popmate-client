@@ -8,6 +8,9 @@
         <variable
             name="titleText"
             type="String" />
+        <variable
+            name="orderDetailItems"
+            type="com.example.popmate.model.data.remote.order.OrderListDetailResponse" />
     </data>
 
     <ScrollView

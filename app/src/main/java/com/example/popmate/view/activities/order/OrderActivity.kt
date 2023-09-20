@@ -1,10 +1,10 @@
 package com.example.popmate.view.activities.order
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityOrderBinding
@@ -46,6 +46,9 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
             binding.placedetail = it
             val placeDetailResponse = binding.placedetail as OrderPlaceDetailResponse
             binding.orderPopstoreName.text = placeDetailResponse.title
+            Glide.with(this)
+                .load(placeDetailResponse.bannerImgUrl)
+                .into(binding.imageView)
             fragment = OrderBottomFragment(placeDetailResponse)
             supportFragmentManager.beginTransaction()
                 .add(R.id.order_bottom,fragment)
