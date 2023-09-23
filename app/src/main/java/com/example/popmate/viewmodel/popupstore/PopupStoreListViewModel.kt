@@ -14,7 +14,6 @@ import retrofit2.Response
 class PopupStoreListViewModel: ViewModel() {
 
 
-
     private val _storeList: MutableLiveData<SearchResponse> = MutableLiveData<SearchResponse>()
     val storeList : LiveData<SearchResponse> = _storeList
 
@@ -28,7 +27,6 @@ class PopupStoreListViewModel: ViewModel() {
         _storeList.value =  SearchResponse(emptyList())
     }
 
-
     fun loadList(
         isOpeningSoon: Boolean?,
         startDate: String?,
@@ -40,29 +38,32 @@ class PopupStoreListViewModel: ViewModel() {
         _loading.value = true
         _error.value = false
 
-        ApiClient.storeService.getStoreSearch(
-            isOpeningSoon,
-            startDate,
-            endDate,
-            keyword,
-            offSetRows,
-            rowsToGet
-        ).enqueue(object : Callback<ApiResponse<SearchResponse>> {
-            override fun onResponse(call: Call<ApiResponse<SearchResponse>>, response: Response<ApiResponse<SearchResponse>>) {
-                _loading.value = false
-                if (response.isSuccessful){
-                    _storeList.value = response.body()?.data!!
-                } else {
-                    _error.value = true
+            ApiClient.storeService.getStoreSearch(
+                isOpeningSoon,
+                startDate,
+                endDate,
+                keyword,
+                offSetRows,
+                rowsToGet
+            ).enqueue(object : Callback<ApiResponse<SearchResponse>> {
+                override fun onResponse(
+                    call: Call<ApiResponse<SearchResponse>>,
+                    response: Response<ApiResponse<SearchResponse>>
+                ) {
+                    _loading.value = false
+                    if (response.isSuccessful) {
+                        _storeList.value = response.body()?.data!!
+                    } else {
+                        _error.value = true
+                    }
+
                 }
 
-                Log.i("HELLO", _storeList.value.toString())
-            }
-            override fun onFailure(call: Call<ApiResponse<SearchResponse>>, t: Throwable) {
-                _loading.value = false
-                _error.value = true
-            }
-        })
+                override fun onFailure(call: Call<ApiResponse<SearchResponse>>, t: Throwable) {
+                    _loading.value = false
+                    _error.value = true
+                }
+            })
     }
 
 }
