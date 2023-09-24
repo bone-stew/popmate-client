@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         viewModel.loadHome()
         viewModel.home.observe(viewLifecycleOwner) {
             binding.run {
@@ -79,12 +79,6 @@ class HomeFragment : Fragment() {
         }
         return binding.root
     }
-
-
-//    override fun onResume() {
-//        super.onResume()
-//        viewModel.loadHome()
-//    }
 
     override fun onStop() {
         super.onStop()

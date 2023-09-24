@@ -3,7 +3,6 @@ package com.example.popmate.view.fragments.popupstore
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.util.CalendarDataListener
@@ -36,7 +34,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private var isOpeningSoon = false
     private var startDate: LocalDate = LocalDate.now()
     private var endDate: LocalDate = LocalDate.now().plusYears(1)
-    private var keyword = null
     private var offSetRows = null
     private var rowsToGet = null
 
@@ -62,7 +59,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popup_store, container, false)
         binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(2, 50))
 
-        viewModel = ViewModelProvider(requireActivity())[PopupStoreListViewModel::class.java]
+        viewModel = ViewModelProvider(this)[PopupStoreListViewModel::class.java]
         viewModel.loadList(
             isOpeningSoon,
             startDate.toString(),
