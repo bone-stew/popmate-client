@@ -26,7 +26,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        var recentlyViewedStores = PopmateApplication.prefs.getList()
+        var recentlyViewedStores = PopmateApplication.prefs.getStoreList()
 
 
         binding.run {
@@ -74,7 +74,7 @@ class SearchFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        var recentlyViewedStores = PopmateApplication.prefs.getList()
+        var recentlyViewedStores = PopmateApplication.prefs.getStoreList()
         refreshUI(recentlyViewedStores)
     }
 

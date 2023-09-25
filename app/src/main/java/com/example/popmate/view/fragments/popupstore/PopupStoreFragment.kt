@@ -140,7 +140,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             bottomSheetFragment.setDataListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
-
+        refreshSearchText()
     }
 
     override fun onAttach(context: Context) {
@@ -179,18 +179,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         binding.popupstoreRecyclerView.visibility = View.VISIBLE
     }
 
-    override fun onResume() {
-        viewModel.loadList(
-            isOpeningSoon,
-            startDate.toString(),
-            endDate.toString(),
-            searchQuery,
-            offSetRows,
-            rowsToGet
-        )
-        refreshSearchText()
-        super.onResume()
-    }
 
     private fun refreshSearchText() {
         val maxKeywordLength = 20
