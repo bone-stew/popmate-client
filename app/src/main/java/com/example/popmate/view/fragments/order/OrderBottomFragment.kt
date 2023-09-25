@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.popmate.R
 import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
@@ -30,6 +31,7 @@ class OrderBottomFragment(private val placedetail: OrderPlaceDetailResponse?) : 
         val view = inflater.inflate(R.layout.fragment_order_bottom, container, false)
         price = view.findViewById(R.id.order_total_price)
         cnt = view.findViewById(R.id.order_cnt)
+
         view.setOnClickListener {
             val intent = Intent(requireContext(), OrderDetailActivity::class.java)
             intent.putExtra("data",hashMap)
@@ -40,16 +42,18 @@ class OrderBottomFragment(private val placedetail: OrderPlaceDetailResponse?) : 
         return view
     }
 
-    fun update(value: PopupStoreItem) {
+    fun update(value: PopupStoreItem, orderGoodsCheck: ImageView) {
         index = value.itemId.toInt()
         if(hashMap.containsKey(index)){
             totalCnt -= 1
             totalPrice -= hashMap[index]?.amount ?: 0
             hashMap.remove(index)
+            orderGoodsCheck.visibility = View.INVISIBLE
         }else{
             hashMap.put(index,value)
             totalCnt += 1
             totalPrice += value.amount
+            orderGoodsCheck.visibility = View.VISIBLE
         }
 
         val totalAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalPrice)

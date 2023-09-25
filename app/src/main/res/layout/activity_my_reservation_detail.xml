@@ -78,12 +78,13 @@
 
                 <ImageView
                     android:id="@+id/img_reservation_qr"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_marginTop="20dp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_popup_store" />
+                    app:layout_constraintTop_toBottomOf="@+id/img_popup_store"/>
 
                 <TextView
                     android:id="@+id/tv_popup_store_name"
@@ -91,7 +92,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="팝업스토어 이름"
-                    android:textStyle="bold"
                     android:textColor="@color/tx_dark_gray"
                     android:textSize="@dimen/h5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -218,16 +218,27 @@
                     android:id="@+id/tv_visit_location"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="25dp"
+                    android:maxLines="3"
                     android:text="더 현대 서울 3층 팝업스토어 매장 더 현대 서울 3층 팝업스토어 매장 더 현대 서울 3층 팝업스토어 매장 더 현대 서울 3층 팝업스토어 매장"
                     android:textColor="@color/tx_dark_gray"
                     android:textSize="@dimen/h7"
-                    android:maxLines="3"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/tv_visit_start_time"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_visit_start_time"
                     app:layout_constraintTop_toTopOf="@id/img_location" />
+
+                <ImageView
+                    android:id="@+id/img_loading_spinner"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="20dp"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_popup_store"
+                    app:srcCompat="@drawable/loading_spinner" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -237,13 +248,13 @@
             android:id="@+id/img_visited_success"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:src="@drawable/visited_success"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_title_simple"
-            app:layout_constraintEnd_toEndOf="parent"
             android:elevation="10dp"
-            android:visibility="gone"/>
+            android:src="@drawable/visited_success"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_title_simple" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
