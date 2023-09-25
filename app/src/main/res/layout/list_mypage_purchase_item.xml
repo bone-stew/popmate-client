@@ -153,7 +153,6 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/h7" />
             </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

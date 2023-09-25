@@ -44,7 +44,7 @@
             android:id="@+id/order_detail_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="@dimen/h7"
             android:textColor="@color/black"
             android:text="12000"/>
 
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:textSize="@dimen/h7"
             android:textColor="@color/black"
             android:text="1"/>
 

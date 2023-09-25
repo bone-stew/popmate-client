@@ -72,7 +72,7 @@ class ChatActivity : BaseActivity<ActivityChatBinding>(R.layout.activity_chat) {
             enterRoom(roomId)
             currUser.observe(this@ChatActivity) {
                 this@ChatActivity.currUser = it
-                chatAdapter = ChatAdapter(emptyList(), it)
+                chatAdapter = ChatAdapter(emptyList(), it, this@ChatActivity)
                 binding.chatBox.adapter = chatAdapter
                 binding.inputText.hint = it.nickname + binding.inputText.hint
             }

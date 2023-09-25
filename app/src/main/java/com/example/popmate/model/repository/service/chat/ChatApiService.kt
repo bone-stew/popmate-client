@@ -6,7 +6,11 @@ import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.chat.CurrUserResponse
 import com.example.popmate.model.data.remote.chat.MessagesResponse
 import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -29,4 +33,10 @@ interface ChatApiService {
     fun getThumbnail(
         @Path("roomId") roomId: Long
     ): Call<ApiResponse<MessagesResponse>>
+
+    @POST("chat/report")
+    @FormUrlEncoded
+    fun report(
+        @Field("chatId") chatId: String
+    ): Call<ApiResponse<String>>
 }
