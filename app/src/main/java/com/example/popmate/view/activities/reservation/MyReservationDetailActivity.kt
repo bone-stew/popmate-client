@@ -53,32 +53,7 @@ class MyReservationDetailActivity :
                 .into(binding.imgPopupStore)
             Glide.with(this)
                 .load(it.reservationQrImageUrl)
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        binding.imgReservationQr.visibility = View.VISIBLE
-                        binding.imgLoadingSpinner.visibility = View.GONE
-                        return false
-                    }
-
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        // 이미지 로드가 완료되면 로딩 이미지 대신 이미지를 표시
-                        binding.imgReservationQr.visibility = View.VISIBLE
-                        binding.imgReservationQr.setImageDrawable(resource)
-                        binding.imgLoadingSpinner.visibility = View.GONE
-                        return true
-                    }
-                }).into(binding.imgReservationQr)
+                .into(binding.imgReservationQr)
             if (it.reservationStatus == "VISITED") {
                 binding.imgVisitedSuccess.visibility = View.VISIBLE
             }

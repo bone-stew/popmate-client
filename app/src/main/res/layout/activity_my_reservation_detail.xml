@@ -4,10 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="titleText"
             type="String" />
+        <variable
+            name="sale"
+            type="java.lang.Boolean"/>
 
         <variable
             name="viewModel"
@@ -84,7 +87,7 @@
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_popup_store"/>
+                    app:layout_constraintTop_toBottomOf="@+id/img_popup_store" />
 
                 <TextView
                     android:id="@+id/tv_popup_store_name"
@@ -234,8 +237,9 @@
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="20dp"
-                    android:visibility="visible"
+                    android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.502"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_popup_store"
                     app:srcCompat="@drawable/loading_spinner" />
