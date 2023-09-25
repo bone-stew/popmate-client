@@ -56,47 +56,31 @@
 
             <LinearLayout
                 android:id="@+id/btn_mypage_purchase_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="20dp"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:background="@drawable/mypage_order_rounded_rectangle"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_reservation_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:text="구매 상세"
-                    android:textColor="@color/blue_500"
-                    android:textSize="@dimen/h5" />
-
-                <Button
-                    android:id="@+id/btn_reservation_detail"
-                    android:layout_width="8dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/arrow3"
-                    android:backgroundTint="@color/blue_500" />
-
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/h7" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/line_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/bg_light_gray"
-                app:layout_constraintTop_toBottomOf="@+id/txt_list_mypage_purchase_day" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
                 android:id="@+id/layout_popup_store"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintTop_toTopOf="@+id/line_divider">
+                android:layout_marginTop="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_list_mypage_purchase_pickup">
 
                 <ImageView
                     android:id="@+id/img_list_mypage_bannerimg"
@@ -124,10 +108,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="무럭무럭 잔 1개 + 투두투두 잇 1개"
                     android:textColor="@color/tx_gray"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/img_list_mypage_bannerimg" />
+                    android:textSize="12dp"
+                    app:layout_constraintStart_toEndOf="@+id/img_list_mypage_bannerimg"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_mypage_order_detail_store_name" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
