@@ -9,7 +9,7 @@
         android:id="@+id/sender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/h6"
+        android:textSize="@dimen/h7"
         android:textColor="@color/tx_gray"
         android:text="수더분한 굽은오릭스"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +27,7 @@
         android:maxWidth="200dp"
         android:text="옥지얌"
         android:textColor="@color/tx_gray"
-        android:textSize="@dimen/h5"
+        android:textSize="@dimen/h6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sender" />
 
@@ -38,7 +38,7 @@
         android:paddingHorizontal="8dp"
         android:text="16:06"
         android:textColor="@color/bg_gray"
-        android:textSize="@dimen/h6"
+        android:textSize="@dimen/h8"
         app:layout_constraintBottom_toBottomOf="@+id/chat_message"
         app:layout_constraintStart_toEndOf="@id/chat_message" />
 

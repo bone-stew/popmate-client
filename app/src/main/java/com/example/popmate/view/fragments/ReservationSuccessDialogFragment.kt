@@ -2,11 +2,14 @@ package com.example.popmate.view.fragments
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -14,8 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
 import com.example.popmate.util.DateTimeUtils
-import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.detail.PopupDetailActivity
+import com.example.popmate.view.activities.reservation.MyReservationDetailActivity
 import com.example.popmate.viewmodel.ReservationSuccessViewModel
 
 
@@ -38,6 +41,8 @@ class ReservationSuccessDialogFragment : DialogFragment() {
             false
         )
         binding.lifecycleOwner = viewLifecycleOwner
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         return binding.root
     }
@@ -47,7 +52,8 @@ class ReservationSuccessDialogFragment : DialogFragment() {
 
 //      dialog fragment custom width
         try {
-            val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val windowManager =
+                requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val display = windowManager.defaultDisplay
             val deviceSize = Point()
             display.getSize(deviceSize)
@@ -88,11 +94,14 @@ class ReservationSuccessDialogFragment : DialogFragment() {
     }
 
     private fun initEvent() {
-        val popupStoreId: Long = arguments?.getLong("popupStoreId", 0) ?: 0
         binding.btnClose.setOnClickListener {
-            val intent = Intent(activity, PopupDetailActivity::class.java)
-            intent.putExtra("id", popupStoreId)
+            val intent = Intent(activity, MyReservationDetailActivity::class.java)
+            intent.putExtra("reservationId", viewModel.reservationId)
             startActivity(intent)
+
+            // 다이얼로그, 액티비티 모두 종료
+            dismiss()
+            activity?.finish()
         }
     }
 

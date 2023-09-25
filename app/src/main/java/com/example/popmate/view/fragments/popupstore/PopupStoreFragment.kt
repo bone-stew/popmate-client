@@ -57,7 +57,16 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popup_store, container, false)
-        binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(2, 50))
+
+
+        val resources = resources
+        val screenWidthDP = resources.displayMetrics.widthPixels / resources.displayMetrics.density
+
+        if (screenWidthDP > 500 ){
+            binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(4, 50))
+        } else {
+            binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(2, 50))
+        }
 
         viewModel = ViewModelProvider(this)[PopupStoreListViewModel::class.java]
         viewModel.loadList(
@@ -72,7 +81,11 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         viewModel.storeList.observe(viewLifecycleOwner) {
             binding.run {
                 stores = it
-                popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                if (screenWidthDP > 500 ) {
+                    popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+                } else {
+                    popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                }
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
             }
@@ -82,11 +95,19 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             if (isLoading) {
                 binding.shimmerLayout.startShimmer()
                 binding.popupstoreRecyclerView.visibility = View.GONE
-                binding.shimmerLayout.visibility = View.VISIBLE
+                if (screenWidthDP > 500 ) {
+                    binding.shimmerGridTabletLayout.visibility = View.VISIBLE
+                }else {
+                    binding.shimmerGridLayout.visibility = View.VISIBLE
+                }
             } else {
                 binding.shimmerLayout.stopShimmer()
                 binding.popupstoreRecyclerView.visibility = View.VISIBLE
-                binding.shimmerLayout.visibility = View.GONE
+                if (screenWidthDP > 500 ) {
+                    binding.shimmerGridTabletLayout.visibility = View.GONE
+                }else {
+                    binding.shimmerGridLayout.visibility = View.GONE
+                }
 
             }
         }
@@ -140,7 +161,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             bottomSheetFragment.setDataListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
-
+        refreshSearchText()
     }
 
     override fun onAttach(context: Context) {
@@ -179,18 +200,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         binding.popupstoreRecyclerView.visibility = View.VISIBLE
     }
 
-    override fun onResume() {
-        viewModel.loadList(
-            isOpeningSoon,
-            startDate.toString(),
-            endDate.toString(),
-            searchQuery,
-            offSetRows,
-            rowsToGet
-        )
-        refreshSearchText()
-        super.onResume()
-    }
 
     private fun refreshSearchText() {
         val maxKeywordLength = 20

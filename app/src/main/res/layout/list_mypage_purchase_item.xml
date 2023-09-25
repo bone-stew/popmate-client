@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="9.12"
                 android:textColor="@color/tx_gray"
-                android:textSize="@dimen/h4"
+                android:textSize="@dimen/h7"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
                 android:layout_marginTop="4dp"
                 android:text=" ˙ "
                 android:textColor="@color/tx_gray"
-                android:textSize="13dp"
+                android:textSize="@dimen/h7"
                 app:layout_constraintEnd_toStartOf="@+id/txt_list_mypage_purchase_pickup"
                 app:layout_constraintStart_toEndOf="@+id/txt_list_mypage_purchase_day"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="픽업 대기"
                 android:textColor="@color/tx_gray"
-                android:textSize="13dp"
+                android:textSize="@dimen/h7"
                 app:layout_constraintStart_toEndOf="@+id/textView19"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,7 +99,7 @@
                     android:layout_marginStart="10dp"
                     android:text="빵빵이의 생일파티"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h4"
+                    android:textSize="@dimen/h5"
                     app:layout_constraintStart_toEndOf="@id/img_list_mypage_bannerimg"
                     app:layout_constraintTop_toTopOf="@id/img_list_mypage_bannerimg" />
 
@@ -111,7 +111,7 @@
                     android:layout_marginTop="5dp"
                     android:text="무럭무럭 잔 1개 + 투두투두 잇 1개"
                     android:textColor="@color/tx_gray"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/h7"
                     app:layout_constraintStart_toEndOf="@+id/img_list_mypage_bannerimg"
                     app:layout_constraintTop_toBottomOf="@+id/txt_mypage_order_detail_store_name" />
 
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="픽업 시간"
-                android:textSize="@dimen/h5"
+                android:textSize="@dimen/h7"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/layout_popup_store" />
 
@@ -141,7 +141,7 @@
                     android:layout_marginTop="5dp"
                     android:text="9.12"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h5" />
+                    android:textSize="@dimen/h7" />
 
 
                 <TextView
@@ -151,7 +151,7 @@
                     android:layout_marginTop="5dp"
                     android:text="10:00"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h5" />
+                    android:textSize="@dimen/h7" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

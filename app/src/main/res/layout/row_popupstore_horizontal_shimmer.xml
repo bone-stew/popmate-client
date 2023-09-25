@@ -32,7 +32,6 @@
       android:layout_marginStart="17dp"
       android:paddingBottom="8dp"
       android:background="@color/tx_light_gray"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@id/itemPlaceholder"
       app:layout_constraintTop_toTopOf="@id/itemPlaceholder" />
 

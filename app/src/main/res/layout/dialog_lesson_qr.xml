@@ -15,7 +15,7 @@
         android:elevation="5dp"
         android:text="상품 픽업을 위한 QR코드"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="@dimen/h6"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         android:backgroundTint="@color/orange_light"
         android:text="확인"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/h5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
