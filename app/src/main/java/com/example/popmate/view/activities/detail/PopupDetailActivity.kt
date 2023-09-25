@@ -152,7 +152,7 @@ class PopupDetailActivity :
                 store = it
             }
             setInfoFragment()
-            saveToRecentlyViewedSharedPrefs(it)
+            saveToRecentlyViewedSharedPrefs(popupStoreId, it)
             if (!it.reservationEnabled) {
                 binding.reserveBtn.backgroundTintList =
                     ColorStateList.valueOf(resources.getColor((R.color.bg_gray)))
