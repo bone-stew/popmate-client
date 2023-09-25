@@ -2,11 +2,14 @@ package com.example.popmate.view.fragments
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -14,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
 import com.example.popmate.util.DateTimeUtils
-import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.detail.PopupDetailActivity
 import com.example.popmate.viewmodel.ReservationSuccessViewModel
 
@@ -38,6 +40,8 @@ class ReservationSuccessDialogFragment : DialogFragment() {
             false
         )
         binding.lifecycleOwner = viewLifecycleOwner
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 
         return binding.root
     }
