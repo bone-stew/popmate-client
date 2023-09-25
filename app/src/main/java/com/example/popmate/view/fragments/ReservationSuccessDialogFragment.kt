@@ -18,6 +18,7 @@ import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
 import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.view.activities.detail.PopupDetailActivity
+import com.example.popmate.view.activities.reservation.MyReservationDetailActivity
 import com.example.popmate.viewmodel.ReservationSuccessViewModel
 
 
@@ -51,7 +52,8 @@ class ReservationSuccessDialogFragment : DialogFragment() {
 
 //      dialog fragment custom width
         try {
-            val windowManager = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            val windowManager =
+                requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val display = windowManager.defaultDisplay
             val deviceSize = Point()
             display.getSize(deviceSize)
@@ -92,13 +94,14 @@ class ReservationSuccessDialogFragment : DialogFragment() {
     }
 
     private fun initEvent() {
-        val popupStoreId: Long = arguments?.getLong("popupStoreId", 0) ?: 0
         binding.btnClose.setOnClickListener {
-            val intent = Intent(activity, PopupDetailActivity::class.java)
-            intent.putExtra("id", popupStoreId)
-            // 기존 액티비티 스택을 모두 제거하고 새로운 액티비티를 호출
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val intent = Intent(activity, MyReservationDetailActivity::class.java)
+            intent.putExtra("reservationId", viewModel.reservationId)
             startActivity(intent)
+
+            // 다이얼로그, 액티비티 모두 종료
+            dismiss()
+            activity?.finish()
         }
     }
 

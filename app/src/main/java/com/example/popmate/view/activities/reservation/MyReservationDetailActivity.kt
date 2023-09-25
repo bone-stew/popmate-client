@@ -90,4 +90,8 @@ class MyReservationDetailActivity :
             finish()
         }
     }
+
+    override fun onBackPressed() {
+        finish()
+    }
 }
