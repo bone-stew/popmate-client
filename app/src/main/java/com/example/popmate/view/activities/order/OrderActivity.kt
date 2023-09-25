@@ -1,6 +1,7 @@
 package com.example.popmate.view.activities.order
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -61,14 +62,14 @@ class OrderActivity : BaseActivity<ActivityOrderBinding>(R.layout.activity_order
         }
     }
 
-    override fun onClick(value: PopupStoreItem) {
+    override fun onClick(value: PopupStoreItem, orderGoodsCheck: ImageView) {
         if(value.stock==0){
             Toast.makeText(this, "재고가 없습니다.", Toast.LENGTH_SHORT).show()
         }else{
             supportFragmentManager.beginTransaction()
                 .show(fragment)
                 .commit()
-            fragment.update(value)
+            fragment.update(value,orderGoodsCheck)
         }
     }
 
