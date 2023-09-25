@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.engine.executor.GlideExecutor.UncaughtThrowableStrategy.LOG
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentPopupStoreBinding
 import com.example.popmate.util.CalendarDataListener
@@ -60,7 +59,19 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popup_store, container, false)
-        binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(2, 50))
+
+
+        val resources = resources
+        val screenWidthDP = resources.displayMetrics.widthPixels / resources.displayMetrics.density
+
+        if (screenWidthDP > 500 ){
+            binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(4, 50))
+        } else {
+            binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(2, 50))
+        }
+        Log.i("swc", screenWidthDP.toString());
+        Log.i("swc", "HELLO");
+
 
         viewModel = ViewModelProvider(requireActivity())[PopupStoreListViewModel::class.java]
         viewModel.loadList(
@@ -75,7 +86,11 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         viewModel.storeList.observe(viewLifecycleOwner) {
             binding.run {
                 stores = it
-                popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                if (screenWidthDP > 500 ) {
+                    popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+                } else {
+                    popupstoreRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+                }
                 popupstoreRecyclerView.adapter =
                     PopupStoreAdapter(requireContext(), it.popupStores, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE_GRID)
             }
@@ -85,11 +100,19 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             if (isLoading) {
                 binding.shimmerLayout.startShimmer()
                 binding.popupstoreRecyclerView.visibility = View.GONE
-                binding.shimmerLayout.visibility = View.VISIBLE
+                if (screenWidthDP > 500 ) {
+                    binding.shimmerGridTabletLayout.visibility = View.VISIBLE
+                }else {
+                    binding.shimmerGridLayout.visibility = View.VISIBLE
+                }
             } else {
                 binding.shimmerLayout.stopShimmer()
                 binding.popupstoreRecyclerView.visibility = View.VISIBLE
-                binding.shimmerLayout.visibility = View.GONE
+                if (screenWidthDP > 500 ) {
+                    binding.shimmerGridTabletLayout.visibility = View.GONE
+                }else {
+                    binding.shimmerGridLayout.visibility = View.GONE
+                }
 
             }
         }

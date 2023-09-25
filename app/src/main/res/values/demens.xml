@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="h1">26sp</dimen> <!-- -->
     <dimen name="h2">22sp</dimen> <!-- 상세정보 제목 사이즈-->
     <dimen name="h3">18sp</dimen> <!-- 상세정보 부제목 사이즈 -->
@@ -8,4 +8,6 @@
     <dimen name="h4">14sp</dimen> <!-- 타이틀 폰트 사이즈 -->
     <dimen name="h5">12sp</dimen> <!-- 기본 폰트 사이즈 -->
     <dimen name="h6">10sp</dimen> <!-- 상세 폰트 사이즈 ex) 달력 시간 -->
+    <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
+    <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
 </resources>
