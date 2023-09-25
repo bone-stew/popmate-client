@@ -15,6 +15,7 @@ import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMyReservationDetailBinding
 import com.example.popmate.util.DateTimeUtils
+import com.example.popmate.view.fragments.ReservationCancelDialogFragment
 import com.example.popmate.viewmodel.reservation.MyReservationDetailViewModel
 
 class MyReservationDetailActivity :
@@ -63,6 +64,15 @@ class MyReservationDetailActivity :
     private fun initEvent() {
         binding.layoutTitleSimple.imgArrow.setOnClickListener {
             finish()
+        }
+        binding.tvCancelReservation.setOnClickListener {
+            // 예약 취소 다이얼로그 띄우기
+            val dialog = ReservationCancelDialogFragment()
+            val bundle = Bundle()
+            bundle.putLong("reservationId", viewModel.reservationId)
+            dialog.arguments = bundle
+            dialog.show(supportFragmentManager, "ReservationCancelDialogFragment")
+//            viewModel.cancelReservation(viewModel.reservationId)
         }
     }
 

@@ -16,7 +16,7 @@
         android:layout_marginBottom="16dp"
         android:text="로그인 후 이용하시겠습니까?"
         android:textColor="@color/black"
-        android:textSize="@dimen/h6"
+        android:textSize="@dimen/h5"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_login_go"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         android:backgroundTint="@color/orange_light"
         android:text="로그인 하러가기"
         android:textColor="@color/white"
-        android:textSize="@dimen/h6"
+        android:textSize="@dimen/h5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
