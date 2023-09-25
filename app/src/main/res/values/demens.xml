@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <dimen name="h1">26sp</dimen> <!-- -->
-    <dimen name="h2">22sp</dimen> <!-- 상세정보 제목 사이즈-->
-    <dimen name="h3">18sp</dimen> <!-- 상세정보 부제목 사이즈 -->
-    <dimen name="h7">11sp</dimen> <!-- 상세 폰트 사이즈 ex) 달력 시간 -->
-    <dimen name="h8">13sp</dimen> <!-- 부제목, 카드 타이틀 사이즈 -->
-    <dimen name="h4">14sp</dimen> <!-- 타이틀 폰트 사이즈 -->
-    <dimen name="h5">12sp</dimen> <!-- 기본 폰트 사이즈 -->
-    <dimen name="h6">10sp</dimen> <!-- 상세 폰트 사이즈 ex) 달력 시간 -->
+<resources  xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="h1">26dp</dimen> <!-- -->
+    <dimen name="h2">24dp</dimen> <!-- 상세정보 제목 사이즈-->
+    <dimen name="h3">22dp</dimen> <!-- 상세정보 부제목 사이즈 -->
+    <dimen name="h4">18dp</dimen> <!-- 타이틀 폰트 사이즈 -->
+    <dimen name="h5">16dp</dimen> <!-- 부제목, 카드 타이틀 사이즈 -->
+    <dimen name="h6">13dp</dimen> <!-- 기본 폰트 사이즈 -->
+    <dimen name="h7">12dp</dimen> <!-- 상세 폰트 사이즈 ex) 달력 시간 -->
+    <dimen name="h8">10dp</dimen> <!-- 상세 폰트 사이즈 ex) 달력 시간 -->
     <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
     <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
 </resources>

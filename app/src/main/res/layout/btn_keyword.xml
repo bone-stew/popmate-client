@@ -13,7 +13,7 @@
     android:layout_height="wrap_content"
     android:text="키워드"
     android:textColor="@color/tx_light_gray"
-    android:textSize="@dimen/h5"
+    android:textSize="@dimen/h6"
     android:layout_marginStart="8dp"
     android:layout_gravity="center"/>
 

@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="방문 예정"
-                    android:textSize="@dimen/h4"
+                    android:textSize="@dimen/h5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/tx_dark_gray"/>
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:text="예약 상세"
-                        android:textSize="@dimen/h5"
+                        android:textSize="@dimen/h6"
                         android:textColor="@color/blue_500"/>
 
                     <Button
@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="스토어 이름"
-                        android:textSize="@dimen/h4"
+                        android:textSize="@dimen/h5"
                         android:textColor="@color/tx_dark_gray"
                         app:layout_constraintStart_toEndOf="@id/img_popup_store"
                         app:layout_constraintTop_toTopOf="@id/img_popup_store" />
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="입장 시간"
-                    android:textSize="@dimen/h5"
+                    android:textSize="@dimen/h6"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/layout_popup_store" />
 
@@ -125,14 +125,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="9.12 (화) 10:00"
-                        android:textSize="@dimen/h5"/>
+                        android:textSize="@dimen/h6"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text=" ~ "
-                    android:textSize="@dimen/h5" />
+                    android:textSize="@dimen/h6" />
 
                     <TextView
                         android:id="@+id/tv_visit_end_time"
@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="10:15"
-                    android:textSize="@dimen/h5" />
+                    android:textSize="@dimen/h6" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="1"
-                android:textSize="@dimen/h5"
+                android:textSize="@dimen/h6"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_visit_start_date" />

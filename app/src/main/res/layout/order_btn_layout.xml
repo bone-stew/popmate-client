@@ -16,7 +16,7 @@
     android:layout_weight="1"
     android:visibility="gone"
     android:textColor="@color/white"
-    android:textSize="@dimen/h4" />
+    android:textSize="@dimen/h5" />
 
   <Button
     android:id="@+id/order_btn_post"
@@ -29,6 +29,6 @@
     android:visibility="gone"
     android:layout_weight="1"
     android:textColor="@color/white"
-    android:textSize="@dimen/h4" />
+    android:textSize="@dimen/h5" />
 
 </LinearLayout>

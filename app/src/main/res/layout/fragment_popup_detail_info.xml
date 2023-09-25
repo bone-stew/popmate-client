@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.openDateFormatted}"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h7" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -79,7 +79,7 @@
                         android:layout_height="18dp"
                         android:layout_gravity="center"
                         android:layout_marginEnd="8dp"
-                        android:src="@drawable/clock" />
+                        android:src="@drawable/clock_gray" />
 
                     <TextView
                         android:id="@+id/popup_open_time"
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.openTimeFormatted}"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h7" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.placeDetail}"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h7" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.entryFeeFormatted}"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -147,7 +147,7 @@
                     android:layout_marginStart="16dp"
                     android:text="SNS"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h3" />
+                    android:textSize="@dimen/h5" />
 
                 <LinearLayout
                     android:id="@+id/instagram"
@@ -156,9 +156,8 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-
-                    android:paddingHorizontal="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="18dp"
@@ -170,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
                         android:text="인스타그램"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h6" />
 
                     <View
                         android:layout_width="0dp"
@@ -183,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/text_boarder"
                         android:text="\@sesonenon"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -193,8 +192,8 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:visibility="gone"
-                    android:paddingHorizontal="16dp">
+                    android:paddingHorizontal="16dp"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="18dp"
@@ -206,7 +205,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
                         android:text="홈페이지"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h6" />
 
                     <View
                         android:layout_width="0dp"
@@ -218,8 +217,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/text_boarder"
+                        android:linksClickable="false"
                         android:text="www.sesonenon.org"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -229,9 +229,9 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:visibility="gone"
+                    android:paddingHorizontal="16dp"
 
-                    android:paddingHorizontal="16dp">
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="18dp"
@@ -243,7 +243,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
                         android:text="Youtube"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h6" />
 
                     <View
                         android:layout_width="0dp"
@@ -256,7 +256,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/text_boarder"
                         android:text="\@sesonenon"
-                        android:textSize="@dimen/h4" />
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -278,7 +278,7 @@
                     android:layout_marginBottom="16dp"
                     android:text="오시는 길"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h3" />
+                    android:textSize="@dimen/h5" />
 
 
                 <com.google.android.gms.maps.MapView
@@ -293,22 +293,23 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                      android:id="@+id/location_copy_btn"
+                        android:id="@+id/location_copy_btn"
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:src="@drawable/tabler_copy"
                         app:tint="@color/tx_gray" />
+
                     <TextView
                         android:id="@+id/location_detail_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="서울 영등포구 여의대로 108 더현대 서울 B2 아이코닉"
-                        android:textSize="@dimen/h5" />
+                        android:textSize="@dimen/h7" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-              android:id="@+id/mapLayout"
+                android:id="@+id/mapLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -322,16 +323,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                  android:paddingHorizontal="16dp"
-
-                  android:text="같은 지점에서 진행되고 있는 팝업스토어"
+                    android:paddingHorizontal="16dp"
+                    android:text="같은 지점에서 진행되고 있는 팝업스토어"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h3" />
+                    android:textSize="@dimen/h5" />
+
                 <androidx.recyclerview.widget.RecyclerView
-                  android:id="@+id/recommend_store"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  app:layout_constraintTop_toBottomOf="@+id/mapLayout"/>
+                    android:id="@+id/recommend_store"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/mapLayout" />
 
             </LinearLayout>
 

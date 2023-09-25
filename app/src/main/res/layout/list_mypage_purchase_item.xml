@@ -21,7 +21,7 @@
         android:layout_marginTop="23dp"
         android:text="9.12"
         android:textColor="@color/tx_gray"
-        android:textSize="13dp"
+        android:textSize="@dimen/h7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
         android:layout_marginTop="23dp"
         android:text="픽업 대기"
         android:textColor="@color/tx_gray"
-        android:textSize="13dp"
+        android:textSize="@dimen/h7"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="구매 상세"
             android:textColor="@color/black"
-            android:textSize="13dp" />
+            android:textSize="@dimen/h7" />
     </LinearLayout>
 
     <TextView
@@ -80,7 +80,7 @@
         android:layout_marginTop="26dp"
         android:text=" ˙ "
         android:textColor="@color/tx_gray"
-        android:textSize="13dp"
+        android:textSize="@dimen/h7"
         app:layout_constraintEnd_toStartOf="@+id/txt_list_mypage_purchase_pickup"
         app:layout_constraintStart_toEndOf="@+id/txt_list_mypage_purchase_day"
         app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +93,7 @@
         android:layout_marginTop="50dp"
         android:text="빵빵이의 생일파티"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="@dimen/h5"
         app:layout_constraintStart_toEndOf="@+id/img_list_mypage_bannerimg"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,7 +106,7 @@
         android:layout_marginTop="5dp"
         android:text="무럭무럭 잔 1개 + 투두투두 잇 1개"
         android:textColor="@color/tx_gray"
-        android:textSize="13dp"
+        android:textSize="@dimen/h7"
         app:layout_constraintStart_toEndOf="@+id/img_list_mypage_bannerimg"
         app:layout_constraintTop_toBottomOf="@+id/txt_mypage_order_detail_store_name" />
 
@@ -119,7 +119,7 @@
         android:layout_marginTop="12dp"
         android:text="픽업 시간"
         android:textColor="@color/tx_gray"
-        android:textSize="13dp"
+        android:textSize="@dimen/h7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_list_mypage_bannerimg" />
 
@@ -131,7 +131,7 @@
         android:layout_marginBottom="12dp"
         android:text="9.12"
         android:textColor="@color/black"
-        android:textSize="13dp"
+        android:textSize="@dimen/h7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -143,7 +143,7 @@
         android:layout_marginStart="4dp"
         android:text="10:00"
         android:textColor="@color/black"
-        android:textSize="13dp"
+        android:textSize="@dimen/h7"
         app:layout_constraintStart_toEndOf="@+id/txt_list_mypage_purchase_pickup_day"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
