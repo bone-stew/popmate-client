@@ -9,34 +9,53 @@ import java.lang.reflect.Type
 
 
 class PreferenceManager(context: Context) {
-    companion object{
-
-    private val PREFERNCE_NAME : String = "popmate"
+    companion object {
+        private const val PREFERNCE_NAME: String = "popmate"
+        private const val STORE_KEY: String = "storeKey"
+        private const val STORE_ID_KEY: String = "storeIdKey"
     }
-    private val prefs : SharedPreferences = context.getSharedPreferences(PREFERNCE_NAME, Context.MODE_PRIVATE)
+
+    private val prefs: SharedPreferences = context.getSharedPreferences(PREFERNCE_NAME, Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = prefs.edit()
 
-    fun <PopupStore> setList(key: String, list: List<PopupStore>){
+    fun <PopupStore> setStoreList(key: String, list: List<PopupStore>) {
         val gson = Gson()
         val json = gson.toJson(list)
         set(key, json)
     }
 
-    fun set(key: String, value: String){
+    fun <Long> setStoreIdList(key: String, list: List<Long>) {
+        val gson = Gson()
+        val json = gson.toJson(list)
+        set(key, json)
+    }
+
+    fun set(key: String, value: String) {
         editor.putString(key, value)
         editor.apply()
     }
 
-    fun clear(){
+    fun clear() {
         editor.clear()
         editor.apply()
     }
 
-    fun getList(): List<PopupStore>? {
-        val serializedObject = prefs.getString(PREFERNCE_NAME, null)
+    fun getStoreList(): List<PopupStore>? {
+        val serializedObject = prefs.getString(STORE_KEY, null)
         return if (serializedObject != null) {
             val gson = Gson()
             val type: Type = object : TypeToken<List<PopupStore>>() {}.type
+            gson.fromJson(serializedObject, type)
+        } else {
+            null
+        }
+    }
+
+    fun getStoreIdList(): List<Long>? {
+        val serializedObject = prefs.getString(STORE_ID_KEY, null)
+        return if (serializedObject != null) {
+            val gson = Gson()
+            val type: Type = object : TypeToken<List<Long>>() {}.type
             gson.fromJson(serializedObject, type)
         } else {
             null

@@ -62,6 +62,7 @@ class HomeFragment : Fragment() {
                 binding.imageCarousel.visibility = View.GONE
                 binding.listView.visibility = View.GONE
                 binding.endingSoonView.visibility = View.GONE
+                binding.visitedRecyclerView.visibility = View.GONE
                 binding.homeShimmerLayout.visibility = View.VISIBLE
                 binding.carouselShimmerLayout.visibility = View.VISIBLE
                 binding.openingSoonShimmerLayout.visibility = View.VISIBLE
@@ -72,6 +73,7 @@ class HomeFragment : Fragment() {
                 binding.imageCarousel.visibility = View.VISIBLE
                 binding.listView.visibility = View.VISIBLE
                 binding.endingSoonView.visibility = View.VISIBLE
+                binding.visitedRecyclerView.visibility = View.VISIBLE
                 binding.homeShimmerLayout.visibility = View.GONE
                 binding.carouselShimmerLayout.visibility = View.GONE
                 binding.openingSoonShimmerLayout.visibility = View.GONE

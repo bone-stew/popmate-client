@@ -32,6 +32,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         Log.d("ddddd", ApiClient.getJwtToken().toString())
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener { item ->
+
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.flFragment)
+            if (currentFragment is HomeFragment && item.itemId == R.id.page_home ||
+                currentFragment is PopupStoreFragment && item.itemId == R.id.page_popupstore ||
+                (currentFragment is MyPageLoginFragment || currentFragment is MyPageLogoutFragment) && item.itemId == R.id.page_mypage
+            ) {
+                return@setOnItemSelectedListener true
+            }
+
+
             when (item.itemId) {
                 R.id.page_home -> setCurrentFragment(HomeFragment(), false)
                 R.id.page_popupstore -> setCurrentFragment(PopupStoreFragment(), false)

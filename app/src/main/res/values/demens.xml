@@ -8,4 +8,6 @@
     <dimen name="h6">13dp</dimen> <!-- 기본 폰트 사이즈 -->
     <dimen name="h7">12dp</dimen> <!-- 상세 폰트 사이즈 ex) 달력 시간 -->
     <dimen name="h8">10dp</dimen> <!-- 상세 폰트 사이즈 ex) 달력 시간 -->
+    <dimen name="design_bottom_navigation_item_max_width" tools:override="true">600dp</dimen>
+    <dimen name="design_bottom_navigation_active_item_max_width" tools:override="true">600dp</dimen>
 </resources>
