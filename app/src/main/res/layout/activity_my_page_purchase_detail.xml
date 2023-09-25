@@ -117,8 +117,9 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="12dp"
+                android:background="@drawable/button_radius"
                 android:layout_marginEnd="16dp"
-                android:background="@color/orange_light"
+                android:backgroundTint="@color/orange_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView_my_page_puchase_detail">
