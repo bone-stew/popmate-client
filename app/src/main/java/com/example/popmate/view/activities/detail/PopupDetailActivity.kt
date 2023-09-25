@@ -3,6 +3,7 @@ package com.example.popmate.view.activities.detail
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,9 +40,12 @@ class PopupDetailActivity :
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         popupStoreId = intent.getLongExtra("id", -1)
-        
-        val model: PopupDetailViewModel by viewModels()
 
+        initEvent()
+        setObserve()
+    }
+
+    private fun initEvent() {
         binding.run {
             backBtn.setOnClickListener { finish() }
             infoChatTab.run {
@@ -67,20 +71,19 @@ class PopupDetailActivity :
                      * dialog_lesson_login 다이얼로그 띄우기
                      */
                     val dialog = LessonLoginDialog(this@PopupDetailActivity)
-                    dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
+                    dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener {
                         override fun onOkClicked() {
                             val intent = Intent(this@PopupDetailActivity, LoginActivity::class.java)
-                            intent.putExtra("returnToActivity", PopupDetailActivity::class.java.name)
-                            intent.putExtra("id",popupStoreId)
+                            intent.putExtra(
+                                "returnToActivity",
+                                PopupDetailActivity::class.java.name
+                            )
+                            intent.putExtra("id", popupStoreId)
                             startActivity(intent)
                             finish()
                         }
                     }
                     dialog.start()
-                    return@setOnClickListener
-                }
-                if (!model.store.value!!.reservationEnabled) {
-                    Toast.makeText(this@PopupDetailActivity, "예약을 하지 않는 팝업스토어입니다", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
                 /**
@@ -122,11 +125,14 @@ class PopupDetailActivity :
                     startActivity(intent)
                 } else {
                     val dialog = LessonLoginDialog(this@PopupDetailActivity)
-                    dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener{
+                    dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener {
                         override fun onOkClicked() {
                             val intent = Intent(this@PopupDetailActivity, LoginActivity::class.java)
-                            intent.putExtra("returnToActivity", PopupDetailActivity::class.java.name)
-                            intent.putExtra("id",popupStoreId)
+                            intent.putExtra(
+                                "returnToActivity",
+                                PopupDetailActivity::class.java.name
+                            )
+                            intent.putExtra("id", popupStoreId)
                             startActivity(intent)
                             finish()
                         }
@@ -135,7 +141,9 @@ class PopupDetailActivity :
                 }
             }
         }
+    }
 
+    private fun setObserve() {
         model.loadStore(popupStoreId)
         model.loadChatThumbnail(popupStoreId)
         model.store.observe(this) {
@@ -145,6 +153,12 @@ class PopupDetailActivity :
             }
             setInfoFragment()
             saveToRecentlyViewedSharedPrefs(it)
+            if (!it.reservationEnabled) {
+                binding.reserveBtn.backgroundTintList =
+                    ColorStateList.valueOf(resources.getColor((R.color.bg_gray)))
+                binding.reserveBtn.text = "바로 방문할 수 있는 팝업스토어입니다"
+                binding.reserveBtn.isEnabled = false
+            }
         }
 
         model.status.observe(this) {
@@ -269,9 +283,9 @@ class PopupDetailActivity :
         }
     }
 
-    private fun orderDialog(){
+    private fun orderDialog() {
         val dialog = LessonOrderDialog(this@PopupDetailActivity)
-        dialog.listener = object : LessonOrderDialog.LessonOkDialogClickedListener{
+        dialog.listener = object : LessonOrderDialog.LessonOkDialogClickedListener {
             override fun onOkClicked() {
             }
         }
