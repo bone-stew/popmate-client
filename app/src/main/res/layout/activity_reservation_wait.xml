@@ -50,7 +50,7 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/tx_dark_gray"
                     android:text="@string/popup_store_visit_time"
-                    android:textSize="@dimen/h4" />
+                    android:textSize="@dimen/h6" />
 
             </LinearLayout>
 
@@ -76,7 +76,7 @@
                         android:layout_marginBottom="5dp"
                         android:text="@string/popup_store_visit_time"
                         android:textColor="@color/tx_gray"
-                        android:textSize="@dimen/h5" />
+                        android:textSize="@dimen/h6" />
 
                     <TextView
                         android:id="@+id/tv_visit_status"
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:text="@string/popup_store_visit_status"
-                        android:textSize="@dimen/h3"
+                        android:textSize="@dimen/h4"
                         android:textColor="@color/tx_dark_gray"
                         android:textStyle="bold" />
 
@@ -99,21 +99,21 @@
                             android:layout_height="wrap_content"
                             android:text="10시 30분"
                             android:textColor="@color/tx_gray"
-                            android:textSize="@dimen/h5" />
+                            android:textSize="@dimen/h6" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" ~ "
                             android:textColor="@color/tx_gray"
-                            android:textSize="@dimen/h5" />
+                            android:textSize="@dimen/h6" />
 
                         <TextView
                             android:id="@+id/tv_entry_end_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="10시 50분"
-                            android:textSize="@dimen/h5"
+                            android:textSize="@dimen/h6"
                             android:textColor="@color/tx_gray" />
                     </LinearLayout>
 
@@ -141,7 +141,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/tx_dark_gray"
                     android:text="@string/popup_store_visiter_count"
-                    android:textSize="@dimen/h4" />
+                    android:textSize="@dimen/h6" />
 
             </LinearLayout>
 
@@ -218,7 +218,7 @@
                     android:layout_weight="1"
                     android:text="@string/reservation"
                     android:textColor="@color/tx_dark_gray"
-                    android:textSize="@dimen/h4" />
+                    android:textSize="@dimen/h6" />
 
             </LinearLayout>
 
@@ -274,7 +274,7 @@
                             android:layout_marginBottom="5dp"
                             android:textColor="@color/tx_gray"
                             android:text="설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명"
-                            android:textSize="@dimen/h5" />
+                            android:textSize="@dimen/h6" />
 
                         <View
                             android:layout_width="match_parent"
@@ -294,7 +294,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="운영시간"
                                 android:textColor="@color/tx_dark_gray"
-                                android:textSize="@dimen/h5" />
+                                android:textSize="@dimen/h6" />
 
                             <TextView
                                 android:id="@+id/tv_popup_store_open_time"
@@ -303,14 +303,14 @@
                                 android:layout_marginLeft="10dp"
                                 android:text="10:00"
                                 android:textColor="@color/tx_dark_gray"
-                                android:textSize="@dimen/h5" />
+                                android:textSize="@dimen/h6" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=" ~ "
                                 android:textColor="@color/tx_dark_gray"
-                                android:textSize="@dimen/h5" />
+                                android:textSize="@dimen/h6" />
 
                             <TextView
                                 android:id="@+id/tv_popup_store_close_time"
@@ -318,7 +318,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="10:15"
                                 android:textColor="@color/tx_dark_gray"
-                                android:textSize="@dimen/h5" />
+                                android:textSize="@dimen/h6" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

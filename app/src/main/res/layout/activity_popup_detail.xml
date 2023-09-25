@@ -71,7 +71,7 @@
                     android:maxWidth="280dp"
                     android:text="@{store.description}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/h4"
+                    android:textSize="@dimen/h5"
                     app:layout_constraintBottom_toBottomOf="@+id/bannerImage"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toLeftOf="@+id/bannerImage"
@@ -88,7 +88,8 @@
                     android:paddingStart="16dp"
                     android:text="팝업 프로모션 및 이벤트"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h4"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/h5"
                     app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
 
                 <TextView
@@ -101,7 +102,7 @@
                     android:padding="10dp"
                     android:text="@{store.eventDescription}"
                     android:textColor="@color/tx_gray"
-                    android:textSize="@dimen/h5"
+                    android:textSize="@dimen/h6"
                     app:layout_constraintTop_toBottomOf="@id/eventText" />
 
                 <com.google.android.material.tabs.TabLayout
@@ -142,7 +143,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingTop="8dp"
             android:background="@color/white"
+            android:elevation="8dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent">
 

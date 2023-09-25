@@ -33,7 +33,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintVertical_bias="0.5"
       android:textStyle="bold"
-      android:textSize="@dimen/h5"
+      android:textSize="@dimen/h6"
       android:textColor="@color/black"
       android:gravity="center"
       android:layout_marginTop="4dp" />

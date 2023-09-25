@@ -17,6 +17,7 @@ import com.example.popmate.config.BaseActivity
 import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.ActivityPopupDetailBinding
 import com.example.popmate.model.data.local.PopupStore
+import com.example.popmate.model.data.local.PopupStoreSnsResponse
 import com.example.popmate.model.repository.ApiClient
 import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.util.LessonOrderDialog

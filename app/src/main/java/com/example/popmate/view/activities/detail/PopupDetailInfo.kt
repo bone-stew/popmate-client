@@ -3,6 +3,8 @@ package com.example.popmate.view.activities.detail
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -54,6 +56,40 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
             binding.run {
                 Log.d(TAG, "onCreateView: $it")
                 store = it
+                for (sns: PopupStoreSnsResponse in it.popupStoreSnsResponses) {
+                    when (sns.platform) {
+                        "Instagram" -> {
+                            instagram.visibility = View.VISIBLE
+                            instagramUrl.text = sns.url.split("/").last()
+                            instagramUrl.setOnClickListener {
+                                val uri = Uri.parse(sns.url)
+                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                startActivity(intent)
+                            }
+                        }
+
+                        "Youtube" -> {
+                            youtube.visibility = View.VISIBLE
+                            youtubeUrl.text = sns.url.split("/").last()
+                            youtubeUrl.setOnClickListener {
+                                val uri = Uri.parse(sns.url)
+                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                startActivity(intent)
+                            }
+                        }
+
+                        "Website" -> {
+                            homePage.visibility = View.VISIBLE
+                            homePageUrl.text = sns.url.split("/")[2]
+                            homePageUrl.setOnClickListener {
+                                val uri = Uri.parse(sns.url)
+                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                startActivity(intent)
+                            }
+                        }
+                    }
+
+                }
                 imageCarousel.adapter = DetailCarouselAdapter(it.popupStoreImgResponses)
                 imageCarousel.orientation = ViewPager2.ORIENTATION_HORIZONTAL
                 indicator.setViewPager(imageCarousel)
@@ -64,10 +100,11 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
                         "homePage" -> setSnsView(homePage, homePageUrl, sns)
                     }
                 }
-                val address =  it.department.placeDescription + " " + it.placeDetail
+                val address = it.department.placeDescription + " " + it.placeDetail
                 locationDetailText.text = address
-                    val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    val clipData = ClipData.newPlainText("locationDetail", address)
+                val clipboard =
+                    requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clipData = ClipData.newPlainText("locationDetail", address)
                 locationCopyBtn.setOnClickListener {
                     clipboard.setPrimaryClip(clipData)
                     Toast.makeText(
@@ -88,7 +125,11 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
                 recommendStore.layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 recommendStore.adapter =
-                    PopupStoreAdapter(requireContext(), it.popupStoresNearBy, PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE)
+                    PopupStoreAdapter(
+                        requireContext(),
+                        it.popupStoresNearBy,
+                        PopupStoreAdapter.ViewHolderType.VERTICAL_LARGE
+                    )
             }
         }
         mapView = binding.storeLocationMap
@@ -109,7 +150,8 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
         this.googleMap = googleMap
         viewModel.store.observe(viewLifecycleOwner) {
             Log.d(TAG, "onMapReady: ")
-            currentMarker = setupMarker(LatLngEntity(it.department.latitude, it.department.longitude))
+            currentMarker =
+                setupMarker(LatLngEntity(it.department.latitude, it.department.longitude))
         }
 //        currentMarker?.showInfoWindow()
     }
