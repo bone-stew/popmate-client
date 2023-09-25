@@ -67,9 +67,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         } else {
             binding.popupstoreRecyclerView.addItemDecoration(GridSpacingDecoration(2, 50))
         }
-        Log.i("swc", screenWidthDP.toString());
-        Log.i("swc", "HELLO");
-
 
         viewModel = ViewModelProvider(this)[PopupStoreListViewModel::class.java]
         viewModel.loadList(
