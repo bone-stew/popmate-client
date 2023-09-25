@@ -27,7 +27,7 @@ class ReservationSuccessViewModel : ViewModel() {
                 ) {
                     if (response.isSuccessful) {
                         val result = response.body()?.data
-                            result?.let {
+                        result?.let {
                             _myReservation.postValue(it)
                         }
                         Log.d("Reservation", "result: $result")
