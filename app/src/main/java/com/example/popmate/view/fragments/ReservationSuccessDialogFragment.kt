@@ -96,6 +96,8 @@ class ReservationSuccessDialogFragment : DialogFragment() {
         binding.btnClose.setOnClickListener {
             val intent = Intent(activity, PopupDetailActivity::class.java)
             intent.putExtra("id", popupStoreId)
+            // 기존 액티비티 스택을 모두 제거하고 새로운 액티비티를 호출
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
     }
