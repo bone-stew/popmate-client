@@ -45,7 +45,7 @@
             android:layout_marginTop="21dp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="@dimen/h4"
+            android:textSize="@dimen/h3"
             android:paddingLeft="20dp"
             android:text="SE SO NEON : A Pirateship"
             app:layout_constraintEnd_toEndOf="parent"
