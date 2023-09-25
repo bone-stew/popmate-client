@@ -49,7 +49,7 @@
       android:textColor="@drawable/txt_is_opening_soon_selector"
       android:textOff="오픈예정"
       android:textOn="오픈예정"
-      android:textSize="@dimen/h5"
+      android:textSize="@dimen/h7"
       app:layout_constraintEnd_toStartOf="@+id/calendarLayout"
       app:layout_constraintTop_toBottomOf="@id/titleText" />
 

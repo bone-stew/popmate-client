@@ -48,7 +48,7 @@
                 android:layout_marginBottom="17dp"
                 android:text="결제 완료"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="@dimen/h4"
                 app:layout_constraintBottom_toTopOf="@+id/txt_order_detail_payment_complete_totalprice"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +60,7 @@
                 android:layout_marginTop="13dp"
                 android:text="18000"
                 android:textColor="@color/black"
-                android:textSize="28dp"
+                android:textSize="@dimen/h1"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/textView7"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                 android:layout_marginTop="11dp"
                 android:text="원"
                 android:textColor="@color/black"
-                android:textSize="28dp"
+                android:textSize="@dimen/h1"
                 app:layout_constraintStart_toEndOf="@+id/txt_order_detail_payment_complete_totalprice"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
