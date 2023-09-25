@@ -1,15 +1,26 @@
 package com.example.popmate.view.activities.chat
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.popmate.databinding.DialogChatReportBinding
 import com.example.popmate.databinding.ItemChatMineBinding
 import com.example.popmate.databinding.ItemChatOthersBinding
 import com.example.popmate.model.data.local.Chat
 import com.example.popmate.model.data.local.CurrUser
+import com.example.popmate.util.ChatReportDialog
 
-class ChatAdapter(private var messages: List<Chat>, private val currUser: CurrUser?) :
+class ChatAdapter(
+    private var messages: List<Chat>,
+    private val currUser: CurrUser?,
+    private val context: ChatActivity?
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val TAG = "ChatAdapter"
 
     companion object {
         private const val MY_CHAT = 1
@@ -30,6 +41,14 @@ class ChatAdapter(private var messages: List<Chat>, private val currUser: CurrUs
             binding.chatMessage.text = chat.message
             binding.timeStamp.text = chat.createdAt?.substring(11, 16)
             binding.sender.text = chat.name
+            context?.let {
+                binding.chatMessage.setOnLongClickListener {
+                    Log.d(TAG, "bind: $chat")
+                    val dialog = ChatReportDialog(context)
+                    dialog.show(chat)
+                    true
+                }
+            }
         }
     }
 

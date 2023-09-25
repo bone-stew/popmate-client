@@ -1,10 +1,12 @@
 package com.example.popmate.view.activities.detail
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -30,7 +32,7 @@ class PopupDetailChat : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_popup_detail_chat, container, false)
         binding.chatThumbnail.layoutManager = LinearLayoutManager(context)
-        binding.chatThumbnail.adapter = ChatAdapter(emptyList(), null)
+        binding.chatThumbnail.adapter = ChatAdapter(emptyList(), null, null)
         viewModel.chat.observe(viewLifecycleOwner) {
             (binding.chatThumbnail.adapter as ChatAdapter).addChat(it)
         }
