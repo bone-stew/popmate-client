@@ -1,6 +1,7 @@
 package com.example.popmate.view.fragments.user
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.popmate.databinding.FragmentMyPagePurchaseDetailBinding
 import com.example.popmate.model.data.remote.user.OrderListItem
 import com.example.popmate.model.data.remote.user.Orders
 import com.example.popmate.view.adapters.user.MyPageOrderDetailAdapter
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -41,9 +43,9 @@ class MyPagePurchaseDetailFragment(private val clickedItem: Orders) : Fragment()
         binding.txtFragmentMyPagePurchaseDetailStoreName.text = clickedItem.title
 
         if(clickedItem.orderItemList.size == 1){
-            binding.txtFragmentMyPagePurchaseDetailItems.text = clickedItem.orderItemList[0].popupStoreItem.name
+            binding.txtFragmentMyPagePurchaseDetailItems.text = clickedItem.orderItemList[0].popupStoreItem!!.name
         }else{
-            binding.txtFragmentMyPagePurchaseDetailItems.text = clickedItem.orderItemList[0].popupStoreItem.name + " 외 ${clickedItem.orderItemList.size-1}개"
+            binding.txtFragmentMyPagePurchaseDetailItems.text = clickedItem.orderItemList[0].popupStoreItem!!.name + " 외 ${clickedItem.orderItemList.size-1}개"
         }
         val koreanLocale = Locale("ko", "KR")
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", koreanLocale)
@@ -53,7 +55,10 @@ class MyPagePurchaseDetailFragment(private val clickedItem: Orders) : Fragment()
         binding.txtFragmentMyPagePurchaseDetailTime.text = "구매일시 : ${formattedDate}"
         binding.txtFragmentMyPagePurchaseDetailOrderNumber.text = "주문번호 : ${clickedItem.orderTossId}"
 
-        binding.txtFragmentMyPagePurchaseDetailTotalPrice.text = "${clickedItem.total_amount}원"
+        val amount = clickedItem.total_amount
+        val totalAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(amount) + "원"
+        Log.d("jjrd",clickedItem.total_amount.toString())
+        binding.txtFragmentMyPagePurchaseDetailTotalPrice.text = "${totalAmount}원"
 
         if(clickedItem.easyPay==null){
             binding.txtFragmentMyPagePurchaseDetailPayment.text = "${clickedItem.cardType}${clickedItem.method}"

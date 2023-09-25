@@ -144,7 +144,7 @@ class PopupDetailActivity :
                 store = it
             }
             setInfoFragment()
-            saveToRecentlyViewedSharedPrefs(it)
+            saveToRecentlyViewedSharedPrefs(popupStoreId, it)
         }
 
         model.status.observe(this) {
@@ -216,22 +216,33 @@ class PopupDetailActivity :
         }
     }
 
-    private fun saveToRecentlyViewedSharedPrefs(store: PopupStore?) {
-        val storeList = PopmateApplication.prefs.getList()
+    private fun saveToRecentlyViewedSharedPrefs(storeId: Long?, store: PopupStore?) {
+        val storeList = PopmateApplication.prefs.getStoreList()
+        val storeIdList = PopmateApplication.prefs.getStoreIdList()
         var storeLinkedList: LinkedList<PopupStore>? = null
+        var storeIdLinkedList: LinkedList<Long>? = null
         storeLinkedList = if (storeList == null) {
             LinkedList<PopupStore>()
         } else {
             LinkedList(storeList)
         }
-        if (storeLinkedList.contains(store)) {
+        storeIdLinkedList = if (storeIdList == null) {
+            LinkedList<Long>()
+        } else {
+            LinkedList(storeIdList)
+        }
+        if (storeIdLinkedList.contains(storeId)) {
             storeLinkedList.remove(store)
+            storeIdLinkedList.remove(storeId)
         }
         storeLinkedList.addFirst(store)
+        storeIdLinkedList.addFirst(storeId)
         if (storeLinkedList.size > 5) {
             storeLinkedList.removeLast()
+            storeIdLinkedList.removeLast()
         }
-        PopmateApplication.prefs.setList("popmate", storeLinkedList.toList())
+        PopmateApplication.prefs.setStoreList("storeKey", storeLinkedList.toList())
+        PopmateApplication.prefs.setStoreIdList("storeIdKey", storeIdLinkedList.toList())
     }
 
     private fun setInfoFragment() {
@@ -244,7 +255,10 @@ class PopupDetailActivity :
                 orderLayout.reserveBtnPost.visibility = View.VISIBLE
                 orderLayout.orderBtnPost.setOnClickListener {
                     // 안드로이드 출시를 하면 주문 쪽으로 들어가면 안되기 때문에 설정
-                    orderDialog()
+                    //orderDialog()
+                    val intent = Intent(applicationContext, OrderActivity::class.java)
+                    intent.putExtra("id", popupStoreId)
+                    startActivity(intent)
                 }
             } else {
                 reserveBtn.visibility = View.VISIBLE

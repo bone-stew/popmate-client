@@ -11,6 +11,9 @@ import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.detail.PopupDetailActivity
+import com.example.popmate.view.activities.user.MyPagePurchaseActivity
+import com.example.popmate.view.activities.user.MyPagePurchaseDetailActivity
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -41,7 +44,7 @@ class OrderPaymentCompleteActivity : BaseActivity<ActivityOrderPaymentCompleteBi
                 }
             }
         }
-
+        val orderId = intent.getLongExtra("orderId",0)
         if(intent.hasExtra("placeDetail")){
             placeDetail = intent.getParcelableExtra("placeDetail") as? OrderPlaceDetailResponse
         }
@@ -50,8 +53,9 @@ class OrderPaymentCompleteActivity : BaseActivity<ActivityOrderPaymentCompleteBi
         val currentTime = Date()
 
 
-        binding.txtOrderDetailPaymentCompleteTotalprice.text = totalAmount.toString()
-        binding.textView13.text = totalAmount.toString()
+        val amount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalAmount)
+        binding.txtOrderDetailPaymentCompleteTotalprice.text = amount
+        binding.textView13.text = amount
         binding.textView14.text = dateFormat.format(currentTime)
         binding.textView15.text = placeDetail?.placeDetail
 
@@ -63,6 +67,12 @@ class OrderPaymentCompleteActivity : BaseActivity<ActivityOrderPaymentCompleteBi
 
         binding.imgOrderDetailPaymentCompleteClose.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.layoutOrderPaymentOrderList.setOnClickListener {
+            val intent = Intent(this,MyPagePurchaseDetailActivity::class.java)
+            intent.putExtra("orderId",orderId)
             startActivity(intent)
         }
     }

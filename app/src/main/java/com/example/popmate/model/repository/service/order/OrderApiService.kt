@@ -2,6 +2,7 @@ package com.example.popmate.model.repository.service.order
 
 import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.order.OrderItemRequest
+import com.example.popmate.model.data.remote.order.OrderListDetailResponse
 import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
@@ -33,4 +34,7 @@ interface OrderApiService {
 
     @GET("orders/placedetails/{popupStoreId}")
     fun getPlaceDetails(@Path("popupStoreId") popupStoreId: Long) : Call<ApiResponse<OrderPlaceDetailResponse>>
+
+    @GET("orders/details/{orderId}")
+    fun getOrderListDetails(@Path("orderId") orderId: Long) :Call<ApiResponse<OrderListDetailResponse>>
 }

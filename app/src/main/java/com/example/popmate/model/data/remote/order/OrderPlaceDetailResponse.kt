@@ -6,9 +6,11 @@ import android.os.Parcelable
 data class OrderPlaceDetailResponse(
     val title: String,
     val placeDetail: String,
-    val placeDescription: String
+    val placeDescription: String,
+    val bannerImgUrl: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: ""
@@ -18,6 +20,7 @@ data class OrderPlaceDetailResponse(
         parcel.writeString(title)
         parcel.writeString(placeDetail)
         parcel.writeString(placeDescription)
+        parcel.writeString(bannerImgUrl)
     }
 
     override fun describeContents(): Int {

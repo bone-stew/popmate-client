@@ -1,7 +1,9 @@
 package com.example.popmate.model.repository.service.chat
 
 import com.example.popmate.model.data.local.Chat
+import com.example.popmate.model.data.local.CurrUser
 import com.example.popmate.model.data.remote.ApiResponse
+import com.example.popmate.model.data.remote.chat.CurrUserResponse
 import com.example.popmate.model.data.remote.chat.MessagesResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -21,7 +23,7 @@ interface ChatApiService {
     @GET("chat/enter/{roomId}")
     fun enter(
         @Path("roomId") roomId: Long
-    ): Call<ApiResponse<String>>
+    ): Call<ApiResponse<CurrUserResponse>>
 
     @GET("chat/thumbnail/{roomId}")
     fun getThumbnail(

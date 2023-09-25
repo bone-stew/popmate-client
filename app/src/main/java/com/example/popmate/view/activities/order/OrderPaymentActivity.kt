@@ -26,6 +26,8 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.NumberFormat
+import java.util.Locale
 import java.util.Random
 import java.util.UUID
 
@@ -65,10 +67,10 @@ class OrderPaymentActivity : AppCompatActivity() {
         binding.txtOrderDetailPaymentPopupstoreName.text = placeDetail?.title
         binding.txtOrderDetailPaymentDepartment.text = placeDetail?.placeDetail
 
-        binding.txtOrderDetailPaymentTotalprice.text = totalAmount.toString()
+        val amount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalAmount)
+        binding.txtOrderDetailPaymentTotalprice.text = amount
 
         val orderId = generateOrderId(10)
-        Log.d("ddd", orderId)
         val clientKey = getString(R.string.toss_client_key)
         val uuid = UUID.randomUUID()
         val paymentWidget = PaymentWidget(
@@ -171,10 +173,11 @@ class OrderPaymentActivity : AppCompatActivity() {
                 call: Call<ApiResponse<OrderResponse>>,
                 response: Response<ApiResponse<OrderResponse>>
             ) {
-                Log.d("jja","서버 왔어요")
+                val orderId = response.body()?.data?.orderId
                 val intent = Intent(this@OrderPaymentActivity,OrderPaymentCompleteActivity::class.java)
                 intent.putExtra("item",data)
                 intent.putExtra("placeDetail",placeDetail)
+                intent.putExtra("orderId",orderId)
                 startActivity(intent)
             }
 
