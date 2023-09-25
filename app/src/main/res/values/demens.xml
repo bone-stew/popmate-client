@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources  xmlns:tools="http://schemas.android.com/tools">
     <dimen name="h1">26dp</dimen> <!-- -->
     <dimen name="h2">24dp</dimen> <!-- 상세정보 제목 사이즈-->
     <dimen name="h3">22dp</dimen> <!-- 상세정보 부제목 사이즈 -->
