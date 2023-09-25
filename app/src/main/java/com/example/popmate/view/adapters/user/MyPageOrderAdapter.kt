@@ -2,13 +2,11 @@ package com.example.popmate.view.adapters.user
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.databinding.ListMypagePurchaseItemBinding
 import com.example.popmate.model.data.remote.user.Orders
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class MyPageOrderAdapter(): RecyclerView.Adapter<MypageOrderHolder>() {
@@ -74,9 +72,9 @@ class MypageOrderHolder(val binding: ListMypagePurchaseItemBinding) : RecyclerVi
         binding.txtListMypagePurchasePickupDay.text = outputFormat.format(date)
         binding.txtListMypagePurchasePickupTime.text = "$formattedTime ~"
         if(item.orderItemList.size == 1){
-            binding.txtMypageOrderDetailStoreItems.text = item.orderItemList[0].popupStoreItem.name
+            binding.txtMypageOrderDetailStoreItems.text = item.orderItemList[0].popupStoreItem!!.name
         }else{
-            binding.txtMypageOrderDetailStoreItems.text = item.orderItemList[0].popupStoreItem.name + " 외 ${item.orderItemList.size-1}개"
+            binding.txtMypageOrderDetailStoreItems.text = item.orderItemList[0].popupStoreItem!!.name + " 외 ${item.orderItemList.size-1}개"
         }
         if(item.status == 0){
             binding.txtListMypagePurchasePickup.text = "픽업대기"

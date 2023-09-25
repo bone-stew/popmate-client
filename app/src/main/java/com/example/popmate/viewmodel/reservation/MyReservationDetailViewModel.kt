@@ -1,20 +1,12 @@
 package com.example.popmate.viewmodel.reservation
 
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.example.popmate.config.BaseViewModel
-import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.model.data.remote.ApiResponse
-import com.example.popmate.model.data.remote.getResult
 import com.example.popmate.model.data.remote.reservation.MyReservationDetailResponse
 import com.example.popmate.model.repository.ApiClient.reservationService
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

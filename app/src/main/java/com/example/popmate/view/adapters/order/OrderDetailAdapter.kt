@@ -10,6 +10,8 @@ import com.example.popmate.databinding.ListOrderPurchaseItemBinding
 import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.view.activities.order.OrderDetailActivity
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class OrderDetailAdapter(
@@ -39,7 +41,9 @@ class OrderDetailAdapter(
     inner class orderDetailHolder(val binding: ListOrderPurchaseItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setGoods(item: PopupStoreItem) {
             binding.orderDetailName.text = item.name
-            binding.orderDetailPrice.text = item.amount.toString()
+            val amount = item.amount
+            val totalAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(amount)
+            binding.orderDetailPrice.text = totalAmount
             binding.orderDetailListCnt.text = item.totalQuantity.toString()
             binding.orderDetailMinus.setOnClickListener {
                 if(item.totalQuantity>1){

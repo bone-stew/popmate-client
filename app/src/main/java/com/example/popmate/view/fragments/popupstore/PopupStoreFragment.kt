@@ -3,7 +3,6 @@ package com.example.popmate.view.fragments.popupstore
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +34,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
     private var isOpeningSoon = false
     private var startDate: LocalDate = LocalDate.now()
     private var endDate: LocalDate = LocalDate.now().plusYears(1)
-    private var keyword = null
     private var offSetRows = null
     private var rowsToGet = null
 
@@ -73,7 +71,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         Log.i("swc", "HELLO");
 
 
-        viewModel = ViewModelProvider(requireActivity())[PopupStoreListViewModel::class.java]
+        viewModel = ViewModelProvider(this)[PopupStoreListViewModel::class.java]
         viewModel.loadList(
             isOpeningSoon,
             startDate.toString(),
@@ -166,7 +164,7 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
             bottomSheetFragment.setDataListener(this)
             bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
         }
-
+        refreshSearchText()
     }
 
     override fun onAttach(context: Context) {
@@ -205,18 +203,6 @@ class PopupStoreFragment : Fragment(), CalendarDataListener, SearchQueryListener
         binding.popupstoreRecyclerView.visibility = View.VISIBLE
     }
 
-    override fun onResume() {
-        viewModel.loadList(
-            isOpeningSoon,
-            startDate.toString(),
-            endDate.toString(),
-            searchQuery,
-            offSetRows,
-            rowsToGet
-        )
-        refreshSearchText()
-        super.onResume()
-    }
 
     private fun refreshSearchText() {
         val maxKeywordLength = 20

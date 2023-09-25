@@ -21,16 +21,21 @@
         android:theme="@style/Theme.Popmate"
         tools:targetApi="31">
         <activity
+            android:name=".view.activities.user.MyPagePurchaseDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activities.user.MyPagePurchaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".util.TitleActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.activities.user.GithubActivity"
             android:exported="false" />
@@ -42,18 +47,14 @@
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate">
-        </activity>
+            android:theme="@style/Theme.Popmate" />
 
         <!-- LoginActivity 부분 -->
         <activity
             android:name=".view.activities.login.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
-        <activity
-            android:name=".view.activities.user.MyPageLogoutActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Popmate" />
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -77,7 +78,8 @@
         <activity
             android:name=".view.activities.order.OrderActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate" />
+            android:theme="@style/Theme.Popmate"/>
+
         <activity
             android:name=".view.activities.order.OrderPaymentCompleteActivity"
             android:exported="false" />
@@ -86,9 +88,6 @@
             android:exported="false" />
         <activity
             android:name=".view.activities.order.OrderDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activities.user.MyPageLoginActivity"
             android:exported="false" />
 
         <!-- Reservation Activity 설정 -->

@@ -12,6 +12,8 @@ import com.example.popmate.R
 import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.view.activities.order.OrderDetailActivity
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class OrderBottomFragment(private val placedetail: OrderPlaceDetailResponse?) : Fragment(){
@@ -50,7 +52,8 @@ class OrderBottomFragment(private val placedetail: OrderPlaceDetailResponse?) : 
             totalPrice += value.amount
         }
 
-        price.text = totalPrice.toString()
+        val totalAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(totalPrice)
+        price.text = totalAmount
         cnt.text = totalCnt.toString()
 
         if (totalCnt == 0) {

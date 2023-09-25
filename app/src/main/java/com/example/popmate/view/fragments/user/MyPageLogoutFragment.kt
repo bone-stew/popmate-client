@@ -9,12 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.popmate.R
 import com.example.popmate.databinding.FragmentMyPageLogoutBinding
 import com.example.popmate.model.repository.ApiClient
 import com.example.popmate.util.LessonLogoutDialog
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.reservation.MyReservationActivity
+import com.example.popmate.view.activities.user.MyPagePurchaseActivity
 import com.example.popmate.view.activities.user.TermsOfUseActivity
 import com.example.popmate.viewmodel.user.MyPageLogoutViewModel
 
@@ -45,11 +45,8 @@ class MyPageLogoutFragment() : Fragment() {
          * 구매 내역 클릭 시 MyReservationActivity로 이동
          */
         binding.layoutMyPageLogoutPurchase.setOnClickListener {
-            val newFragment = MyPagePurchaseFragment()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.flFragment, newFragment)
-                .addToBackStack(null)
-                .commit()
+            val intent = Intent(requireContext(), MyPagePurchaseActivity::class.java)
+            requireContext().startActivity(intent)
         }
 
         /**

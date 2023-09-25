@@ -86,7 +86,6 @@ class PopupStoreAdapter(
             }
             val isOdd = popupStores.size % 2 == 1
 
-
             if (isGridLayout) {
                 if (isOdd) {
                     if (position >= popupStores.size - 1) {
@@ -102,7 +101,6 @@ class PopupStoreAdapter(
 
         fun setLayout(binding: RowPopupstoreVerticalBinding) {
             val layoutParams = binding.root.layoutParams as ViewGroup.MarginLayoutParams
-            layoutParams.bottomMargin = dpToPx(130)
             binding.root.layoutParams = layoutParams
         }
     }
@@ -238,7 +236,7 @@ class PopupStoreAdapter(
     private fun adjustImageSize(imageView: ImageView, imageSize: ImageSize) {
         val layoutParams = imageView.layoutParams
         val sizeInDp = when (imageSize) {
-            ImageSize.EXTRA_LARGE-> 175
+            ImageSize.EXTRA_LARGE -> 175
             ImageSize.LARGE -> 150
             ImageSize.SMALL -> 90
             ImageSize.MEDIUM -> 135

@@ -11,12 +11,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PopupStoreListViewModel: ViewModel() {
-
+class PopupStoreListViewModel : ViewModel() {
 
 
     private val _storeList: MutableLiveData<SearchResponse> = MutableLiveData<SearchResponse>()
-    val storeList : LiveData<SearchResponse> = _storeList
+    val storeList: LiveData<SearchResponse> = _storeList
 
     private val _loading: MutableLiveData<Boolean> = MutableLiveData()
     val loading: LiveData<Boolean> = _loading
@@ -25,9 +24,8 @@ class PopupStoreListViewModel: ViewModel() {
     val error: LiveData<Boolean> = _error
 
     fun clearList() {
-        _storeList.value =  SearchResponse(emptyList())
+        _storeList.value = SearchResponse(emptyList())
     }
-
 
     fun loadList(
         isOpeningSoon: Boolean?,
@@ -48,16 +46,19 @@ class PopupStoreListViewModel: ViewModel() {
             offSetRows,
             rowsToGet
         ).enqueue(object : Callback<ApiResponse<SearchResponse>> {
-            override fun onResponse(call: Call<ApiResponse<SearchResponse>>, response: Response<ApiResponse<SearchResponse>>) {
+            override fun onResponse(
+                call: Call<ApiResponse<SearchResponse>>,
+                response: Response<ApiResponse<SearchResponse>>
+            ) {
                 _loading.value = false
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     _storeList.value = response.body()?.data!!
                 } else {
                     _error.value = true
                 }
 
-                Log.i("HELLO", _storeList.value.toString())
             }
+
             override fun onFailure(call: Call<ApiResponse<SearchResponse>>, t: Throwable) {
                 _loading.value = false
                 _error.value = true
