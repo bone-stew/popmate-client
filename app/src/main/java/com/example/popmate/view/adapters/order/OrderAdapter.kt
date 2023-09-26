@@ -3,8 +3,8 @@ package com.example.popmate.view.adapters.order
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.popmate.databinding.ListOrderItemBinding
@@ -13,7 +13,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 interface OnItemClick {
-    fun onClick(value: PopupStoreItem, orderGoodsCheck: ImageView)
+    fun onClick(value: PopupStoreItem, orderGoodsCheck: View)
 }
 
 class OrderAdapter(private val itemClickCallback: OnItemClick):RecyclerView.Adapter<OrderAdapter.Holder>() {

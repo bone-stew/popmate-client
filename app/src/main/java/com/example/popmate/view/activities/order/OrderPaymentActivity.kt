@@ -13,6 +13,7 @@ import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
 import com.example.popmate.model.data.remote.order.OrderResponse
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import com.example.popmate.model.repository.ApiClient
+import com.example.popmate.util.ProgressDialog
 import com.google.gson.Gson
 import com.tosspayments.paymentsdk.PaymentWidget
 import com.tosspayments.paymentsdk.model.PaymentCallback
@@ -29,7 +30,6 @@ import retrofit2.Response
 import java.text.NumberFormat
 import java.util.Locale
 import java.util.Random
-import java.util.UUID
 
 class OrderPaymentActivity : AppCompatActivity() {
     private lateinit var binding : ActivityOrderPaymentBinding
@@ -41,6 +41,10 @@ class OrderPaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityOrderPaymentBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        val progressDialog = ProgressDialog(this)
+        progressDialog.start()
+        progressDialog.setCancelable(false)
+
         setContentView(binding.root)
         data = ArrayList<PopupStoreItem>()
         if (intent.hasExtra("item")) {
@@ -72,7 +76,7 @@ class OrderPaymentActivity : AppCompatActivity() {
 
         val orderId = generateOrderId(10)
         val clientKey = getString(R.string.toss_client_key)
-        val uuid = UUID.randomUUID()
+
         val paymentWidget = PaymentWidget(
             activity = this@OrderPaymentActivity,
             clientKey = clientKey,
@@ -83,6 +87,8 @@ class OrderPaymentActivity : AppCompatActivity() {
             override fun onLoad() {
                 val message = "결제위젯 렌더링 완료"
                 Log.d("jja", message)
+                //loadingSpinner.visibility = View.GONE
+                progressDialog.dismiss()
             }
         }
 
