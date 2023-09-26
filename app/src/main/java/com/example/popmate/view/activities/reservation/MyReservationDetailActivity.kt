@@ -57,6 +57,8 @@ class MyReservationDetailActivity :
                 .into(binding.imgReservationQr)
             if (it.reservationStatus == "VISITED") {
                 binding.imgVisitedSuccess.visibility = View.VISIBLE
+            } else if (it.reservationStatus == "RESERVED") {
+                binding.tvCancelReservation.visibility = View.VISIBLE
             }
         }
     }
