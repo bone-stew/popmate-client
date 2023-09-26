@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import
+            type="android.view.View"/>
         <variable
             name="store"
             type="com.example.popmate.model.data.local.PopupStore" />
@@ -89,6 +90,7 @@
                     android:text="팝업 프로모션 및 이벤트"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+                    android:visibility="@{store.eventDescription.empty || store.eventDescription == null ? View.GONE : View.VISIBLE}"
                     android:textSize="@dimen/h5"
                     app:layout_constraintTop_toBottomOf="@+id/bannerImage" />
 
@@ -101,6 +103,7 @@
                     android:background="@color/bg_light_gray"
                     android:padding="10dp"
                     android:text="@{store.eventDescription}"
+                    android:visibility="@{store.eventDescription.empty || store.eventDescription == null ? View.GONE : View.VISIBLE}"
                     android:textColor="@color/tx_gray"
                     android:textSize="@dimen/h6"
                     app:layout_constraintTop_toBottomOf="@id/eventText" />

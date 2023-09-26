@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="store"
             type="com.example.popmate.model.data.local.PopupStore" />
@@ -139,6 +141,7 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingVertical="16dp"
+                android:visibility="@{store.popupStoreSnsResponses.empty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintTop_toBottomOf="@+id/popstore_time_location">
 
                 <TextView
@@ -317,6 +320,7 @@
                 android:orientation="vertical"
                 android:paddingTop="16dp"
                 android:paddingBottom="60dp"
+                android:visibility="@{store.popupStoresNearBy.empty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintTop_toBottomOf="@+id/map_section">
 
                 <TextView
@@ -336,6 +340,11 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:visibility="@{store.popupStoreSnsResponses.empty ? View.VISIBLE : View.GONE}"
+                app:layout_constraintTop_toBottomOf="@id/map_section" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
