@@ -59,32 +59,41 @@ class PopupDetailInfo() : Fragment(), OnMapReadyCallback {
                 for (sns: PopupStoreSnsResponse in it.popupStoreSnsResponses) {
                     when (sns.platform) {
                         "Instagram" -> {
-                            instagram.visibility = View.VISIBLE
-                            instagramUrl.text = sns.url.split("/").last()
-                            instagramUrl.setOnClickListener {
-                                val uri = Uri.parse(sns.url)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                startActivity(intent)
+                            val text = sns.url.split("/").getOrNull(3)
+                            text?.let {
+                                instagram.visibility = View.VISIBLE
+                                instagramUrl.text = it
+                                instagramUrl.setOnClickListener {
+                                    val uri = Uri.parse(sns.url)
+                                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                                    startActivity(intent)
+                                }
                             }
                         }
 
                         "Youtube" -> {
-                            youtube.visibility = View.VISIBLE
-                            youtubeUrl.text = sns.url.split("/").last()
-                            youtubeUrl.setOnClickListener {
-                                val uri = Uri.parse(sns.url)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                startActivity(intent)
+                            val text = sns.url.split("/").getOrNull(3)
+                            text?.let {
+                                youtube.visibility = View.VISIBLE
+                                youtubeUrl.text = it
+                                youtubeUrl.setOnClickListener {
+                                    val uri = Uri.parse(sns.url)
+                                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                                    startActivity(intent)
+                                }
                             }
                         }
 
                         "Website" -> {
-                            homePage.visibility = View.VISIBLE
-                            homePageUrl.text = sns.url.split("/")[2]
-                            homePageUrl.setOnClickListener {
-                                val uri = Uri.parse(sns.url)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                startActivity(intent)
+                            val text = sns.url.split("/").getOrNull(2)
+                            text?.let {
+                                homePage.visibility = View.VISIBLE
+                                homePageUrl.text = it
+                                homePageUrl.setOnClickListener {
+                                    val uri = Uri.parse(sns.url)
+                                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                                    startActivity(intent)
+                                }
                             }
                         }
                     }
