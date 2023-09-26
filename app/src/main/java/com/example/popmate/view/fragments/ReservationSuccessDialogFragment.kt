@@ -49,8 +49,6 @@ class ReservationSuccessDialogFragment : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-
-//      dialog fragment custom width
         try {
             val windowManager =
                 requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -62,7 +60,6 @@ class ReservationSuccessDialogFragment : DialogFragment() {
             params.horizontalMargin = 0.0f
             dialog!!.window!!.attributes = params
         } catch (e: Exception) {
-            // regardless
             e.printStackTrace()
         }
     }

@@ -8,6 +8,7 @@ import com.example.popmate.model.data.remote.reservation.ReservationRequest
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -31,5 +32,10 @@ interface ReservationApiService {
     fun reserve(
         @Path("reservationId") reservationId: Long,
         @Body body: ReservationRequest
+    ): Call<ApiResponse<Void>>
+
+    @PATCH("reservations/{reservationId}/cancel")
+    fun cancelReservation(
+        @Path("reservationId") reservationId: Long
     ): Call<ApiResponse<Void>>
 }

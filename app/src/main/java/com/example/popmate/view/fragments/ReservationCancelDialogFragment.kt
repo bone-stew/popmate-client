@@ -12,16 +12,18 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationCancelDialogBinding
-import com.example.popmate.viewmodel.ReservationSuccessViewModel
+import com.example.popmate.viewmodel.ReservationCancelViewModel
 
 class ReservationCancelDialogFragment : DialogFragment() {
 
     private var _binding: FragmentReservationCancelDialogBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ReservationSuccessViewModel
+    private lateinit var viewModel: ReservationCancelViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +45,6 @@ class ReservationCancelDialogFragment : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-
-//      dialog fragment custom width
         try {
             val windowManager =
                 requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -66,11 +66,22 @@ class ReservationCancelDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        viewModel = ViewModelProvider(this)[ReservationSuccessViewModel::class.java]
-//        viewModel.reservationId = arguments?.getLong("reservationId", 0) ?: 0
+        viewModel = ViewModelProvider(this)[ReservationCancelViewModel::class.java]
+        viewModel.reservationId = arguments?.getLong("reservationId", 0) ?: 0
 
-//        initView()
-//        initEvent()
+        initEvent()
+    }
+
+    private fun initEvent() {
+        binding.btnYes.setOnClickListener {
+            val reservationId = arguments?.getLong("reservationId", 0) ?: 0
+            viewModel.cancelReservation(reservationId)
+            dismiss()
+            activity?.finish()
+        }
+        binding.btnNo.setOnClickListener {
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {
