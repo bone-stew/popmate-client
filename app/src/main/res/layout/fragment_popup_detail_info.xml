@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="store"
             type="com.example.popmate.model.data.local.PopupStore" />
@@ -67,7 +69,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.openDateFormatted}"
-                        android:textSize="@dimen/h7" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -87,7 +90,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.openTimeFormatted}"
-                        android:textSize="@dimen/h7" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -107,7 +111,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.placeDetail}"
-                        android:textSize="@dimen/h7" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:text="@{store.entryFeeFormatted}"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/h6" />
                 </LinearLayout>
             </LinearLayout>
@@ -139,6 +145,7 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingVertical="16dp"
+                android:visibility="@{store.popupStoreSnsResponses.empty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintTop_toBottomOf="@+id/popstore_time_location">
 
                 <TextView
@@ -294,17 +301,19 @@
 
                     <ImageView
                         android:id="@+id/location_copy_btn"
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:src="@drawable/tabler_copy"
-                        app:tint="@color/tx_gray" />
+                        android:layout_marginHorizontal="8dp"
+                        app:tint="@color/black" />
 
                     <TextView
                         android:id="@+id/location_detail_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="서울 영등포구 여의대로 108 더현대 서울 B2 아이코닉"
-                        android:textSize="@dimen/h7" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/h6" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -317,6 +326,7 @@
                 android:orientation="vertical"
                 android:paddingTop="16dp"
                 android:paddingBottom="60dp"
+                android:visibility="@{store.popupStoresNearBy.empty ? View.GONE : View.VISIBLE}"
                 app:layout_constraintTop_toBottomOf="@+id/map_section">
 
                 <TextView
@@ -336,6 +346,11 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:visibility="@{store.popupStoreSnsResponses.empty ? View.VISIBLE : View.GONE}"
+                app:layout_constraintTop_toBottomOf="@id/map_section" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
