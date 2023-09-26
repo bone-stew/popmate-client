@@ -41,7 +41,7 @@ class OrderAdapter(private val itemClickCallback: OnItemClick):RecyclerView.Adap
                 val curPos: Int = bindingAdapterPosition
                 val storeItem: PopupStoreItem = listData[curPos]
                 itemClickCallback.onClick(storeItem,binding.orderGoodsCheck)
-
+                //binding.orderGoodsImg.alpha = 0.2f
             }
         }
         fun setGoods(item: PopupStoreItem) {

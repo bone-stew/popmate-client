@@ -54,7 +54,7 @@
         <TextView
             android:id="@+id/txt_order_text_introduce"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="26dp"
             android:text="특별한 굿즈로 행복을 만나보세요!"

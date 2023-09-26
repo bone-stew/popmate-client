@@ -108,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="4dp"
                     android:text="무럭무럭 잔 1개 + 투두투두 잇 1개"
                     android:textColor="@color/tx_gray"
                     android:textSize="@dimen/h7"
