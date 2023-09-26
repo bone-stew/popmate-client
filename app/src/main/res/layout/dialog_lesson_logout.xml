@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="로그아웃 하시겠습니까?"
         android:textColor="@color/black"
-        android:textSize="@dimen/h6"
+        android:textSize="@dimen/h5"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_logout_cancle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
         android:gravity="center"
         android:text="취소"
         android:textColor="@color/white"
-        android:textSize="@dimen/h6"
+        android:textSize="@dimen/h5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_logout_go"
         app:layout_constraintStart_toStartOf="parent" />
@@ -49,7 +49,7 @@
         android:gravity="center"
         android:text="확인"
         android:textColor="@color/white"
-        android:textSize="@dimen/h6"
+        android:textSize="@dimen/h5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

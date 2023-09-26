@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.example.popmate.R
 import com.example.popmate.model.data.remote.order.OrderPlaceDetailResponse
@@ -42,7 +41,7 @@ class OrderBottomFragment(private val placedetail: OrderPlaceDetailResponse?) : 
         return view
     }
 
-    fun update(value: PopupStoreItem, orderGoodsCheck: ImageView) {
+    fun update(value: PopupStoreItem, orderGoodsCheck: View) {
         index = value.itemId.toInt()
         if(hashMap.containsKey(index)){
             totalCnt -= 1

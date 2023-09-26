@@ -40,17 +40,27 @@
 
         <TextView
             android:id="@+id/order_popstore_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginTop="21dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="@dimen/h3"
             android:paddingLeft="20dp"
             android:text="SE SO NEON : A Pirateship"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/txt_order_text_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="26dp"
+            android:text="특별한 굿즈로 행복을 만나보세요!"
+            android:textColor="@color/black"
+            android:textSize="@dimen/h6"
+            app:layout_constraintStart_toEndOf="@+id/order_popstore_name"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <androidx.recyclerview.widget.RecyclerView
