@@ -301,10 +301,11 @@
 
                     <ImageView
                         android:id="@+id/location_copy_btn"
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:src="@drawable/tabler_copy"
-                        app:tint="@color/tx_gray" />
+                        android:layout_marginHorizontal="8dp"
+                        app:tint="@color/black" />
 
                     <TextView
                         android:id="@+id/location_detail_text"
