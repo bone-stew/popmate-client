@@ -36,6 +36,6 @@ class MyPageOrderDetailHolder(val binding: ListMypagePurchaseDetailItemBinding) 
         val amount = item.popupStoreItem!!.amount
         val totalAmount = NumberFormat.getNumberInstance(Locale.KOREA).format(amount)
         binding.orderDetailPrice.text = totalAmount
-        binding.txtListMypagePurchaseDetailItemCnt.text = "${item.totalQuantity}개"
+        binding.txtListMypagePurchaseDetailItemCnt.text = " ${item.totalQuantity}개"
     }
 }
