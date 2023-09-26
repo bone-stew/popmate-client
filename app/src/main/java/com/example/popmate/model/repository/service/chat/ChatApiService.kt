@@ -35,8 +35,7 @@ interface ChatApiService {
     ): Call<ApiResponse<MessagesResponse>>
 
     @POST("chat/report")
-    @FormUrlEncoded
     fun report(
-        @Field("chatId") chatId: String
+        @Body chat: Chat
     ): Call<ApiResponse<String>>
 }

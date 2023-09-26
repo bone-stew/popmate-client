@@ -27,7 +27,7 @@ class ChatReportDialog(private val context: AppCompatActivity) {
             chatMessage.sender.text = chat.name
             chatMessage.timeStamp.text = chat.createdAt?.substring(11, 16)
             reportBtn.setOnClickListener {
-                ApiClient.chatService.report(chat.id!!)
+                ApiClient.chatService.report(chat)
                     .enqueue(object : Callback<ApiResponse<String>> {
                         override fun onResponse(
                             call: Call<ApiResponse<String>>,
