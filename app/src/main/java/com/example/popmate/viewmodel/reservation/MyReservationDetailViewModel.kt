@@ -17,7 +17,12 @@ class MyReservationDetailViewModel : BaseViewModel() {
     private val _myReservation = MutableLiveData<MyReservationDetailResponse>()
     val myReservation: LiveData<MyReservationDetailResponse> = _myReservation
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading // 로딩 상태
+
     fun loadMyReservationDetail(reservationId: Long) {
+        _isLoading.value = true
+
         Log.d("Reservation", "loadMyReservationDetail: $reservationId")
         reservationService.getMyReservation(reservationId)
             .enqueue(object : Callback<ApiResponse<MyReservationDetailResponse>> {
@@ -34,6 +39,7 @@ class MyReservationDetailViewModel : BaseViewModel() {
                             _myReservation.postValue(it)
                         }
                     }
+                    _isLoading.value = false
                 }
 
                 override fun onFailure(
@@ -42,6 +48,7 @@ class MyReservationDetailViewModel : BaseViewModel() {
                 ) {
                     Log.d("Reservation", "onFailure: $t")
                     sendErrorMessage(t)
+                    _isLoading.value = false
                 }
             })
     }

@@ -1,7 +1,6 @@
 package com.example.popmate.view.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
@@ -15,19 +14,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
-import com.example.popmate.databinding.FragmentReservationSuccessDialogBinding
-import com.example.popmate.util.DateTimeUtils
-import com.example.popmate.view.activities.detail.PopupDetailActivity
-import com.example.popmate.view.activities.reservation.MyReservationDetailActivity
-import com.example.popmate.viewmodel.ReservationSuccessViewModel
+import com.example.popmate.databinding.FragmentReservationCancelDialogBinding
+import com.example.popmate.viewmodel.ReservationCancelViewModel
 
+class ReservationCancelDialogFragment : DialogFragment() {
 
-class ReservationSuccessDialogFragment : DialogFragment() {
-
-    private var _binding: FragmentReservationSuccessDialogBinding? = null
+    private var _binding: FragmentReservationCancelDialogBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: ReservationSuccessViewModel
+    private lateinit var viewModel: ReservationCancelViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +32,7 @@ class ReservationSuccessDialogFragment : DialogFragment() {
     ): View {
         _binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_reservation_success_dialog,
+            R.layout.fragment_reservation_cancel_dialog,
             container,
             false
         )
@@ -70,35 +66,21 @@ class ReservationSuccessDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[ReservationSuccessViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ReservationCancelViewModel::class.java]
         viewModel.reservationId = arguments?.getLong("reservationId", 0) ?: 0
 
-        initView()
         initEvent()
     }
 
-    private fun initView() {
-        viewModel.getReservationInfo()
-        viewModel.myReservation.observe(viewLifecycleOwner) {
-            if (it != null) {
-                binding.tvPopupStoreName.text = it.popupStoreTitle
-                binding.tvVisitStartTime.text = DateTimeUtils().toTimeString(it.visitStartTime)
-                binding.tvVisitEndTime.text = DateTimeUtils().toTimeString(it.visitEndTime)
-                binding.tvVisitPeopleCount.text = it.guestCount.toString()
-                binding.tvPopupStorePlaceDetail.text = it.popupStorePlaceDetail
-            }
-        }
-    }
-
     private fun initEvent() {
-        binding.btnClose.setOnClickListener {
-            val intent = Intent(activity, MyReservationDetailActivity::class.java)
-            intent.putExtra("reservationId", viewModel.reservationId)
-            startActivity(intent)
-
-            // 다이얼로그, 액티비티 모두 종료
+        binding.btnYes.setOnClickListener {
+            val reservationId = arguments?.getLong("reservationId", 0) ?: 0
+            viewModel.cancelReservation(reservationId)
             dismiss()
             activity?.finish()
+        }
+        binding.btnNo.setOnClickListener {
+            dismiss()
         }
     }
 

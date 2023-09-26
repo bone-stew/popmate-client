@@ -15,6 +15,7 @@ import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMyReservationDetailBinding
 import com.example.popmate.util.DateTimeUtils
+import com.example.popmate.view.fragments.ReservationCancelDialogFragment
 import com.example.popmate.viewmodel.reservation.MyReservationDetailViewModel
 
 class MyReservationDetailActivity :
@@ -53,34 +54,11 @@ class MyReservationDetailActivity :
                 .into(binding.imgPopupStore)
             Glide.with(this)
                 .load(it.reservationQrImageUrl)
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        binding.imgReservationQr.visibility = View.VISIBLE
-                        binding.imgLoadingSpinner.visibility = View.GONE
-                        return false
-                    }
-
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        // 이미지 로드가 완료되면 로딩 이미지 대신 이미지를 표시
-                        binding.imgReservationQr.visibility = View.VISIBLE
-                        binding.imgReservationQr.setImageDrawable(resource)
-                        binding.imgLoadingSpinner.visibility = View.GONE
-                        return true
-                    }
-                }).into(binding.imgReservationQr)
+                .into(binding.imgReservationQr)
             if (it.reservationStatus == "VISITED") {
                 binding.imgVisitedSuccess.visibility = View.VISIBLE
+            } else if (it.reservationStatus == "RESERVED") {
+                binding.tvCancelReservation.visibility = View.VISIBLE
             }
         }
     }
@@ -88,6 +66,15 @@ class MyReservationDetailActivity :
     private fun initEvent() {
         binding.layoutTitleSimple.imgArrow.setOnClickListener {
             finish()
+        }
+        binding.tvCancelReservation.setOnClickListener {
+            // 예약 취소 다이얼로그 띄우기
+            val dialog = ReservationCancelDialogFragment()
+            val bundle = Bundle()
+            bundle.putLong("reservationId", viewModel.reservationId)
+            dialog.arguments = bundle
+            dialog.show(supportFragmentManager, "ReservationCancelDialogFragment")
+//            viewModel.cancelReservation(viewModel.reservationId)
         }
     }
 
