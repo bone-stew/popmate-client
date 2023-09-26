@@ -82,6 +82,8 @@
       android:layout_height="wrap_content"
       android:id="@+id/shimmerLayout"
       app:shimmer_auto_start="true"
+      android:layout_marginTop="32dp"
+      android:layout_marginRight="16dp"
       app:shimmer_highlight_alpha="0.5"
       app:shimmer_duration="2000">
 
