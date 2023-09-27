@@ -45,7 +45,11 @@ class MyPageLoginFragment : Fragment() {
             context?.startActivity(intent)
         }
 
-
+        binding.layoutPrivacy.setOnClickListener{
+            val intent = Intent(context, TermsOfUseActivity::class.java)
+            intent.putExtra("url", "https://woowon.notion.site/29bc0080820145d9b4b655e1a534942c")
+            context?.startActivity(intent)
+        }
         // Inflate the layout for this fragment
         return binding.root
     }

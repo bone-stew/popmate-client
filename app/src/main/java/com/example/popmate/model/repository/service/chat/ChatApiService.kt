@@ -4,6 +4,7 @@ import com.example.popmate.model.data.local.Chat
 import com.example.popmate.model.data.local.CurrUser
 import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.chat.CurrUserResponse
+import com.example.popmate.model.data.remote.chat.EnterVerifyResponse
 import com.example.popmate.model.data.remote.chat.MessagesResponse
 import retrofit2.Call
 import retrofit2.http.Body
@@ -38,4 +39,7 @@ interface ChatApiService {
     fun report(
         @Body chat: Chat
     ): Call<ApiResponse<String>>
+
+    @GET("chat/enter-verify")
+    fun enterVerify(): Call<ApiResponse<EnterVerifyResponse>>
 }

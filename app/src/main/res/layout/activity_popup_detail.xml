@@ -70,15 +70,14 @@
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
                     android:maxWidth="280dp"
+                    android:layout_marginTop="12dp"
                     android:text="@{store.description}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/h5"
-                    app:layout_constraintBottom_toBottomOf="@+id/bannerImage"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintLeft_toLeftOf="@+id/bannerImage"
                     app:layout_constraintRight_toRightOf="@+id/bannerImage"
-                    app:layout_constraintTop_toTopOf="@+id/bannerImage"
-                    app:layout_constraintVertical_bias="0.45" />
+                    app:layout_constraintTop_toBottomOf="@+id/popupTitle"
+                    />
 
                 <TextView
                     android:id="@+id/eventText"
