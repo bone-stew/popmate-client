@@ -99,6 +99,12 @@ class MyPageLogoutFragment() : Fragment() {
             intent.putExtra("url", "https://github.com/bone-stew") // 이동할 웹페이지 URL을 넣어주세요.
             context?.startActivity(intent)
         }
+
+        binding.layoutPrivacy.setOnClickListener{
+            val intent = Intent(context, TermsOfUseActivity::class.java)
+            intent.putExtra("url", "https://woowon.notion.site/29bc0080820145d9b4b655e1a534942c")
+            context?.startActivity(intent)
+        }
     }
 
 }
