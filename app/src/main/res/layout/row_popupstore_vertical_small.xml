@@ -24,11 +24,28 @@
       android:layout_marginBottom="8dp" />
 
     <TextView
+      android:id="@+id/categoryTextView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@{popupstore.categoryName}"
+      app:layout_constraintTop_toBottomOf="@id/itemImageView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constrainedWidth="true"
+      android:maxLines="1"
+      android:textSize="@dimen/h8"
+      android:textStyle="bold"
+      android:textColor="@color/orange_light"
+      app:layout_constraintHorizontal_bias="0.0"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp" />
+
+    <TextView
       android:id="@+id/titleTextView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@{popupstore.title}"
-      app:layout_constraintTop_toBottomOf="@id/itemImageView"
+      app:layout_constraintTop_toBottomOf="@id/categoryTextView"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constrainedWidth="true"

@@ -66,7 +66,6 @@
       android:id="@+id/popupstoreRecyclerView"
       android:layout_width="match_parent"
       android:layout_height="0dp"
-      android:layout_marginTop="10dp"
       android:clipToPadding="false"
       android:paddingBottom="100dp"
       app:layout_constraintEnd_toEndOf="parent"
