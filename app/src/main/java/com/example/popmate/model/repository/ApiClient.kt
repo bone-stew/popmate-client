@@ -24,7 +24,8 @@ object ApiClient {
 
 //        private const val BASE_URL = "http://10.0.2.2:8080/api/v1/"
 //    private const val BASE_URL = "http://192.168.0.64:8080/api/v1/"
-    private const val BASE_URL = "https://popmate.xyz/api/v1/"
+    private const val BASE_URL = "http://192.168.0.51:8080/api/v1/"
+//    private const val BASE_URL = "https://popmate.xyz/api/v1/"
 
     private val retrofit: Retrofit by lazy {
 

@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel(){
+class HomeViewModel : ViewModel() {
 
     private val _home: MutableLiveData<HomeResponse> = MutableLiveData<HomeResponse>()
 
@@ -31,12 +31,13 @@ class HomeViewModel : ViewModel(){
         ApiClient.storeService.getStoreHome().enqueue(object : Callback<ApiResponse<HomeResponse>> {
             override fun onResponse(call: Call<ApiResponse<HomeResponse>>, response: Response<ApiResponse<HomeResponse>>) {
                 _loading.value = false
-                if (response.isSuccessful){
-                _home.value = response.body()?.data!!
+                if (response.isSuccessful) {
+                    _home.value = response.body()?.data!!
                 } else {
                     _error.value = true
                 }
             }
+
             override fun onFailure(call: Call<ApiResponse<HomeResponse>>, t: Throwable) {
                 _loading.value = false
                 _error.value = true

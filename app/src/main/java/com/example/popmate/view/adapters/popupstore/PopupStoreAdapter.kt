@@ -237,9 +237,9 @@ class PopupStoreAdapter(
         val layoutParams = imageView.layoutParams
         val sizeInDp = when (imageSize) {
             ImageSize.EXTRA_LARGE -> 175
-            ImageSize.LARGE -> 150
+            ImageSize.LARGE -> 170
             ImageSize.SMALL -> 90
-            ImageSize.MEDIUM -> 135
+            ImageSize.MEDIUM -> 190
         }
         layoutParams.width = dpToPx(sizeInDp)
         layoutParams.height = dpToPx(sizeInDp)
