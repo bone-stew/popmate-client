@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textSize="@dimen/h6"
+            android:textSize="@dimen/h4"
             android:text="아래 채팅을 신고하시겠습니까?"
             android:textColor="@color/black"/>
         <include
@@ -37,6 +37,6 @@
             android:backgroundTint="@color/orange_light"
             android:text="신고하기"
             android:textColor="@color/white"
-            android:textSize="@dimen/h6" />
+            android:textSize="@dimen/h4" />
     </LinearLayout>
 </layout>
