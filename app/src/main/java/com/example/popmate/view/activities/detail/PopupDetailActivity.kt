@@ -18,7 +18,10 @@ import com.example.popmate.config.PopmateApplication
 import com.example.popmate.databinding.ActivityPopupDetailBinding
 import com.example.popmate.model.data.local.PopupStore
 import com.example.popmate.model.data.local.PopupStoreSnsResponse
+import com.example.popmate.model.data.remote.ApiResponse
+import com.example.popmate.model.data.remote.chat.EnterVerifyResponse
 import com.example.popmate.model.repository.ApiClient
+import com.example.popmate.util.DateTimeUtils
 import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.util.LessonOrderDialog
 import com.example.popmate.view.activities.chat.ChatActivity
@@ -26,6 +29,9 @@ import com.example.popmate.view.activities.login.LoginActivity
 import com.example.popmate.view.activities.order.OrderActivity
 import com.example.popmate.view.activities.reservation.ReservationWaitActivity
 import com.google.android.material.tabs.TabLayout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.LinkedList
 
 
@@ -35,7 +41,7 @@ class PopupDetailActivity :
 
     private val wifiPermissionCode = 1000 // 권한 요청 코드
     private var popupStoreId: Long = -1
-
+    private val TAG = "PopupDetailActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,10 +126,32 @@ class PopupDetailActivity :
             chatEnterBtnClick.setOnClickListener {
                 Log.d("kww", "onCreate: ${ApiClient.loginCheck()} ${ApiClient.getJwtToken()}")
                 if (ApiClient.loginCheck()) {
-                    val intent = Intent(applicationContext, ChatActivity::class.java)
-                    intent.putExtra("storeId", popupStoreId)
-                    intent.putExtra("storeName", model.store.value?.title)
-                    startActivity(intent)
+                    ApiClient.chatService.enterVerify().enqueue(object : Callback<ApiResponse<EnterVerifyResponse>> {
+                        override fun onResponse(
+                            call: Call<ApiResponse<EnterVerifyResponse>>,
+                            response: Response<ApiResponse<EnterVerifyResponse>>
+                        ) {
+                            Log.d(TAG, "요청 성공")
+                            response.body()?.data?.let {
+                                if (!it.denied) {
+                                    val intent = Intent(applicationContext, ChatActivity::class.java)
+                                    intent.putExtra("storeId", popupStoreId)
+                                    intent.putExtra("storeName", model.store.value?.title)
+                                    startActivity(intent)
+                                } else {
+                                    Toast.makeText(this@PopupDetailActivity, "부적절한 채팅으로\n${DateTimeUtils().toDateString(it.until!!)}까지 이용 불가합니다.", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<ApiResponse<EnterVerifyResponse>>,
+                            t: Throwable
+                        ) {
+                            Log.d(TAG, "요청 실패")
+                        }
+
+                    })
                 } else {
                     val dialog = LessonLoginDialog(this@PopupDetailActivity)
                     dialog.listener = object : LessonLoginDialog.LessonOkDialogClickedListener {
