@@ -51,7 +51,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constrainedWidth="true"
-      android:textSize="@dimen/h6"
+      android:textSize="@dimen/h5_2"
       android:textStyle="bold"
       android:maxLines="1"
       android:textColor="@color/black"
