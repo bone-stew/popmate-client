@@ -15,7 +15,7 @@
         android:id="@+id/order_goods_img"
         android:layout_width="176dp"
         android:layout_height="176dp"
-        android:background="@drawable/round_image_view"
+        android:src="@drawable/round_image_view"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -1,7 +1,6 @@
 package com.example.popmate.view.adapters.order
 
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -22,6 +21,7 @@ class OrderDetailAdapter(
 ):RecyclerView.Adapter<OrderDetailAdapter.orderDetailHolder>() {
 
     var listData = mutableListOf<PopupStoreItem>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): orderDetailHolder {
         val binding = ListOrderPurchaseItemBinding.inflate(LayoutInflater.from(parent.context),
         parent,false)
@@ -39,6 +39,8 @@ class OrderDetailAdapter(
     }
 
     inner class orderDetailHolder(val binding: ListOrderPurchaseItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        private var isFirstToastShown = false
         fun setGoods(item: PopupStoreItem) {
             binding.orderDetailName.text = item.name
             val amount = item.amount
@@ -61,8 +63,9 @@ class OrderDetailAdapter(
                     binding.orderDetailListCnt.text = item.totalQuantity.toString()
                     notifyItemChanged(bindingAdapterPosition)
                     onAmountChanged(bindingAdapterPosition, item.totalQuantity, "plus")
-                }else if(item.totalQuantity==item.orderLimit){
+                }else if(item.totalQuantity==item.orderLimit && !isFirstToastShown){
                     Toast.makeText(context, "주문 가능한 최대 수량입니다", Toast.LENGTH_SHORT).show()
+                    isFirstToastShown = true
                 }
             }
 
