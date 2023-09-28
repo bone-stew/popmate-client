@@ -17,6 +17,7 @@ import com.example.popmate.view.activities.reservation.MyReservationActivity
 import com.example.popmate.view.activities.user.MyPagePurchaseActivity
 import com.example.popmate.view.activities.user.TermsOfUseActivity
 import com.example.popmate.viewmodel.user.MyPageLogoutViewModel
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 
 class MyPageLogoutFragment() : Fragment() {
@@ -87,7 +88,7 @@ class MyPageLogoutFragment() : Fragment() {
          */
         binding.layoutMyPageLogoutUse.setOnClickListener {
             val intent = Intent(context, TermsOfUseActivity::class.java)
-            intent.putExtra("url", "https://naver.com") // 이동할 웹페이지 URL을 넣어주세요.
+            intent.putExtra("url", "https://woowon.notion.site/1221bc7c941843f480be4fd7d559c3b6?pvs=4") // 이동할 웹페이지 URL을 넣어주세요.
             context?.startActivity(intent)
         }
 
@@ -95,9 +96,8 @@ class MyPageLogoutFragment() : Fragment() {
          * 오픈소스 클릭 시 Activity로 이동 (깃허브)
          */
         binding.layoutOpensource.setOnClickListener {
-            val intent = Intent(context, TermsOfUseActivity::class.java)
-            intent.putExtra("url", "https://github.com/bone-stew") // 이동할 웹페이지 URL을 넣어주세요.
-            context?.startActivity(intent)
+            OssLicensesMenuActivity.setActivityTitle("오픈소스 라이센스 목록")
+            startActivity(Intent(context, OssLicensesMenuActivity::class.java))
         }
 
         binding.layoutPrivacy.setOnClickListener{
