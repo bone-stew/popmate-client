@@ -55,25 +55,24 @@
             android:id="@+id/txt_order_text_introduce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginStart="20dp"
             android:text="특별한 굿즈로 행복을 만나보세요!"
             android:textColor="@color/black"
             android:textSize="@dimen/h6"
-            app:layout_constraintStart_toEndOf="@+id/order_popstore_name"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/order_popstore_name" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/order_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
             android:paddingHorizontal="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/order_popstore_name"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_order_text_introduce" />
 
         <FrameLayout
             android:id="@+id/order_bottom"

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.popmate.databinding.ListOrderItemBinding
 import com.example.popmate.model.data.remote.order.PopupStoreItem
 import java.text.NumberFormat
@@ -52,6 +53,7 @@ class OrderAdapter(private val itemClickCallback: OnItemClick):RecyclerView.Adap
             // Glide를 사용하여 이미지 로드 및 표시
             Glide.with(binding.root.context) // Glide를 현재 컨텍스트에 연결
                 .load(item.imgUrl) // 이미지 URL 설정 (item.imgUrl은 이미지의 URL입니다)
+                .transform(RoundedCorners(15))
                 .into(binding.orderGoodsImg) // 이미지를 표시할 ImageView 설정
         }
     }
