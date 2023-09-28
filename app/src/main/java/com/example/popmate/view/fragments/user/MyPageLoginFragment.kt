@@ -11,6 +11,7 @@ import com.example.popmate.util.LessonLoginDialog
 import com.example.popmate.view.activities.MainActivity
 import com.example.popmate.view.activities.login.LoginActivity
 import com.example.popmate.view.activities.user.TermsOfUseActivity
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 
 
 class MyPageLoginFragment : Fragment() {
@@ -35,19 +36,18 @@ class MyPageLoginFragment : Fragment() {
 
         binding.gonotion.setOnClickListener {
             val intent = Intent(context, TermsOfUseActivity::class.java)
-            intent.putExtra("url", "https://naver.com") // 이동할 웹페이지 URL을 넣어주세요.
+            intent.putExtra("url", "https://woowon.notion.site/1221bc7c941843f480be4fd7d559c3b6?pvs=4") // 이동할 웹페이지 URL을 넣어주세요.
             context?.startActivity(intent)
         }
 
         binding.gogithub.setOnClickListener {
-            val intent = Intent(context, TermsOfUseActivity::class.java)
-            intent.putExtra("url", "https://github.com/bone-stew") // 이동할 웹페이지 URL을 넣어주세요.
-            context?.startActivity(intent)
+            OssLicensesMenuActivity.setActivityTitle("오픈소스 라이센스 목록")
+            startActivity(Intent(context, OssLicensesMenuActivity::class.java))
         }
 
         binding.layoutPrivacy.setOnClickListener{
             val intent = Intent(context, TermsOfUseActivity::class.java)
-            intent.putExtra("url", "https://woowon.notion.site/29bc0080820145d9b4b655e1a534942c")
+            intent.putExtra("url", "https://woowon.notion.site/29bc0080820145d9b4b655e1a534942c?pvs=4")
             context?.startActivity(intent)
         }
         // Inflate the layout for this fragment
