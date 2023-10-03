@@ -30,11 +30,11 @@ class MyReservationAdapter(
              * 예약 상세 페이지로 이동
              */
             binding.layoutReservationDetail.setOnClickListener {
-                val selectedReservationId: Long = itemList[adapterPosition].reservationId
+                val selectedUserReservationId: Long = itemList[adapterPosition].userReservationId
                 val popupStoreId = Integer.parseInt(binding.tvId.text.toString())
                 val intent = Intent(context, MyReservationDetailActivity::class.java)
-                intent.putExtra("reservationId", selectedReservationId)
-                Log.d("MyReservationAdapter", "예약 상세 reservationId: $popupStoreId")
+                intent.putExtra("userReservationId", selectedUserReservationId)
+                Log.d("MyReservationAdapter", "예약 상세 userReservationId: $selectedUserReservationId")
                 context.startActivity(intent)
             }
 
@@ -42,7 +42,6 @@ class MyReservationAdapter(
              * 팝업 스토어 상세 페이지로 이동
              */
             binding.layoutPopupStore.setOnClickListener {
-                val popupStoreId = binding.tvId.text.toString().toLong()
                 val selectedPopupStoreId: Long = itemList[adapterPosition].popupStoreId
                 val intent = Intent(context, PopupDetailActivity::class.java)
                 intent.putExtra("id", selectedPopupStoreId)

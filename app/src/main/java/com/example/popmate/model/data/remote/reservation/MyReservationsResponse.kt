@@ -6,6 +6,7 @@ data class MyReservationsResponse(
     val canceled: List<MyReservationResponse>? = null,
 ) {
     data class MyReservationResponse(
+        val userReservationId: Long,
         val bannerImgUrl: String,
         val endTime: String,
         val popupStoreId: Long,

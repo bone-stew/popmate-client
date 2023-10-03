@@ -35,12 +35,10 @@ class MyReservationDetailActivity :
     }
 
     private fun initView() {
-        viewModel.reservationId = intent.getLongExtra("reservationId", -1)
-        println("viewModel.reservationId = ${viewModel.reservationId}")
+        viewModel.userReservationId = intent.getLongExtra("userReservationId", -1)
 
-        viewModel.loadMyReservationDetail(viewModel.reservationId)
+        viewModel.loadMyReservationDetail(viewModel.userReservationId)
         viewModel.myReservation.observe(this) {
-            Log.d("smh", "initView: $it")
             binding.tvPopupStoreName.text = it.popupStoreTitle
             binding.tvVisitPeopleCount.text = it.guestCount.toString()
             binding.tvVisitLocation.text = it.popupStorePlaceDetail
@@ -71,7 +69,7 @@ class MyReservationDetailActivity :
             // 예약 취소 다이얼로그 띄우기
             val dialog = ReservationCancelDialogFragment()
             val bundle = Bundle()
-            bundle.putLong("reservationId", viewModel.reservationId)
+            bundle.putLong("reservationId", viewModel.userReservationId)
             dialog.arguments = bundle
             dialog.show(supportFragmentManager, "ReservationCancelDialogFragment")
 //            viewModel.cancelReservation(viewModel.reservationId)

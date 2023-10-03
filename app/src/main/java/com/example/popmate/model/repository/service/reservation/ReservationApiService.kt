@@ -14,13 +14,19 @@ import retrofit2.http.Path
 
 interface ReservationApiService {
 
+    /**
+     * 나의 예약 목록 조회
+     */
     @GET("members/me/reservations")
     fun getMyReservations(
     ): Call<ApiResponse<MyReservationsResponse>>
 
-    @GET("members/me/reservations/{reservationId}")
+    /**
+     * 나의 예약 상세 조회
+     */
+    @GET("members/me/user-reservations/{userReservationId}")
     fun getMyReservation(
-        @Path("reservationId") reservationId: Long
+        @Path("userReservationId") userReservationId: Long
     ): Call<ApiResponse<MyReservationDetailResponse>>
 
     @GET("popup-stores/{popupStoreId}/current-reservations")
