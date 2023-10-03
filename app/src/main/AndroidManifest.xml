@@ -21,6 +21,10 @@
         android:theme="@style/Theme.Popmate"
         tools:targetApi="31">
         <activity
+            android:name=".util.OnBoardingActivity"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".view.activities.user.MyPagePurchaseDetailActivity"
             android:exported="false" />
         <activity
@@ -41,20 +45,15 @@
             android:exported="false" />
         <activity
             android:name=".view.activities.user.TermsOfUseActivity"
-            android:exported="false" />
-
-        <!-- MainActivity 부분 -->
+            android:exported="false" /> <!-- MainActivity 부분 -->
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate" />
-
-        <!-- LoginActivity 부분 -->
+            android:theme="@style/Theme.Popmate" /> <!-- LoginActivity 부분 -->
         <activity
             android:name=".view.activities.login.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Popmate" />
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -72,14 +71,11 @@
         </activity>
         <activity
             android:name=".view.activities.detail.PopupDetailActivity"
-            android:exported="true" />
-
-        <!-- OrderActivity 부분 -->
+            android:exported="true" /> <!-- OrderActivity 부분 -->
         <activity
             android:name=".view.activities.order.OrderActivity"
             android:exported="true"
-            android:theme="@style/Theme.Popmate"/>
-
+            android:theme="@style/Theme.Popmate" />
         <activity
             android:name=".view.activities.order.OrderPaymentCompleteActivity"
             android:exported="false" />
@@ -88,9 +84,7 @@
             android:exported="false" />
         <activity
             android:name=".view.activities.order.OrderDetailActivity"
-            android:exported="false" />
-
-        <!-- Reservation Activity 설정 -->
+            android:exported="false" /> <!-- Reservation Activity 설정 -->
         <activity
             android:name=".view.activities.reservation.ReservationWaitActivity"
             android:exported="true"
@@ -100,9 +94,7 @@
             android:exported="true" />
         <activity
             android:name=".view.activities.reservation.MyReservationDetailActivity"
-            android:exported="true" />
-
-        <!-- Chat Activity 설정 -->
+            android:exported="true" /> <!-- Chat Activity 설정 -->
         <activity
             android:name=".view.activities.chat.ChatActivity"
             android:exported="true" />
