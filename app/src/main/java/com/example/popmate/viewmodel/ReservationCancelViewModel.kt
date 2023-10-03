@@ -14,10 +14,10 @@ import retrofit2.Response
 
 class ReservationCancelViewModel : BaseViewModel() {
 
-    var reservationId: Long = 0
+    var userReservationId: Long = 0
 
-    fun cancelReservation(reservationId: Long) {
-        ApiClient.reservationService.cancelReservation(reservationId)
+    fun cancelReservation(userReservationId: Long) {
+        ApiClient.reservationService.cancelReservation(userReservationId)
             .enqueue(object : Callback<ApiResponse<Void>> {
                 override fun onResponse(
                     call: Call<ApiResponse<Void>>,

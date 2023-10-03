@@ -40,8 +40,8 @@ interface ReservationApiService {
         @Body body: ReservationRequest
     ): Call<ApiResponse<Void>>
 
-    @PATCH("reservations/{reservationId}/cancel")
+    @PATCH("user-reservations/{userReservationId}/cancel")
     fun cancelReservation(
-        @Path("reservationId") reservationId: Long
+        @Path("userReservationId") userReservationId: Long
     ): Call<ApiResponse<Void>>
 }

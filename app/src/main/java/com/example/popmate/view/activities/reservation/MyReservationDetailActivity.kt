@@ -69,10 +69,9 @@ class MyReservationDetailActivity :
             // 예약 취소 다이얼로그 띄우기
             val dialog = ReservationCancelDialogFragment()
             val bundle = Bundle()
-            bundle.putLong("reservationId", viewModel.userReservationId)
+            bundle.putLong("userReservationId", viewModel.userReservationId)
             dialog.arguments = bundle
             dialog.show(supportFragmentManager, "ReservationCancelDialogFragment")
-//            viewModel.cancelReservation(viewModel.reservationId)
         }
     }
 
