@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.popmate.model.data.remote.ApiResponse
 import com.example.popmate.model.data.remote.reservation.CurrentReservationResponse
 import com.example.popmate.model.data.remote.reservation.ReservationRequest
+import com.example.popmate.model.data.remote.reservation.ReservationSuccessResponse
 import com.example.popmate.model.data.remote.reservation.Wifi
 import com.example.popmate.model.repository.ApiClient
 import retrofit2.Call
@@ -26,6 +27,10 @@ class ReservationViewModel : ViewModel() {
     private var _reservationId: Long? = null
     val reservationId: Long?
         get() = _reservationId
+
+    private var _userReservationId: Long? = null
+    val userReservationId : Long?
+        get() = _userReservationId
 
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String>
@@ -97,14 +102,18 @@ class ReservationViewModel : ViewModel() {
         _reservationId?.let {
             // 예약하기 버튼 클릭 시 동작
             ApiClient.reservationService.reserve(_reservationId!!, ReservationRequest(guestCount, getCurrentLocation()))
-                .enqueue(object : Callback<ApiResponse<Void>> {
+                .enqueue(object : Callback<ApiResponse<ReservationSuccessResponse>> {
                     override fun onResponse(
-                        call: Call<ApiResponse<Void>>,
-                        response: Response<ApiResponse<Void>>
+                        call: Call<ApiResponse<ReservationSuccessResponse>>,
+                        response: Response<ApiResponse<ReservationSuccessResponse>>
                     ) {
                         Log.d("smh", "예약 성공 여부: ${response}")
                         if (response.isSuccessful) {
-                            callback(true)
+                            response.body()!!.data?.let {
+                                Log.d("smh", "예약 성공: $it")
+                                _userReservationId = it.userReservationId
+                                callback(true)
+                            }
                         } else if (response.code() == 400) {
                             _toastMessage.value = "이미 예약되었습니다."
                             callback(false)
@@ -115,7 +124,7 @@ class ReservationViewModel : ViewModel() {
                     }
 
                     override fun onFailure(
-                        call: Call<ApiResponse<Void>>,
+                        call: Call<ApiResponse<ReservationSuccessResponse>>,
                         t: Throwable
                     ) {
                         // 예약이 마감되는 경우

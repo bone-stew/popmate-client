@@ -12,14 +12,22 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ReservationSuccessViewModel : ViewModel() {
-    var reservationId: Long = 0
+
+    private var _reservationId: Long? = null
+    val reservationId: Long?
+        get() = _reservationId
+
+    private var _userReservationId: Long? = null
+    val userReservationId: Long?
+        get() = _userReservationId
 
     private val _myReservation = MutableLiveData<MyReservationDetailResponse>()
     val myReservation: LiveData<MyReservationDetailResponse> = _myReservation
 
-    fun getReservationInfo() {
-        Log.i("ReservationSuccessViewModel", "getReservationInfo: $reservationId")
-        ApiClient.reservationService.getMyReservation(reservationId)
+    fun getReservationInfo(userReservationId: Long) {
+        _userReservationId = userReservationId
+        Log.i("smh", "getReservationInfo: $userReservationId")
+        ApiClient.reservationService.getMyReservation(userReservationId)
             .enqueue(object : Callback<ApiResponse<MyReservationDetailResponse>> {
                 override fun onResponse(
                     call: Call<ApiResponse<MyReservationDetailResponse>>,
