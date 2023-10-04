@@ -1,6 +1,7 @@
 package com.example.popmate.view.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
@@ -16,6 +17,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.popmate.R
 import com.example.popmate.databinding.FragmentReservationCancelDialogBinding
+import com.example.popmate.view.activities.reservation.MyReservationActivity
 import com.example.popmate.viewmodel.ReservationCancelViewModel
 
 class ReservationCancelDialogFragment : DialogFragment() {
@@ -77,8 +79,11 @@ class ReservationCancelDialogFragment : DialogFragment() {
         binding.btnYes.setOnClickListener {
             val userReservationId = viewModel.userReservationId
             viewModel.cancelReservation(userReservationId)
+            
+            val intent = Intent(activity, MyReservationActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
             dismiss()
-            activity?.finish()
         }
         binding.btnNo.setOnClickListener {
             dismiss()
