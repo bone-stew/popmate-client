@@ -152,7 +152,7 @@ class OrderPaymentActivity : AppCompatActivity() {
     }
 
     private fun generateOrderId(length: Int): String {
-        val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_,"
+        val characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
         val random = Random()
         val orderId = StringBuilder()
 
@@ -166,32 +166,42 @@ class OrderPaymentActivity : AppCompatActivity() {
     }
 
     private fun ordercomplete(payment: Payment) {
-        Log.d("ddd", "orderComplete")
-        Log.d("ddd", payment.toString())
-        val orderItemRequest = OrderItemRequest(data,payment.orderId, payment.receipt.url, payment.card.cardType,
-            "", payment.method) //payment.easyPay as String
-        Log.d("ddd",orderItemRequest.orderId)
-        Log.d("ddd",orderItemRequest.cardType)
-        Log.d("ddd",orderItemRequest.toString())
-        val call : Call<ApiResponse<OrderResponse>> = ApiClient.orderService.orderItems(orderItemRequest)
-        call.enqueue(object : Callback<ApiResponse<OrderResponse>>{
-            override fun onResponse(
-                call: Call<ApiResponse<OrderResponse>>,
-                response: Response<ApiResponse<OrderResponse>>
-            ) {
-                val orderId = response.body()?.data?.orderId
-                val intent = Intent(this@OrderPaymentActivity,OrderPaymentCompleteActivity::class.java)
-                intent.putExtra("item",data)
-                intent.putExtra("placeDetail",placeDetail)
-                intent.putExtra("orderId",orderId)
-                startActivity(intent)
-            }
+        runOnUiThread {
+            // ProgressDialog를 시작
+            val progressDialog = ProgressDialog(this@OrderPaymentActivity)
+            progressDialog.start()
+            progressDialog.setCancelable(false)
 
-            override fun onFailure(call: Call<ApiResponse<OrderResponse>>, t: Throwable) {
-                Log.d("jja","서버 실패")
-            }
-        })
+            Log.d("ddd", "orderComplete")
+            Log.d("ddd", payment.toString())
+            val orderItemRequest = OrderItemRequest(data, payment.orderId, payment.receipt.url, payment.card.cardType,
+                "", payment.method)
 
+            val call: Call<ApiResponse<OrderResponse>> = ApiClient.orderService.orderItems(orderItemRequest)
+            call.enqueue(object : Callback<ApiResponse<OrderResponse>> {
+                override fun onResponse(
+                    call: Call<ApiResponse<OrderResponse>>,
+                    response: Response<ApiResponse<OrderResponse>>
+                ) {
+                    Log.d("ddd", "왔어??")
+                    val orderId = response.body()?.data?.orderId
+                    val intent = Intent(this@OrderPaymentActivity, OrderPaymentCompleteActivity::class.java)
+                    intent.putExtra("item", data)
+                    intent.putExtra("placeDetail", placeDetail)
+                    intent.putExtra("orderId", orderId)
+
+                    // ProgressDialog를 닫음
+                    progressDialog.dismiss()
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<ApiResponse<OrderResponse>>, t: Throwable) {
+                    Log.d("jja", "서버 실패")
+
+                    // ProgressDialog를 닫음
+                    progressDialog.dismiss()
+                }
+            })
+        }
     }
-
 }
