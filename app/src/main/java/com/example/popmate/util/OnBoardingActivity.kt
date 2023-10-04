@@ -18,10 +18,8 @@ class OnBoardingActivity : AppCompatActivity(), OnboardingAdapter.OnboardingClic
         super.onCreate(savedInstanceState)
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         viewPager = binding.pager2
         dotsIndicator = binding.dotsIndicator
-
         val adapter = OnboardingAdapter(this)
         viewPager.adapter = adapter
 
@@ -29,6 +27,10 @@ class OnBoardingActivity : AppCompatActivity(), OnboardingAdapter.OnboardingClic
     }
 
     override fun onButtonClick() {
+        val auto = getSharedPreferences("onboarding", MODE_PRIVATE)
+        val autoLoginEdit = auto.edit()
+        autoLoginEdit.putString("Check","true")
+        autoLoginEdit.apply()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

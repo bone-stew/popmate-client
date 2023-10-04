@@ -13,10 +13,12 @@ class TitleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val pref = getSharedPreferences("autoLogin", 0)
         val jwtToken =pref.getString("JwtToken", "").toString()
+        val pref1 = getSharedPreferences("onboarding", 0)
+        val onboardingCheck =pref1.getString("Check", "").toString()
         Log.d("dddddd", jwtToken)
         Log.d("dddddd", ApiClient.getJwtToken().toString())
         ApiClient.setJwtToken(jwtToken)
-        if(jwtToken==""){
+        if(onboardingCheck==""){
             val intent = Intent(applicationContext, OnBoardingActivity::class.java)
             startActivity(intent)
             finish()
