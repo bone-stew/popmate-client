@@ -112,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="구매 내역 조회하기"
+                    android:textSize="@dimen/h5_2"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -133,7 +134,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_order_payment_complete_middle"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="120dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +147,7 @@
                 android:layout_marginTop="24dp"
                 android:text="주문금액"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="@dimen/h5_2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -157,7 +158,7 @@
                 android:layout_marginTop="8dp"
                 android:text="결제일시"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="@dimen/h5_2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -168,7 +169,7 @@
                 android:layout_marginTop="8dp"
                 android:text="상호명"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="@dimen/h5_2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -179,7 +180,7 @@
                 android:layout_marginTop="24dp"
                 android:textColor="@color/black"
                 android:text="18000"
-                android:textSize="13dp"
+                android:textSize="@dimen/h5_2"
                 app:layout_constraintEnd_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -190,7 +191,7 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:text="2023.09.12 12:00:24"
-                android:textSize="13dp"
+                android:textSize="@dimen/h5_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -201,7 +202,7 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:text="더 현대 서울"
-                android:textSize="13dp"
+                android:textSize="@dimen/h5_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -212,7 +213,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="원"
                 android:textColor="@color/black"
-                android:textSize="13dp"
+                android:textSize="@dimen/h5_2"
                 app:layout_constraintBottom_toTopOf="@+id/textView14"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -236,7 +237,7 @@
             android:layout_marginBottom="16dp"
             android:text="- 결제 취소는 팝업스토어에서 취소 요청 문의 바랍니다."
             android:textColor="@color/tx_gray"
-            android:textSize="11dp"
+            android:textSize="13dp"
             app:layout_constraintBottom_toTopOf="@+id/btn_order_payment_complete_check"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -264,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:text="확인"
                 android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textSize="@dimen/h5" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
