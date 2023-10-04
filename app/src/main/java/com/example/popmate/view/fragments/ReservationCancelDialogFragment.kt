@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,15 +68,15 @@ class ReservationCancelDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this)[ReservationCancelViewModel::class.java]
-        viewModel.reservationId = arguments?.getLong("reservationId", 0) ?: 0
+        viewModel.userReservationId = arguments?.getLong("userReservationId", 0) ?: 0
 
         initEvent()
     }
 
     private fun initEvent() {
         binding.btnYes.setOnClickListener {
-            val reservationId = arguments?.getLong("reservationId", 0) ?: 0
-            viewModel.cancelReservation(reservationId)
+            val userReservationId = viewModel.userReservationId
+            viewModel.cancelReservation(userReservationId)
             dismiss()
             activity?.finish()
         }

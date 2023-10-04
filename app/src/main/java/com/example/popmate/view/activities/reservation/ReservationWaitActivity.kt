@@ -107,7 +107,8 @@ class ReservationWaitActivity :
     private fun showReservationSuccessDialog() {
         val dialog = ReservationSuccessDialogFragment()
         val bundle = Bundle()
-        bundle.putLong("reservationId", viewModel.reservationId!!) // 예약 성공 시 reservationId를 넘겨줌
+        bundle.putLong("userReservationId", viewModel.userReservationId!!)
+        bundle.putLong("reservationId", viewModel.reservationId!!)
         bundle.putLong("popupStoreId", viewModel.popupStoreId!!)
         dialog.arguments = bundle
         dialog.show(supportFragmentManager, "ReservationSuccessDialogFragment")

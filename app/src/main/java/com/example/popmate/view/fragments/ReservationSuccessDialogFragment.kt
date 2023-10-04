@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,14 +72,15 @@ class ReservationSuccessDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this)[ReservationSuccessViewModel::class.java]
-        viewModel.reservationId = arguments?.getLong("reservationId", 0) ?: 0
 
         initView()
         initEvent()
     }
 
     private fun initView() {
-        viewModel.getReservationInfo()
+        val userReservationId = arguments?.getLong("userReservationId", 0) ?: 0
+
+        viewModel.getReservationInfo(userReservationId)
         viewModel.myReservation.observe(viewLifecycleOwner) {
             if (it != null) {
                 binding.tvPopupStoreName.text = it.popupStoreTitle
@@ -93,7 +95,9 @@ class ReservationSuccessDialogFragment : DialogFragment() {
     private fun initEvent() {
         binding.btnClose.setOnClickListener {
             val intent = Intent(activity, MyReservationDetailActivity::class.java)
-            intent.putExtra("reservationId", viewModel.reservationId)
+            val reservationId = arguments?.getLong("reservationId", 0) ?: 0
+            intent.putExtra("reservationId", reservationId)
+            intent.putExtra("userReservationId", viewModel.userReservationId)
             startActivity(intent)
 
             // 다이얼로그, 액티비티 모두 종료

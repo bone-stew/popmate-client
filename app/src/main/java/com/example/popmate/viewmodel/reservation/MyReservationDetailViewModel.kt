@@ -12,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MyReservationDetailViewModel : BaseViewModel() {
-    var reservationId: Long = 0
+    var userReservationId: Long = 0
 
     private val _myReservation = MutableLiveData<MyReservationDetailResponse>()
     val myReservation: LiveData<MyReservationDetailResponse> = _myReservation
