@@ -187,6 +187,13 @@ class PopupDetailActivity :
                     ColorStateList.valueOf(resources.getColor((R.color.bg_gray)))
                 binding.reserveBtn.text = "바로 방문할 수 있는 팝업스토어입니다"
                 binding.reserveBtn.isEnabled = false
+            } else {
+                if (!it.canReserveToday) {
+                    binding.reserveBtn.backgroundTintList =
+                        ColorStateList.valueOf(resources.getColor((R.color.bg_dark_gray)))
+                    binding.reserveBtn.text = "오늘 예약이 마감되었어요"
+                    binding.reserveBtn.isEnabled = false
+                }
             }
         }
 

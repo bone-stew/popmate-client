@@ -21,6 +21,7 @@ data class PopupStore(
     val title: String,
     val views: Int,
     val reservationEnabled: Boolean,
+    val canReserveToday: Boolean,
     val department: Department,
     val categoryName: String
 ) {
