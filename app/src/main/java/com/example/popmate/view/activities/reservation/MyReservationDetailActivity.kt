@@ -15,6 +15,7 @@ import com.example.popmate.R
 import com.example.popmate.config.BaseActivity
 import com.example.popmate.databinding.ActivityMyReservationDetailBinding
 import com.example.popmate.util.DateTimeUtils
+import com.example.popmate.util.ProgressDialog
 import com.example.popmate.view.fragments.ReservationCancelDialogFragment
 import com.example.popmate.viewmodel.reservation.MyReservationDetailViewModel
 
@@ -22,6 +23,7 @@ class MyReservationDetailActivity :
     BaseActivity<ActivityMyReservationDetailBinding>(R.layout.activity_my_reservation_detail) {
 
     private val viewModel by viewModels<MyReservationDetailViewModel>()
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,10 @@ class MyReservationDetailActivity :
         val viewModel = ViewModelProvider(this)[MyReservationDetailViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.start()
+        progressDialog.setCancelable(false)
 
         initView()
         initEvent()
@@ -59,6 +65,7 @@ class MyReservationDetailActivity :
                 binding.tvCancelReservation.visibility = View.VISIBLE
             }
         }
+        progressDialog.dismiss()
     }
 
     private fun initEvent() {
