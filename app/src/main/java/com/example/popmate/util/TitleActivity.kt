@@ -18,7 +18,7 @@ class TitleActivity : AppCompatActivity() {
         Log.d("dddddd", jwtToken)
         Log.d("dddddd", ApiClient.getJwtToken().toString())
         ApiClient.setJwtToken(jwtToken)
-        if(onboardingCheck==""){
+        if(ApiClient.getJwtToken()==""){
             val intent = Intent(applicationContext, OnBoardingActivity::class.java)
             startActivity(intent)
             finish()
