@@ -1,7 +1,6 @@
 package com.example.popmate.view.activities.user
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.popmate.R
@@ -13,6 +12,7 @@ import com.example.popmate.view.adapters.user.MyPageOrderDetailAdapter
 import com.example.popmate.viewmodel.user.OrderListDetailViewModel
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Locale
 
 class MyPagePurchaseDetailActivity : BaseActivity<ActivityMyPagePurchaseDetailBinding>(R.layout.activity_my_page_purchase_detail) {
@@ -56,6 +56,12 @@ class MyPagePurchaseDetailActivity : BaseActivity<ActivityMyPagePurchaseDetailBi
             val date = inputFormat.parse(data.createdAt)
             val formattedDate = outputFormat.format(date)
 
+            //pickup 시간
+            val currentTime = Calendar.getInstance()
+            currentTime.time = date
+            currentTime.add(Calendar.MINUTE, 10)
+            val pickupDate = outputFormat.format(currentTime.time)
+            binding.txtFragmentMyPagePickup.text = "픽업시간 : ${pickupDate}"
             binding.txtFragmentMyPagePurchaseDetailTime.text = "구매일시 : ${formattedDate}"
             binding.txtFragmentMyPagePurchaseDetailOrderNumber.text = "주문번호 : ${data.orderTossId}"
             val amount = data.total_amount

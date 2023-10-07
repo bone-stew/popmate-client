@@ -15,7 +15,7 @@
         android:layout_marginTop="23dp"
         android:text="투두투두 잇 "
         android:textColor="@color/black"
-        android:textSize="@dimen/h6"
+        android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +27,7 @@
         android:layout_marginTop="23dp"
         android:text=" 1개"
         android:textColor="@color/black"
-        android:textSize="@dimen/h6"
+        android:textSize="14dp"
         app:layout_constraintStart_toEndOf="@+id/order_detail_name"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
         android:layout_marginBottom="23dp"
         android:text="12000"
         android:textColor="@color/black"
-        android:textSize="@dimen/h6"
+        android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -51,7 +51,7 @@
         android:layout_weight="3.3"
         android:text="원"
         android:textColor="@color/black"
-        android:textSize="@dimen/h6"
+        android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintStart_toEndOf="@+id/order_detail_price" />
 
