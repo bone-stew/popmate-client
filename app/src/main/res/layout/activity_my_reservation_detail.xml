@@ -47,9 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:lineSpacingExtra="2sp"
+            android:lineSpacingExtra="4dp"
             android:text="@string/reservation_notification_detail"
-            android:textSize="@dimen/h7"
+            android:textColor="@color/tx_gray"
+            android:textSize="@dimen/h6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_reservation_notification" />

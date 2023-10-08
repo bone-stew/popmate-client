@@ -51,9 +51,9 @@
 
                 <TextView
                     android:id="@+id/popupTitle"
-                    android:layout_width="280dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxWidth="280dp"
+                    android:layout_marginHorizontal="50dp"
                     android:text="@{store.title}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/h2"
@@ -67,17 +67,19 @@
 
                 <TextView
                     android:id="@+id/popupDetail"
-                    android:layout_width="280dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxWidth="280dp"
+                    android:layout_marginHorizontal="50dp"
                     android:layout_marginTop="12dp"
+                    android:lineSpacingExtra="8sp"
+                    android:maxWidth="280dp"
+                    android:maxLines="5"
                     android:text="@{store.description}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/h5"
+                    android:textSize="@dimen/h5_2"
                     app:layout_constraintLeft_toLeftOf="@+id/bannerImage"
                     app:layout_constraintRight_toRightOf="@+id/bannerImage"
-                    app:layout_constraintTop_toBottomOf="@+id/popupTitle"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/popupTitle" />
 
                 <TextView
                     android:id="@+id/eventText"
@@ -100,12 +102,14 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
                     android:background="@color/bg_light_gray"
+                    android:lineSpacingExtra="4dp"
                     android:padding="10dp"
                     android:text="@{store.eventDescription}"
-                    android:visibility="@{store.eventDescription.empty || store.eventDescription == null ? View.GONE : View.VISIBLE}"
                     android:textColor="@color/tx_gray"
                     android:textSize="@dimen/h6"
-                    app:layout_constraintTop_toBottomOf="@id/eventText" />
+                    android:visibility="@{store.eventDescription.empty || store.eventDescription == null ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintTop_toBottomOf="@id/eventText"
+                    tools:layout_editor_absoluteX="16dp" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/info_chat_tab"
