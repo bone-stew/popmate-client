@@ -56,7 +56,7 @@ class OrderPaymentCompleteActivity : BaseActivity<ActivityOrderPaymentCompleteBi
         binding.txtOrderDetailPaymentCompleteTotalprice.text = amount
         binding.textView13.text = amount
         binding.textView14.text = dateFormat.format(currentTime)
-        binding.textView15.text = placeDetail?.placeDetail
+        binding.textView15.text = placeDetail?.title
 
         binding.btnOrderPaymentCompleteCheck.setOnClickListener {
             val intent = Intent(this, PopupDetailActivity::class.java)
@@ -82,6 +82,4 @@ class OrderPaymentCompleteActivity : BaseActivity<ActivityOrderPaymentCompleteBi
         startActivity(intent)
         finish()
     }
-
-
 }
