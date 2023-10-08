@@ -154,7 +154,8 @@
                     android:layout_marginStart="16dp"
                     android:text="SNS"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h5" />
+                    android:textSize="@dimen/h5"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/instagram"
@@ -285,7 +286,9 @@
                     android:layout_marginBottom="16dp"
                     android:text="오시는 길"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h5" />
+                    android:textSize="@dimen/h5"
+                    android:textStyle="bold"
+                    />
 
 
                 <com.google.android.gms.maps.MapView
@@ -332,11 +335,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:paddingHorizontal="16dp"
-                    android:text="같은 지점에서 진행되고 있는 팝업스토어"
+                    android:text="같은 지점에서 진행되고 있는 스토어"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/h5" />
+                    android:textSize="@dimen/h5"
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommend_store"
