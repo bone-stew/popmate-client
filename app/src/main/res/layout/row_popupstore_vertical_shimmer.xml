@@ -19,18 +19,17 @@
     <!-- Square placeholder with grayish color -->
     <View
       android:id="@+id/itemPlaceholder"
-      android:layout_width="160dp"
-      android:layout_height="150dp"
+      android:layout_width="175dp"
+      android:layout_height="175dp"
       android:background="@color/tx_light_gray"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       android:layout_marginBottom="8dp" />
 
-    <!-- Square placeholder with grayish color (title) -->
     <View
       android:id="@+id/titlePlaceholder"
-      android:layout_width="160dp"
-      android:layout_height="20dp"
+      android:layout_width="175dp"
+      android:layout_height="12dp"
       android:background="@color/tx_light_gray"
       app:layout_constraintTop_toBottomOf="@id/itemPlaceholder"
       app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +39,7 @@
 
        <View
       android:id="@+id/titlePlaceholder2"
-      android:layout_width="160dp"
+      android:layout_width="175dp"
       android:layout_height="20dp"
       android:background="@color/tx_light_gray"
       app:layout_constraintTop_toBottomOf="@id/titlePlaceholder"
@@ -51,13 +50,23 @@
 
        <View
       android:id="@+id/titlePlaceholder3"
-      android:layout_width="160dp"
-      android:layout_height="20dp"
+      android:layout_width="175dp"
+      android:layout_height="12dp"
       android:background="@color/tx_light_gray"
       app:layout_constraintTop_toBottomOf="@id/titlePlaceholder2"
          app:layout_constraintStart_toStartOf="parent"
-
          app:layout_constrainedWidth="true"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="8dp" />
+
+    <View
+      android:id="@+id/titlePlaceholder4"
+      android:layout_width="175dp"
+      android:layout_height="12dp"
+      android:background="@color/tx_light_gray"
+      app:layout_constraintTop_toBottomOf="@id/titlePlaceholder3"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constrainedWidth="true"
       android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp" />
 
