@@ -6,6 +6,7 @@
     <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     <item name="android:windowBackground">@color/white</item>
     <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowTranslucentStatus">true</item>
   </style>
 
   <style name="AppBottomSheetDialogTheme"
