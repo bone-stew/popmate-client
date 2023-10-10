@@ -47,7 +47,7 @@ class QrDialog(context: Context, private val qrImgUrl: String) {
 
     private fun startCountdown() {
         timerTextView = dlg.findViewById(R.id.timer)
-        val totalTime = 15000L // 15초 (밀리초 단위)
+        val totalTime = 30000L // 15초 (밀리초 단위)
 
         countDownTimer = object : CountDownTimer(totalTime, 1000) {
             override fun onTick(millisUntilFinished: Long) {
